@@ -2,6 +2,7 @@
 
 <main>
 <video type=”video/mp4” src="../assets/video/tree2.mp4" muted loop autoplay/>
+<p class="citation">Image courtsey canva.com</p>
 </main>
 
 </template>
@@ -29,6 +30,13 @@ video {
     /* width: 100%; */
     /* border:2px solid red; */
     /* outline:2px solid red; */
+}
+
+p {
+    position:absolute;
+    bottom:10px;
+    margin: 10px;
+    color: white;
 }
 
 .skyline {
