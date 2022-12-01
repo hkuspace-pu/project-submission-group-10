@@ -23,7 +23,23 @@ UML - Diagram LEO
 
 ## RISK MANAGAMENT PLAN - LEO
 - what are the risks?
-
+- IP attack
+- data tamper
+- data transfer tapping
+- sql injection
+- data interception
+- service go down
+- what are the solutions?
+- network VPC for the service group
+- k8s monitoring service
+- ACL for the data access service
+- WFA
+- cloudfare
+- web server fire wall
+- security group for the APIs service
+- data encryption
+- https, wss, TLS
+- token for the APIs calling 
 ## COMMUNICATION PLAN - 
 
 - how we communicate  with the client
