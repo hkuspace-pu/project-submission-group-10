@@ -14,10 +14,18 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 
 
 ## INTIAL REQUIREMNTS MODEL  ( USER STORIES, USE CASE , LINKS TO UML)
+User story/use case
+
+UML - Diagram LEO
 
 ## SPRINT PLAN (TRELLO?) - SIMON
 
-## RISK MANAGAMENT PLAN - RISHI
+## RISK MANAGAMENT PLAN - LEO
+- what are the risks?
 
 ## COMMUNICATION PLAN - 
+
+- how we communicate  with the client
+-  how we communicate with each other
+
 
