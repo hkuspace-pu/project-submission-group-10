@@ -19,6 +19,7 @@ User story/use case
 UML - Diagram LEO
 
 ## SPRINT PLAN (TRELLO?) - SIMON
+...
 
 ## RISK MANAGAMENT PLAN - LEO
 - what are the risks?
