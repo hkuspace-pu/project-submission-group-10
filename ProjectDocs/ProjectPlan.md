@@ -13,14 +13,14 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 - To increase adoption and usage of the software through gamification.
 
 
-## INTIAL REQUIREMNTS MODEL  ( USER STORIES, USE CASE , LINKS TO UML)
-USER STORY
+
+## USER STORY
 ![USER STORY](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/c02a0ee0fea9570e868184a29da3c9d08487cd33/ProjectDocs/group%20project%20prouct%20plan%20user%20story.jpg)
 
 
-UML - Diagram LEO
+## UML - TO BE COMPLETED
 
-## SPRINT PLAN (TRELLO?) - SIMON
+## SPRINT PLAN - TO BE COMPLETED
 ...
 
 ## RISK MANAGAMENT PLAN
