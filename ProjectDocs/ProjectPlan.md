@@ -29,10 +29,10 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
   - Given that this is a project for an NGO with a minimal budget, we are mandated to keep our costs as low as possible while delivering a high-quality product. Thus a heavy reliance on team cooperation and work ethic are of utmost importance while keeping the budget low.
 
 ### SOlUTION
-   - Using open source software and off-the-shelf products to design and implement the software without a burdening expense
+   - Using open source software and off-the-shelf products to design and implement the software without a burdening expense.
 
 ### SCOPE CREEP
-  - Scope screen is a phenomenon of the software development lifecycle; it happens when the client adds features that were not already discussed at the planning stage, thus increasing the cost and workload for our team and may push deadlines beyond the time limit set.
+  - Scope creep is a phenomenon of the software development lifecycle; it happens when the client adds features that were not already discussed at the planning stage, thus increasing the cost and workload for our team and may push deadlines beyond the time limit set.
 
 ### SOLUTION
   - Regular client meetings are necessary to ensure that plans are followed strictly to avoid scope creep. All stakeholders must be in agreement to the product backlog and the features that are required. Small and trivial additional features are usually acceptable.
