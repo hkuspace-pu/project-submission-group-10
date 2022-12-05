@@ -74,9 +74,15 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 - data encryption
 - https, wss, TLS
 - token for the APIs calling 
-## COMMUNICATION PLAN - 
 
-- how we communicate  with the client
--  how we communicate with each other
+## COMMUNICATION PLAN - 
+Teammates
+We use WhatsApp, google drive, git, Teamgantt, and face-to-face meetings to communicate with teammates
+Teamgantt is our schedule. We mark down, what we are going to do and how long we prepare.
+We will submit our working in here. And Git can make a task or command.
+Whatsapp is the main communication. But we do not talk about any sensitive information. We will note teammates, whether we made changes somewhere or what we did. Our documents will store in google drive.
+
+Client
+We communicate client by using email and meeting.
 
 
