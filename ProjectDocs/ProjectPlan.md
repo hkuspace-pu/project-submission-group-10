@@ -28,7 +28,7 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 ### BUDGET RISK
   - Given that this is a project for an NGO with a minimal budget, we are mandated to keep our costs as low as possible while delivering a high-quality product. Thus a heavy reliance on team cooperation and work ethic are of utmost importance while keeping the budget low.
 
-### SOlUTION
+### SOLUTION
    - Using open source software and off-the-shelf products to design and implement the software without a burdening expense.
 
 ### SCOPE CREEP
@@ -42,9 +42,10 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 
 ### SOLUTION
  - By using agile methodologies and sticking to deadlines for software releases as well as keeping a time buffer should alleviate most of the time delays that we may experien
- - 
+  
 ### EXTERNAL FACTORS
   - Face-to-face client meetings may be hindered due to the current Covid-19 pandemic and the restrictions that are still present in Hong Kong. While some of the restrictions have been lifted, they have yet to be totally removed.
+
 ### SOLUTION
   - Channels of communication such as Slack, Zoom will be utilized if incase such face-to-face meetings cannot take place, although meeting clients face to face is a preferred choice to obtain valuable feedback.
   
