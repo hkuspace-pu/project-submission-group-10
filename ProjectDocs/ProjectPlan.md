@@ -47,33 +47,15 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
   - Face-to-face client meetings may be hindered due to the current Covid-19 pandemic and the restrictions that are still present in Hong Kong. While some of the restrictions have been lifted, they have yet to be totally removed.
 
 ### SOLUTION
-  - Channels of communication such as Slack, Zoom will be utilized if incase such face-to-face meetings cannot take place, although meeting clients face to face is a preferred choice to obtain valuable feedback.
-  
+  - Channels of communication such as Slack, Zoom will be utilized if incase such face-to-face meetings cannot take place, although meeting clients face to face is a preferred choice to obtain valuable feedback.    
     
-    
-    
-    
- TECHNICAL ISSUES
- 
-    
-- what are the risks?
-- IP attack
-- data tamper
-- data transfer tapping
-- sql injection
-- data interception
-- service go down
-- what are the solutions?
-- network VPC for the service group
-- k8s monitoring service
-- ACL for the data access service
-- WFA
-- cloudfare
-- web server fire wall
-- security group for the APIs service
-- data encryption
-- https, wss, TLS
-- token for the APIs calling 
+### SECURITY ATTACK
+
+  - There may have IP attack, data tamper or sql injection hacking by the hacker that harm the application.
+
+### SOLUTION
+
+  - We can set up the network VPC for the service group, using firewall and WAF, using HTTPS instead of HTTP. Adding verification for the API requests.
 
 ## COMMUNICATION PLAN - 
 Teammates
