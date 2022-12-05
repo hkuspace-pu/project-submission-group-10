@@ -28,7 +28,7 @@ UML - Diagram LEO
 ### BUDGET RISK
   - Given that this is a project for an NGO with a minimal budget, we are mandated to keep our costs as low as possible while delivering a high-quality product. Thus a heavy reliance on team cooperation and work ethic are of utmost importance while keeping the budget low.
 
-### SOLITION
+### SOlUTION
    - Using open source software and off-the-shelf products to design and implement the software without a burdening expense
 
 ### SCOPE CREEP
