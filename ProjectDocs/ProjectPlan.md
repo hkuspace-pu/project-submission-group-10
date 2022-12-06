@@ -3,6 +3,11 @@
 
 ## GROUP 10 COMP2003 HK TREE WATCH 
 
+### THIS IS LIVING DOCUMENT
+
+Link directly to the most updated version of this living here : https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/a151165e2aa0fc834b251162a09f8e9e37297e05/ProjectDocs/ProjectPlan.md
+
+
 ### PROJECT VISION
 To realize our client's goals in developing and implementing a Natural science survey system with a primary focus on the surveying and data retrieval of tree species. This new system aims to replace the current antiquated paper-based recording and the problems that arise with manual data entry. 
 
