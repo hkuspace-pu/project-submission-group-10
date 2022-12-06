@@ -17,12 +17,6 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 ## USER STORY
 ![USER STORY](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/c02a0ee0fea9570e868184a29da3c9d08487cd33/ProjectDocs/group%20project%20prouct%20plan%20user%20story.jpg)
 
-
-## UML - TO BE COMPLETED
-
-## SPRINT PLAN - TO BE COMPLETED
-...
-
 ## RISK MANAGAMENT PLAN
 
 ### BUDGET RISK
@@ -68,3 +62,7 @@ Client
 We communicate client by using email and meeting.
 
 
+## UML - TO BE COMPLETED
+
+## SPRINT PLAN - TO BE COMPLETED
+...
