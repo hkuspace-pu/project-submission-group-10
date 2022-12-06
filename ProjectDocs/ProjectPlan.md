@@ -1,5 +1,8 @@
 # <div align="center">PROJECT PLAN</div>
 
+
+## GROUP 10 COMP2003 HK TREE WATCH 
+
 ### PROJECT VISION
 To realize our client's goals in developing and implementing a Natural science survey system with a primary focus on the surveying and data retrieval of tree species. This new system aims to replace the current antiquated paper-based recording and the problems that arise with manual data entry. 
 
