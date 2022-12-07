@@ -146,5 +146,11 @@ We communicate client by using email and meeting.
 ...
 
 
+## QUESTIONS FOR CLIENT
+- Does the client have any specific requests on the layout?
+- Any other questions
+- Any other core features missing or required that are within the scope of the project?
+- Client Communication - Weekly meetings and communication over channels like slack and email & zoom?
+
 
 
