@@ -1,10 +1,13 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import Features from './components/Features.vue';
+import Banner from './components/Banner.vue';
 import TheHero from './components/TheHero.vue'
 import TheNav from './components/TheNav.vue'
 </script>
 
 <template>
+  <the-nav/>
   <!-- <header> -->
     
 
@@ -19,7 +22,8 @@ import TheNav from './components/TheNav.vue'
   <!-- </header> -->
  
   <the-hero class="hero"/>
-<the-nav/>
+  <Features/>
+  <Banner/>
 
 
 

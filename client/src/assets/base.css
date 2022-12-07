@@ -5,7 +5,7 @@
 
 /* semantic color variables for this project */
 :root {
-
+  --dark: #3E3D56;
 }
 
 
@@ -32,4 +32,31 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  color:white;
+  /* font-size:3.6rem; */
+  font-size : clamp(2.1rem, 2vw + 2rem, 4.25rem);
+  font-weight: 800;
+  line-height: 5rem;
+  white-space: nowrap;
+}
+
+h2 {
+  color:white;
+  font-size:2.2rem;
+  font-size : clamp(1.8rem, 1vw + 1.5rem, 3rem);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+h3 {
+  color:white;
+  font-size:1.5rem;
+  font-weight: 400;
+}
+
+.dark {
+  color: #3E3D56;
 }
