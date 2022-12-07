@@ -20,7 +20,71 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 - Create a visually compelling, high learnability interface based on client feedback
 - To increase adoption and usage of the software through gamification.
 
+## SOFTWARE REQUIREMENTS & SCOPE
 
+### PRODUCT SCOPE
+- Provide a comprehensive & consistent method for both beginner and advanced surveyors to record and retrieve tree species data by oberveration and assess changes associated with particular species over time.
+
+### PRODUCT VALUE ( How the audience will find value )
+- Provide a knowledge base on the local trees and diverse fauna in Hong Kong
+- Gamification to encourage repeat usage
+- Safety and Protection for the general public against damaged or dangerous trees or trees with root damage.
+- Replace old paper system, increase speed efficiency, retrieval
+
+###  Intended Audience (Who the product is intended to serve)
+- General Public (Ametuer surveyors)
+- Professional surveyors
+- Administrators (are admins also surveyors?)
+
+
+## INTENDED USE
+- Mobile users on hikes, walks, one-handed input  of data on the spot during real-time observation
+- On the desktop at home, upload data in a more casual environment with saved photos
+
+## FUNCTIONAL REQUIRMENTS & FEATURES
+- Server & Client Component to collect & process data
+- Database Management System for data storage & retrieval
+- Support multiple devices, laptops, desktops, and mobile phones
+- Already have a predefined demo species list 
+- Allow users to input and record information 
+- Attached multimedia, videos, images
+- Authentication system
+- Search & filter features
+- Users should be able to edit and remove their own surveys, but admins have full control
+- Keep a log of all entries with timestamps
+- Admins have full CRUD operation
+- Views include List & Grid view, sorting, filtering, thumbnails, maps.
+- Exporting data to different formats
+- Gamification to encourage users to upload data. (Badge Service)
+- Secure
+
+## CONSTRAINTS
+- Focus on Trees at this moment with the possibility to expand the scope to other species, i.e. birds and trees in the future.
+- PWA Limitations (Browser API's may not be fully supported, but they do offer 90% of requirements) And we feel this is the way forward to increse adoption rather then being in the app store which is often difficult to find.
+- Apple IOS does support PWA, but it does have some limitations on its support; users can always fall back to the website.
+
+
+## USER INTERFACE REQUIREMENTS
+- Responsive application
+- Progress WEB Application 
+-  We will constantly iterate after several rounds of usability testing and feedback
+- Follow common design principles such as Visibility, Feeback, Constraints, Consistency & Affordance (Interaction Design, SHARP, 2019). This will help our application have a good user experience, 
+ For example 
+(Feedback) Give the user feedback or error notifications for incorrect validations or failed inputs. 
+(Constrains) specific features for different types of user roles may be hidden or dimmed.
+(Visibility) by making it clear to the user what to do next and where to click.
+
+
+## HARDWARE REQUIREMENTS
+- Mobile Phone
+- Tablet
+- Desktop or Laptop Computer
+- Wired / Wireless / Mobile internet connection
+
+
+## COMMUNICATION INTERFACE REQUIREMENTS 
+- Email notifications?
+- SMS notifications?
 
 ## USER STORY
 ![USER STORY](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/c02a0ee0fea9570e868184a29da3c9d08487cd33/ProjectDocs/group%20project%20prouct%20plan%20user%20story.jpg)
@@ -74,3 +138,7 @@ We communicate client by using email and meeting.
 
 ## SPRINT PLAN - TO BE COMPLETED
 ...
+
+
+
+
