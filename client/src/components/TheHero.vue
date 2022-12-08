@@ -2,13 +2,23 @@
 
 <div class="heroContainer">
  <div class="heroTitle">
+    <XyzTransition appear xyz="fade right delay-6">
     <img class="bird" src="../assets/images/bird.gif"/>
+    </XyzTransition>
+    <XyzTransition appear xyz="fade left delay-9">
     <img class="bird2" src="../assets/images/bird.gif"/>
+</XyzTransition>
+<XyzTransition appear xyz="fade-75 left delay-10">
     <img class="butterfly" src="../assets/images/butterfly.webp"/>
+    </XyzTransition>
+
     <h1 class="dark">Hong Kong Tree Watch</h1>
     <h2 class="dark">A natural science survey system.</h2>
-    <img class="tree" width="360px" src="../assets/images/tree.svg"/>
-    <h3 class="dark">Know your roots.</h3>
+    <XyzTransition appear xyz="fade down delay-2">
+        <img class="tree" src="../assets/images/tree.svg"/>
+
+    </XyzTransition>
+
 </div> 
 
  </div>
@@ -16,6 +26,11 @@
 
 
 </template>
+
+<script setup>
+import Button from './Button.vue';
+</script>
+
 
 
 <style scoped>
@@ -28,10 +43,11 @@
     background-size:100%;
     background-repeat: no-repeat;
     background-position: bottom;
+    overflow:hidden;
 
     /* background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);  */
 /* background-color: #F7FAFC; */
-z-index:-100;
+/* z-index:-100; */
     
     padding: 2rem;
 }
@@ -74,15 +90,25 @@ z-index:-100;
 }
 
 
-.tree {
-    fill:red;
-    /* width:100%; */
-}
 
 p {
     position:absolute;
     bottom:10px;
     margin: 10px;
     color: white;
+}
+
+.tree {
+    height: 400px;
+    /* width: 380px; */
+    padding: 10px 0;
+
+}
+
+@media (max-width:600px) {
+   
+    .tree {
+        width: 280px;
+    }
 }
 </style>
