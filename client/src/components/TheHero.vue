@@ -7,7 +7,7 @@
     <img class="butterfly" src="../assets/images/butterfly.webp"/>
     <h1 class="dark">Hong Kong Tree Watch</h1>
     <h2 class="dark">A natural science survey system.</h2>
-    <img width="360px" src="../assets/images/tree.svg"/>
+    <img class="tree" width="360px" src="../assets/images/tree.svg"/>
     <h3 class="dark">Know your roots.</h3>
 </div> 
 
@@ -24,10 +24,14 @@
     height: 75vh;
     width: 100%;
     position:relative;
-    /* border-bottom:1px solid black; */
-    
-    /* background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-background-color: #F7FAFC;
+    background: url('../assets/images/sky3.png'),#F7FAFC;;
+    background-size:100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+
+    /* background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);  */
+/* background-color: #F7FAFC; */
+z-index:-100;
     
     padding: 2rem;
 }
@@ -70,6 +74,10 @@ background-color: #F7FAFC;
 }
 
 
+.tree {
+    fill:red;
+    /* width:100%; */
+}
 
 p {
     position:absolute;

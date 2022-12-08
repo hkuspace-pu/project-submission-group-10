@@ -8,20 +8,22 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon as fa } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faBars,faTree } from '@fortawesome/free-solid-svg-icons'
+import { faBars,faTree,faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import VueAnimXyz from '@animxyz/vue3'
 
 /* add icons to the library */
-library.add(faBars,faTree)
+library.add(faBars,faTree,faCircleXmark)
 
 
 import App from './App.vue'
 import router from './router'
 
 import './assets/main.css'
+import '@animxyz/core'
 
 const app = createApp(App)
 app.component('fa', fa)
-
+app.use(VueAnimXyz)
 app.use(createPinia())
 app.use(router)
 
