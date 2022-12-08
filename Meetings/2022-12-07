@@ -1,0 +1,59 @@
+# 2022-12-07 Group Project Client Meeting
+
+## Present Today
+- [X] Rishi (Product Owner)
+- [X] Simon (Scrum Master)
+- [X] Leo (Technical Lead)
+
+## Meeting Location
+- HPC 1102
+
+## Today's Actions
+
+1. Meeting with client for further requirements.
+2. Show case of the user story broad.
+3. Low fid UI design discussion. 
+
+## Task and Q&A Records
+Q1. How many roles in the system is needed?
+A1. There are Admin, moderator, professional surveyor, and general user.
+
+Q2. Duty and permission of the role?
+A2. Admin have all the system action permission, moderator can approval or reject the survey list,
+professional surveyor can input formal information to the database directly, 
+general user can upload can submit data but need to wait for further approval. 
+All the input data need to have the resource record such as input by who and what his /her role.
+
+Q3. About the app device
+A3. web app and responsive web page is preferred.
+
+Q4. The way to response the user action?
+A4. Using the app alert or notification are accepted.
+
+Q5. About the game and score for the user
+A5. The user will get a point or score after the submit is approval instead of before.
+
+Q6. Any special feature is needed?
+A6. No
+
+Q7. Is that TSV is a must?
+A7. The file is require to open with most of kind spreadsheet software, and some of the user is prefer to use TSV format.
+
+Q8. Who can download the TSV survey records?
+A8. Admin can download and view all of the records, and the user can only download the record that belong to himself.
+
+## Impediments (Problems)
+1. Need improve the admin role functions.
+2. Redesign the database structure for the further action requirement.
+3. Some functions can be merge for a clear view.
+
+## Future Actions
+--
+
+## What we learned (Knowledge)
+1.The use of the data records.
+2.What kind of role will appear in the system.
+3.How to build up a better SDLC planning.
+
+## Other
+1. Next action event will be on first client meeting 2022-1-19
