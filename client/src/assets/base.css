@@ -68,3 +68,7 @@ h3 {
 .dark {
   color: #3E3D56;
 }
+
+ul {
+  list-style: none;
+}

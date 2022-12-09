@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
+import DashHome from '@/components/DashHome.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,7 +23,34 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
-    }
+    },
+    {
+    path: '/dash',
+    name: 'dashboard',
+    component : () => import('../views/Dashboard.vue'),
+    children: [
+
+      {
+          path : '',
+          name : 'dashboard',
+          component: DashHome
+          // component: () => import('@/component/DashHome.vue')
+          // component: () => import(/* webpackChunkName: "DashboardHome" */ '@/components/DashHome.vue'),
+    
+
+
+      },
+    ]
+    
+  
+  
+  
+  
+     },
+
+
+    
+
   ]
 })
 

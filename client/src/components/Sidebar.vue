@@ -1,8 +1,22 @@
 <template>
 <div class="sideBarContainer">
 <div class="topBar">
-    <!-- <fa size="lg" icon="circle-xmark"/> -->
+   
 </div>
+
+<nav>
+    <ul>
+        <li class="link">
+            <fa  size="2x" icon="user"/> <p>Login</p>
+        </li>
+        <router-link class="link" tag="li" :to="{name:'dashboard'}">
+            <fa  size="2x" icon="user"/> <p>Login</p>
+       </router-link>
+
+    </ul>
+
+
+</nav>
 
 </div>
 
@@ -29,8 +43,21 @@
     box-shadow: 4px 0 10px 0 rgb(0 0 0 / 40%);
 }
 
-.topBar svg {
-   
+.topBar  {
+   height: 65px;
+}
+
+.link {
+    color:grey;
+    /* font-size:16px; */
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+    gap:1rem;
+}
+ 
+li p {
+    font-size: 20px;
 }
 
 </style>

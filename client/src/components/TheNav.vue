@@ -8,8 +8,9 @@
 
 <div @click="store.toggleOpen" class="bars">
  
-<fa size="lg" class="showBar" icon="fa-bars"/>
-<fa size="lg" class="close" icon="circle-xmark"/>
+<fa v-if="!store.isSideBarOpen" size="lg" class="showBar" icon="fa-bars"/>
+
+<fa v-else size="lg" class="close" icon="xmark"/>
 </div>
 
 
@@ -88,11 +89,6 @@ input {
 display:none;
 }
 
-
-
-.close {
-  display:none;
-}
 
 
 .bars {

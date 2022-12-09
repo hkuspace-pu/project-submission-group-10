@@ -8,11 +8,11 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon as fa } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faBars,faTree,faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { faBars,faTree,faXmark,faFilePen,faUser } from '@fortawesome/free-solid-svg-icons'
 import VueAnimXyz from '@animxyz/vue3'
 
 /* add icons to the library */
-library.add(faBars,faTree,faCircleXmark)
+library.add(faBars,faTree,faXmark,faFilePen,faUser)
 
 
 import App from './App.vue'
