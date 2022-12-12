@@ -8,12 +8,16 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon as fa } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faBars,faTree,faXmark,faFilePen,faUser } from '@fortawesome/free-solid-svg-icons'
+import { faBars,faTree,faXmark,faFilePen,faUser,faSpinner,faH } from '@fortawesome/free-solid-svg-icons'
 import VueAnimXyz from '@animxyz/vue3'
 
 /* add icons to the library */
-library.add(faBars,faTree,faXmark,faFilePen,faUser)
+library.add(faBars,faTree,faXmark,faFilePen,faUser,faSpinner)
 
+import Vue3EasyDataTable from 'vue3-easy-data-table';
+import 'vue3-easy-data-table/dist/style.css';
+
+// // const app = createApp(App);
 
 import App from './App.vue'
 import router from './router'
@@ -26,5 +30,8 @@ app.component('fa', fa)
 app.use(VueAnimXyz)
 app.use(createPinia())
 app.use(router)
+
+
+app.component('EasyDataTable', Vue3EasyDataTable);
 
 app.mount('#app')
