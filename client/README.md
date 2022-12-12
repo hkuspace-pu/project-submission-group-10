@@ -1,14 +1,25 @@
-# hktreewatch
+# HK TREE WATCH
 
-This template should help get you started developing with Vue 3 in Vite.
+Please use 'dev' branch
 
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur)
 
-## Customize configuration
+## Technology
+- [VUE 3 with Composition API](https://vuejs.org/)
+- [Pinia for state management](https://pinia.vuejs.org/)
+- [XyzAnimation - Animation Library](www.animxyz.com)
+- [Font Awesome 6 - Icon package (Solid icon only)](www.fontawesome.com)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Folder structure
+- main.js file is the entry point
+- /src/assets - Image Folder
+- /src/components - Components
+- /src/views - Views
+- /src/stores - State management
+- /src/router/router.js - Vue router
+- ./vite.config.js - Advanced configuration stuff.
 
 ## Project Setup
 
@@ -27,3 +38,6 @@ npm run dev
 ```sh
 npm run build
 ```
+
+Please push to 'dev' commit to dev branch first.
+

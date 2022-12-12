@@ -32,7 +32,6 @@
     height: 200px;
     width: 400px;
     padding: 2rem;
-    /* border:1px solid red; */
 
 }
 
