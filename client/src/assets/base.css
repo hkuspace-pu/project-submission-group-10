@@ -2,6 +2,11 @@
 /* semantic color variables for this project */
 :root {
   --dark: #3E3D56;
+  --darkGreen : #87986A;
+  --dg2 : #034F32;
+  --lightGreen : #B8C8AC;
+  --brightGreen : #D0E1AC;
+  --brown : #B8B4B0;
 }
 
 
@@ -75,6 +80,8 @@ h4 {
 .dark {
   color: #3E3D56;
 }
+
+
 
 ul {
   list-style: none;

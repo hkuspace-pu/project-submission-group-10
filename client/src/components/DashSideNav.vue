@@ -1,14 +1,26 @@
 <template>
 
 <div class="dashSideNav">
-<div class="row">
-
-    <div class="title">New Survey</div>
-    <fa class="icon" size="2x" icon="file-pen"/>
+    <div class="menuItems">
+<router-link tag="div" class="row" :to="{name:'dashboard'}">
+   <fa class="icon" size="2x" icon="house" :class="$route.name=='dashboard' && 'focused'" />
+</router-link>
+<router-link tag="div" class="row" :to="{name:'new'}" >
+   <fa class="icon" size="2x" icon="file-pen" :class="$route.name=='new' && 'focused'"/>
+</router-link>
 </div>
-<!-- 
-<fa icon="file-pen"/>
-<fa icon="file-pen"/> -->
+
+
+<foot>
+    <router-link tag="div" class="row" :to="{name:'new'}" >
+   <fa class="icon" size="2x" icon="circle-question" :class="$route.name=='help' && 'focused'"/>
+</router-link>
+<!-- <router-link tag="div" class="row" :to="{name:'new'}" >
+   <fa class="icon" size="2x" icon="circle-question" :class="$route.name=='help' && 'focused'"/>
+</router-link> -->
+
+</foot>
+
 
 
 </div>
@@ -19,30 +31,50 @@
 <style scoped>
 
 .dashSideNav {
-    
+    /* z-index:100000; */
     /* padding: 1rem; */
-    width: 220px;
+    /* width: 80px; */
     height: 100%;
     /* height: calc(100% - 65px); */
     box-shadow: 3px 0px 7px 0px rgba(189,187,189,0.4);
     background-color: #F7F9FA;
+    background-color: var(--brown);
+    background-color: var(--darkGreen);
+
     display:flex;
     flex-direction: column;
     
 }
 
+.menuItems {
+    flex:1;
+}
+/* :class="$route.name=='new' && 'focused'" */
 .icon {
-    color: grey;
-    padding:2rem;
 
+    /* border: 1px solid red; */
+    /* background-color: #f0f0f069; */
+    padding: 10px;
+    border-radius: 6px;
+    color: white;
+    /* padding:2rem; */
+
+}
+
+.focused {
+    background-color: #f0f0f069;
 }
 .row {
 /* margin:10px; */
-padding:10px;
+/* padding:10px; */
+/* border:1px solid red; */
+padding:15px;
     display:flex;
     flex-direction: row;
     align-items: center;
-    border-bottom: 1px solid lightgray;
+
+    justify-content: center;
+    /* border-bottom: 1px solid lightgray; */
 }
 
 .title {

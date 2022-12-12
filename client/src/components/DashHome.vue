@@ -1,12 +1,12 @@
 <template>
 
-<div class="dashHomeContainer">
-<h3>dash</h3>
+<!-- <h3 class="dark">List Surveys</h3> -->
 <EasyDataTable
     :headers="headers"
     :items="data"
     alternating
     show-index
+    table-class-name="customize-table"
     v-model:items-selected="itemsSelected"
     :loading=isDataLoading
     @expand-row="showRow"
@@ -153,7 +153,7 @@
 
 </EasyDataTable>
 
-</div>
+<!-- </div> -->
 
 </template>
 
@@ -349,7 +349,8 @@ const headers = [
 .dataContainer {
   /* border:1px solid red; */
   padding: 5px;
-  background-color:aliceblue;
+  background-color:#f7f7f7;
+  /* background-color: var(--dark); */
   /* display:flex; */
   /* flex-direction: row; */
 }
@@ -419,6 +420,12 @@ table.dataTable {
     border-width: 1px;
     border-style: outset;
     
-  
+}
+
+.customize-table { 
+height: 100%;
+  overflow-y:auto;
+  /* overflow:hidden; */
+  border-radius: 12px;
 }
 </style>

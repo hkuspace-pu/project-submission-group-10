@@ -13,7 +13,7 @@
 
 .dashTopBarContainer {
     height: 65px;
-    background-color: #3E3D56;
+    background-color: var(--lightGreen);
     width: 100%;
 }
 </style>
