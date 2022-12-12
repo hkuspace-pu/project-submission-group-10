@@ -65,10 +65,65 @@ h3 {
   font-weight: 400;
 }
 
+h4 {
+  color: var(--dark);
+  font-size:1.2rem;
+  font-weight: 300;
+}
+
+
 .dark {
   color: #3E3D56;
 }
 
 ul {
   list-style: none;
+}
+
+input {
+  padding: 10px;
+  border-radius: 6px;
+  font-size:16px;
+  border-color: lightblue;
+
+}
+
+.btn {
+
+    border-radius: 8px;
+    font-size: 18px;
+    background-color: var(--dark);
+    border: none;
+    outline:none;
+   width: 200px;
+   height: 40px;
+   font-weight: 600;
+   word-wrap: none;
+    cursor: pointer;
+    color: white;
+    overflow:hidden;
+      white-space:nowrap;
+      /* margin-left:auto; */
+      /* margin: auto; */
+      box-shadow: 0 0 3px 5px rgb(255 255 255 / 20%);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+}
+
+.spinner-enter-active,
+.spinner-leave-active {
+    transition: transform .3s, opacity .3s;
+}
+
+.spinner-enter,
+.spinner-leave-to {
+    /* transform-origin: center; */
+    transform: scale(1.8);
+    opacity: 0;
+}
+
+.btnText {
+  font-size: 20px;
+ display:inline-block;
+  transition: all 150ms ;
 }

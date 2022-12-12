@@ -6,9 +6,9 @@
     <div class="title">New Survey</div>
     <fa class="icon" size="2x" icon="file-pen"/>
 </div>
-
+<!-- 
 <fa icon="file-pen"/>
-<fa icon="file-pen"/>
+<fa icon="file-pen"/> -->
 
 
 </div>

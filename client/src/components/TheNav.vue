@@ -6,12 +6,16 @@
   
 </div>
 
+<NavMenuContents  id="navBarContents" ></NavMenuContents>
+
+
 <div @click="store.toggleOpen" class="bars">
- 
-<fa v-if="!store.isSideBarOpen" size="lg" class="showBar" icon="fa-bars"/>
+
+   <fa v-if="!store.isSideBarOpen" size="lg" icon="fa-bars"/>
 
 <fa v-else size="lg" class="close" icon="xmark"/>
 </div>
+ 
 
 
 <XyzTransition xyz="right-100% duration-1 delay-0">
@@ -27,6 +31,7 @@
 
 <script setup>
 import Sidebar from './Sidebar.vue';
+import NavMenuContents from '../components/NavMenuContents.vue';
 import {useStore} from '@/stores/counter.js'
 
 const store = useStore()
@@ -59,6 +64,7 @@ const store = useStore()
   /* background-color: #B2D1BD; */
 }
 
+#navBar
 
 .logo {
   font-size: 15px;
@@ -66,19 +72,18 @@ const store = useStore()
 }
 
 .bars {
-  padding: 10px;
+  padding: 15px;
   height: 55px;
   width: 55px;
   border-radius: 50%;
-  background-color: var(--dark);
-  display:flex;
+  display:none;
+  align-items: center;
   justify-content: center;
-align-items: center;
+  background-color: var(--dark);
   cursor:pointer;
   color:white;
   z-index:1001;
-  /* margin: auto; */
-  /* border:1px solid red; */
+
 }
 
 .bars label, .bars input{
@@ -89,14 +94,17 @@ input {
 display:none;
 }
 
+@media (max-width: 600px) {
+ 
+  #navBarContents {
+    display:none;
+  }
 
+  .bars {
+    display:flex;
+  }
 
-.bars {
-  /* display:none; */
 }
-
-
-
 
 
 

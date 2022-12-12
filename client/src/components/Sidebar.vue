@@ -4,25 +4,18 @@
    
 </div>
 
-<nav>
-    <ul>
-        <li class="link">
-            <fa  size="2x" icon="user"/> <p>Login</p>
-        </li>
-        <router-link class="link" tag="li" :to="{name:'dashboard'}">
-            <fa  size="2x" icon="user"/> <p>Login</p>
-       </router-link>
-
-    </ul>
+<NavMenuContents/>
 
 
-</nav>
 
 </div>
 
 
 </template>
 
+<script setup>
+import NavMenuContents from '@/components/NavMenuContents.vue'
+</script>
 
 <style scoped>
 
@@ -31,6 +24,7 @@
     background-color:lightblue;
     height: 1290px;
     width: 365px;
+    max-width: 99%;
     /* background-color:white; */
     position :fixed;
     right:0;
@@ -47,17 +41,6 @@
    height: 65px;
 }
 
-.link {
-    color:grey;
-    /* font-size:16px; */
-    display:flex;
-    flex-direction:row;
-    align-items: center;
-    gap:1rem;
-}
- 
-li p {
-    font-size: 20px;
-}
+
 
 </style>
