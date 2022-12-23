@@ -30,10 +30,14 @@ import DashSideNav from '../components/DashSideNav.vue';
 import DashTopBar from '../components/DashTopBar.vue';
 
 
+
+
 </script>
 
 
 <style scoped>
+
+
 .dashboardContainer {
 height: 100vh;
 width: 100%;
