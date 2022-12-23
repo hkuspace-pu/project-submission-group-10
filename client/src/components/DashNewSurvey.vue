@@ -17,7 +17,7 @@
     </Multiselect>
 
     <FormKit type="form" @submit="submitHandler">
-    <FormKit type="text" label="Name" name="name" />
+    <FormKit type="text" label="Name" name="name" help="wererer" placeholder="sdfsdf" />
     <FormKit type="email" label="Email" name="email" />
   </FormKit>
 

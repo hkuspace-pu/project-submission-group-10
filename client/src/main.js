@@ -23,6 +23,7 @@ import App from './App.vue'
 import router from './router'
 
 import { plugin, defaultConfig } from '@formkit/vue'
+import '@formkit/themes/genesis'
 
 import './assets/main.css'
 import '@animxyz/core'
