@@ -39,10 +39,11 @@
 }
 
 .account_icon {
-  width: 48%;
+  width: 30%;
   border: 1px solid #333;
   margin: 0 2%;
   padding: 2%;
+  border-radius: 5px;
 } 
 
 .account_detail {
