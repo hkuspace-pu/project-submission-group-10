@@ -22,6 +22,9 @@ import 'vue3-easy-data-table/dist/style.css';
 import App from './App.vue'
 import router from './router'
 
+import { plugin, defaultConfig } from '@formkit/vue'
+import '@formkit/themes/genesis'
+
 import './assets/main.css'
 import '@animxyz/core'
 
@@ -30,6 +33,7 @@ app.component('fa', fa)
 app.use(VueAnimXyz)
 app.use(createPinia())
 app.use(router)
+app.use(plugin, defaultConfig)
 
 
 app.component('EasyDataTable', Vue3EasyDataTable);

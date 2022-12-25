@@ -8,6 +8,18 @@
     <label for="date">Tags</label>
     <input type="text" id="tags" class="input">
 
+    <Multiselect
+      v-model="selected"
+      :options="options"
+      :multiple="true"
+      :taggable="true"
+      >
+    </Multiselect>
+
+    <FormKit type="form" @submit="submitHandler">
+    <FormKit type="text" label="Name" name="name" help="wererer" placeholder="sdfsdf" />
+    <FormKit type="email" label="Email" name="email" />
+  </FormKit>
 
 </form>
 
@@ -16,6 +28,14 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import Multiselect from 'vue-multiselect'
+// import { plugin, defaultConfig } from '@formkit/vue'
+import "vue-multiselect/dist/vue-multiselect.css"
+
+const selected = ref(null);
+const options = ref(['Stone Wall', 'Dead', 'Alive']);
+
 
 // getlocation(() => {
 //     navigator.getlocation
