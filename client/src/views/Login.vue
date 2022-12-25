@@ -64,11 +64,11 @@ const isLoading = ref(false);
 async function login() {
     try {
     isLoading.value = true
-    const resp = await fetch('https://httpbin.org/get', {
-        method: 'GET',
+    const resp = await fetch('http://18.118.83.77:9000/login', {
+        method: 'POST',
         headers : {
         "Content-type": "application/json;charset=UTF-8",
-        "Authorization" : 'Basic '+ btoa(email.value+":"+password.value)}
+        "Authorization" : btoa(email.value+":"+password.value)}
     })
     const token = await resp.json()
     console.log(token)
