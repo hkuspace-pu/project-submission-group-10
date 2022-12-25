@@ -2,26 +2,33 @@
 
 <div class="dashSideNav">
     <div class="menuItems">
-<router-link tag="div" class="row" :to="{name:'dashboard'}">
-   <fa class="icon" size="2x" icon="house" :class="$route.name=='dashboard' && 'focused'" />
-</router-link>
-<router-link tag="div" class="row" :to="{name:'new'}" >
-   <fa class="icon" size="2x" icon="file-pen" :class="$route.name=='new' && 'focused'"/>
-</router-link>
-</div>
+        <router-link tag="div" class="row" :to="{name:'dashboard'}">
+            <fa class="icon" size="2x" icon="house" :class="$route.name=='dashboard' && 'focused'" />
+        </router-link>
+        <router-link tag="div" class="row" :to="{name:'report'}" >
+            <fa class="icon" size="2x" icon="notes-medical" :class="$route.name=='report' && 'focused'"/>
+        </router-link>
+        <router-link tag="div" class="row" :to="{name:'new'}" >
+            <fa class="icon" size="2x" icon="file-pen" :class="$route.name=='new' && 'focused'"/>
+        </router-link>
+        <router-link tag="div" class="row" :to="{name:'chart'}" >
+            <fa class="icon" size="2x" icon="chart-simple" :class="$route.name=='chart' && 'focused'"/>
+        </router-link>
+    </div>
 
 
-<foot>
-    <router-link tag="div" class="row" :to="{name:'new'}" >
-   <fa class="icon" size="2x" icon="circle-question" :class="$route.name=='help' && 'focused'"/>
-</router-link>
-<!-- <router-link tag="div" class="row" :to="{name:'new'}" >
-   <fa class="icon" size="2x" icon="circle-question" :class="$route.name=='help' && 'focused'"/>
-</router-link> -->
+    <foot>
+        <router-link tag="div" class="row" :to="{name:'admin_account'}" >
+            <fa class="icon" size="2x" icon="circle-user" :class="$route.name=='admin_account' && 'focused'"/>
+        </router-link>
+        <router-link tag="div" class="row" :to="{name:'new'}" >
+            <fa class="icon" size="2x" icon="circle-question" :class="$route.name=='help' && 'focused'"/>
+        </router-link>
+        <!-- <router-link tag="div" class="row" :to="{name:'new'}" >
+        <fa class="icon" size="2x" icon="circle-question" :class="$route.name=='help' && 'focused'"/>
+        </router-link> -->
 
-</foot>
-
-
+    </foot>
 
 </div>
 

@@ -4,6 +4,10 @@ import Login from '../views/Login.vue'
 import DashHome from '@/components/DashHome.vue'
 import DashNewSurvey from '@/components/DashNewSurvey.vue'
 
+import DashChart from '@/components/DashChart.vue'
+import DashReport from '@/components/DashReport.vue'
+import DashAccount from '@/components/DashAccount.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -26,43 +30,109 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-    path: '/dash',
-    // name: 'dashboard',
-    component : () => import('../views/Dashboard.vue'),
-    meta : {
-      title : 'Dashboard'
-    },
-    children: [
-
-      {
-          path : '',
-          name : 'dashboard',
-          component: DashHome,
-          meta : {
-            title : 'Dashboard'
-          }
+      path: '/dash',
+      // name: 'dashboard',
+      component : () => import('../views/Dashboard.vue'),
+      meta : {
+        title : 'Dashboard'
       },
+      children: [
 
         {
-          path : 'new',
-          name : 'new',
-          component: DashNewSurvey,
-          meta : {
-            title : 'Create New Survey'
-          }
-  
-      },
+            path : '',
+            name : 'dashboard',
+            component: DashHome,
+            meta : {
+              title : 'Dashboard'
+            }
+        },
 
-   
-    ]
+          {
+            path : 'report',
+            name : 'report',
+            component: DashReport,
+            meta : {
+              title : 'Reports'
+            }
+    
+        },
+
+          {
+            path : 'new',
+            name : 'new',
+            component: DashNewSurvey,
+            meta : {
+              title : 'Create New Survey'
+            }
+    
+        },
+          {
+            path : 'chart',
+            name : 'chart',
+            component: DashChart,
+            meta : {
+              title : 'Chart Report'
+            }
+    
+        },
+
+          {
+            path : 'account',
+            name : 'admin_account',
+            component: DashAccount,
+            meta : {
+              title : 'Account'
+            }
+    
+        },
+
+      ]
     
   
-  
-  
-  
-     },
+    },
 
+    {
+      path: '/client_dash',
+      // name: 'dashboard',
+      component : () => import('../views/Dashboard.vue'),
+      meta : {
+        title : 'Dashboard'
+      },
+      children: [
 
+        {
+            path : '',
+            name : 'dashboard',
+            component: DashHome,
+            meta : {
+              title : 'Dashboard'
+            }
+        },
+
+          {
+            path : 'report',
+            name : 'report',
+            component: DashReport,
+            meta : {
+              title : 'Reports'
+            }
+    
+        },
+
+          {
+            path : 'account',
+            name : 'admin_account',
+            component: DashAccount,
+            meta : {
+              title : 'Account'
+            }
+    
+        },
+
+      ]
+    
+  
+    },
     
 
   ]
