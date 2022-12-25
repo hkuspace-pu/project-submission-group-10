@@ -110,11 +110,11 @@ const router = createRouter({
         },
 
           {
-            path : 'report',
-            name : 'report',
-            component: DashReport,
+            path : 'survey',
+            name : 'survey',
+            component: DashSurvey,
             meta : {
-              title : 'Reports'
+              title : 'Surveys'
             }
     
         },
