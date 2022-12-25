@@ -5,8 +5,8 @@
         <router-link tag="div" class="row" :to="{name:'dashboard'}">
             <fa class="icon" size="2x" icon="house" :class="$route.name=='dashboard' && 'focused'" />
         </router-link>
-        <router-link tag="div" class="row" :to="{name:'report'}" >
-            <fa class="icon" size="2x" icon="notes-medical" :class="$route.name=='report' && 'focused'"/>
+        <router-link tag="div" class="row" :to="{name:'survey'}" >
+            <fa class="icon" size="2x" icon="notes-medical" :class="$route.name=='survey' && 'focused'"/>
         </router-link>
         <router-link tag="div" class="row" :to="{name:'new'}" >
             <fa class="icon" size="2x" icon="file-pen" :class="$route.name=='new' && 'focused'"/>
