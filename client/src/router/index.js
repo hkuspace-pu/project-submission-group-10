@@ -7,6 +7,9 @@ import DashNewSurvey from '@/components/DashNewSurvey.vue'
 import DashChart from '@/components/DashChart.vue'
 import DashSurvey from '@/components/DashSurvey.vue'
 import DashAccount from '@/components/DashAccount.vue'
+import DashSyncFile from '@/components/DashSyncFile.vue'
+import DashFeature from '@/components/DashFeature.vue'
+// import DashNewFeature from '@/components/DashNewFeature.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -82,6 +85,36 @@ const router = createRouter({
             component: DashAccount,
             meta : {
               title : 'Account'
+            }
+    
+        },
+
+          {
+            path : 'syncfile',
+            name : 'syncfile',
+            component: DashSyncFile,
+            meta : {
+              title : 'TSV file handling'
+            }
+    
+        },
+
+          {
+            path : 'feature',
+            name : 'feature',
+            component: DashFeature,
+            meta : {
+              title : 'News / Events / Features'
+            }
+    
+        },
+
+          {
+            path : 'feature_new',
+            name : 'feature_new',
+            component: DashNewSurvey,
+            meta : {
+              title : 'Add News / Events / Features'
             }
     
         },

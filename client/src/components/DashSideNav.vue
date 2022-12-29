@@ -14,6 +14,17 @@
         <router-link tag="div" class="row" :to="{name:'chart'}" >
             <fa class="icon" size="2x" icon="chart-simple" :class="$route.name=='chart' && 'focused'"/>
         </router-link>
+
+        <router-link tag="div" class="row" :to="{name:'feature'}" >
+            <fa class="icon" size="2x" icon="layer-group" :class="$route.name=='feature' && 'focused'"/>
+        </router-link>
+        <router-link tag="div" class="row" :to="{name:'feature_new'}" >
+            <fa class="icon" size="2x" icon="file-circle-plus" :class="$route.name=='feature_new' && 'focused'"/>
+        </router-link>
+
+        <router-link tag="div" class="row" :to="{name:'syncfile'}" >
+            <fa class="icon" size="2x" icon="file-arrow-up" :class="$route.name=='syncfile' && 'focused'"/>
+        </router-link>
     </div>
 
 
