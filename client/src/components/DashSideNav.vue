@@ -1,5 +1,6 @@
 <template>
 
+<<<<<<< HEAD
     <div class="dashSideNav">
         <div class="menuItems">
             <router-link tag="div" class="row" :to="{ name: 'dashboard' }">
@@ -20,6 +21,51 @@
 </router-link> -->
         </foot>
     </div>
+=======
+<div class="dashSideNav">
+    <div class="menuItems">
+        <router-link tag="div" class="row" :to="{name:'dashboard'}">
+            <fa class="icon" size="2x" icon="house" :class="$route.name=='dashboard' && 'focused'" />
+        </router-link>
+        <router-link tag="div" class="row" :to="{name:'survey'}" >
+            <fa class="icon" size="2x" icon="notes-medical" :class="$route.name=='survey' && 'focused'"/>
+        </router-link>
+        <router-link tag="div" class="row" :to="{name:'new'}" >
+            <fa class="icon" size="2x" icon="file-pen" :class="$route.name=='new' && 'focused'"/>
+        </router-link>
+        <router-link tag="div" class="row" :to="{name:'chart'}" >
+            <fa class="icon" size="2x" icon="chart-simple" :class="$route.name=='chart' && 'focused'"/>
+        </router-link>
+
+        <router-link tag="div" class="row" :to="{name:'feature'}" >
+            <fa class="icon" size="2x" icon="layer-group" :class="$route.name=='feature' && 'focused'"/>
+        </router-link>
+        <router-link tag="div" class="row" :to="{name:'feature_new'}" >
+            <fa class="icon" size="2x" icon="file-circle-plus" :class="$route.name=='feature_new' && 'focused'"/>
+        </router-link>
+
+        <router-link tag="div" class="row" :to="{name:'syncfile'}" >
+            <fa class="icon" size="2x" icon="file-arrow-up" :class="$route.name=='syncfile' && 'focused'"/>
+        </router-link>
+    </div>
+
+
+    <foot>
+        <router-link tag="div" class="row" :to="{name:'admin_account'}" >
+            <fa class="icon" size="2x" icon="circle-user" :class="$route.name=='admin_account' && 'focused'"/>
+        </router-link>
+        <router-link tag="div" class="row" :to="{name:'new'}" >
+            <fa class="icon" size="2x" icon="circle-question" :class="$route.name=='help' && 'focused'"/>
+        </router-link>
+        <!-- <router-link tag="div" class="row" :to="{name:'new'}" >
+        <fa class="icon" size="2x" icon="circle-question" :class="$route.name=='help' && 'focused'"/>
+        </router-link> -->
+
+    </foot>
+
+</div>
+
+>>>>>>> dev-simon
 </template>
 
 

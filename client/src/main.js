@@ -8,11 +8,21 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon as fa } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
+<<<<<<< HEAD
 import { faBars,faTree,faXmark,faFilePen,faUser,faSpinner,faHouse,faCircleQuestion,faChartPie } from '@fortawesome/free-solid-svg-icons'
 import VueAnimXyz from '@animxyz/vue3'
 
 /* add icons to the library */
 library.add(faBars,faTree,faXmark,faFilePen,faUser,faSpinner,faHouse,faCircleQuestion,faChartPie)
+=======
+import { faBars,faTree,faXmark,faFilePen,faUser,faSpinner,faHouse,faCircleQuestion,faNotesMedical,faCircleUser,faChartSimple
+        ,faLocationDot, faFileArrowUp, faLayerGroup, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import VueAnimXyz from '@animxyz/vue3'
+
+/* add icons to the library */
+library.add(faBars,faTree,faXmark,faFilePen,faUser,faSpinner,faHouse,faCircleQuestion,faNotesMedical,faCircleUser,faChartSimple
+            ,faLocationDot, faFileArrowUp, faLayerGroup, faCirclePlus)
+>>>>>>> dev-simon
 
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 import 'vue3-easy-data-table/dist/style.css';
