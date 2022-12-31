@@ -1,27 +1,5 @@
 <template>
 
-<<<<<<< HEAD
-    <div class="dashSideNav">
-        <div class="menuItems">
-            <router-link tag="div" class="row" :to="{ name: 'dashboard' }">
-                <fa class="icon" size="2x" icon="house" :class="$route.name == 'dashboard' && 'focused'" />
-            </router-link>
-            <router-link tag="div" class="row" :to="{ name: 'new' }">
-                <fa class="icon" size="2x" icon="file-pen" :class="$route.name == 'new' && 'focused'" />
-            </router-link>
-        </div>
-
-
-        <foot>
-            <router-link tag="div" class="row" :to="{ name: 'new' }">
-                <fa class="icon" size="2x" icon="circle-question" :class="$route.name == 'help' && 'focused'" />
-            </router-link>
-            <!-- <router-link tag="div" class="row" :to="{name:'new'}" >
-   <fa class="icon" size="2x" icon="circle-question" :class="$route.name=='help' && 'focused'"/>
-</router-link> -->
-        </foot>
-    </div>
-=======
 <div class="dashSideNav">
     <div class="menuItems">
         <router-link tag="div" class="row" :to="{name:'dashboard'}">
@@ -65,7 +43,6 @@
 
 </div>
 
->>>>>>> dev-simon
 </template>
 
 

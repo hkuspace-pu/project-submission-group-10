@@ -8,13 +8,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon as fa } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-<<<<<<< HEAD
-import { faBars,faTree,faXmark,faFilePen,faUser,faSpinner,faHouse,faCircleQuestion,faChartPie } from '@fortawesome/free-solid-svg-icons'
-import VueAnimXyz from '@animxyz/vue3'
-
-/* add icons to the library */
-library.add(faBars,faTree,faXmark,faFilePen,faUser,faSpinner,faHouse,faCircleQuestion,faChartPie)
-=======
 import { faBars,faTree,faXmark,faFilePen,faUser,faSpinner,faHouse,faCircleQuestion,faNotesMedical,faCircleUser,faChartSimple
         ,faLocationDot, faFileArrowUp, faLayerGroup, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import VueAnimXyz from '@animxyz/vue3'
@@ -22,23 +15,35 @@ import VueAnimXyz from '@animxyz/vue3'
 /* add icons to the library */
 library.add(faBars,faTree,faXmark,faFilePen,faUser,faSpinner,faHouse,faCircleQuestion,faNotesMedical,faCircleUser,faChartSimple
             ,faLocationDot, faFileArrowUp, faLayerGroup, faCirclePlus)
->>>>>>> dev-simon
 
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 import 'vue3-easy-data-table/dist/style.css';
+
+
 
 // // const app = createApp(App);
 
 import App from './App.vue'
 import router from './router'
 
-import { plugin, defaultConfig } from '@formkit/vue'
-import '@formkit/themes/genesis'
 
+
+
+import { plugin, defaultConfig } from '@formkit/vue'
+import { createProPlugin, inputs } from '@formkit/pro'
+import '@formkit/themes/genesis'
+import '@formkit/pro/genesis'
+// import '@formkit/themes/genesis'
 import './assets/main.css'
 import '@animxyz/core'
 
+
+
 const app = createApp(App)
+
+const pro = createProPlugin('fk-577218191f7', inputs)
+app.use(plugin, defaultConfig({ plugins: [pro] }))
+
 app.component('fa', fa)
 app.use(VueAnimXyz)
 app.use(createPinia())
