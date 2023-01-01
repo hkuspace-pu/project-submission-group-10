@@ -160,7 +160,7 @@
 <script setup>
 import { ref,reactive,computed } from 'vue';
 
-import AddressAutocomplete from 'vue-google-maps-address-autocomplete';
+// import AddressAutocomplete from 'vue-google-maps-address-autocomplete';
 const step = ref(1);
 const commonName = ref(['Fig tree (无花果树)', 'Gingko tree (银杏树)']);
 const treeTags = ref(['Stone wall', 'Old & valuable','Juvenile (sapling)','Mature', ])
