@@ -16,6 +16,7 @@
    
     <XyzTransition key="1" class="item-group" xyz="fade up-100% out-up" mode="out-in">
     <section v-show="step == 1">
+<div>
     <FormKit type="group" name="locationInfo">
        
       <FormKit type="text"
@@ -36,12 +37,19 @@
 />
 
     </FormKit>
+    </div>
+
+    <div>
+      <h3 class="dark">Map Info</h3>
+    </div>
+
+ 
     </section>
     </XyzTransition>
 
     <XyzTransition key="2" class="item-group" xyz="fade up-100% out-up" mode="out-in">
     <section v-show="step == 2">
-
+    <div>
     <FormKit type="group" name="BasicTreeInfo">
 
     <FormKit
@@ -50,17 +58,39 @@
       prefixIcon="search"
       suffixIcon="info"
       label="Common name"
+      selection-appearance="option"
       validation="required"
       placeholder="Example: Mango tree"
       :options="commonName"
-    />
+    >
+
+    <template #option="{ option }">
+        <div class="formkit-option">
+          <img :src="option.logo" width="20px"/>
+          <span>
+            {{ option.label }}
+          </span>
+        </div>
+      </template>
 
     </FormKit>
+
+    </FormKit>
+    </div>
+
+    <div>
+<img src="../assets/images/tree.svg"/>
+    </div>
+
+
     </section>
+
+
     </XyzTransition>
 
     <XyzTransition key="3" class="item-group" xyz="fade up-100% out-up" mode="out-in">
 <section v-show="step == 3">
+  <div>
 <FormKit type="group" name="Attributes">
     <FormKit
   type="number"
@@ -82,12 +112,18 @@
   step="1"
 />
 </FormKit>
+</div>
+
+<div>
+  <p>something here</p>
+</div>
 </section>
 </XyzTransition>
 
 
 <XyzTransition key="4" class="item-group" xyz="fade up-100% out-up" mode="out-in">
 <section v-show="step == 4">
+  <div>
 <FormKit type="group" name="health">
 <FormKit
   type="rating"
@@ -115,6 +151,9 @@
      
     />
 </FormKit>
+</div>
+
+<div><p>something here</p></div>
 </section>
 </XyzTransition>
 
@@ -126,6 +165,7 @@
 
 <XyzTransition key="5" class="item-group" xyz="fade up-100% out-up" mode="out-in">
 <section v-show="step == 5">
+  <div>
 <FormKit
   type="file"
   label="Add  media"
@@ -133,6 +173,11 @@
   help="Add images or video"
   multiple
 />
+</div>
+
+<div>
+  <p>someting here</p>
+</div>
 </section>
 </XyzTransition>
 
@@ -146,7 +191,7 @@
   </div>
   <div class="step-nav">
       <FormKit type="button" :disabled="step == 1" @click="step--" v-text="'Previous step'" />
-      <FormKit v-if="step <5" type="button" class="next" :disabled="step == 5 " @click="step++" v-text="nextText"/>
+      <FormKit v-if="step <5" type="button" class="next"  @click="step++" v-text="nextText"/>
       <FormKit v-else type="submit" label="Submit Application" />
     </div>
  
@@ -162,7 +207,7 @@ import { ref,reactive,computed } from 'vue';
 
 import AddressAutocomplete from 'vue-google-maps-address-autocomplete';
 const step = ref(1);
-const commonName = ref(['Fig tree (无花果树)', 'Gingko tree (银杏树)']);
+const commonName = ref([{label:'Fig tree (无花果树)', value : 'Fig tree (无花果树)', logo: '../assets/images/butterfly.webp' }, {label :'Gingko tree (银杏树)', value: 'Gingko tree (银杏树)',logo: '../assets/images/bird.gif' }]);
 const treeTags = ref(['Stone wall', 'Old & valuable','Juvenile (sapling)','Mature', ])
 const selected = ref(null);
 const options = ref(['Stone Wall', 'Dead', 'Alive']);
@@ -198,13 +243,11 @@ const nextText = computed(() => {
 
 const submit = async (fields) => {
   console.log(step)
-  if (step.value == 4) {
+ 
       await new Promise((r) => setTimeout(r, 1000))
   alert(JSON.stringify(fields))
   step.value = 1;
-  } else {
-     step.value++
-  }
+
 
 }
 
@@ -219,7 +262,7 @@ const submit = async (fields) => {
 
   /* height:  */
   /* width: 100%; */
-  height: 350px;
+  height: 550px;
   max-height: 80%;
   overflow-y: auto;
   /* margin-bottom:100px; */
@@ -263,9 +306,10 @@ input {
 
 <style>
 .formkit-inner {
-  width: 700px;
+  /* width: 700px; */
   /* max-width: 80%; */
   font-size: 18px;
+  max-width: 420px;
   /* padding:0.5rem; */
   min-height: 55px;
 }
@@ -286,6 +330,23 @@ input {
 
 }
 
+.formkit-option {
+  display: flex;
+  align-items: center;
+}
 
+.formkit-option img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
 
+section {
+  display:flex;
+  flex-direction: row;
+  
+  justify-content: space-between;
+  /* align-items: center; */
+  border:1px solid red;
+}
 </style>
