@@ -40,18 +40,11 @@
     </div>
 
     <div>
-      <h3 class="dark">Map Info</h3>
+      <h3 class="dark">Map Info {{ GOOGLE_API }}</h3>
       <div>
 
-        <iframe
-  width="600"
-  height="450"
-  style="border:0"
-  loading="lazy"
-  allowfullscreen
-  referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/place?key={{GOOGLE_API}}
-    &q=Space+Needle,Seattle+WA">
+        <iframe width="450" height="350" frameborder="0" style="border:0"
+:src="gmapurl" allowfullscreen>
 </iframe>
 
       </div>
@@ -218,6 +211,10 @@
 
 <script setup>
 import { ref,reactive,computed } from 'vue';
+// const GOOGLE_API = import.meta.env.'VITE_GOOGLE_API'
+const GOOGLE_API = 'AIzaSyCv6UXTIdpXEKk0eHF7GC42Gv9mxcHd8o4'
+const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=Space+Needle,Seattle+WA`
+
 
 // import AddressAutocomplete from 'vue-google-maps-address-autocomplete';
 const step = ref(1);
