@@ -124,50 +124,6 @@ const router = createRouter({
   
     },
 
-    {
-      path: '/client_dash',
-      // name: 'dashboard',
-      component : () => import('../views/Dashboard.vue'),
-      meta : {
-        title : 'Dashboard'
-      },
-      children: [
-
-        {
-            path : '',
-            name : 'dashboard',
-            component: DashHome,
-            meta : {
-              title : 'Dashboard'
-            }
-        },
-
-          {
-            path : 'survey',
-            name : 'survey',
-            component: DashSurvey,
-            meta : {
-              title : 'Surveys'
-            }
-    
-        },
-
-          {
-            path : 'account',
-            name : 'admin_account',
-            component: DashAccount,
-            meta : {
-              title : 'Account'
-            }
-    
-        },
-
-      ]
-    
-  
-    },
-    
-
   ]
 })
 
