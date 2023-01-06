@@ -283,12 +283,16 @@ onMounted(async () => {
 //REQUEST LOCATION FROM THE BROWSER
 
 const sb = (position) => {
+  console.log('geo ok')
   console.log(position)
 }
 
 const eb = (error) => {
+  console.log('geo error')
   console.log(error)
 }
+
+console.log('getting geo location')
 
 navigator.geolocation.getCurrentPosition(sb,eb)
 
