@@ -14,7 +14,7 @@
 
   <div class="form-body">
    
-    <XyzTransitionGroup  xyz="down-75% out-up-100%" mode="out-in">
+    <XyzTransitionGroup  xyz="down-100% out-up-100%" mode="out-in">
       <!-- <XyzTransitionGroup  xyz="" mode="out-in"> -->
 
     <section key=1 v-if="step == 1">
@@ -218,7 +218,7 @@ import { ref,reactive,computed, onMounted } from 'vue';
 // const GOOGLE_API = import.meta.env.'VITE_GOOGLE_API'
 const GOOGLE_API = 'AIzaSyCv6UXTIdpXEKk0eHF7GC42Gv9mxcHd8o4'
 const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=Space+Needle,Seattle+WA`
-
+const cord = reactive({lat:0,long:0})
 
 // import AddressAutocomplete from 'vue-google-maps-address-autocomplete';
 const step = ref(1);
@@ -280,6 +280,21 @@ onMounted(async () => {
     console.log(data)
     // commonName.value = data
 
+//REQUEST LOCATION FROM THE BROWSER
+
+const sb = (position) => {
+  console.log(position)
+}
+
+const eb = (error) => {
+  console.log(error)
+}
+
+navigator.geolocation.getCurrentPosition(sb,eb)
+
+
+
+
 })
 
 </script>
@@ -295,7 +310,7 @@ onMounted(async () => {
   /* width: 100%; */
   height: 550px;
   max-height: 80%;
-  overflow-y: auto;
+  overflow-y: hidden;
   /* margin-bottom:100px; */
   /* border:1px solid red; */
   /* display:flex; */
@@ -311,6 +326,7 @@ onMounted(async () => {
   padding:1.4rem;
   /* margin:auto; */
   height: 100%;
+  /* border: 1px solid red; */
   width: 100%;
   /* border:1px solid green; */
   /* display:flex; */
