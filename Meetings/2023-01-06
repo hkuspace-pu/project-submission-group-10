@@ -1,0 +1,42 @@
+# 2023-01-06 Group Project Meeting
+
+## Present Today
+- [X] Rishi (Product Owner)
+- [X] Simon (Scrum Master)
+- [X] Leo (Technical Lead)
+
+## Meeting Location
+- Google meeting
+
+## Today's Actions
+
+1. Confirmation for the front-end.
+2. Confirmation for the back-end api.
+3. Modify the structure of the return json. 
+4. Adding columns to the Database table.
+
+## Task to do
+1. modify the query api.
+2. adding SSL to the api nginx server.
+3. modify the return josn structure.
+4. survey insert api.
+5. survey list query api.
+6. demo data feeding
+7. front-end charting page
+8. user profile page.
+
+## Impediments (Problems)
+1. Need improve the admin role functions.
+2. Redesign the database structure for the further action requirement.
+3. Adding more api.
+
+## Future Actions
+--
+
+## What we learned (Knowledge)
+1.JWT token.
+2.Encryption and decryption of the data transfer.
+3.Co-working processing.
+
+## Other
+1. Next action event will be on first client meeting 2023-1-11
