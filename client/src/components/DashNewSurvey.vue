@@ -14,8 +14,10 @@
 
   <div class="form-body">
    
-    <XyzTransition key="1" class="item-group" xyz="fade up-100% out-up" mode="out-in">
-    <section v-show="step == 1">
+    <XyzTransitionGroup  xyz="down-75% out-up-100%" mode="out-in">
+      <!-- <XyzTransitionGroup  xyz="" mode="out-in"> -->
+
+    <section key=1 v-if="step == 1">
 <div>
     <FormKit type="group" name="locationInfo">
        
@@ -40,7 +42,7 @@
     </div>
 
     <div>
-      <h3 class="dark">Map Info {{ GOOGLE_API }}</h3>
+      <h3 class="dark">Location</h3>
       <div>
 
         <iframe width="450" height="350" frameborder="0" style="border:0"
@@ -52,10 +54,11 @@
 
  
     </section>
-    </XyzTransition>
+    <!-- </XyzTransition> -->
 
-    <XyzTransition key="2" class="item-group" xyz="fade up-100% out-up" mode="out-in">
-    <section v-show="step == 2">
+
+    <!-- <XyzTransition  class="item-group" xyz="fade up-100% out-up" mode="out-in"> -->
+    <section key=2 v-else-if="step == 2">
     <div>
     <FormKit type="group" name="BasicTreeInfo">
 
@@ -73,9 +76,9 @@
 
     <template #option="{ option }">
         <div class="formkit-option">
-          <img :src="option.logo" width="20px"/>
+          <!-- <img :src="option.logo" width="20px"/> -->
           <span>
-            {{ option.label }}
+            {{ option.commonName }}
           </span>
         </div>
       </template>
@@ -93,10 +96,10 @@
     </section>
 
 
-    </XyzTransition>
+    <!-- </XyzTransition> -->
 
-    <XyzTransition key="3" class="item-group" xyz="fade up-100% out-up" mode="out-in">
-<section v-show="step == 3">
+    <!-- <XyzTransition class="item-group" xyz="fade up-100% out-up" mode="out-in"> -->
+<section key=3 v-else-if="step == 3">
   <div>
 <FormKit type="group" name="Attributes">
     <FormKit
@@ -122,20 +125,19 @@
 </div>
 
 <div>
-  <p>something here</p>
+  <img src="../assets/images/crown_spread_image.gif">
 </div>
 </section>
-</XyzTransition>
+<!-- </XyzTransition> -->
 
 
-<XyzTransition key="4" class="item-group" xyz="fade up-100% out-up" mode="out-in">
-<section v-show="step == 4">
+<!-- <XyzTransition class="item-group" xyz="fade up-100% out-up" mode="out-in"> -->
+<section key=4 v-else-if="step == 4">
   <div>
 <FormKit type="group" name="health">
 <FormKit
   type="rating"
   name="health"  
- 
   min="1"
   step="0.5"
   rating-icon="heart"
@@ -162,7 +164,7 @@
 
 <div><p>something here</p></div>
 </section>
-</XyzTransition>
+<!-- </XyzTransition> -->
 
 
 
@@ -170,8 +172,8 @@
 
 
 
-<XyzTransition key="5" class="item-group" xyz="fade up-100% out-up" mode="out-in">
-<section v-show="step == 5">
+<!-- <XyzTransition class="item-group" xyz="fade up-100% out-up" mode="out-in"> -->
+<section key=5 v-else-if="step == 5">
   <div>
 <FormKit
   type="file"
@@ -186,7 +188,9 @@
   <p>someting here</p>
 </div>
 </section>
-</XyzTransition>
+
+    </XyzTransitionGroup>
+
 
 
 
@@ -210,7 +214,7 @@
 </template>
 
 <script setup>
-import { ref,reactive,computed } from 'vue';
+import { ref,reactive,computed, onMounted } from 'vue';
 // const GOOGLE_API = import.meta.env.'VITE_GOOGLE_API'
 const GOOGLE_API = 'AIzaSyCv6UXTIdpXEKk0eHF7GC42Gv9mxcHd8o4'
 const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=Space+Needle,Seattle+WA`
@@ -218,11 +222,13 @@ const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=
 
 // import AddressAutocomplete from 'vue-google-maps-address-autocomplete';
 const step = ref(1);
-const commonName = ref([{label:'Fig tree (无花果树)', value : 'Fig tree (无花果树)', logo: '../assets/images/butterfly.webp' }, {label :'Gingko tree (银杏树)', value: 'Gingko tree (银杏树)',logo: '../assets/images/bird.gif' }]);
+const commonName = ref([{commonName:'Fig tree (无花果树)', value : 'Fig tree (无花果树)', logo: '../assets/images/butterfly.webp' }, {commonName :'Gingko tree (银杏树)', value: 'Gingko tree (银杏树)',logo: '../assets/images/bird.gif' }]);
 const treeTags = ref(['Stone wall', 'Old & valuable','Juvenile (sapling)','Mature', ])
 const selected = ref(null);
 const options = ref(['Stone Wall', 'Dead', 'Alive']);
 const stepNames = reactive(['locationInfo', 'basicInfo', 'advancedInfo'])
+
+// const commonName = ref(null);
 // const address = reactive({ streetName, streetNumber, zipCode, city })
 
 // const nextText = 'asdasd';
@@ -261,6 +267,20 @@ const submit = async (fields) => {
 
 
 }
+
+onMounted(async () => {
+  const resp = await fetch('http://18.118.83.77:9000/getCommonAndScientificNameList', {
+        method: 'GET',
+        // headers : {
+        // "Content-type": "application/json;charset=UTF-8",
+        // "Authorization" : btoa(email.value+":"+password.value)}
+    }
+    )
+    const {data}= await resp.json()
+    console.log(data)
+    // commonName.value = data
+
+})
 
 </script>
 
@@ -356,8 +376,8 @@ section {
   display:flex;
   flex-direction: row;
   
-  justify-content: space-between;
+  justify-content: space-evenly;
   /* align-items: center; */
-  border:1px solid red;
+  /* border:1px solid red; */
 }
 </style>
