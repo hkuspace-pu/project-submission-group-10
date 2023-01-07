@@ -17,20 +17,35 @@
     <XyzTransitionGroup  xyz="down-100% duration-6 ease-in-out out-up-100%" mode="out-in">
       <!-- <XyzTransitionGroup  xyz="" mode="out-in"> -->
 
-    <section key=1 v-if="step == 1">
+    <section key=1 v-show="step == 1">
 <div>
-    <FormKit type="group" name="locationInfo">
+    <!-- <FormKit type="group" name="locationInfo"> -->
        
+      <FormKit
+      type="dropdown"
+      name="district"
+      label="*District"
+      placeholder="Select district"
+      :options="district"
+      help="E.g Central, Wanchai etc."
+      validation="required"
+    />
+
       <FormKit type="text"
       prefixIcon="flag"
+      name="location"
       label="*Tree location"
-      help="The location within 10 meters of the tree species."
-      validation="required|length:10"
+      help="E.g. No. 8 Tai Tong Street, Sha Tin"
+      validation="required"
     />
+ 
+   
+    
 
     <FormKit
   type="date"
-  value="2021-01-01"
+  name="survey_date"
+  :value="todayDate"
   prefixIcon="Date of survey"
   label="*Date"
   help="Enter the date of the survey"
@@ -38,7 +53,7 @@
   validation-visibility="live"
 />
 
-    </FormKit>
+    <!-- </FormKit> -->
     </div>
 
     <div>
@@ -57,9 +72,9 @@
 
 
     <!-- <XyzTransition  class="item-group" xyz="fade up-100% out-up" mode="out-in"> -->
-    <section key=2 v-else-if="step == 2">
+    <section key=2 v-show="step == 2">
     <div>
-    <FormKit type="group" name="BasicTreeInfo">
+    <!-- <FormKit type="group" name="BasicTreeInfo"> -->
 
     <FormKit
       type="autocomplete"
@@ -83,7 +98,7 @@
         </div>
       </template>
 
-    </FormKit>
+    <!-- </FormKit> -->
 
     </FormKit>
     </div>
@@ -99,9 +114,9 @@
     <!-- </XyzTransition> -->
 
     <!-- <XyzTransition class="item-group" xyz="fade up-100% out-up" mode="out-in"> -->
-<section key=3 v-else-if="step == 3">
+<section key=3 v-show="step == 3">
   <div>
-<FormKit type="group" name="Attributes">
+<!-- <FormKit type="group" name="Attributes"> -->
     <FormKit
   type="number"
   help="Estimate the tree height in meters."
@@ -126,14 +141,14 @@
   type="number"
   help="Trunk diameter 1.3m above ground"
   label="Stem circumference"
-  name="crown"
+  name="stem_circumference"
   suffixIcon="info"
   value="25"
   step="1"
 />
 
 
-</FormKit>
+<!-- </FormKit> -->
 </div>
 
 <div class="rightSide">
@@ -144,9 +159,9 @@
 
 
 <!-- <XyzTransition class="item-group" xyz="fade up-100% out-up" mode="out-in"> -->
-<section key=4 v-else-if="step == 4">
+<section key=4 v-show="step == 4">
   <div>
-<FormKit type="group" name="health">
+<!-- <FormKit type="group" name="health"> -->
 <FormKit
   type="rating"
   name="health"  
@@ -164,7 +179,7 @@
 
   
 
-</FormKit>
+<!-- </FormKit> -->
 
 <FormKit
       type="dropdown"
@@ -187,8 +202,9 @@
   type="range"
   label="Amenity value to general public"
   min="0"
+  name="amenity_value"
   prefix="1"
-  suffix="10"
+  suffix="5"
   max="5"
   help="0 = No Value, 5 = High Value"
 />
@@ -198,11 +214,14 @@
 <FormKit
   type="date"
   value="2022-01-01"
+  name="next_inspection_date"
   label="Next inspection date"
   help="Schedule next inspection date"
   validation="required|date_before:2010-01-01"
   validation-visibility="live"
 />
+
+
 </div>
 
 
@@ -218,15 +237,24 @@
 
 
 <!-- <XyzTransition class="item-group" xyz="fade up-100% out-up" mode="out-in"> -->
-<section key=5 v-else-if="step == 5">
+<section key=5 v-show="step == 5">
   <div>
 <FormKit
   type="file"
+  name="file"
   label="Add  media"
   accept=".jpg,.mov.,.mp4.,png"
   help="Add images or video"
   multiple
 />
+
+<FormKit
+      type="taglist"
+      name="tree_tag"
+      label="Tree Tags"
+      :options="treeTags"
+      :value=[]
+    />
 
 <FormKit
   v-model="checkBoxValue"
@@ -237,12 +265,49 @@
   validation="accepted"
   validation-visibility="dirty"
 />
+
+<FormKit
+  type="toggle"
+  name="dangerous_tree"
+  label="Is this tree a potential hazard?"
+/>
+
+<FormKit
+  type="textarea"
+  label="comments"
+  name="comments"
+  rows="10"
+  placeholder="Remember to write in complete sentences."
+  help="I'll know if you didn't read the book!"
+/>
+
 </div>
 
 <div>
   <p>someting here</p>
 </div>
 </section>
+
+<section key=6 v-show="step == 6">
+  <div>
+    <h3>Advanced Options</h3>
+<FormKit type="text"
+      prefixIcon="flag"
+      name="tcmp_id"
+      label="Do you know the TCMP ID?"
+      help="Government registered ID"
+      validation="required|length:10"
+    />
+    
+    <FormKit type="text"
+      prefixIcon="flag"
+      name="responsible_dept"
+      label="Responsible Department"
+      help="Which Government department is responsible"
+      validation="required|length:10"
+    />
+    </div>
+    </section>
 
     </XyzTransitionGroup>
 
@@ -258,10 +323,10 @@
  
   <div class="step-nav">
       <FormKit type="button" :disabled="step == 1" @click="step--" v-text="'Previous step'" />
-      <FormKit v-if="step <5" type="button" class="next"  @click="step++" v-text="nextText"/>
+      <FormKit v-if="step <6" type="button" class="next"  @click="step++" v-text="nextText"/>
       <FormKit v-else type="submit" label="Submit Application" />
     </div>
-
+    <pre wrap>{{ value }}</pre>
 </FormKit>
 
 
@@ -287,8 +352,14 @@ const selected = ref(null);
 const options = ref(['Stone Wall', 'Dead', 'Alive']);
 const stepNames = reactive(['locationInfo', 'basicInfo', 'advancedInfo'])
 const recommendation = ref(['Retain', 'Transplant', 'Trim', 'Removal'])
+const district = ref(['Central', 'Western', 'Peak', 'Midlevels'])
 const treeValue = ref(null);
 const checkBoxValue = ref(null);
+// const todayDate = new Date(Date.now()).toLocaleString();
+// const todayDate = '07/07/2022'
+const today = new Date();
+const todayDate = today.toISOString().split('T')[0];
+// const nextInspectionDate = todayDate+
 // const commonName = ref(null);
 // const address = reactive({ streetName, streetNumber, zipCode, city })
 
@@ -307,6 +378,8 @@ const nextText = computed(() => {
       return 'Next (Health)'
       case 4:
       return 'Next (Media)'
+      case 5:
+      return 'Next (Advanced)'
   
     default:
     return 'Next'
