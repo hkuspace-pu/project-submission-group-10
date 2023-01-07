@@ -4,6 +4,40 @@
   <!-- :submit-label="button_label" -->
   <!-- <FormKit  @submit="submit" type="form" #default="{ value }" >  -->
 
+    <div class="surveySteps">
+
+      <div @click="step = 1" class="step" :class="step == 1 && 'step_background'">
+      <div class="step_number">1</div>
+      <div>Location</div>
+      </div>
+      <fa icon="chevron-right"/>
+      <div @click="step = 2"  class="step" :class="step == 2 && 'step_background'">
+      <div class="step_number">2</div>
+      <div>Identification </div>
+      </div>
+      <fa icon="chevron-right"/>
+      <div @click="step = 3"  class="step" :class="step == 3 && 'step_background'">
+      <div class="step_number">3</div>
+      <div>Attributes</div>
+      </div>
+      <fa icon="chevron-right"/>
+      <div @click="step = 4"  class="step" :class="step == 4 && 'step_background'">
+      <div class="step_number">4</div>
+      <div>Health</div>
+      </div>
+      <fa icon="chevron-right"/>
+      <div @click="step = 5" class="step" :class="step == 5 && 'step_background'">
+      <div class="step_number">5</div>
+      <div>Media </div>
+      </div>
+      <fa icon="chevron-right"/>
+      <div @click="step = 6" class="step" :class="step == 6 && 'step_background'">
+      <div class="step_number">6</div>
+      <div>Advanced </div>
+      </div>
+     
+     
+    </div>
     <FormKit
   type="form"
   #default="{ value}"
@@ -99,12 +133,23 @@
       </template>
 
     <!-- </FormKit> -->
+    
 
     </FormKit>
+
+    <FormKit
+      type="taglist"
+      name="tree_tag"
+      label="Tree Tags"
+      :options="treeTags"
+      :value=[]
+    />
+
     </div>
 
     <div class="rightSide">
 <img src="../assets/images/tree.svg"/>
+
     </div>
 
 
@@ -153,8 +198,19 @@
 
 <div class="rightSide">
   <img  src="../assets/images/crown_spread_image.gif">
-</div>
-</section>
+  <div class="attributeCrown">{{ value.crown }}</div>
+  <div class="attributeHeight">{{ value.height }}</div>
+  <div class="attributeStep">{{ value.stem_circumference }}</div>
+  <!-- <input class="inputImage"  type="text"/> -->
+  <!-- <FormKit
+  outer-class="class-append"
+  type="number"
+   inner-class="my-input-class"
+  name="crown"
+  value="25"
+  step="1"
+/> -->
+</div> </section>
 <!-- </XyzTransition> -->
 
 
@@ -167,28 +223,29 @@
   name="health"  
   min="1"
   step="0.5"
-  rating-icon="heart"
-  on-color="#DA012D"
   max="5"
   id="health"
   label="Rate the overall health condition of the tree"
-/>
-<div>
+>
+<template #offItem>
+    <img src="../assets/images/heart_empty.png" />
+  </template>
+  <template #onItem>
+    <img src="../assets/images/heart_filled.png" />
+  </template>
+  </FormKit>
 
-</div>
 
   
 
 <!-- </FormKit> -->
 
-<FormKit
-      type="dropdown"
-      name="recommendation"
-      label="Your recommendation"
-      placeholder="Follow-up action"
-      :options="recommendation"
-    />
 
+    <FormKit
+  type="toggle"
+  name="dangerous_tree"
+  label="Is this tree a potential hazard?"
+/>
     <!-- <FormKit
   v-model="treeValue"
   type="radio"
@@ -197,36 +254,26 @@
   help="Does this tree bring value to its surroundings?"
 /> -->
 
-<FormKit
-  v-model="treeValue"
-  type="range"
-  label="Amenity value to general public"
-  min="0"
-  name="amenity_value"
-  prefix="1"
-  suffix="5"
-  max="5"
-  help="0 = No Value, 5 = High Value"
-/>
-{{treeValue}}
 
 
-<FormKit
-  type="date"
-  value="2022-01-01"
-  name="next_inspection_date"
-  label="Next inspection date"
-  help="Schedule next inspection date"
-  validation="required|date_before:2010-01-01"
-  validation-visibility="live"
-/>
+
+
+
 
 
 </div>
 
 
 
-<div><p>something here</p></div>
+<div>
+  <FormKit
+      type="dropdown"
+      name="recommendation"
+      label="Your recommendation"
+      placeholder="Follow-up action"
+      :options="recommendation"
+    />
+  </div>
 </section>
 <!-- </XyzTransition> -->
 
@@ -249,37 +296,20 @@
 />
 
 <FormKit
-      type="taglist"
-      name="tree_tag"
-      label="Tree Tags"
-      :options="treeTags"
-      :value=[]
-    />
-
-<FormKit
-  v-model="checkBoxValue"
-  type="checkbox"
-  label="Terms and Conditions"
-  help="Do you agree to our terms of service?"
-  name="terms"
-  validation="accepted"
-  validation-visibility="dirty"
+  v-model="treeValue"
+  type="range"
+  label="Amenity value to general public"
+  min="0"
+  name="amenity_value"
+  prefix="1"
+  suffix="5"
+  max="5"
+  :options="[{label:'Poor', value:0},{label:'Average', value:1}]"
+  help="0 = No Value, 5 = High Value"
 />
 
-<FormKit
-  type="toggle"
-  name="dangerous_tree"
-  label="Is this tree a potential hazard?"
-/>
 
-<FormKit
-  type="textarea"
-  label="comments"
-  name="comments"
-  rows="10"
-  placeholder="Remember to write in complete sentences."
-  help="I'll know if you didn't read the book!"
-/>
+
 
 </div>
 
@@ -292,21 +322,59 @@
   <div>
     <h3>Advanced Options</h3>
 <FormKit type="text"
-      prefixIcon="flag"
+      prefixIcon="number"
       name="tcmp_id"
-      label="Do you know the TCMP ID?"
+      label="Government Tree Identification"
       help="Government registered ID"
-      validation="required|length:10"
+    
     />
     
-    <FormKit type="text"
-      prefixIcon="flag"
+  
+
+    <FormKit
+      type="dropdown"
       name="responsible_dept"
       label="Responsible Department"
-      help="Which Government department is responsible"
-      validation="required|length:10"
+      placeholder="Select Department"
+      :options="department"
+      help="E.g LCSD, Highways Dept."
+     
     />
+    <FormKit
+  type="date"
+  value="2023-06-01"
+  name="next_inspection_date"
+  label="Next inspection date"
+  help="Schedule next inspection date"
+
+/>
+
+
     </div>
+
+    <div>
+      <FormKit
+  type="textarea"
+  label="comments"
+  name="comments"
+  rows="5"
+  placeholder="Remember to write in complete sentences."
+  help="I'll know if you didn't read the book!"
+/>
+
+<FormKit
+  v-model="checkBoxValue"
+  type="checkbox"
+  label="Terms and Conditions"
+  help="Do you agree to our terms of service?"
+  name="terms"
+  validation="accepted"
+  validation-visibility="dirty"
+/>
+
+    </div>
+
+    
     </section>
 
     </XyzTransitionGroup>
@@ -326,7 +394,7 @@
       <FormKit v-if="step <6" type="button" class="next"  @click="step++" v-text="nextText"/>
       <FormKit v-else type="submit" label="Submit Application" />
     </div>
-    <pre wrap>{{ value }}</pre>
+    <!-- <pre wrap>{{ value }}</pre> -->
 </FormKit>
 
 
@@ -353,6 +421,7 @@ const options = ref(['Stone Wall', 'Dead', 'Alive']);
 const stepNames = reactive(['locationInfo', 'basicInfo', 'advancedInfo'])
 const recommendation = ref(['Retain', 'Transplant', 'Trim', 'Removal'])
 const district = ref(['Central', 'Western', 'Peak', 'Midlevels'])
+const department = ref(['AFCD', 'LCSD','Highways Dept', 'Water Supplies Dept.', 'Housing Dept.'])
 const treeValue = ref(null);
 const checkBoxValue = ref(null);
 // const todayDate = new Date(Date.now()).toLocaleString();
@@ -483,6 +552,48 @@ navigator.geolocation.getCurrentPosition(sb,eb)
 
 }
 
+.surveySteps {
+  margin: 25px 0;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* border:1px solid red; */
+  gap:20px;
+}
+
+.step {
+display:flex;
+gap:10px;
+color:var(--dark);
+cursor: pointer;
+border-radius: 6px;
+padding: 5px 8px;
+justify-content: center;
+align-items: center;
+}
+
+.step:hover {
+  opacity: 0.8;
+}
+
+.step_background {
+  background-color: var(--lightGreen);
+}
+
+.step_number {
+  height: 20px;
+  width: 20px;
+font-size:13px;
+font-weight: 600;
+display:flex;
+justify-content: center;
+align-items: center;
+  background-color: var(--dg2);
+  color:white;
+  border-radius: 50%;
+}
+
 .step-nav {
   /* margin-top: */
   width: 100%;
@@ -492,10 +603,27 @@ navigator.geolocation.getCurrentPosition(sb,eb)
   
 }
 
-input {
-  width: 700px;
+.rightSide {
+  position:relative;
+}
+.class-append{
+  border:1px solid red;
 }
 
+.inputImage {
+  position : absolute;
+  top:100px;
+  right:150px;
+  /* left:0; */
+}
+
+input {
+  /* width: 10px; */
+}
+
+.inputImage {
+  width: 80px;
+}
 section {
   display:flex;
   flex-direction: row;
@@ -549,6 +677,40 @@ img {
 </style>
 
 <style>
+
+.attributeCrown{
+  position:absolute;
+  top:165px;
+  color:rgb(213, 18, 18);
+  font-size:22px;
+  width: 80px;
+  left:235px;
+}
+
+.attributeHeight {
+  position:absolute;
+  top:185px;
+  transform: rotate(-90deg);
+  color:rgb(213, 18, 18);
+  font-size:22px;
+  width: 80px;
+  left:15px;
+}
+
+.attributeStep {
+  position:absolute;
+  top:422px;
+  color:rgb(213, 18, 18);
+  font-size:22px;
+  width: 80px;
+  left:345px;
+}
+
+.my-input-class {
+  color:red;
+  background-color:rgba(250, 235, 215, 0.397);
+  border:1px solid red;
+}
 .formkit-inner {
   /* p/: 10px; */
   /* border:1px solid red; */
@@ -562,7 +724,7 @@ img {
 
 .formkit-wrapper {
   /* border:2px solid orange; */
-  max-width: unset !important;
+  /* max-width: unset !important; */
   /* : 10px; */
   
 }

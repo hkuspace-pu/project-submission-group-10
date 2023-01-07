@@ -9,12 +9,12 @@ import { FontAwesomeIcon as fa } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
 import { faBars,faTree,faXmark,faFilePen,faUser,faSpinner,faHouse,faCircleQuestion,faNotesMedical,faCircleUser,faChartSimple
-        ,faLocationDot, faFileArrowUp, faLayerGroup, faFileCirclePlus } from '@fortawesome/free-solid-svg-icons'
+        ,faLocationDot, faFileArrowUp, faLayerGroup, faFileCirclePlus,faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import VueAnimXyz from '@animxyz/vue3'
 
 /* add icons to the library */
 library.add(faBars,faTree,faXmark,faFilePen,faUser,faSpinner,faHouse,faCircleQuestion,faNotesMedical,faCircleUser,faChartSimple
-            ,faLocationDot, faFileArrowUp, faLayerGroup, faFileCirclePlus)
+            ,faLocationDot, faFileArrowUp, faLayerGroup, faFileCirclePlus,faChevronRight)
 
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 import 'vue3-easy-data-table/dist/style.css';
