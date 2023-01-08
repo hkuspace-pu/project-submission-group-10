@@ -64,15 +64,27 @@ const isLoading = ref(false);
 async function login() {
     try {
     isLoading.value = true
-    const resp = await fetch('https://httpbin.org/get', {
-        method: 'GET',
-        headers : {
-        "Content-type": "application/json;charset=UTF-8",
-        "Authorization" : 'Basic '+ btoa(email.value+":"+password.value)}
-    })
+    // const resp = await fetch('https://httpbin.org/get', {
+    //     method: 'GET',
+    //     headers : {
+    //     "Content-type": "application/json;charset=UTF-8",
+    //     "Authorization" : 'Basic '+ btoa(email.value+":"+password.value)}
+    // })
+    var url
+    if ( email.value == 'simon@gmail.com' ) {
+        url = 'client.json'
+    } else if ( email.value == 'leo@gmail.com' ) {
+        url = 'admin.json'
+    } else if ( email.value == 'rishi@gmail.com' ) {
+        url = 'moderator.json'
+    }
+    const resp = await fetch('/src/assets/'+url, {
+            method: 'GET'
+        })
     const token = await resp.json()
     console.log(token)
-   router.push({name: 'dashboard'})
+    localStorage.setItem('user_info',JSON.stringify(token));
+    router.push({name: 'dashboard'})
     // return resp2
 
 }

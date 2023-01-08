@@ -9,6 +9,7 @@ import DashSurvey from '@/components/DashSurvey.vue'
 import DashAccount from '@/components/DashAccount.vue'
 import DashSyncFile from '@/components/DashSyncFile.vue'
 import DashFeature from '@/components/DashFeature.vue'
+import DashUsers from '@/components/DashUsers.vue'
 // import DashNewFeature from '@/components/DashNewFeature.vue'
 
 const router = createRouter({
@@ -115,6 +116,16 @@ const router = createRouter({
             component: DashNewSurvey,
             meta : {
               title : 'Add News / Events / Features'
+            }
+    
+        },
+
+          {
+            path : 'users',
+            name : 'users',
+            component: DashUsers,
+            meta : {
+              title : 'Users'
             }
     
         },
