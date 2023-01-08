@@ -9,6 +9,7 @@ import DashSurvey from '@/components/DashSurvey.vue'
 import DashAccount from '@/components/DashAccount.vue'
 import DashSyncFile from '@/components/DashSyncFile.vue'
 import DashFeature from '@/components/DashFeature.vue'
+import DashUsers from '@/components/DashUsers.vue'
 // import DashNewFeature from '@/components/DashNewFeature.vue'
 
 const router = createRouter({
@@ -119,45 +120,12 @@ const router = createRouter({
     
         },
 
-      ]
-    
-  
-    },
-
-    {
-      path: '/client_dash',
-      // name: 'dashboard',
-      component : () => import('../views/Dashboard.vue'),
-      meta : {
-        title : 'Dashboard'
-      },
-      children: [
-
-        {
-            path : '',
-            name : 'dashboard',
-            component: DashHome,
-            meta : {
-              title : 'Dashboard'
-            }
-        },
-
           {
-            path : 'survey',
-            name : 'survey',
-            component: DashSurvey,
+            path : 'users',
+            name : 'users',
+            component: DashUsers,
             meta : {
-              title : 'Surveys'
-            }
-    
-        },
-
-          {
-            path : 'account',
-            name : 'admin_account',
-            component: DashAccount,
-            meta : {
-              title : 'Account'
+              title : 'Users'
             }
     
         },
@@ -166,7 +134,6 @@ const router = createRouter({
     
   
     },
-    
 
   ]
 })
