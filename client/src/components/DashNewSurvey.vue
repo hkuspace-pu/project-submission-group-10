@@ -113,7 +113,7 @@
     <FormKit
       type="autocomplete"
       @input="passData"
-      name="commonName"
+      name="id"
       id="commonName"
       prefixIcon="search"
       suffixIcon="info"
@@ -127,7 +127,7 @@
 
     <template #option="{ option }">
         <div class="formkit-option">
-          <!-- <img :src="option.imgUrl" width="20px"/> -->
+          <img :src="option.imgUrl" width="20px"/>
           <span>
             {{ option.value }}
           </span>
@@ -260,11 +260,11 @@
 <!-- </FormKit> -->
 
 
-    <!-- <FormKit
+    <FormKit
   type="toggle"
   name="dangerous_tree"
   label="Is this tree a potential hazard?"
-/> -->
+/>
     <!-- <FormKit
   v-model="treeValue"
   type="radio"
@@ -498,17 +498,29 @@ console.log('INFO CLICKED')
 
 }
 const submit = async (fields) => {
-  console.log(step)
+  if (fields.dangerous_tree) {
+    fields.dangerous_tree = 1
+  } else {
+    fields.dangerous_tree = 0
+  }
+
+
+ fields.tree_type_id = treeID.value.id
+ fields.user_id = 1
+ fields.lat = "039333"
+ fields.long = "323232"
+ delete fields.id
+delete fields.terms
  console.log(fields)
+
   const url = "http://api.hktreewatch.org:9000"
   const resp = await fetch(url+'/InsertSurveyRecord', {
         method: 'POST',
         body: JSON.stringify(fields)
       })
 
-  //     await new Promise((r) => setTimeout(r, 1000))
-  // alert(JSON.stringify(fields))
-  step.value = 1;
+
+  // step.value = 1;
 
 
 }
