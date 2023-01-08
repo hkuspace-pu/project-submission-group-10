@@ -1,18 +1,20 @@
 <template>
 
-<div class="dashTopBarContainer">
-    <div class="accountName">
-        {{ full_name }}
-    </div>
-    <div>
-        <router-link tag="div" class="row" :to="{name:'admin_account'}" >
-            <div class="account_icon">
-                <fa class="icon" size="2x" icon="circle-user"/>
-            </div>
-        </router-link>
-    </div>
+<nav>
+    <div class="dashTopBarContainer">
+        <div class="accountName">
+            {{ full_name }}
+        </div>
+        <div>
+            <router-link tag="div" class="row" :to="{name:'admin_account'}" >
+                <div class="account_icon">
+                    <fa class="icon" size="2x" icon="circle-user"/>
+                </div>
+            </router-link>
+        </div>
 
-</div>
+    </div>
+</nav>
 
 </template>
 <script>

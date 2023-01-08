@@ -17,22 +17,22 @@ export default defineComponent({
   components: { DoughnutChart, LineChart, BarChart },
   setup() {
     const testData = {
-      labels: ['Paris', 'Nîmes', 'Toulon', 'Perpignan', 'Autre'],
+      labels: ['North', 'Sha Tin', 'Yau Tsim Mong', 'Kwun Tong', 'Central and Western', 'Islands'],
       datasets: [
         {
-          data: [30, 40, 60, 70, 5],
-          backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED'],
+          data: [30, 40, 60, 70, 5, 20],
+          backgroundColor: ['#C67C5C', '#3E868E', '#E1B878', '#75ACC0', '#87986A', '#CFE1AC'],
         },
       ],
     };
 
     const data = ref([30, 40, 60, 70, 5]);
     const chartData = computed(() => ({
-      labels: ['Paris', 'Nîmes', 'Toulon', 'Perpignan', 'Autre'],
+      labels: ['2022-07', '2022-08', '2022-09', '2022-10', '2022-11', '2022-12'],
       datasets: [
         {
           data: data.value,
-          backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED'],
+          backgroundColor: ['#C67C5C', '#3E868E', '#E1B878', '#75ACC0', '#87986A', '#CFE1AC'],
         },
       ],
     }));
