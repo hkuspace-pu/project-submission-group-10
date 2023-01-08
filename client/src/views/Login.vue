@@ -64,14 +64,6 @@ const isLoading = ref(false);
 async function login() {
     try {
     isLoading.value = true
-<<<<<<< HEAD
-    const resp = await fetch('http://18.118.83.77:9000/login', {
-        method: 'POST',
-        headers : {
-        "Content-type": "application/json;charset=UTF-8",
-        "Authorization" : btoa(email.value+":"+password.value)}
-    })
-=======
     // const resp = await fetch('https://httpbin.org/get', {
     //     method: 'GET',
     //     headers : {
@@ -89,7 +81,6 @@ async function login() {
     const resp = await fetch('/src/assets/'+url, {
             method: 'GET'
         })
->>>>>>> dev-simon
     const token = await resp.json()
     console.log(token)
     localStorage.setItem('user_info',JSON.stringify(token));
