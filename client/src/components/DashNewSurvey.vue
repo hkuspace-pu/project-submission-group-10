@@ -545,9 +545,13 @@ const loadTreeList = async () => {
         // "Content-type": "application/json;charset=UTF-8",
         // "Authorization" : btoa(email.value+":"+password.value)}
     })
-    const {data} = await resp.json()
+    let {data} = await resp.json()
 
-console.log(data)
+   data = data.map((item) => {
+   return {...item, label : item.value}
+      // item.label = item.value
+
+    })
     commonName.value = data
     
     // commonName.value = data.map((result) => {
