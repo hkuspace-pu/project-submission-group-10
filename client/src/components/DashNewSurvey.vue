@@ -40,7 +40,7 @@
     </div>
     <FormKit
   type="form"
-  #default="{ value}"
+  #default="{ value }"
   @submit="submit"
   :actions="false"
 >
@@ -112,7 +112,9 @@
 
     <FormKit
       type="autocomplete"
+      @input="passData"
       name="commonName"
+      id="commonName"
       prefixIcon="search"
       suffixIcon="info"
       @suffix-icon-click="handleIconClick"
@@ -125,17 +127,19 @@
 
     <template #option="{ option }">
         <div class="formkit-option">
-          <!-- <img :src="option.logo" width="20px"/> -->
+          <!-- <img :src="option.imgUrl" width="20px"/> -->
           <span>
-            {{ option.commonName }}
+            {{ option.value }}
           </span>
         </div>
+        
       </template>
+      
+     </FormKit>
+     <div v-if="treeID.longChiDesc" class="details">
 
-    <!-- </FormKit> -->
-    
-
-    </FormKit>
+     
+     </div>
 
     <FormKit
       type="taglist"
@@ -147,9 +151,22 @@
 
     </div>
 
-    <div class="rightSide">
-<img src="../assets/images/tree.svg"/>
-
+    <div class="rightSide">   
+      <XyzTransition appear xyz="fade" mode="out-in">
+        <div :key="treeID.imgUrl" v-show="treeID.id">
+        <img width="320" height="320"   :src="treeID.imgUrl"/>
+      <div class="treeData">
+        <p>Common Name : {{ treeID.commonName }} ({{treeID.commonChiName}})</p>
+        <p>Scientific Name : {{ treeID.scientificName}}</p>
+        <!-- ({{treeID.commonChiName}})</p> -->
+      
+        <p>Family : {{ treeID.family }}</p>
+        <p><em>{{treeID.longDesc  }}</em></p>
+      <p><em>{{treeID.longChiDesc  }}</em></p>
+      </div>
+      </div>
+        </XyzTransition>
+ 
     </div>
 
 
@@ -222,18 +239,20 @@
   type="rating"
   name="health"  
   min="1"
-  step="0.5"
+  step="1"
   max="5"
   id="health"
-  label="Rate the overall health condition of the tree"
->
-<template #offItem>
-    <img src="../assets/images/heart_empty.png" />
-  </template>
-  <template #onItem>
-    <img src="../assets/images/heart_filled.png" />
-  </template>
-  </FormKit>
+  placeholder="asdasd"
+  label="Health assessment rating (Vigor):"
+/>
+<div class="ratingGuide">
+<p>1 = Tree is weak with high stress and rot.</p>
+<p>2 = Tree has poor vigor and/or disease infection. </p>
+<p>3 = Tree has average vigor with mild rot/infection.</p>
+<p>2 = Tree is in above average health with no signs of disease or stress.</p>
+<p>5 = Tree is growing well and appears to be free of health stress factors.</p>
+</div>
+
 
 
   
@@ -241,11 +260,11 @@
 <!-- </FormKit> -->
 
 
-    <FormKit
+    <!-- <FormKit
   type="toggle"
   name="dangerous_tree"
   label="Is this tree a potential hazard?"
-/>
+/> -->
     <!-- <FormKit
   v-model="treeValue"
   type="radio"
@@ -254,25 +273,20 @@
   help="Does this tree bring value to its surroundings?"
 /> -->
 
-
-
-
-
-
-
+<FormKit
+      type="dropdown"
+      name="recommendation"
+      label="Your recommendation:"
+      placeholder="Follow-up action"
+      :options="recommendation"
+    />
 
 </div>
 
 
 
 <div>
-  <FormKit
-      type="dropdown"
-      name="recommendation"
-      label="Your recommendation"
-      placeholder="Follow-up action"
-      :options="recommendation"
-    />
+
   </div>
 </section>
 <!-- </XyzTransition> -->
@@ -295,18 +309,30 @@
   multiple
 />
 
+
 <FormKit
   v-model="treeValue"
   type="range"
   label="Amenity value to general public"
-  min="0"
+  min="1"
   name="amenity_value"
-  prefix="1"
-  suffix="5"
   max="5"
+  
   :options="[{label:'Poor', value:0},{label:'Average', value:1}]"
-  help="0 = No Value, 5 = High Value"
+  help="1 = Low Value, 5 = High Value"
 />
+
+
+<div class="amenity">
+  <p class="step_number color">{{ value.amenity_value }}</p>
+<p><em>"Amenity value" is used to describe the visual aspect of a tree, it's health, beautification to landscape, shelter & value.</em> </p>
+<p>0 = Nil to low amenity value to the surroundings, wildlife and general public.</p>
+<p>1 = Low to mild, provides habitat for small insects, birds, fungi.</p>
+<p>2 = Mild to average, provides shelter, slows rainfall, reduce flash floods.</p>
+<p>3 = Average, increases land value, provides shade.</p>
+<p>4 = Above average, desirable, increases land value, health.</p>
+<p>5 = High value, desirable, healthy, old & valuable.</p>
+</div>
 
 
 
@@ -407,23 +433,28 @@
 
 <script setup>
 import { ref,reactive,computed, onMounted } from 'vue';
+import { getNode } from '@formkit/core'
 // const GOOGLE_API = import.meta.env.'VITE_GOOGLE_API'
 const GOOGLE_API = 'AIzaSyCv6UXTIdpXEKk0eHF7GC42Gv9mxcHd8o4'
 const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=Po+Leung+Kuk,Hong Kong+HK`
 const cord = reactive({lat:0,long:0})
-
+// const data = reactive(null);
 // import AddressAutocomplete from 'vue-google-maps-address-autocomplete';
 const step = ref(1);
-const commonName = ref([{commonName:'Fig tree (无花果树)', value : 'Fig tree (无花果树)', logo: '../assets/images/butterfly.webp' }, {commonName :'Gingko tree (银杏树)', value: 'Gingko tree (银杏树)',logo: '../assets/images/bird.gif' }]);
+const commonName = ref([{commonName:'Fig tree (无花果树)', value : 'Fig tree (无花果树)', logo: '../assets/images/butterfly.webp', other : 'werwerwre', somethingelse: 'werwerwr' }, {commonName :'Gingko tree (银杏树)', value: 'Gingko tree (银杏树)',logo: '../assets/images/bird.gif',other : 'werwerwred', somethingelse: 'werdwerwr' }]);
+// const commonName = ref([{}]);
+
 const treeTags = ref(['Stone wall', 'Old & valuable','Juvenile (sapling)','Mature', ])
 const selected = ref(null);
 const options = ref(['Stone Wall', 'Dead', 'Alive']);
 const stepNames = reactive(['locationInfo', 'basicInfo', 'advancedInfo'])
-const recommendation = ref(['Retain', 'Transplant', 'Trim', 'Removal'])
+const recommendation = ref(['Retain', 'Transplant', 'Trim', 'Removal','Request furthur inspection'])
 const district = ref(['Central', 'Western', 'Peak', 'Midlevels'])
 const department = ref(['AFCD', 'LCSD','Highways Dept', 'Water Supplies Dept.', 'Housing Dept.'])
 const treeValue = ref(null);
+const treeID = ref({imgUrl: null});
 const checkBoxValue = ref(null);
+const selectedTree = "re";
 // const todayDate = new Date(Date.now()).toLocaleString();
 // const todayDate = '07/07/2022'
 const today = new Date();
@@ -468,27 +499,62 @@ console.log('INFO CLICKED')
 }
 const submit = async (fields) => {
   console.log(step)
- 
-      await new Promise((r) => setTimeout(r, 1000))
-  alert(JSON.stringify(fields))
+ console.log(fields)
+  const url = "http://api.hktreewatch.org:9000"
+  const resp = await fetch(url+'/InsertSurveyRecord', {
+        method: 'POST',
+        body: JSON.stringify(fields)
+      })
+
+  //     await new Promise((r) => setTimeout(r, 1000))
+  // alert(JSON.stringify(fields))
   step.value = 1;
 
 
 }
 
-onMounted(async () => {
+const passData = (e) => {
+  console.log('data passe ', e)
+  if (e) {
+    treeID.value = commonName.value.find(name => e == name.value)
+  } else {
+     console.log('no image')
+    // treeID.value.imgUrl = '../assets/images/tree2.svg'
+  }
+  // console.log(treeID)
+ 
+}
+
+const loadTreeList = async () => {
   const url = "http://api.hktreewatch.org:9000"
-  // http://18.118.83.77:9000
-  const resp = await fetch('url/getCommonAndScientificNameList', {
+  const resp = await fetch(url+'/getCommonAndScientificNameList', {
         method: 'GET',
         // headers : {
         // "Content-type": "application/json;charset=UTF-8",
         // "Authorization" : btoa(email.value+":"+password.value)}
-    }
-    )
-    const {data}= await resp.json()
-    console.log(data)
-    // commonName.value = data
+    })
+    const {data} = await resp.json()
+
+console.log(data)
+    commonName.value = data
+    
+    // commonName.value = data.map((result) => {
+    //   return {
+    //     label : result.value,
+    //     value : result.id,
+    //   }
+    // })
+
+
+
+  
+}
+
+onMounted(async () => {
+  console.log('ON MOUNTED ')
+
+  loadTreeList()
+
 
 //REQUEST LOCATION FROM THE BROWSER
 
@@ -539,6 +605,16 @@ navigator.geolocation.getCurrentPosition(sb,eb)
   /* margin-right:auto; */
   /* margin-left:auto; */
  
+
+}
+
+
+.ratingGuide {
+  margin-top:-15px;
+  margin-bottom:20px;
+}
+.ratingGuide p, .amenity p {
+  font-size:12px;
 
 }
 
@@ -594,6 +670,13 @@ align-items: center;
   border-radius: 50%;
 }
 
+.color {
+  background-color: var(--lightGreen);
+  color: var(--dark);
+  margin-bottom:20px;
+  /* color:red !important; */
+/* color:red; */
+}
 .step-nav {
   /* margin-top: */
   width: 100%;
@@ -605,6 +688,16 @@ align-items: center;
 
 .rightSide {
   position:relative;
+  max-width: 320px;
+  height: auto;
+}
+
+.rightSide img {
+  object-fit: cover;
+  border:1px solid grey;
+  border-radius: 16px;
+  /* width: 100%; */
+  /* height: 100%; */
 }
 .class-append{
   border:1px solid red;
@@ -678,6 +771,9 @@ img {
 
 <style>
 
+[rating] .formkit-outer {
+  margin-top:0;
+}
 .attributeCrown{
   position:absolute;
   top:165px;
