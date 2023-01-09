@@ -35,10 +35,6 @@
         <router-link tag="div" class="row" :to="{name:'new'}" >
             <fa class="icon" size="2x" icon="circle-question" :class="$route.name=='help' && 'focused'"/>
         </router-link>
-        <!-- <router-link tag="div" class="row" :to="{name:'new'}" >
-        <fa class="icon" size="2x" icon="circle-question" :class="$route.name=='help' && 'focused'"/>
-        </router-link> -->
-
     </foot>
 
 </div>
@@ -63,56 +59,80 @@ export default {
 
 
 <style scoped>
-
 .dashSideNav {
-    /* z-index:100000; */
-    /* padding: 1rem; */
-    /* width: 80px; */
-    height: 100%;
-    /* height: calc(100% - 65px); */
-    box-shadow: 3px 0px 7px 0px rgba(189,187,189,0.4);
-    background-color: #F7F9FA;
-    background-color: var(--brown);
+    /* height: 100%; */
+    box-shadow: 3px 0px 7px 0px rgba(189, 187, 189, 0.4);
     background-color: var(--darkGreen);
-
-    display:flex;
+    display: flex;
+    overflow: hidden;
     flex-direction: column;
-    
+    /* flex-direction: row; */
+    /* height: 100%; */
+    /* width: 100%; */
+    /* border:1px solid red; */
+    /* flex-direction: column; */
 }
 
 .menuItems {
-    flex:1;
+    display:flex;
+    flex-direction: column;
+    /* WIDTH: 100%; */
+    flex: 1;
 }
-/* :class="$route.name=='new' && 'focused'" */
-.icon {
 
-    /* border: 1px solid red; */
-    /* background-color: #f0f0f069; */
+.icon {
     padding: 10px;
     border-radius: 6px;
     color: white;
-    /* padding:2rem; */
-
 }
 
 .focused {
     background-color: #f0f0f069;
 }
+
 .row {
-/* margin:10px; */
-/* padding:10px; */
-/* border:1px solid red; */
-padding:15px;
-    display:flex;
+
+    padding: 15px;
+    display: flex;
     flex-direction: row;
     align-items: center;
-
     justify-content: center;
-    /* border-bottom: 1px solid lightgray; */
+    /* border:1px solid red; */
+
 }
 
 .title {
     font-weight: 400;
-    font-size:12px;
+    font-size: 12px;
+}
+
+foot {
+    display:flex;
+    flex-direction: column;
+    /* border:1px solid red; */
+    /* margin-left:auto; */
+    /* margin-top:auto; */
+    /* display:flex; */
+}
+
+@media only screen and (max-width:600px) {
+.menuItems {
+    flex-direction: row;
+}
+
+foot {
+    flex-direction: row;
+}
+.dashSideNav {
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.row {
+    padding: 5px;
+}
+.icon{
+    font-size: 26px;
+}
 }
 </style>

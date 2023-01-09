@@ -1,10 +1,8 @@
 <template>
-
+<!-- Default Button Template -->
 <button class="btn">
     <slot></slot>
 </button>
-
-
 </template>
 
 
