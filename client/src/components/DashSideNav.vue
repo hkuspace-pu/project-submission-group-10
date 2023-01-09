@@ -2,7 +2,7 @@
 
 <div class="dashSideNav">
     <div class="menuItems">
-        <router-link v-if="role=='Admin'" tag="div" class="row" :to="{name:'dashboard'}">
+        <router-link tag="div" class="row" :to="{name:'dashboard'}">
             <fa class="icon" size="2x" icon="house" :class="$route.name=='dashboard' && 'focused'" />
         </router-link>
         <router-link tag="div" class="row" :to="{name:'new'}" >
