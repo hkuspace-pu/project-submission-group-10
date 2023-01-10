@@ -6,9 +6,9 @@
     </div>
     <div class="account_detail">
       <div><label for="name">Name: </label>{{ full_name }}</div>
-      <div><label for="name">Points: </label>{{ points }}</div>
-      <div><label for="name">Joined: </label>{{ join_date }}</div>
-      <div><label for="name">
+      <div><label for="points">Points: </label>{{ points }}</div>
+      <div><label for="date">Joined: </label>{{ join_date }}</div>
+      <div><label for="location">
         <fa class="icon" size="1x" icon="location-dot"/>
       </label> {{ location }}</div>
     </div>
