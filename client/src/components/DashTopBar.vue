@@ -50,7 +50,7 @@ export default {
 }
 
 .dashTopBarContainer {
-    width: calc(95%-7px);
+    width: calc(95% - 7px);
     padding: 15px 2% 0;
     color: black !important;
 

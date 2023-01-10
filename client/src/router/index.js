@@ -3,18 +3,14 @@ import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
 import DashHome from '@/components/DashHome.vue'
 import DashNewSurvey from '@/components/DashNewSurvey.vue'
-
 import DashChart from '@/components/DashChart.vue'
 import DashSurvey from '@/components/DashSurvey.vue'
 import DashAccount from '@/components/DashAccount.vue'
 import DashSyncFile from '@/components/DashSyncFile.vue'
 import DashFeature from '@/components/DashFeature.vue'
 import DashUsers from '@/components/DashUsers.vue'
-<<<<<<< HEAD
 import Blog from '@/components/Blog.vue'
-=======
 import DashTreeLists from '@/components/DashTreeLists.vue'
->>>>>>> dev-simon
 // import DashNewFeature from '@/components/DashNewFeature.vue'
 
 const router = createRouter({
