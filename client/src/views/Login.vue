@@ -78,21 +78,28 @@ async function login() {
     } else if ( email.value == 'rishi@gmail.com' ) {
         url = 'moderator.json'
     }
-    const resp = await fetch('/src/assets/'+url, {
+    const resp = await fetch(url, {
             method: 'GET'
         })
+
+        console.log(resp)
     const token = await resp.json()
     console.log(token)
     localStorage.setItem('user_info',JSON.stringify(token));
-    router.push({name: 'dashboard'})
+    
+    setTimeout(() => {
+        isLoading.value = false
+        router.push({name: 'dashboard'})
+    }, 1200);
+
     // return resp2
 
 }
     catch(e) {
-        console.log('error : ', e.message)
+        console.log('error1 : ', e.message)
         
     } finally {
-        isLoading.value = false
+        // isLoading.value = false
     }
 
 }
