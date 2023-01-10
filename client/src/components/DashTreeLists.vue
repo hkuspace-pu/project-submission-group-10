@@ -7,11 +7,11 @@
   >
 
     <template #expand="data">
-      <div class="accountContainer" >
+      <div class="tree_container" >
         <div>
-          <img class="account_icon" src="../assets/images/man.png" /> 
+          <img class="tree_icon" src="https://www.greening.gov.hk/filemanager/greening/treeant/31/t_031_Overview.jpg" /> 
         </div>
-        <div class="account_detail">
+        <div class="tree_detail">
           <div><label for="scientific_name">Scientific Name </label>{{ data.scientific_name }}</div>
           <div><label for="common_name">Common Name: </label>{{ data.common_name }}</div>
           <div><label for="chinese_name">Chinese Name: </label>{{ data.chinese_name }}</div>
@@ -184,7 +184,7 @@ height: 100%;
   border-radius: 12px;
 }
 
-.accountContainer {
+.tree_container {
     display:flex;
     flex-direction: row;
     gap:20px;
@@ -195,15 +195,15 @@ height: 100%;
 
 }
 
-.account_icon {
-  width: 150px;
+.tree_icon {
+  max-height:150px;
   border: 1px solid #333;
   margin: 0 2%;
   padding: 2%;
   border-radius: 5px;
 } 
 
-.account_detail {
+.tree_detail {
   width: 48%
 }
 </style>
