@@ -7,6 +7,7 @@
   --lightGreen : #B8C8AC;
   --brightGreen : #D0E1AC;
   --brown : #B8B4B0;
+  --backgroundColor: #F7FAFC;
 }
 
 
@@ -134,3 +135,52 @@ input {
  display:inline-block;
   transition: all 150ms ;
 }
+
+.mark {
+  display: inline-block;
+  font-weight: 600;
+  /* color: var(--myWhiteColor); */
+  color: var(--myDarkIconColor);
+  background: var(--wesYellow) !important;
+  padding: 4px;
+  transform: rotate(-1deg);
+  border-radius: 4px;
+}
+
+.underline {
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 6px;
+  background-position: 50% 125%;
+  cursor: pointer;
+  transition: background-size 120ms ease-in-out;
+}
+
+.new {
+  /* width: 55px; */
+  /* height: 35px; */
+  border: 1px solid var(--myToastBackColor);
+  background-color: var(--wesYellow);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transform: rotate(-2deg);
+  border-radius: 4px;
+  display: inline-block;
+  color: var(--mondayBlue);
+}
+
+.link {
+  /* color: var(--myLinkBlue); */
+  border-bottom: 1px solid var(--myDarkIconColor);
+  box-shadow: 0 0.4px var(--myLightIconColor);
+  cursor: pointer;
+  padding-bottom: 1px;
+  width: fit-content;
+  transition: box-shadow .20s;
+}
+.link:hover {
+  /* border-bottom: 3px solid var(--myLinkBlue); */
+  box-shadow: 0px 2px var(--myLightIconColor);
+}
+

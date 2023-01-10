@@ -32,7 +32,15 @@ const store = useStore()
  
   <TheHero/>
   <Features/>
-  <Banner/>
+  <Suspense>
+    <template #default>
+      <Banner />
+    </template>
+ 
+    <template #fallback>
+      <div>Loading...</div>
+    </template>
+  </Suspense>
 
 
 

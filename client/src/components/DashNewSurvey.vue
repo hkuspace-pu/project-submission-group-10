@@ -42,6 +42,7 @@
   type="form"
   #default="{ value }"
   @submit="submit"
+  id="treeform"
   :actions="false"
 >
 
@@ -303,12 +304,14 @@
 <FormKit
   type="file"
   name="file"
+  @input="onfileInput"
   label="Add  media"
   accept=".jpg,.mov.,.mp4.,png"
   help="Add images or video"
   multiple
 />
 
+{{ value.file }}
 
 <FormKit
   v-model="treeValue"
@@ -340,7 +343,12 @@
 </div>
 
 <div>
-  <p>someting here</p>
+  <p>Images</p>
+  <div  class="preview">
+   <img  id="file-ip-1-preview">
+ </div>
+
+
 </div>
 </section>
 
@@ -381,11 +389,11 @@
     <div>
       <FormKit
   type="textarea"
-  label="comments"
+  label="Further comments"
   name="comments"
   rows="5"
-  placeholder="Remember to write in complete sentences."
-  help="I'll know if you didn't read the book!"
+  placeholder="Further comments"
+  help="E.g. The tree is beautiful but needs trimming."
 />
 
 <FormKit
@@ -487,6 +495,8 @@ const nextText = computed(() => {
   }
 })
 
+// const`` previewImg
+
 
 // getlocation(() => {
 //     navigator.getlocation
@@ -510,19 +520,24 @@ const submit = async (fields) => {
  fields.lat = "039333"
  fields.long = "323232"
  delete fields.id
-delete fields.terms
- console.log(fields)
+ delete fields.terms
+var form_data = new FormData();
+
+form_data.append('data', JSON.stringify(fields));
 
   const url = "http://api.hktreewatch.org:9000"
   const resp = await fetch(url+'/InsertSurveyRecord', {
         method: 'POST',
-        body: JSON.stringify(fields)
+        // body: JSON.stringify(fields)
+        body: form_data
       })
 
 
   // step.value = 1;
+}
 
-
+const onfileInput = (e) => {
+console.log('on file input')
 }
 
 const passData = (e) => {
@@ -762,6 +777,12 @@ img {
 @media only screen and (max-width:800px) {
 section {
   flex-direction: column;
+
+
+}
+
+.surveySteps {
+  display:none;
 }
 
 img {

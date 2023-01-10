@@ -1,26 +1,42 @@
 <template>
+    
     <div class="bannerContainer">
-        <h2 class="dark">Banner</h2>
+     
+        <h2 class="dark">What's new</h2>
         <div class="bannerInnerContainer">
             <div class="innerLeft">
-                <img src="https://via.placeholder.com/150" />
+                <img :src="data.stories[0].content.image.filename || data.stories[0].content.url.url" />
             </div>
             <div class="innerRight">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda iusto fugiat repudiandae suscipit
-                    ratione nesciunt, numquam veritatis eligendi unde ipsa incidunt non minima omnis qui? Ab eos quos
-                    ipsam eum!</p>
+  
+                <h3 class="dark">{{ data.stories[0].content.title}}</h3>
+                <p v-html="articleContent"></p>
             </div>
         </div>
     </div>
+
 </template>
     
+<script setup>
+import { computed } from "@vue/reactivity";
+  import { useStoryblokApi } from "@storyblok/vue";
+  import { renderRichText } from "@storyblok/vue";
+  const storyblokApi = useStoryblokApi();
+
+  const {data} = await storyblokApi.get("cdn/stories", {"starts_with": "featured", "resolve_assets" : 1});
+  const articleContent = computed(() => renderRichText(data.stories[0].content.body));
+
+  console.log(data)
+
+</script>
     
 <style scoped>
 .bannerContainer {
     margin-top: 5rem;
     width: 100%;
     height: 380px;
-    padding: 2rem;
+    background-color: var(--backgroundColor);
+    /* padding: 2rem; */
     display: flex;
     flex-direction: column;
     flex-direction: center;
@@ -31,9 +47,27 @@
 
 .bannerInnerContainer {
     display: flex;
+    padding: 2rem;
     flex-direction: row;
     gap: 1rem;
     align-items: center;
+    width: 100%;
+    /* background-color: grey; */
+    overflow:hidden;
     justify-content: center;
+}
+
+.innerLeft {
+    width: 100%;
+}
+.innerLeft img {
+    max-width: 400px;
+    border-radius: 16px;
+}
+
+.innerRight {
+    display:flex;
+    flex-direction: column;
+    gap: 15px;
 }
 </style>

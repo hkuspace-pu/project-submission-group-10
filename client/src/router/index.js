@@ -10,6 +10,7 @@ import DashAccount from '@/components/DashAccount.vue'
 import DashSyncFile from '@/components/DashSyncFile.vue'
 import DashFeature from '@/components/DashFeature.vue'
 import DashUsers from '@/components/DashUsers.vue'
+import Blog from '@/components/Blog.vue'
 // import DashNewFeature from '@/components/DashNewFeature.vue'
 
 const router = createRouter({
@@ -129,6 +130,15 @@ const router = createRouter({
             }
     
         },
+        {
+          path : 'blog',
+          name : 'blog',
+          component: Blog,
+          meta : {
+            title : 'Blog'
+          }
+  
+      },
 
       ]
     
