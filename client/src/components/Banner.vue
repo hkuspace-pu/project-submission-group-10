@@ -3,14 +3,18 @@
     <div class="bannerContainer">
      
         <h2 class="mark">What's new</h2>
-        <div class="bannerInnerContainer">
+        <div v-for="item in data.stories" :key="item.content.title" class="bannerInnerContainer">
             <div class="innerLeft">
-                <img :src="data.stories[0].content.image.filename || data.stories[0].content.url.url" />
+                <img :src="item.content.image.filename || item.content.url.url" />
+                <!-- <img :src="data.stories[0].content.image.filename || data.stories[0].content.url.url" /> -->
+
             </div>
             <div class="innerRight">
-                <p class="date">{{new Date(data.stories[0].created_at).toLocaleString('en-UK', {dateStyle: 'full'}) }}</p>
-                <h3 class="dark">{{ data.stories[0].content.title}}</h3>
-                <p v-html="articleContent"></p>
+                <!-- <p class="date">{{new Date(data.stories[0].created_at).toLocaleString('en-UK', {dateStyle: 'full'}) }}</p>
+                <h3 class="dark">{{ data.stories[0].content.title}}</h3> -->
+                <p class="date">{{new Date(item.created_at).toLocaleString('en-UK', {dateStyle: 'full'}) }}</p>
+                <h3 class="dark">{{ item.content.title}}</h3>
+                <p v-html="renderRichText(item.content.body)"></p>
             </div>
         </div>
     </div>
@@ -24,7 +28,7 @@ import { computed } from "@vue/reactivity";
   const storyblokApi = useStoryblokApi();
 
   const {data} = await storyblokApi.get("cdn/stories", {"starts_with": "featured", "resolve_assets" : 1});
-  const articleContent = computed(() => renderRichText(data.stories[0].content.body));
+//   const articleContent = computed(() => renderRichText(data.stories[0].content.body));
 
   console.log(data)
 
@@ -32,7 +36,7 @@ import { computed } from "@vue/reactivity";
     
 <style scoped>
 .bannerContainer {
-    margin-top: 5rem;
+    padding:3rem 0;
     width: 100%;
     /* height: 380px; */
     background-color: var(--backgroundColor);
@@ -48,12 +52,19 @@ import { computed } from "@vue/reactivity";
 .bannerInnerContainer {
     max-width: 1280px;
     display: flex;
-    padding: 2rem;
+    /* padding: 2rem; */
     flex-direction: row;
-    gap: 1rem;
+    gap: 1.5rem;
     /* align-items: center; */
     width: 100%;
     justify-content: space-evenly;
+}
+
+.bannerInnerContainer:nth-child(odd) {
+   padding-top:1.5rem;
+    flex-direction: row-reverse;
+    border-top:1px solid var(--brown);
+
 }
 
 .innerLeft {

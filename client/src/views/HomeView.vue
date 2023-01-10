@@ -15,22 +15,7 @@ const store = useStore()
  <!-- <div v-if="store.isSideBarOpen" class="cover"></div> -->
   <main :class="store.isSideBarOpen && 'blur'">
     
-   
 
-    <!-- <div class="cover"></div> -->
-
-  <!-- <header> -->
-    
-
-    <!-- <div class="wrapper"> -->
-     
-
-     <!-- <nav>  -->
-        <!-- <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink> -->
-      <!-- </nav> -->
- 
-  <!-- </header> -->
  
   <TheHero/>
   <Features/>
@@ -42,8 +27,8 @@ const store = useStore()
     </template>
  
     <template #fallback>
-      <!-- <div>Loading...</div> -->
-      <Banner />
+      <div>Loading...</div>
+      <!-- <Banner /> -->
       
     </template>
   </Suspense>
@@ -54,18 +39,14 @@ const store = useStore()
     </template>
  
     <template #fallback>
-      <!-- <div>Loading...</div> -->
-      <Faq />
+      <div>Loading...</div>
+      <!-- <Faq /> -->
       
     </template>
   </Suspense>
 
   <TheFoot/>
   
-
-
-
-
 
   </main>
 </template>
