@@ -96,7 +96,10 @@
 
 
       <div>
-        <iframe class="mapBox" frameborder="0" style="border:0" :src="gmapurl" allowfullscreen></iframe>
+        <!-- <iframe class="mapBox" frameborder="0" style="border:0" :src="gmapurl" allowfullscreen></iframe> -->
+        <GoogleMap :api-key="GOOGLE_API" class="mapBox" :center="center" :zoom="12">
+    <Marker :options="{ position: center }" />
+  </GoogleMap>
       </div>
 
     </div>
@@ -440,11 +443,13 @@
 </template>
 
 <script setup>
+import { GoogleMap, Marker } from "vue3-google-map";
 import { ref,reactive,computed, onMounted } from 'vue';
 import { getNode } from '@formkit/core'
 // const GOOGLE_API = import.meta.env.'VITE_GOOGLE_API'
 const GOOGLE_API = 'AIzaSyCv6UXTIdpXEKk0eHF7GC42Gv9mxcHd8o4'
 const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=Po+Leung+Kuk,Hong Kong+HK`
+const center = ref({ lat: 22.2776807, lng: 14.1558142 });
 const cord = reactive({lat:0,long:0})
 // const data = reactive(null);
 // import AddressAutocomplete from 'vue-google-maps-address-autocomplete';
@@ -495,12 +500,7 @@ const nextText = computed(() => {
   }
 })
 
-// const`` previewImg
 
-
-// getlocation(() => {
-//     navigator.getlocation
-// })
 
 
 const handleIconClick = () => {
@@ -569,12 +569,6 @@ const loadTreeList = async () => {
     })
     commonName.value = data
     
-    // commonName.value = data.map((result) => {
-    //   return {
-    //     label : result.value,
-    //     value : result.id,
-    //   }
-    // })
 
 
 
@@ -590,9 +584,8 @@ onMounted(async () => {
 //REQUEST LOCATION FROM THE BROWSER
 
 const sb = (position) => {
-  console.log('geo ok')
-  console.log(position)
-}
+  center.value = {lat: position.coords.latitude ,lng: position.coords.longitude }
+ }
 
 const eb = (error) => {
   console.log('geo error')
@@ -605,12 +598,10 @@ navigator.geolocation.getCurrentPosition(sb,eb)
 
 
 
-
 })
 
 </script>
 
-<!-- <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap"></script> -->
 
 <style scoped>
 

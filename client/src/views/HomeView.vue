@@ -4,6 +4,8 @@ import Features from '@/components/Features.vue';
 import Banner from '@/components/Banner.vue';
 import TheHero from '@/components/TheHero.vue'
 import TheNav from '@/components/TheNav.vue'
+import Faq from '@/components/TheFaq.vue'
+import TheFoot from '@/components/TheFoot.vue'
 import {useStore} from '@/stores/counter.js'
 const store = useStore()
 </script>
@@ -32,15 +34,36 @@ const store = useStore()
  
   <TheHero/>
   <Features/>
-  <Suspense>
+ 
+   <Suspense>
     <template #default>
       <Banner />
+
     </template>
  
     <template #fallback>
-      <div>Loading...</div>
+      <!-- <div>Loading...</div> -->
+      <Banner />
+      
     </template>
   </Suspense>
+  <Suspense>
+    <template #default>
+      <Faq />
+
+    </template>
+ 
+    <template #fallback>
+      <!-- <div>Loading...</div> -->
+      <Faq />
+      
+    </template>
+  </Suspense>
+
+  <TheFoot/>
+  
+
+
 
 
 
@@ -52,6 +75,7 @@ const store = useStore()
 
 main {
   height: 100%;
+  scroll-behavior: smooth;
   width: 100%;
   position: relative;
 }

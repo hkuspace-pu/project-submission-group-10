@@ -2,13 +2,13 @@
     
     <div class="bannerContainer">
      
-        <h2 class="dark">What's new</h2>
+        <h2 class="mark">What's new</h2>
         <div class="bannerInnerContainer">
             <div class="innerLeft">
                 <img :src="data.stories[0].content.image.filename || data.stories[0].content.url.url" />
             </div>
             <div class="innerRight">
-  
+                <p class="date">{{new Date(data.stories[0].created_at).toLocaleString('en-UK', {dateStyle: 'full'}) }}</p>
                 <h3 class="dark">{{ data.stories[0].content.title}}</h3>
                 <p v-html="articleContent"></p>
             </div>
@@ -34,7 +34,7 @@ import { computed } from "@vue/reactivity";
 .bannerContainer {
     margin-top: 5rem;
     width: 100%;
-    height: 380px;
+    /* height: 380px; */
     background-color: var(--backgroundColor);
     /* padding: 2rem; */
     display: flex;
@@ -46,15 +46,14 @@ import { computed } from "@vue/reactivity";
 }
 
 .bannerInnerContainer {
+    max-width: 1280px;
     display: flex;
     padding: 2rem;
     flex-direction: row;
     gap: 1rem;
-    align-items: center;
+    /* align-items: center; */
     width: 100%;
-    /* background-color: grey; */
-    overflow:hidden;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .innerLeft {
@@ -69,5 +68,29 @@ import { computed } from "@vue/reactivity";
     display:flex;
     flex-direction: column;
     gap: 15px;
+}
+
+.date {
+    font-size: 13px;
+    color: var(--dark);
+
+}
+/* .innerRight > p {
+    margin: 16px 0;
+} */
+
+
+@media only screen and (max-width:800px) {
+.bannerInnerContainer {
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.innerLeft img {
+    max-width:300px
+}
+
 }
 </style>

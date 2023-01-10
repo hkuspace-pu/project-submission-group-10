@@ -27,6 +27,7 @@ html {
   -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -37,6 +38,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 
  
 }
@@ -59,7 +61,7 @@ h1 {
 h2 {
   color:white;
   font-size:2.2rem;
-  font-size : clamp(1.4rem, 1vw + 1rem, 3rem);
+  font-size : clamp(1.4rem, 1vw + 1.2rem, 3rem);
   font-weight: 400;
   text-align: center;
   white-space: nowrap;
@@ -137,15 +139,21 @@ input {
 }
 
 .mark {
+  margin: 20px 0;
   display: inline-block;
-  font-weight: 600;
-  /* color: var(--myWhiteColor); */
-  color: var(--myDarkIconColor);
-  background: var(--wesYellow) !important;
-  padding: 4px;
-  transform: rotate(-1deg);
+  color: white;
+  background: var(--dg2);
+  padding: 8px 17px;
   border-radius: 4px;
 }
+
+.rotate {
+  /* transform: rotate(-1deg); */
+  background-color : var(--lightGreen);
+  color: var(--dg2);
+
+}
+
 
 .underline {
   background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
