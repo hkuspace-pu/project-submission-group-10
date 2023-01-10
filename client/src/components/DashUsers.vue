@@ -20,9 +20,9 @@
         </div>
         <div class="account_detail">
           <div><label for="name">Name: </label>{{ data.name }}</div>
-          <div><label for="name">Points: </label>{{ data.points }}</div>
-          <div><label for="name">Joined: </label>{{ data.join_date }}</div>
-          <div><label for="name">
+          <div><label for="points">Points: </label>{{ data.points }}</div>
+          <div><label for="join_date">Joined: </label>{{ data.join_date }}</div>
+          <div><label for="location">
             <fa class="icon" size="1x" icon="location-dot"/>
           </label> {{ data.location }}</div>
         </div>
