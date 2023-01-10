@@ -10,6 +10,7 @@ import DashAccount from '@/components/DashAccount.vue'
 import DashSyncFile from '@/components/DashSyncFile.vue'
 import DashFeature from '@/components/DashFeature.vue'
 import DashUsers from '@/components/DashUsers.vue'
+import DashTreeLists from '@/components/DashTreeLists.vue'
 // import DashNewFeature from '@/components/DashNewFeature.vue'
 
 const router = createRouter({
@@ -126,6 +127,16 @@ const router = createRouter({
             component: DashUsers,
             meta : {
               title : 'Users'
+            }
+    
+        },
+
+          {
+            path : 'trees',
+            name : 'trees',
+            component: DashTreeLists,
+            meta : {
+              title : 'Tree lists'
             }
     
         },
