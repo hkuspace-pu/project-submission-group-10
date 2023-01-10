@@ -2,7 +2,7 @@
     
     <div id="faq" class="faqContainer">
      
-        <h2 class="dark">Frequenetly asked questions</h2>
+        <h2 class="dark">Frequently asked questions</h2>
         <ul>
   
   <li @click="faq.isShown = !faq.isShown" v-for="faq in faqs" :key="faq.question">
@@ -19,11 +19,11 @@
 
 </ul>
     </div>
-
+ 
 </template>
     
 <script setup>
-import { computed,ref } from "@vue/reactivity";
+import { ref } from "@vue/reactivity";
   import { useStoryblokApi } from "@storyblok/vue";
 //   import { renderRichText } from "@storyblok/vue";
   const storyblokApi = useStoryblokApi();
@@ -103,7 +103,7 @@ console.log(faqs)
   
   .faqContent {
     color: var(--darkGreen);
-    font-weight: 200;
+    font-weight: 500;
     margin: 1rem 0.5rem;
     line-height: 25px;
     border-radius:4px;
