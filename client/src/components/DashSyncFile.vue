@@ -1,32 +1,35 @@
 <template>
-    <div @drop.prevent="onDrop">
-        <slot></slot>
+    <div class="file-upload">
+        <div class="file-upload__area">
+            <input type="file" name="" id="" />
+        </div>
     </div>
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
-const emit = defineEmits(['files-dropped'])
 
-function onDrop(e) {
-    emit('files-dropped', [...e.dataTransfer.files])
-}
-
-function preventDefaults(e) {
-    e.preventDefault()
-}
-
-const events = ['dragenter', 'dragover', 'dragleave', 'drop']
-
-onMounted(() => {
-    events.forEach((eventName) => {
-        document.body.addEventListener(eventName, preventDefaults)
-    })
-})
-
-onUnmounted(() => {
-    events.forEach((eventName) => {
-        document.body.removeEventListener(eventName, preventDefaults)
-    })
-})
 </script>
+<script>
+    export default {
+        name: "FileUpload",
+    };
+</script>
+
+<style scoped>
+    .file-upload {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .file-upload .file-upload__area {
+        width: 80%;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px dashed #ccc;
+        margin-top: 40px;
+    }
+</style>

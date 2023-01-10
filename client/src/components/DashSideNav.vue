@@ -2,7 +2,7 @@
 
 <div class="dashSideNav">
     <div class="menuItems">
-        <router-link v-if="role=='Admin'" tag="div" class="row" :to="{name:'dashboard'}">
+        <router-link tag="div" class="row" :to="{name:'dashboard'}">
             <fa class="icon" size="2x" icon="house" :class="$route.name=='dashboard' && 'focused'" />
         </router-link>
         <router-link tag="div" class="row" :to="{name:'new'}" >
@@ -17,6 +17,10 @@
         </router-link>
         <router-link v-if="role=='Admin'" tag="div" class="row" :to="{name:'feature_new'}" >
             <fa class="icon" size="2x" icon="notes-medical" :class="$route.name=='feature_new' && 'focused'"/>
+        </router-link>
+
+        <router-link v-if="role=='Admin'||role=='Moderator'" tag="div" class="row" :to="{name:'trees'}" >
+            <fa class="icon" size="2x" icon="tree" :class="$route.name=='trees' && 'focused'"/>
         </router-link>
 
         <router-link v-if="role=='Admin'||role=='Moderator'" tag="div" class="row" :to="{name:'syncfile'}" >

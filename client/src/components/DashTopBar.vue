@@ -1,9 +1,15 @@
 <template>
 
-<nav>
+
+<div class="dashTopBar">
+    <div class="logo">
+        <fa size="2x" icon="tree"/>
+    </div>
     <div class="dashTopBarContainer">
+
         <div class="accountName">
-            {{ full_name }}
+            <p>{{ full_name }}</p>
+            <p>{{ role }}</p>
         </div>
         <div>
             <router-link tag="div" class="row" :to="{name:'admin_account'}" >
@@ -14,7 +20,7 @@
         </div>
 
     </div>
-</nav>
+</div>
 
 </template>
 <script>
@@ -25,8 +31,9 @@ export default {
         var user_info = JSON.parse(localStorage.getItem('user_info'))
         console.log( 'user_info', user_info )
         var full_name = user_info.full_name
+        var role = user_info.role
         return {
-            full_name
+            full_name, role
         }
     },
 };
@@ -36,13 +43,14 @@ export default {
 
 <style scoped>
 
-
-.dashTopBarContainer {
+.dashTopBar{
     height: 65px;
     background-color: var(--lightGreen);
     width: 100%;
+}
 
-    text-align: right;
+.dashTopBarContainer {
+    width: calc(95%-7px);
     padding: 15px 2% 0;
     color: black !important;
 
@@ -52,9 +60,20 @@ export default {
 
 .accountName {
     padding: 2px 5px;
+    margin-top: -2px;
+    line-height: 1;
 }   
 
 a {
     color: black !important;
+}
+
+.logo {
+    width: 5%;
+    margin-left: 7px;
+    float: left;
+    padding: 15px 2% 0;
+    font-size: 15px;
+    font-weight: 600;
 }
 </style>
