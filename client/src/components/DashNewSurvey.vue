@@ -150,6 +150,7 @@
       name="tree_tag"
       label="Tree Tags"
       :options="treeTags"
+      validation="required"
       :value=[]
     />
 
@@ -189,6 +190,7 @@
   label="Height (meters)"
   name="height"
   suffixIcon="info"
+  validation="required"
   value="25"
   step="1"
 />
@@ -199,7 +201,8 @@
   label="Crown spread width (meters)"
   name="crown"
   suffixIcon="info"
-  value="25"
+  validation="required"
+  value="35"
   step="1"
 />
 
@@ -209,7 +212,8 @@
   label="Stem circumference"
   name="stem_circumference"
   suffixIcon="info"
-  value="25"
+  value="9"
+  validation="required"
   step="1"
 />
 
@@ -245,8 +249,9 @@
   min="1"
   step="1"
   max="5"
+  value="3"
   id="health"
-  placeholder="asdasd"
+  validation="required"
   label="Health assessment rating (Vigor):"
 />
 <div class="ratingGuide">
@@ -267,6 +272,8 @@
     <FormKit
   type="toggle"
   name="dangerous_tree"
+  value="1"
+  validation="required"
   label="Is this tree a potential hazard?"
 />
     <!-- <FormKit
@@ -282,6 +289,7 @@
       name="recommendation"
       label="Your recommendation:"
       placeholder="Follow-up action"
+      validation="required"
       :options="recommendation"
     />
 
@@ -309,6 +317,7 @@
   name="file"
   @input="onfileInput"
   label="Add  media"
+  validation="required"
   accept=".jpg,.mov.,.mp4.,png"
   help="Add images or video"
   multiple
@@ -323,7 +332,8 @@
   min="1"
   name="amenity_value"
   max="5"
-  
+  value="4"
+  validation="required"
   :options="[{label:'Poor', value:0},{label:'Average', value:1}]"
   help="1 = Low Value, 5 = High Value"
 />
@@ -361,6 +371,8 @@
 <FormKit type="text"
       prefixIcon="number"
       name="tcmp_id"
+      
+      placeholder="GOVTCP2927S888S"
       label="Government Tree Identification"
       help="Government registered ID"
     
@@ -524,9 +536,9 @@ const submit = async (fields) => {
 var form_data = new FormData();
 
 form_data.append('data', JSON.stringify(fields));
-
+  const url2 = "http://18.118.83.77:9000"
   const url = "http://api.hktreewatch.org:9000"
-  const resp = await fetch(url+'/InsertSurveyRecord', {
+  const resp = await fetch(url2+'/InsertSurveyRecord', {
         method: 'POST',
         // body: JSON.stringify(fields)
         body: form_data
