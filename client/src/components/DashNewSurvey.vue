@@ -119,6 +119,7 @@
       @input="passData"
       name="id"
       id="commonName"
+      inputmode="none"
       prefixIcon="search"
       suffixIcon="info"
       @suffix-icon-click="handleIconClick"
@@ -504,10 +505,15 @@ const nextText = computed(() => {
 
 
 const handleIconClick = () => {
-console.log('INFO CLICKED')
+
 
 }
+
+
+
 const submit = async (fields) => {
+
+try {
   if (fields.dangerous_tree) {
     fields.dangerous_tree = 1
   } else {
@@ -526,12 +532,16 @@ var form_data = new FormData();
 form_data.append('data', JSON.stringify(fields));
 
   const url = "http://api.hktreewatch.org:9000"
-  const resp = await fetch(url+'/InsertSurveyRecord', {
+  const resp = await fetch(url+'insertSurveyRecord', {
         method: 'POST',
         // body: JSON.stringify(fields)
         body: form_data
       })
 
+    
+    }catch(e) {
+      console.log(e)
+    }
 
   // step.value = 1;
 }
@@ -651,18 +661,17 @@ navigator.geolocation.getCurrentPosition(sb,eb)
 }
 
 .surveySteps {
-  margin: 25px 0;
+  margin: 25px 10px;
   display:flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* border:1px solid red; */
   gap:20px;
 }
 
 .step {
 display:flex;
-gap:10px;
+gap:5px;
 color:var(--dark);
 cursor: pointer;
 border-radius: 6px;

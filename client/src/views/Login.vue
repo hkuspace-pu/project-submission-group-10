@@ -1,10 +1,15 @@
 <template>
     <div class="loginWrapper">
+        <div class="treeImage">
+            <fa size="2x" icon="tree"/>
+            <p>HK Tree Watch</p>
+               </div>
         <div class="loginBox">
+      
             <div class="leftSide">
                <div class="topBar">
                 <fa size="2x" icon="tree"/>
-                <p>HK TREE WATCH</p>
+  
                </div>
 
                <div class="treeImage">
@@ -112,8 +117,10 @@ async function login() {
 
 <style scoped>
 .loginWrapper {
-    min-height: 100vh;
+    /* min-height: 50vh; */
     display:flex;
+    height: 100%;
+    /* overflow-x:auto; */
    flex-direction: column; 
    align-items: center;
    justify-content: center;
@@ -129,15 +136,16 @@ async function login() {
 }
 
 .loginBox {
-    max-width: 960px;
+    max-width: 90%;
  max-height: 600px;
 height: 400px;
-width: 700px;
+width: 650px;
   border-radius: 24px;
- background-color: white;
-  box-shadow: 0 0 60px -20px rgb(0 0 0 / 85%);
+ background-color: var(--backgroundColor);
+  box-shadow: 0 0 60px -20px rgb(0 0 0 / 35%);
   display:flex;
   flex-direction: row;
+  margin: 2rem;
   overflow:hidden;
 }
 
@@ -145,7 +153,7 @@ width: 700px;
 width: 45%;
 padding: 20px;
 padding-bottom: 0;
-background: lightblue;
+background: var(--lightGreen);
 flex-direction: column;
 justify-content: center;
 align-items: center;
@@ -190,12 +198,26 @@ form {
 
 
 .treeImage {
+    color: var(--dg2);
     margin: 2rem 0;
     text-align: center;
    
 }
 .tree {
 width: 220px;
+}
+
+
+@media only screen and (max-width:800px) {
+.leftSide {
+    display:none;
+}
+
+.rightSide {
+
+}
+
+
 }
 
 </style>

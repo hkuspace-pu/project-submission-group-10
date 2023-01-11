@@ -68,7 +68,7 @@ import { computed } from "@vue/reactivity";
 }
 
 .innerLeft {
-    width: 100%;
+    /* width: 100%; */
 }
 .innerLeft img {
     max-width: 400px;
@@ -76,6 +76,7 @@ import { computed } from "@vue/reactivity";
 }
 
 .innerRight {
+    margin: 0 1rem;
     display:flex;
     flex-direction: column;
     gap: 15px;
@@ -98,6 +99,15 @@ import { computed } from "@vue/reactivity";
   justify-content: center;
   align-items: center;
 }
+
+.bannerInnerContainer:nth-child(odd) {
+    flex-direction: column-reverse;
+
+justify-content: center;
+align-items: center;
+
+}
+
 
 .innerLeft img {
     max-width:300px
