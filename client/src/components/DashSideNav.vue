@@ -28,7 +28,7 @@
         </router-link>
 
        
-        <router-link v-if="role=='Admin'||role=='Moderator'" tag="div" class="row" :to="{name:'blog'}" >
+        <router-link  tag="div" class="row" :to="{name:'blog'}" >
             <fa class="icon" size="2x" icon="newspaper" :class="$route.name=='blog' && 'focused'"/>
         </router-link>
     </div>
