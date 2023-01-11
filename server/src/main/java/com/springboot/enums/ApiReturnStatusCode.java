@@ -13,7 +13,9 @@ public enum ApiReturnStatusCode {
 	//信息获取失败
 	REQUEST_FAIL(401, "Request Fail", "信息获取失败"),
 	//请求错误
-	INVALID_REQUEST(403, "Invalid Request", "请求错误");
+	INVALID_REQUEST(403, "Invalid Request", "请求错误"),
+	//未能找到Tree id的資料
+	INVALID_TREE_ID_NOT_FOUND(404, "Tree id not found", "Tree id 找不到");
 
 	private int code;
     private String msg;
