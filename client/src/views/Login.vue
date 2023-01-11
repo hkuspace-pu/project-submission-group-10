@@ -45,11 +45,12 @@
                 <p>Don't have a account? Register here</p>
                 </div>
                    </div>
+                  
 
 
 
         </div>
-
+<p v-show="loginError" style="color:red">Please check your login credentials.</p>
 
     </div>
 
@@ -65,18 +66,31 @@ const router = useRouter()
 const email = ref(null);
 const password = ref(null);
 const isLoading = ref(false);
-
+const loginError = ref(false);
 async function login() {
     try {
     isLoading.value = true
-    // const resp = await fetch('https://httpbin.org/get', {
-    //     method: 'GET',
+     loginError.value = false
+
+
+    // API WAY
+    // const url = "http://api.hktreewatch.org:9000"
+
+    // const resp = await fetch(url+'/login', {
+    //     method: 'POST',
+    //     body :  JSON.stringify(btoa(email.value+":"+password.value)),
     //     headers : {
-    //     "Content-type": "application/json;charset=UTF-8",
-    //     "Authorization" : 'Basic '+ btoa(email.value+":"+password.value)}
+    //     // "Content-type": "application/json;charset=UTF-8",
+    //     "Authorization" : btoa(email.value+":"+password.value)
+    // }
     // })
+
+    // console.log(resp)
+
+
+    // SIMON LOCAL JSON WAY
     var url
-    if ( email.value == 'simon@gmail.com' ) {
+    if ( email.value == 'ivy@gmail.com' ) {
         url = 'client.json'
     } else if ( email.value == 'leo@gmail.com' ) {
         url = 'admin.json'
@@ -97,10 +111,12 @@ async function login() {
         router.push({name: 'dashboard'})
     }, 1200);
 
-    // return resp2
+
 
 }
     catch(e) {
+        isLoading.value = false
+        loginError.value = true
         console.log('error1 : ', e.message)
         
     } finally {

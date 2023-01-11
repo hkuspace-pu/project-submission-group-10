@@ -2,7 +2,7 @@
 
 
 <div class="dashTopBar">
-    <div class="logo">
+    <div @click="$router.push({name : 'dashboard'})" class="logo">
         <fa size="2x" icon="tree"/>
     </div>
     <div class="rightSide">

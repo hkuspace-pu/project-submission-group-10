@@ -3,37 +3,39 @@
 <div class="formContainer">
   <!-- :submit-label="button_label" -->
   <!-- <FormKit  @submit="submit" type="form" #default="{ value }" >  -->
-
-    <div class="surveySteps">
+    <XyzTransition appear xyz="fade" mode="out-in">
+<div v-if="!formStatus">
+  
+  <div class="surveySteps">
 
       <div @click="step = 1" class="step" :class="step == 1 && 'step_background'">
       <div class="step_number">1</div>
-      <div>Location</div>
+      <div class="attr">Location</div>
       </div>
       <fa icon="chevron-right"/>
       <div @click="step = 2"  class="step" :class="step == 2 && 'step_background'">
       <div class="step_number">2</div>
-      <div>Identification </div>
+      <div class="attr">Identification </div>
       </div>
       <fa icon="chevron-right"/>
       <div @click="step = 3"  class="step" :class="step == 3 && 'step_background'">
       <div class="step_number">3</div>
-      <div>Attributes</div>
+      <div class="attr">Attributes</div>
       </div>
       <fa icon="chevron-right"/>
       <div @click="step = 4"  class="step" :class="step == 4 && 'step_background'">
       <div class="step_number">4</div>
-      <div>Health</div>
+      <div class="attr">Health</div>
       </div>
       <fa icon="chevron-right"/>
       <div @click="step = 5" class="step" :class="step == 5 && 'step_background'">
       <div class="step_number">5</div>
-      <div>Media </div>
+      <div class="attr">Media </div>
       </div>
       <fa icon="chevron-right"/>
       <div @click="step = 6" class="step" :class="step == 6 && 'step_background'">
       <div class="step_number">6</div>
-      <div>Advanced </div>
+      <div class="attr">Advanced </div>
       </div>
      
      
@@ -47,13 +49,21 @@
 >
 
 
+
   <div class="form-body">
+    
+    <div class="step-nav">
+      <FormKit type="button" :disabled="step == 1" @click="step--" v-text="'Previous step'" />
+      <FormKit v-if="step <6" type="button"  class="next"  @click="step++" v-text="nextText"/>
+      <FormKit v-else type="submit" label="Submit Application" />
+    </div>
+
    
-    <XyzTransitionGroup  xyz="down-100% duration-6 ease-in-out out-up-100%" mode="out-in">
+    <XyzTransitionGroup  xyz="right-100% duration-6 out-left-100%" mode="out-in">
       <!-- <XyzTransitionGroup  xyz="" mode="out-in"> -->
 
     <section key=1 v-show="step == 1">
-<div>
+<div class="leftSide">
     <!-- <FormKit type="group" name="locationInfo"> -->
        
       <FormKit
@@ -96,10 +106,10 @@
 
 
       <div>
-        <!-- <iframe class="mapBox" frameborder="0" style="border:0" :src="gmapurl" allowfullscreen></iframe> -->
-        <GoogleMap :api-key="GOOGLE_API" class="mapBox" :center="center" :zoom="12">
+        <iframe class="mapBox" frameborder="0" style="border:0" :src="gmapurl" allowfullscreen></iframe>
+        <!-- <GoogleMap :api-key="GOOGLE_API" class="mapBox" :center="center" :zoom="12">
     <Marker :options="{ position: center }" />
-  </GoogleMap>
+  </GoogleMap> -->
       </div>
 
     </div>
@@ -142,7 +152,7 @@
       
      </FormKit>
      <div v-if="treeID.longChiDesc" class="details">
-
+    {{ treeID.longChiDesc }}
      
      </div>
 
@@ -160,15 +170,16 @@
     <div class="rightSide">   
       <XyzTransition appear xyz="fade" mode="out-in">
         <div :key="treeID.imgUrl" v-show="treeID.id">
-        <img width="320" height="320"   :src="treeID.imgUrl"/>
+        <img width="335" height="335"  :src="treeID.imgUrl"/>
       <div class="treeData">
         <p>Common Name : {{ treeID.commonName }} ({{treeID.commonChiName}})</p>
         <p>Scientific Name : {{ treeID.scientificName}}</p>
         <!-- ({{treeID.commonChiName}})</p> -->
       
         <p>Family : {{ treeID.family }}</p>
-        <p><em>{{treeID.longDesc  }}</em></p>
-      <p><em>{{treeID.longChiDesc  }}</em></p>
+        {{ treeID.longChiDesc }}
+        <p><em>{{treeID.shortDesc  }}</em></p>
+      <!-- <p><em>{{treeID.longChiDesc  }}</em></p> -->
       </div>
       </div>
         </XyzTransition>
@@ -227,15 +238,7 @@
   <div class="attributeCrown">{{ value.crown }}</div>
   <div class="attributeHeight">{{ value.height }}</div>
   <div class="attributeStep">{{ value.stem_circumference }}</div>
-  <!-- <input class="inputImage"  type="text"/> -->
-  <!-- <FormKit
-  outer-class="class-append"
-  type="number"
-   inner-class="my-input-class"
-  name="crown"
-  value="25"
-  step="1"
-/> -->
+ 
 </div> </section>
 <!-- </XyzTransition> -->
 
@@ -270,13 +273,13 @@
 <!-- </FormKit> -->
 
 
-    <FormKit
+    <!-- <FormKit
   type="toggle"
   name="dangerous_tree"
   value="1"
   validation="required"
   label="Is this tree a potential hazard?"
-/>
+/> -->
     <!-- <FormKit
   v-model="treeValue"
   type="radio"
@@ -285,20 +288,21 @@
   help="Does this tree bring value to its surroundings?"
 /> -->
 
-<FormKit
+
+</div>
+
+
+
+<div class="rightSide">
+  <FormKit
       type="dropdown"
+      
       name="recommendation"
       label="Your recommendation:"
       placeholder="Follow-up action"
       validation="required"
       :options="recommendation"
     />
-
-</div>
-
-
-
-<div>
 
   </div>
 </section>
@@ -312,7 +316,7 @@
 
 <!-- <XyzTransition class="item-group" xyz="fade up-100% out-up" mode="out-in"> -->
 <section key=5 v-show="step == 5">
-  <div>
+  <div class="leftSide">
 <FormKit
   type="file"
   name="file"
@@ -323,8 +327,6 @@
   help="Add images or video"
   multiple
 />
-
-{{ value.file }}
 
 <FormKit
   v-model="treeValue"
@@ -356,10 +358,10 @@
 
 </div>
 
-<div>
+<div class="rightSide">
   <p>Images</p>
   <div  class="preview">
-   <img  id="file-ip-1-preview">
+   <img  src="https://dummyimage.com/180x180/cccccc/c6b6b6.png&text=placeholder" id="file-ip-1-preview">
  </div>
 
 
@@ -368,7 +370,7 @@
 
 <section key=6 v-show="step == 6">
   <div>
-    <h3>Advanced Options</h3>
+   
 <FormKit type="text"
       prefixIcon="number"
       name="tcmp_id"
@@ -439,16 +441,26 @@
     </details> -->
   </div>
  
-  <div class="step-nav">
-      <FormKit type="button" :disabled="step == 1" @click="step--" v-text="'Previous step'" />
-      <FormKit v-if="step <6" type="button" class="next"  @click="step++" v-text="nextText"/>
-      <FormKit v-else type="submit" label="Submit Application" />
-    </div>
+ 
     <!-- <pre wrap>{{ value }}</pre> -->
 </FormKit>
 
 
 
+</div>
+
+<div v-else class="success">
+
+<h2 class="dark">Survey submitted.</h2>
+
+<img width="120" src="../assets/sucsess.png"/>
+<p> Thank you, your information will be reviewed.</p>
+
+<button @click="newSurvey" class="btn">Start a new survey</button>
+
+
+</div>
+</XyzTransition>
 
 </div>
 
@@ -461,7 +473,7 @@ import { ref,reactive,computed, onMounted } from 'vue';
 import { getNode } from '@formkit/core'
 // const GOOGLE_API = import.meta.env.'VITE_GOOGLE_API'
 const GOOGLE_API = 'AIzaSyCv6UXTIdpXEKk0eHF7GC42Gv9mxcHd8o4'
-const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=Po+Leung+Kuk,Hong Kong+HK`
+const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=Admiralty+Centre,Hong Kong+HK`
 const center = ref({ lat: 22.2776807, lng: 14.1558142 });
 const cord = reactive({lat:0,long:0})
 // const data = reactive(null);
@@ -485,6 +497,7 @@ const selectedTree = "re";
 // const todayDate = '07/07/2022'
 const today = new Date();
 const todayDate = today.toISOString().split('T')[0];
+const formStatus = ref(false);
 // const nextInspectionDate = todayDate+
 // const commonName = ref(null);
 // const address = reactive({ streetName, streetNumber, zipCode, city })
@@ -521,10 +534,15 @@ const handleIconClick = () => {
 
 }
 
+const newSurvey = () => {
+  formStatus.value = false;
+  step.value = 1;
+}
+
 
 
 const submit = async (fields) => {
-
+console.log('submit')
 try {
   if (fields.dangerous_tree) {
     fields.dangerous_tree = 1
@@ -544,12 +562,14 @@ var form_data = new FormData();
 form_data.append('data', JSON.stringify(fields));
   const url2 = "http://18.118.83.77:9000"
   const url = "http://api.hktreewatch.org:9000"
-  const resp = await fetch(url+'insertSurveyRecord', {
+  const resp = await fetch(url+'/insertSurveyRecord', {
         method: 'POST',
         // body: JSON.stringify(fields)
         body: form_data
       })
+      console.log(resp)
 
+      formStatus.value = true
     
     }catch(e) {
       console.log(e)
@@ -611,6 +631,7 @@ const sb = (position) => {
 
 const eb = (error) => {
   console.log('geo error')
+  center.value = {lat: 22.2776807 ,lng: 14.1558142 }
   console.log(error)
 }
 
@@ -630,25 +651,17 @@ navigator.geolocation.getCurrentPosition(sb,eb)
 
 
 .form-body {
-  /* height: 100%; */
-
-  /* border:1px solid red; */
-  /* width: 100%; */
-  /* height: 600px; */
-  /* max-height: 50%; */
-  overflow-y: hidden;
   display:flex;
   flex-direction: column;
-  /* justify-content: center; */
   width: 100%;
-  height:550px;
+  height: 100%;
+  margin-bottom:30px;
+  /* height:95%; */
   max-height: calc(100% - 120px);
-  /* margin: 40px 0; */
-  /* border:2px solid green; */
-  /* align-items: center; */
-  /* margin-right:auto; */
-  /* margin-left:auto; */
- 
+  height: 620px;
+ /* overflow-y:hidden; */
+ /* overflow:hidden; */
+ overflow-x:hidden;
 
 }
 
@@ -666,9 +679,8 @@ navigator.geolocation.getCurrentPosition(sb,eb)
   padding:10px;
   height: 100%;
   overflow-y:auto;
+  overflow-x:hidden;
   width: 100%;
-  /* border:1px solid red; */
-  /* margin: auto; */
 
 }
 
@@ -722,17 +734,25 @@ align-items: center;
 }
 .step-nav {
   /* margin-top: */
-  width: 100%;
+  /* width: 95%; */
   /* border:1px solid red; */
   display:flex;
-  justify-content: space-between;
+
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom:25px;
   
 }
 
+.leftSide {
+  /* flex:1; */
+}
 .rightSide {
   position:relative;
-  max-width: 320px;
-  height: auto;
+  /* max-width: 365px; */
+  /* flex:1; */
+  /* min-height: 500px; */
+  height: 100%;
 }
 
 .rightSide img {
@@ -763,15 +783,10 @@ input {
 section {
   display:flex;
   flex-direction: row;
-  width: 100%;
+  width: 95%;
   gap:2rem;
-  /* padding:40px 0; */
-  /* margin-top:20px; */
-  /* margin-top:10px; */
-  /* border:1px solid red; */
+/* align-items: center; */
   justify-content: space-evenly;
-  /* align-items: center; */
-  /* border:1px solid red; */
 }
 
 .mapBox {
@@ -786,22 +801,51 @@ img {
   object-fit: cover
 }
 
+
+
+.success {
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid red; */
+  display:flex;
+  flex-direction: column;
+  gap:20px;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+/* .success img {
+width: 120px;
+height: 120px;
+} */
+
 @media only screen and (max-width:800px) {
 section {
   flex-direction: column;
 
-
 }
 
-.surveySteps {
+
+.attributeCrown, .attributeHeight, .attributeStep {
+  display:none
+}
+.attr {
   display:none;
+}
+.surveySteps {
+  margin: 10px 3px;
+ gap:6px;
 }
 
 img {
-   width: 100px;
-  height: 100px;
+  /* width: 100%; */
+   width: 180px;
+  height: 180px;
   object-fit: cover
 }
+
+
 .mapBox {
   /* width: 100%; */
   /* margin-left: auto; */

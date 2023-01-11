@@ -10,17 +10,6 @@ import TheFoot from '@/components/TheFoot.vue'
 import {useStore} from '@/stores/counter.js'
 const store = useStore()
 
-onMounted(() => {
-  console.log("home page mounted")
-
-  setTimeout(function(){
-        // This hides the address bar:
-        window.scrollTo(0, document.body.scrollHeight);
-    }, 0);
-// window.scrollTo(0,1 );
-
-});
-
 
 
 </script>
