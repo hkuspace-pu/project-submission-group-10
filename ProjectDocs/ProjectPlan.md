@@ -1,5 +1,5 @@
-# <div align="center">PROJECT PLAN</div>
-### <div align="center">THIS IS LIVING DOCUMENT</div>
+# <div align="center">GROUP 10 PROJECT PLAN</div>
+## <div align="center">This is a living (evergreen) document</div>
 
 
 ## GROUP 10 COMP2003 HK TREE WATCH 
