@@ -88,6 +88,13 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 - Email notifications?
 - SMS notifications?
 
+## CONTEXT OF USE
+- As a layperson, Marie visits HK TREE WATCH. She hears about it on social media. The web-based mobile app detects her location with her approval and she is shown a gallery of unique trees around her home address. She is surprised as she has never seen these beautiful trees before! Marie decides to go outside to see if she can capture an image and upload it to HKTree Watch
+- Frank is a professional surveyor and is a member of HK Tree Watch. He is authorized to moderate users surveys. Frank logs in and sees that some pending surveys need to be approved. He uses his desktop device to manage these surveys. A survey from Marie needs to be approved. Frank reviews the survey and finds some missing details, such as the tree tags. Frank updates the survey with the correct information and approves the survey.
+- Tina is the Administrator, she needs to manage some users. From her office laptop she logs in to HK TREE WATCH  and clicks on the users profile. She sees a master list of users, which includes all regular users,  She clicks on "Create new user" and adds a new Adminstroar role. Tina can now rely on the additional help to maintain the software.
+- As a normal user, Jenny would like to export her data for a school project. She logs in to her account from her mobile phone and sees her dashboard filled with 20 approved surveys. She clicks on the export button and can download her file. She then opens the file on her laptop and can manipulate the data further.
+- Paul is a Moderator, he wants to update a record that was previously made incorrectly. When he visits the tree he creates a new survey and inputs all the data; suddenly, his 4G network loses connectivity; however, the application is still able to store all user input. Paul is aware that the network has disconnected but the app is stable. After he finishes updating the record, he clicks "Save"  The app saves the record to his device, and when connected back to the internet, the app is able to communicate with the server to save his data. There was no data loss!
+
 ## USER STORY
 ![USER STORY](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/c02a0ee0fea9570e868184a29da3c9d08487cd33/ProjectDocs/group%20project%20prouct%20plan%20user%20story.jpg)
 
