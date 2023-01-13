@@ -9,8 +9,9 @@
 - [Non Technical Objectives](#dart-non-technical-objectives)
 - [Software Requirements & Scope](#minidisc-software-requirments)
 - [Product Value](#gift-product-value)
-- [Intended Audience](#intended)
-- [Context of use](#context)
+- [Initial Requirments - Intended Audience](#intended)
+- [Initial Requirments - Context of use](#context)
+- [Initial Requirments - User Storys](#userstory)
 - [Features](#dart-features)
 - [Constraints](#Constraints)
 - [User Interface, Design Principles](#UI)
@@ -18,7 +19,7 @@
 - [User Communcation](#user_comms)
 - [Team Communication Plan](#team_comms)
 - [Client Communication Plan](#client_comms)
-- [User Storys](#userstory)
+
 - [Usability Study](#usability)
 - [Risk Management](#risk)
 - [Legal social ethical and professional issues](#legal-social-ethical-and-professional-issues)
@@ -117,7 +118,8 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 - On the desktop at home, upload data in a more casual environment with saved photos
 
 ## USER STORY
-![USER STORY](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/c02a0ee0fea9570e868184a29da3c9d08487cd33/ProjectDocs/group%20project%20prouct%20plan%20user%20story.jpg)
+![USER STORY 1 & =2](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/user_story_1_2.jpg)
+![USER_STORY 3](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/group%20project%20prouct%20plan%20user%20story%20(1).jpg)
 
 
 ##  USABILITY STUDY (QUICK AND DIRTY)
