@@ -4,7 +4,7 @@
 
 
 ### Over view
-![Overview](../Mockups/revised/Revised HOME PAGE.jpeg)
+![Overview](Mockups/revised/Revised HOME PAGE.jpeg)
 
 
 
