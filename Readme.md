@@ -11,7 +11,7 @@
 <!-- Badges -->
 <p>
   <a href="">
-    <img src="https://badgen.net/badge/:subject/:status/:color?icon=github" alt="contributors" />
+    <img src="https://badgen.net/badge/:contributors/:status/:color?icon=github" alt="contributors" />
   </a>
   <a href="">
     <img src="https://img.shields.io/github/last-commit/Louis3797/awesome-readme-template" alt="last update" />
