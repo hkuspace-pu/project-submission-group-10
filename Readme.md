@@ -10,9 +10,9 @@
   
 <!-- Badges -->
 <p>
-  <a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/Louis3797/awesome-readme-template" alt="contributors" />
-  </a>
+
+    <img src="https://badgen.net/badge/:subject/:status/:color?icon=github" alt="contributors" />
+  
   <a href="">
     <img src="https://img.shields.io/github/last-commit/Louis3797/awesome-readme-template" alt="last update" />
   </a>
