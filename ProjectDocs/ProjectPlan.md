@@ -171,6 +171,7 @@ Legal
 - (https://www.ogcio.gov.hk/en/our_work/community/web_mobileapp_accessibility/faq/)
 - Hong Kong does not have GPDR but instead has [PDPO](https://www.hk-lawyer.org/content/eu-gdpr-and-hk-pdpo-what%E2%80%99s-difference)
 - Terms and conditions and Terms of use (do we force users to use our app in a certain way?)
+- Professional liability insurance for local jurisdiction.  
 - 
 Ethical
 - Define a code of ethics
