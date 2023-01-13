@@ -27,9 +27,9 @@
 
 <!--Roles-->
 ## :busts_in_silhouette: Roles
-- [x] Leo (Techicanl Lead, Version Control)
-- [x] Simon (Scrum Master , Coach)
-- [x] Rishi (Product owner, features, backlog)
+- [x] Leo (Techicanl Lead, Version Control) [Leo Xie @keixie838](https://github.com/leoxie838)
+- [x] Simon (Scrum Master , Coach) [Ho Wing Simon @WSimonHo](https://github.com/WSimonHo)
+- [x] Rishi (Product owner, features, backlog)  [Rishi Uttam - @ricky11](https://github.com/ricky11)
 
 ## :star2: Project Vision
 To realize our client's goals in developing and implementing a Natural science survey system with a primary focus on the surveying and data retrieval of tree species. This new system aims to replace the current antiquated paper-based recording and the problems that arise with manual data entry. 
@@ -170,8 +170,9 @@ Whatsapp is the main communication. But we do not talk about any sensitive infor
 
 ## UML - TO BE COMPLETED
 
-## SPRINT PLAN - TO BE COMPLETED
-...
+## Initial Sprint Action Plan 
+
+![Sprint Action Plan](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/KanBan/sprint_screen.jpeg)
 
 
 ## QUESTIONS FOR CLIENT
