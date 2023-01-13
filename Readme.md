@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="assets/logo.png" alt="logo" width="200" height="auto" />
+  <img src="client/src/assets/images/tree.svg" alt="logo" width="200" height="auto" />
   <h1>HONG KONG NATURE WATCH</h1>
   
   <p>
