@@ -132,14 +132,20 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-| Primary Color | ![#222831](https://via.placeholder.com/10/222831?text=+) #222831 |
-| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
-| Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
-| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
+| Primary Color | ![#87986A](https://via.placeholder.com/15/87986A) |
+| Secondary Color | ![#393E46](https://via.placeholder.com/15/B8C8AC) |
+| Accent Color | ![#00ADB5](https://via.placeholder.com/15/B8B4B0)  |
+| Text Color | ![#EEEEEE](https://via.placeholder.com/15/EEEEEE)  |
+| Emphasis Color | ![#EEEEEE](https://via.placeholder.com/15/3E3D56) |
+
+
+
+
 
 
 <!-- Env Variables -->
 ### :key: Environment Variables
+![alt text](https://via.placeholder.com/100/87986A)
 
 To run this project, you will need to add the following environment variables to your .env file
 
