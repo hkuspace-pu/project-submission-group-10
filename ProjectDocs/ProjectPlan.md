@@ -1,5 +1,5 @@
 # <div align="center">HK TREE WATCH (GROUP 10) PROJECT PLAN</div>
-## <div align="center">This is a living (evergreen) document</div>
+## <div align="center">Living document</div>
 
 
 <!-- Table of Contents -->
