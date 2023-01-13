@@ -4,7 +4,7 @@
 
 
 ### Over view
-![Overview](./Revised HOME PAGE.jpeg)
+![Overview](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/Mockups/revised/Revised%20HOME%20PAGE.jpeg)
 
 
 
