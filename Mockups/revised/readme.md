@@ -1,6 +1,7 @@
 # <div align="center"> Revised Mockups from Low-fidelty</div>
 
-### After various qukck and dirty testing from our Low-fidelty mockups and after some usability studies, Rishi prepared this Medium Fidelty Mockup.
+Completed by Rishi Uttam
+### After various quick and dirty testing from our Low-fidelty mockups and after some usability studies, Rishi prepared this Medium Fidelty Mockup.
 
 
 ### Over view
