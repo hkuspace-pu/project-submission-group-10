@@ -21,6 +21,8 @@
 - [User Storys](#userstory)
 - [Usability Study](#usability]
 - [Risk Management](#risk)
+- [Legal social ethical and professional issues](LSEP](#)
+- [OWASP](OWASP](#owasp)
 - [UML Diagrams](#uml)
 - [SPRINT PLANT](#sprint)
 - [Furthur Questions](#questions)
@@ -156,6 +158,24 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 **SOLUTION**
 
   - We can set up the network VPC for the service group, using firewall and WAF, using HTTPS instead of HTTP. Adding verification for the API requests.
+
+### Legal social ethical and professional issues
+Legal
+- Compliance with local regulatory laws, Privacy Ordinance (PDPO) etc
+- Does the client require is to disclouse the source code of the software, what is the Licence requirments?
+- Follow regulations provided by Office of [Government Cheif Information Office]
+- State our copyright law and trademark rules if any.
+- Create a (AUP) Acceptable Use Policy
+- (https://www.ogcio.gov.hk/en/our_work/community/web_mobileapp_accessibility/faq/)
+- Hong Kong does not have GPDR but instead has [PDPO](https://www.hk-lawyer.org/content/eu-gdpr-and-hk-pdpo-what%E2%80%99s-difference)
+- Terms and conditions and Terms of use (do we force users to use our app in a certain way?)
+- 
+Ethical
+- Define a code of ethics
+- Ensure that users on the platform do not discrmenate, harrass other members, or post vulgar, violant information.
+
+- Developers have the responsibility to protect user data
+
 
 ## COMMUNICATION PLAN - 
 Teammates
