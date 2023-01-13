@@ -64,12 +64,16 @@
 <!-- About the Project -->
 ## :star2: About the Project
 
+To realize our client's goals in developing and implementing a Natural science survey system with a primary focus on the surveying and data retrieval of tree species. This new system aims to replace the current antiquated paper-based recording and the problems that arise with manual data entry.
+
+Our vision is to enable key stakeholders, namely, researchers and the general public, a sense of pride and love of nature surrounding Hong Kong's diverse flora
 
 <!-- Screenshots -->
 ### :camera: Screenshots
 
 <div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+  <img src="https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/iPhone%2014%20Pro%20in%20deep%20purple%20color_Screenshot%202023-01-08%20at%203.06.39%20AM.png" alt="screenshot" />
+  <img src="https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/iMac%20on%20the%20wooden%20desk%20with%20a%20woman%20phoning_Screenshot%202023-01-08%20at%203.51.30%20AM.png" alt="screenshot" />
 </div>
 
 
@@ -77,37 +81,24 @@
 ### :space_invader: Tech Stack
 
 <details>
-  <summary>Client</summary>
+  <summary>Client (View)</summary>
   <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://nextjs.org/">Next.js</a></li>
-    <li><a href="https://reactjs.org/">React.js</a></li>
-    <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
+    <li><a href="https://vuejs.org/">Vue3</a></li>
   </ul>
 </details>
 
 <details>
-  <summary>Server</summary>
+  <summary>Server (Backend/Controller API)</summary>
   <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-    <li><a href="https://go.dev/">Golang</a></li>
-    <li><a href="https://nestjs.com/">Nest.js</a></li>
-    <li><a href="https://socket.io/">SocketIO</a></li>
-    <li><a href="https://www.prisma.io/">Prisma</a></li>    
-    <li><a href="https://www.apollographql.com/">Apollo</a></li>
-    <li><a href="https://graphql.org/">GraphQL</a></li>
+    <li><a href="https://www.java.com/en/">JAVA</a></li>
+ 
   </ul>
 </details>
 
 <details>
-<summary>Database</summary>
+<summary>Database (Model)</summary>
   <ul>
-    <li><a href="https://www.mysql.com/">MySQL</a></li>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-    <li><a href="https://redis.io/">Redis</a></li>
-    <li><a href="https://neo4j.com/">Neo4j</a></li>
-    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
+    <li><a href="https://mariadb.org/">MariaDB</a></li>
   </ul>
 </details>
 
@@ -115,17 +106,26 @@
 <summary>DevOps</summary>
   <ul>
     <li><a href="https://www.docker.com/">Docker</a></li>
-    <li><a href="https://www.jenkins.io/">Jenkins</a></li>
-    <li><a href="https://circleci.com/">CircleCLI</a></li>
+    <li><a href="https://www.cloudflare.com/">Cloudflare</a></li>
+    <li><a href="https://github.com/">Github</a></li>
   </ul>
 </details>
 
 <!-- Features -->
 ### :dart: Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- Predefined species list
+- Allow users to record new survey information and retrieval
+- Multimedia attachments (Photo/Video)
+- Registration & Login
+- Search, Filter & Sort Records
+- Logging of activity
+- Admins have full role access rights to delete, archive, edit or update survey and user records.
+- Ability to provide different views 
+- Gamification for users to provide engagement
+- Content Management System
+- Exporting & Importing of structured data (tsv)
+
 
 <!-- Color Reference -->
 ### :art: Color Reference
