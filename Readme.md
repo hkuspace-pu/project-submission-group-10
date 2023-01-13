@@ -53,11 +53,9 @@
 - [Usage](#eyes-usage)
 - [Roadmap](#compass-roadmap)
 - [Contributing](#wave-contributing)
-  * [Code of Conduct](#scroll-code-of-conduct)
-- [FAQ](#grey_question-faq)
 - [License](#warning-license)
-- [Contact](#handshake-contact)
-- [Acknowledgements](#gem-acknowledgements)
+- [Acknowledgements](#Acknowledgements)
+
 
   
 
@@ -68,6 +66,17 @@ To realize our client's goals in developing and implementing a Natural science s
 
 Our vision is to enable key stakeholders, namely, researchers and the general public, a sense of pride and love of nature surrounding Hong Kong's diverse flora
 
+
+
+
+<!-- Contributing -->
+## :wave: Contributing
+
+### GROUP 10
+- [Rishi Uttam - @ricky11](https://github.com/ricky11)
+- [Ho Wing Simon @WSimonHo](https://github.com/WSimonHo)
+- [Leo Xie @keixie838](https://github.com/leoxie838)
+
 <!-- Screenshots -->
 ### :camera: Screenshots
 
@@ -75,6 +84,8 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
   <img src="https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/iPhone%2014%20Pro%20in%20deep%20purple%20color_Screenshot%202023-01-08%20at%203.06.39%20AM.png" alt="screenshot" />
   <img src="https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/iMac%20on%20the%20wooden%20desk%20with%20a%20woman%20phoning_Screenshot%202023-01-08%20at%203.51.30%20AM.png" alt="screenshot" />
 </div>
+
+
 
 
 <!-- TechStack -->
@@ -130,16 +141,16 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 <!-- Color Reference -->
 ### :art: Color Reference
 
+Link to MOOD BOARD : [Brand Color Kit](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/Olivia%20Wilson.pdf)
+
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
+| Primary Color |  ![#87986A](https://via.placeholder.com/15/87986A) |
 | Primary Color | ![#87986A](https://via.placeholder.com/15/87986A) |
 | Secondary Color | ![#393E46](https://via.placeholder.com/15/B8C8AC) |
 | Accent Color | ![#00ADB5](https://via.placeholder.com/15/B8B4B0)  |
 | Text Color | ![#EEEEEE](https://via.placeholder.com/15/EEEEEE)  |
-| Emphasis Color | ![#EEEEEE](https://via.placeholder.com/15/3E3D56) |
-
-
-
+| Emphasis Color | ![#3E3D56](https://via.placeholder.com/15/3E3D56) |
 
 
 
@@ -149,6 +160,8 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 
 To run this project, you will need to add the following environment variables to your .env file
 
+Please request disclosure of demo API KEYS
+
 `API_KEY`
 
 `ANOTHER_API_KEY`
@@ -156,13 +169,19 @@ To run this project, you will need to add the following environment variables to
 <!-- Getting Started -->
 ## 	:toolbox: Getting Started
 
+- Updated latest version of node
+- Updare NPM
+- Clone Repo
+- npm install
+- npm run dev
+
 <!-- Prerequisites -->
 ### :bangbang: Prerequisites
 
-This project uses Yarn as package manager
+This project uses Node & NPM for client side
 
 ```bash
- npm install --global yarn
+ npm install --global npm
 ```
 
 <!-- Installation -->
@@ -190,7 +209,7 @@ To run tests, run the following command
 Clone the project
 
 ```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git
+  https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch.git
 ```
 
 Go to the project directory
@@ -202,13 +221,13 @@ Go to the project directory
 Install dependencies
 
 ```bash
-  yarn install
+  npm install
 ```
 
 Start the server
 
 ```bash
-  yarn start
+  npm run dev
 ```
 
 
@@ -218,59 +237,17 @@ Start the server
 To deploy this project run
 
 ```bash
-  yarn deploy
+  npm run build
 ```
 
 
-<!-- Usage -->
-## :eyes: Usage
-
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
-
-
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
-```
 
 <!-- Roadmap -->
 ## :compass: Roadmap
 
-* [x] Todo 1
-* [ ] Todo 2
-
-
-<!-- Contributing -->
-## :wave: Contributing
-
-<a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" />
-</a>
-
-
-Contributions are always welcome!
-
-See `contributing.md` for ways to get started.
-
-
-<!-- Code of Conduct -->
-### :scroll: Code of Conduct
-
-Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
-
-<!-- FAQ -->
-## :grey_question: FAQ
-
-- Question 1
-
-  + Answer 1
-
-- Question 2
-
-  + Answer 2
+* [x] Build login registration
+* [x] Build Dashboard
+* [ ] Other pls refer to our github project backlog
 
 
 <!-- License -->
@@ -287,17 +264,6 @@ Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_
 Project Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
 
 
-<!-- Acknowledgments -->
 ## :gem: Acknowledgements
-
-Use this section to mention useful resources and libraries that you have used in your projects.
-
- - [Shields.io](https://shields.io/)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
- - [Readme Template](https://github.com/othneildrew/Best-README-Template)
-
-
-## :Reference
-- [Plants of the World Online](https://powo.science.kew.org/)
-- [Greening, Landscape & Tree Management Section Development Bureau](https://www.greening.gov.hk/en/community-outreach/qrcode-tree-labels/index.html)
+- [Greening, Landscape & Tree Managment Section](https://www.greening.gov.hk/en/home/index.html)
+- [Tree Register](https://treeregister.greening.gov.hk/map/treeIndex.aspx)
