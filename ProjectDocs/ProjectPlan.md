@@ -175,12 +175,10 @@ Legal
 
 
 Ethical
-- Define a code of ethics
-- Prevent dominance over one culture over another.
+- Define a code of ethics and a general code of conduct to be signed by all team members
 - Ensure that users on the platform do not discrmenate, harrass other members, or post vulgar, violant information.
 - Users must sign up with their real username; we want to prevent psudonames and do not want Trolls (i.e. twitter)
-- Developers have the responsibility to protect user data
-- All members to sign a code of conduct form.
+- Developers have the responsibility to protect user data.
 
 Social
 - Prevent online bullying on our forums or surveys or comments to other users.
