@@ -161,7 +161,7 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 
   - We can set up the network VPC for the service group, using firewall and WAF, using HTTPS instead of HTTP. Adding verification for the API requests.
 
-### Legal social ethical and professional issues
+## Legal social ethical and professional issues
 Legal
 - Compliance with local regulatory laws, Privacy Ordinance (PDPO) etc
 - Does the client require is to disclouse the source code of the software, what is the Licence requirments?
@@ -172,12 +172,23 @@ Legal
 - Hong Kong does not have GPDR but instead has [PDPO](https://www.hk-lawyer.org/content/eu-gdpr-and-hk-pdpo-what%E2%80%99s-difference)
 - Terms and conditions and Terms of use (do we force users to use our app in a certain way?)
 - Professional liability insurance for local jurisdiction.  
-- 
+
+
 Ethical
 - Define a code of ethics
+- Prevent dominance over one culture over another.
 - Ensure that users on the platform do not discrmenate, harrass other members, or post vulgar, violant information.
-
+- Users must sign up with their real username; we want to prevent psudonames and do not want Trolls (i.e. twitter)
 - Developers have the responsibility to protect user data
+- All members to sign a code of conduct form.
+
+Social
+- Prevent online bullying on our forums or surveys or comments to other users.
+- Prevent cultural dominance, i.e. no one race/cast of users can have power over another online on our website. Also English should not be the only laguage as it is the dominant one.
+- Provide avenue of redress i.e. email, contact , telephone if one of our users is being harmed by another user on our platform
+
+ 
+
 
 
 ## COMMUNICATION PLAN - 
