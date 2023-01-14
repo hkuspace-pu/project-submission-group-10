@@ -19,7 +19,7 @@
 - [User Communcation](#user_comms)
 - [Team Communication Plan](#team_comms)
 - [Client Communication Plan](#client_comms)
-
+- [Tech Stack](#tech-stack)
 - [Usability Study](#usability)
 - [Risk Management](#risk)
 - [Legal social ethical and professional issues](#legal-social-ethical-and-professional-issues)
@@ -198,6 +198,12 @@ Whatsapp is the main communication. But we do not talk about any sensitive infor
 
 ## Client
 - We communicate client by using email and regular meetings
+
+## Tech Stack
+MODEL VIEW CONTROLLER (MVC APPROACH)
+- JAVA for the Backend business logic and API
+- MariaDB (mySQL) for our Database Model
+- VueJS for our front end browser based view layer
 
 
 ## UML - TO BE COMPLETED
