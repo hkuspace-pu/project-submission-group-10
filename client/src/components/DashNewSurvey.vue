@@ -137,7 +137,7 @@
       selection-appearance="option"
       validation="required"
       placeholder="Example: Mango tree"
-      :options="commonName"
+      :options="store.dropDownTreeList"
     >
 
     <template #option="{ option }">
@@ -471,6 +471,9 @@
 import { GoogleMap, Marker } from "vue3-google-map";
 import { ref,reactive,computed, onMounted } from 'vue';
 import { getNode } from '@formkit/core'
+import {Fetch} from '@/controller/BaseAPI.js'
+import {useStore} from '@/stores/state.js'
+const store = useStore()
 // const GOOGLE_API = import.meta.env.'VITE_GOOGLE_API'
 const GOOGLE_API = 'AIzaSyCv6UXTIdpXEKk0eHF7GC42Gv9mxcHd8o4'
 const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=Admiralty+Centre,Hong Kong+HK`
@@ -595,21 +598,23 @@ const passData = (e) => {
 }
 
 const loadTreeList = async () => {
-  const url = "http://api.hktreewatch.org:9000"
-  const resp = await fetch(url+'/getCommonAndScientificNameList', {
-        method: 'GET',
-        // headers : {
-        // "Content-type": "application/json;charset=UTF-8",
-        // "Authorization" : btoa(email.value+":"+password.value)}
-    })
-    let {data} = await resp.json()
 
-   data = data.map((item) => {
-   return {...item, label : item.value}
-      // item.label = item.value
+  // return store.getMasterTreeList();
+  // const url = "http://api.hktreewatch.org:9000"
+  // const resp = await fetch(url+'/getCommonAndScientificNameList', {
+  //       method: 'GET',
+  //       // headers : {
+  //       // "Content-type": "application/json;charset=UTF-8",
+  //       // "Authorization" : btoa(email.value+":"+password.value)}
+  //   })
+  //   let {data} = await resp.json()
 
-    })
-    commonName.value = data
+  //  data = data.map((item) => {
+  //  return {...item, label : item.value}
+  //     // item.label = item.value
+
+  //   })
+  //   commonName.value = data
     
 
 
@@ -617,10 +622,13 @@ const loadTreeList = async () => {
   
 }
 
-onMounted(async () => {
+onMounted( async() => {
   console.log('ON MOUNTED ')
+  store.getMasterTreeList();
 
-  loadTreeList()
+  // const tree = new Fetch('getCommonAndScientificNameList', 'GET', null);
+// tree.getMasterTreeList()
+  // loadTreeList()
 
 
 //REQUEST LOCATION FROM THE BROWSER

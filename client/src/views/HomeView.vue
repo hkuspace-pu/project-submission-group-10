@@ -7,7 +7,8 @@ import TheHero from '@/components/TheHero.vue'
 import TheNav from '@/components/TheNav.vue'
 import Faq from '@/components/TheFaq.vue'
 import TheFoot from '@/components/TheFoot.vue'
-import {useStore} from '@/stores/counter.js'
+import {useStore} from '@/stores/state.js'
+// import Btn from '@/components/Button.vue'
 const store = useStore()
 
 
@@ -19,7 +20,7 @@ const store = useStore()
  <!-- <div v-if="store.isSideBarOpen" class="cover"></div> -->
   <main :class="store.isSideBarOpen && 'blur'">
     
-
+<!-- <btn>click me</btn> -->
  
   <TheHero/>
   <Features/>

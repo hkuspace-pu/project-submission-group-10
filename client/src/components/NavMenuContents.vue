@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import {useStore} from '@/stores/counter.js'
+import {useStore} from '@/stores/state.js'
 const store = useStore()
 </script>
 
