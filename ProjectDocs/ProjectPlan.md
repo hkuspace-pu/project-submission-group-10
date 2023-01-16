@@ -12,6 +12,7 @@
 - [Initial Requirments - Intended Audience](#intended)
 - [Initial Requirments - Context of use](#context)
 - [Initial Requirments - User Storys](#userstory)
+- [UML for User Story Normal User Role](#umr-user-story)
 - [Features](#dart-features)
 - [Constraints](#Constraints)
 - [User Interface, Design Principles](#UI)
@@ -24,7 +25,7 @@
 - [Risk Management](#risk)
 - [Legal social ethical and professional issues](#legal-social-ethical-and-professional-issues)
 - [OWASP](OWASP](#owasp)
-- [UML Diagrams](#uml)
+- [UML Diagrams - Tech Stack](#uml)
 - [SPRINT PLANT](#sprint)
 - [Furthur Questions](#questions)
 
@@ -121,6 +122,8 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 ![USER STORY 1 & =2](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/user_story_1_2.jpg)
 ![USER_STORY 3](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/group%20project%20prouct%20plan%20user%20story%20(1).jpg)
 
+## UML FOR USER STORY DIAGRAM
+![NORMAL USER UML](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/HK%20TREE%20WATCH%20NORMAL%20USER.drawio.png)
 
 ##  USABILITY STUDY (QUICK AND DIRTY)
 ![Usability Study Image](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/usability_study/Usability%20Study%20Image.jpeg)
