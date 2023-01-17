@@ -26,8 +26,9 @@
 2. Showing the function flow of the demo.
 3. Present the interaction button with low fidelty design.
 4. Let user to try out the flow and the visual feeling.
+5. Present consent form
 
-## Score of the demo(score range 1-10)
+## Qualitative Score of the demo(score range 1-10)
 1. colour tone of the UI
 --score: 7
 --comment: The colour can be more attractive and colourful.
