@@ -28,29 +28,29 @@
 
 <!-- Table of Contents -->
 # :notebook_with_decorative_cover: Table of Contents
-- [Roles & Contribution](#busts_in_silhouette-roles) 
-- [:link: Link To Offical Readme.md](#link-link-to-offical-readme) 
-- [Product Vision](#star2-project-vision)
-- [Project Objectives](#dart-project-objectives)
-- [Software Requirements & Scope](#minidisc-software-requirments)
-- [Product Value](#gift-product-value)
-- [Initial Requirments Model - Intended Audience](#busts_in_silhouette-intended-audience)
-- [Initial Requirments Model - User Story](#books-user-story)
-- [Initial Requirments Model - Story Board](#movie_camera-story-board)
-- [Initial Requirments Model - UML for User Story Normal User Role](#straight_ruler-uml-user-story-diagram)
-- [Boundaries for success](#raised_hands-boundaries-for-success)
-- [Sprint Cadence](#running-sprint-cadence)
-- [Features & Functional Requirements (High Level)](#eyes-features-and-functional-requirements)
-- [Constraints](#exclamation-constraints)
-- [:earth_asia: Product Roadmap & Release Plan Guideline](#earth_asia-product-roadmap-and-release-plan-guideline)
-- [:art: User Interface, Design Principles](#art-user-interface-and-design-principles)
-- [:computer: Hardware requirements](#computer-hardware-requirements)
-- [:telephone: Communication Plan](#telephone-communication-plan)
-- [:minidisc: Tech Stack](#minidisc-tech-stack)
-- [:guardsman: Usability Study](#guardsman-usability-study)
-- [:traffic_light: Risk Management Plan](#traffic_light-risk-management-plan )
-- [:cop: Legal social ethical and professional issues](#cop-legal-social-ethical-and-professional-issues)
-- [:runner: Sprint Plan](#runner-sprint-plan)
+- [:busts_in_silhouette:  Roles & Contribution](#busts_in_silhouette-roles) 
+- [:link:  Link To Offical Readme.md](#link-link-to-offical-readme) 
+- [:star2:  Product Vision](#star2-project-vision)
+- [:dart:  Project Objectives](#dart-project-objectives)
+- [:minidisc:  Software Requirements & Scope](#minidisc-software-requirments)
+- [:gift:  Product Value](#gift-product-value)
+- [:busts_in_silhouette:  Initial Requirments Model - Intended Audience](#busts_in_silhouette-intended-audience)
+- [:books:  Initial Requirments Model - User Story](#books-user-story)
+- [:movie_camera:  Initial Requirments Model - Story Board](#movie_camera-story-board)
+- [:straight_ruler:  Initial Requirments Model - UML for User Story Normal User Role](#straight_ruler-uml-user-story-diagram)
+- [:raised_hands:  Boundaries for success](#raised_hands-boundaries-for-success)
+- [:running:  Sprint Cadence](#running-sprint-cadence)
+- [:eyes:  Features & Functional Requirements (High Level)](#eyes-features-and-functional-requirements)
+- [:exclamation:  Constraints](#exclamation-constraints)
+- [:earth_asia:  Product Roadmap & Release Plan Guideline](#earth_asia-product-roadmap-and-release-plan-guideline)
+- [:art:  User Interface, Design Principles](#art-user-interface-and-design-principles)
+- [:computer:  Hardware requirements](#computer-hardware-requirements)
+- [:telephone:  Communication Plan](#telephone-communication-plan)
+- [:minidisc:  Tech Stack](#minidisc-tech-stack)
+- [:guardsman:  Usability Study](#guardsman-usability-study)
+- [:traffic_light:  Risk Management Plan](#traffic_light-risk-management-plan )
+- [:cop:  Legal social ethical and professional issues](#cop-legal-social-ethical-and-professional-issues)
+- [:runner:  Sprint Plan](#runner-sprint-plan)
 
 <!--Roles-->
 ## :busts_in_silhouette: Roles
@@ -223,16 +223,14 @@ Regular client meetings are necessary to ensure that plans are followed strictly
   
 ### External Factors
   - Face-to-face client meetings may be hindered due to the current Covid-19 pandemic and the restrictions that are still present in Hong Kong. While some of the restrictions have been lifted, they have yet to be totally removed.
-  - 
+ 
 **SOLUTION**
   - Channels of communication such as Slack, Zoom will be utilized if incase such face-to-face meetings cannot take place, although meeting clients face to face is a preferred choice to obtain valuable feedback.    
     
-### Secutiry Attack
-
+### Secutiry
   - There may have IP attack, data tamper or sql injection hacking by the hacker that harm the application.
 
 **SOLUTION**
-
   - Follow OWASAP TOP 10. We can set up the network VPC for the service group, using firewall and WAF, using HTTPS instead of HTTP. Adding verification for the API requests.
 
 ## :cop: Legal social ethical and professional issues
