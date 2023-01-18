@@ -8,7 +8,7 @@ GROUP PROJECT (GROUP 10)
 
   <img src="/client/src/assets/images/tree.svg" alt="logo" width="200" height="auto" />
   <h1>HONG KONG NATURE WATCH</h1>
- <h3>PRODUCT PLAN</h3>
+ <h3>PROJECT PLAN</h3>
   
   <p>
     A Natural Science Survey System for NGO client project
