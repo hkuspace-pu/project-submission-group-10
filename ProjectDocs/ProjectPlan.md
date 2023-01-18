@@ -29,6 +29,7 @@
 <!-- Table of Contents -->
 # :notebook_with_decorative_cover: Table of Contents
 - [Roles & Contribution](#busts_in_silhouette-roles) 
+- [:link: Link To Offical Readme.md](#link-link-to-offical-readme) 
 - [Product Vision](#star2-project-vision)
 - [Project Objectives](#dart-project-objectives)
 - [Software Requirements & Scope](#minidisc-software-requirments)
@@ -42,18 +43,14 @@
 - [Features & Functional Requirements (High Level)](#eyes-features-and-functional-requirements)
 - [Constraints](#exclamation-constraints)
 - [:earth_asia: Product Roadmap & Release Plan Guideline](#earth_asia-product-roadmap-and-release-plan-guideline)
-- [:art: User Interface, Design Principles](#-art-user-interface-and-design-principles)
-- [Hardware requirments](#hardware)
-- [User Communcation](#user_comms)
-- [Team Communication Plan](#team_comms)
-- [Client Communication Plan](#client_comms)
-- [Tech Stack](#tech-stack)
-- [Usability Study](#usability)
-- [Risk Management Plan](#risk)
-- [Legal social ethical and professional issues](#legal-social-ethical-and-professional-issues)
-- [OWASP](OWASP](#owasp)
-- [UML Diagrams - Tech Stack](#uml)
-- [SPRINT PLANT](#sprint)
+- [:art: User Interface, Design Principles](#art-user-interface-and-design-principles)
+- [:computer: Hardware requirements](#computer-hardware-requirements)
+- [:telephone: Communication Plan](#telephone-communication-plan)
+- [:minidisc: Tech Stack](#minidisc-tech-stack)
+- [:guardsman: Usability Study](#guardsman-usability-study)
+- [:traffic_light: Risk Management Plan](#traffic_light-risk-management-plan )
+- [:cop: Legal social ethical and professional issues](#cop-legal-social-ethical-and-professional-issues)
+- [Sprint Plam](#sprint)
 - [Furthur Questions](#questions)
 
 <!--Roles-->
@@ -61,6 +58,9 @@
 - [x] Leo (Techicanl Lead, Version Control) [Leo Xie @keixie838](https://github.com/leoxie838)
 - [x] Simon (Scrum Master , Coach) [Ho Wing Simon @WSimonHo](https://github.com/WSimonHo)
 - [x] Rishi (Product owner, features, backlog)  [Rishi Uttam - @ricky11](https://github.com/ricky11)
+
+## :link: Link To Offical Readme
+[Readme.md](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/Readme.md)
 
 ## :star2: Project Vision
 To realize our client's goals in developing and implementing a Natural science survey system with a primary focus on the surveying and data retrieval of tree species. This new system aims to replace the current antiquated paper-based recording and the problems that arise with manual data entry. 
@@ -143,7 +143,7 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 - V.1.5.2 Stretch release will include stretch goals thereafter 
 
 
-## :art:User Interface And Design Principles
+## :art: User Interface And Design Principles
 - Responsive application
 - Progress WEB Application 
 -  We will constantly iterate after several rounds of usability testing and feedback
@@ -166,11 +166,12 @@ Link to MOOD BOARD : [Brand Color Kit](https://github.com/hkuspace-pu/project-su
 
 
 
-## HARDWARE REQUIREMENTS
+## :computer: Hardware Requirements
 - Mobile Phone
 - Tablet
 - Desktop or Laptop Computer
 - Wired / Wireless / Mobile internet connection
+- Offline once app/client side has been downloaded
 
 
 ## COMMUNICATION INTERFACE REQUIREMENTS 
@@ -178,9 +179,7 @@ Link to MOOD BOARD : [Brand Color Kit](https://github.com/hkuspace-pu/project-su
 - SMS notifications?
 
 
-
-
-##  USABILITY STUDY (QUICK AND DIRTY)
+## :guardsman: Usability Study
 ![Usability Study Image](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/usability_study/Usability%20Study%20Image.jpeg)
 ![Usability Study Image](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/usability_study/Usability%20Study%20Image2.jpeg)
 
@@ -191,7 +190,7 @@ Link to MOOD BOARD : [Brand Color Kit](https://github.com/hkuspace-pu/project-su
 ## :running: Sprint Cadence
 - Each sprint cadence should be min 1 week to 4 week maximum (We will establish the shortest length as possible)
 
-## RISK MANAGAMENT PLAN
+## :traffic_light: Risk Management Plan 
 
 
 | Risk Identification  | Type    |  Probabilty L/M/H | Mitigation | Owner | Impact Level 1-5 | Impact Description |
@@ -239,7 +238,7 @@ Link to MOOD BOARD : [Brand Color Kit](https://github.com/hkuspace-pu/project-su
 
   - We can set up the network VPC for the service group, using firewall and WAF, using HTTPS instead of HTTP. Adding verification for the API requests.
 
-## Legal social ethical and professional issues
+## :cop: Legal social ethical and professional issues
 Legal
 - Compliance with local regulatory laws, Privacy Ordinance (PDPO) etc
 - Does the client require is to disclouse the source code of the software, what is the Licence requirments?
@@ -253,6 +252,8 @@ Legal
 
 
 Ethical
+- Team Ethical Guideline Document Aceeptance Document
+[Link](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/Ethics/ETHICAL%20UNDERTAKING%20(2).pdf)
 - Define a code of ethics and a general code of conduct to be signed by all team members
 - Ensure that users on the platform do not discrmenate, harrass other members, or post vulgar, violant information.
 - Users must sign up with their real username; we want to prevent psudonames and do not want Trolls (i.e. twitter)
@@ -263,21 +264,18 @@ Social
 - Prevent cultural dominance, i.e. no one race/cast of users can have power over another online on our website. Also English should not be the only laguage as it is the dominant one.
 - Provide avenue of redress i.e. email, contact , telephone if one of our users is being harmed by another user on our platform
 
- 
 
+## :telephone: Communication Plan
+### Teammates
+- We use WhatsApp, google drive, git, Teamgantt, and face-to-face meetings to communicate with teammates
+- Teamgantt is our schedule. We mark down, what we are going to do and how long we prepare.
+- We will submit our working in here. And Git can make a task or command.
+- Whatsapp is the main communication. But we do not talk about any sensitive information. We will note teammates, whether we made changes somewhere or what we did. Our documents will store in google drive.
 
+### Client
+- We communicate client by using email and regular meetings, on site demos
 
-## COMMUNICATION PLAN - 
-Teammates
-We use WhatsApp, google drive, git, Teamgantt, and face-to-face meetings to communicate with teammates
-Teamgantt is our schedule. We mark down, what we are going to do and how long we prepare.
-We will submit our working in here. And Git can make a task or command.
-Whatsapp is the main communication. But we do not talk about any sensitive information. We will note teammates, whether we made changes somewhere or what we did. Our documents will store in google drive.
-
-## Client
-- We communicate client by using email and regular meetings
-
-## Tech Stack
+## :minidisc: Tech Stack
 MODEL VIEW CONTROLLER (MVC APPROACH)
 - JAVA for the Backend business logic and API
 - MariaDB (mySQL) for our Database Model
