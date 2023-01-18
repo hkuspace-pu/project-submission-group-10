@@ -1,3 +1,9 @@
+COMP2003HK
+
+GROUP PROJECT (GROUP 10)
+
+[Click here to view original Markdown on Github](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/f0ef2616be7570b262bec62ecc0c865f3bd4ad48/ProjectDocs/ProjectPlan.md)
+
 <div align="center">
 
   <img src="/client/src/assets/images/tree.svg" alt="logo" width="200" height="auto" />
@@ -5,7 +11,7 @@
  <h3>PRODUCT PLAN</h3>
   
   <p>
-    A Natrual Science Survey System for NGO client project
+    A Natural Science Survey System for NGO client project
   </p>
  </div>
   
@@ -54,8 +60,8 @@
 
 <!--Roles-->
 ## :busts_in_silhouette: Roles
-- [x] Leo (Techicanl Lead, Version Control) [Leo Xie @keixie838](https://github.com/leoxie838)
-- [x] Simon (Scrum Master , Coach) [Ho Wing Simon @WSimonHo](https://github.com/WSimonHo)
+- [x] Leo (Technical Lead, Version Control) [Leo Xie @keixie838](https://github.com/leoxie838)
+- [x] Simon (Scrum Master, Coach) [Ho Wing Simon @WSimonHo](https://github.com/WSimonHo)
 - [x] Rishi (Product owner, features, backlog)  [Rishi Uttam - @ricky11](https://github.com/ricky11)
 
 ## :link: Link To Offical Readme
@@ -71,14 +77,14 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 - Ensure the delivery of a high-quality system within the project scope.
 - To create productivity gains over the current paper-based implementation.
 - Create secure & privacy-compliant software that meets local regulatory and ethical standards.
-- Create a visually compelling, high learnability interface based on client feedback
+- Create a visually compelling, high-learnability interface based on client feedback
 - To increase adoption and usage of the software through gamification.
-- Meet all the functional requirments as per outlined in the product scope
+- Meet all the functional requirements as per outlined in the product scope
 -  Provide a comprehensive & consistent method for both beginner and advanced surveyors to record and retrieve tree species data by oberveration and assess changes associated with particular species over time, others points as per the functional requirments.
 
 ## :minidisc: Software Requirments
 
-- This section is updated weekly, refer to [Readme.md](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch)
+- This section is updated weekly; refer to [Readme.md](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch)
 
 ## :gift: Product Value
 - Provide a knowledge base on the local trees and diverse fauna in Hong Kong
@@ -227,8 +233,8 @@ Regular client meetings are necessary to ensure that plans are followed strictly
 **SOLUTION**
   - Channels of communication such as Slack, Zoom will be utilized if incase such face-to-face meetings cannot take place, although meeting clients face to face is a preferred choice to obtain valuable feedback.    
     
-### Secutiry
-  - There may have IP attack, data tamper or sql injection hacking by the hacker that harm the application.
+### Security
+  - There may have IP attack, data tampering or sql injection hacking by the hacker that harm the application.
 
 **SOLUTION**
   - Follow OWASAP TOP 10. We can set up the network VPC for the service group, using firewall and WAF, using HTTPS instead of HTTP. Adding verification for the API requests.
@@ -236,7 +242,7 @@ Regular client meetings are necessary to ensure that plans are followed strictly
 ## :cop: Legal social ethical and professional issues
 Legal
 - Compliance with local regulatory laws, Privacy Ordinance (PDPO) etc
-- Does the client require is to disclouse the source code of the software, what is the Licence requirments?
+- Does the client requirement is to disclose the source code of the software.
 - Follow regulations provided by Office of [Government Cheif Information Office]
 - State our copyright law and trademark rules if any.
 - Create a (AUP) Acceptable Use Policy
@@ -247,17 +253,17 @@ Legal
 
 
 Ethical
-- Team Ethical Guideline Document Aceeptance Document
+- Team Ethical Guideline Document Acceptance Document
 [Link](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/Ethics/ETHICAL%20UNDERTAKING%20(2).pdf)
 - Define a code of ethics and a general code of conduct to be signed by all team members
-- Ensure that users on the platform do not discrmenate, harrass other members, or post vulgar, violant information.
-- Users must sign up with their real username; we want to prevent psudonames and do not want Trolls (i.e. twitter)
+- Ensure that users on the platform do not discriminate, harass other members, or post vulgar, violent information.
+- Users must sign up with their real username; we want to prevent pseudo names and do not want Trolls (i.e. twitter)
 - Developers have the responsibility to protect user data.
 
 Social
 - Prevent online bullying on our forums or surveys or comments to other users.
 - Prevent cultural dominance, i.e. no one race/cast of users can have power over another online on our website. Also English should not be the only laguage as it is the dominant one.
-- Provide avenue of redress i.e. email, contact , telephone if one of our users is being harmed by another user on our platform
+- Provide an avenue of redress i.e. email, contact, telephone if one of our users is being harmed by another user on our platform
 
 
 ## :telephone: Communication Plan
@@ -268,7 +274,7 @@ Social
 - Whatsapp is the main communication. But we do not talk about any sensitive information. We will note teammates, whether we made changes somewhere or what we did. Our documents will store in google drive.
 
 ### Client
-- We communicate client by using email and regular meetings, on site demos
+- We communicate to client by using email and regular meetings, on site demos
 
 ## :minidisc: Tech Stack
 MODEL VIEW CONTROLLER (MVC APPROACH)
@@ -279,7 +285,5 @@ MODEL VIEW CONTROLLER (MVC APPROACH)
 ## :runner: Sprint Plan
 
 ![Sprint Action Plan](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/KanBan/sprint_screen.jpeg)
-
-
 
 
