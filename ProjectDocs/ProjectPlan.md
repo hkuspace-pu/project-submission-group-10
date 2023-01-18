@@ -50,8 +50,7 @@
 - [:guardsman: Usability Study](#guardsman-usability-study)
 - [:traffic_light: Risk Management Plan](#traffic_light-risk-management-plan )
 - [:cop: Legal social ethical and professional issues](#cop-legal-social-ethical-and-professional-issues)
-- [Sprint Plam](#sprint)
-- [Furthur Questions](#questions)
+- [:runner: Sprint Plan](#runner-sprint-plan)
 
 <!--Roles-->
 ## :busts_in_silhouette: Roles
@@ -202,41 +201,39 @@ Link to MOOD BOARD : [Brand Color Kit](https://github.com/hkuspace-pu/project-su
 | Poor HCI | Frontend  |Medium| Test on all devices, release early |Rishi, Simon |3 |Mobile users may not be able to complete surveys on smaller devices |
 | API SSL | Backend |Medium |Apply Lets encrypt to backend API | Leo |5 |Browser will not be able to send requests to a secure endpoint|
 
-
-
-
-
-### BUDGET RISK
-  - Given that this is a project for an NGO with a minimal budget, we are mandated to keep our costs as low as possible while delivering a high-quality product. Thus a heavy reliance on team cooperation and work ethic are of utmost importance while keeping the budget low.
+Other Risks
+----------
+### Budget Risk
+Given that this is a project for an NGO with a minimal budget, we are mandated to keep our costs as low as possible while delivering a high-quality product. Thus a heavy reliance on team cooperation and work ethic are of utmost importance while keeping the budget low.
 
 **SOLUTION**
-   - Using open source software and off-the-shelf products to design and implement the software without a burdening expense.
+Using open source software and off-the-shelf products to design and implement the software without a burdening expense.
 
-### SCOPE CREEP
-  - Scope creep is a phenomenon of the software development lifecycle; it happens when the client adds features that were not already discussed at the planning stage, thus increasing the cost and workload for our team and may push deadlines beyond the time limit set.
+### Scope Creep
+Scope creep is a phenomenon of the software development lifecycle; it happens when the client adds features that were not already discussed at the planning stage, thus increasing the cost and workload for our team and may push deadlines beyond the time limit set.
 
 **SOLUTION**
-  - Regular client meetings are necessary to ensure that plans are followed strictly to avoid scope creep. All stakeholders must be in agreement to the product backlog and the features that are required. Small and trivial additional features are usually acceptable.
+Regular client meetings are necessary to ensure that plans are followed strictly to avoid scope creep. All stakeholders must be in agreement to the product backlog and the features that are required. Small and trivial additional features are usually acceptable.
 
-### TIME CONSTRAINTS
+### Time Constraints
   - Deadlines are often difficult to stick to due to the very nature of the software development lifecycle. Improper time management and lack of talent are several factors that can push deadlines and affect the completion of work.
-
+  - 
 **SOLUTION**
  - By using agile methodologies and sticking to deadlines for software releases as well as keeping a time buffer should alleviate most of the time delays that we may experien
   
-### EXTERNAL FACTORS
+### External Factors
   - Face-to-face client meetings may be hindered due to the current Covid-19 pandemic and the restrictions that are still present in Hong Kong. While some of the restrictions have been lifted, they have yet to be totally removed.
-
+  - 
 **SOLUTION**
   - Channels of communication such as Slack, Zoom will be utilized if incase such face-to-face meetings cannot take place, although meeting clients face to face is a preferred choice to obtain valuable feedback.    
     
-### SECURITY ATTACK
+### Secutiry Attack
 
   - There may have IP attack, data tamper or sql injection hacking by the hacker that harm the application.
 
 **SOLUTION**
 
-  - We can set up the network VPC for the service group, using firewall and WAF, using HTTPS instead of HTTP. Adding verification for the API requests.
+  - Follow OWASAP TOP 10. We can set up the network VPC for the service group, using firewall and WAF, using HTTPS instead of HTTP. Adding verification for the API requests.
 
 ## :cop: Legal social ethical and professional issues
 Legal
@@ -281,19 +278,10 @@ MODEL VIEW CONTROLLER (MVC APPROACH)
 - MariaDB (mySQL) for our Database Model
 - VueJS for our front end browser based view layer
 
-
-## UML - TO BE COMPLETED
-
-## Initial Sprint Action Plan 
+## :runner: Sprint Plan
 
 ![Sprint Action Plan](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/KanBan/sprint_screen.jpeg)
 
-
-## QUESTIONS FOR CLIENT
-- Does the client have any specific requests on the layout?
-- Any other questions
-- Any other core features missing or required that are within the scope of the project?
-- Client Communication - Weekly meetings and communication over channels like slack and email & zoom?
 
 
 
