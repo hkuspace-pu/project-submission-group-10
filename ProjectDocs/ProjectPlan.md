@@ -1,20 +1,58 @@
-# <div align="center">HK TREE WATCH (GROUP 10) PROJECT PLAN</div>
-## <div align="center">Living document</div>
+<div align="center">
+
+  <img src="/client/src/assets/images/tree.svg" alt="logo" width="200" height="auto" />
+  <h1>HONG KONG NATURE WATCH</h1>
+ <h3>PRODUCT PLAN</h3>
+  
+  <p>
+    A Natrual Science Survey System for NGO client project
+  </p>
+ </div>
+  
+  
+<!-- Badges -->
+<p align="center">
+  <a href="">
+    <img src="https://badgen.net/badge/contributors/3/:color?icon=github" alt="contributors" />
+  </a>
+   <a href="">
+    <img src="https://badgen.net/badge/build/passing/green" alt="contributors" />
+  </a>
+   <a href="">
+    <img src="https://badgen.net/badge/npm/v3.2.45/blue" alt="contributors" />
+  </a>
+
+</p>
+<div align="center">Living document</div>
 
 
 <!-- Table of Contents -->
 # :notebook_with_decorative_cover: Table of Contents
 - [Roles & Contribution](#busts_in_silhouette-roles) 
 - [Product Vision](#star2-project-vision)
-- [Non Technical Objectives](#dart-non-technical-objectives)
+- [Project Objectives](#dart-project-objectives)
 - [Software Requirements & Scope](#minidisc-software-requirments)
 - [Product Value](#gift-product-value)
-- [Initial Requirments - Intended Audience](#intended)
-- [Initial Requirments - Context of use](#context)
-- [Initial Requirments - User Storys](#userstory)
-- [UML for User Story Normal User Role](#umr-user-story)
+- [Initial Requirments Model - Intended Audience](#intended)
+- [Initial Requirments Model - Context of use](#context)
+- [Initial Requirments Model - User Storys](#userstory)
+- [Initial Requirments Model - UML for User Story Normal User Role](#umr-user-story)
+- [Boundaries for Success] 
+For a stories for our team to be done, it has been code reviewed and all errors fixed, as well as tested in the pre-release environment
+- [Sprint Cadence](duration)
+- Each sprint cadence should be min 1 week to 4 week maximum (We will establish the shortest length as possible)
 - [Features](#dart-features)
 - [Constraints](#Constraints)
+- [Product Roadmap & Release Plan Guideline](#road-map)
+- This Roadmap is a guideline not a rule, refer to Backlog for more up to date release information
+- MVP to be released by Marketplace demo 11/Jan/2023
+- V1 TO be released by 15/Feb/2023 which contains most of the high priorty backlog items
+- V1.2 to be released by 25/Feb/2023 which contains all/most of the medium priorty backlog items finished
+- V1.3 to be released by 20/Mar/2023 which contains all/most of the low priorty backlog items finished
+- V.1.3.1 will be released 5/Apr/2023 contained bug fixed for all/most high priroty backlog items
+- V.1.3.2 will be released for bug fixees for all medium and low priroty items.
+- V.1.5 General Release will be released by 1/May/2023 
+- V.1.5.2 Stretch release will include stretch goals thereafter 
 - [User Interface, Design Principles](#UI)
 - [Hardware requirments](#hardware)
 - [User Communcation](#user_comms)
@@ -22,7 +60,7 @@
 - [Client Communication Plan](#client_comms)
 - [Tech Stack](#tech-stack)
 - [Usability Study](#usability)
-- [Risk Management](#risk)
+- [Risk Management Plan](#risk)
 - [Legal social ethical and professional issues](#legal-social-ethical-and-professional-issues)
 - [OWASP](OWASP](#owasp)
 - [UML Diagrams - Tech Stack](#uml)
@@ -40,16 +78,19 @@ To realize our client's goals in developing and implementing a Natural science s
 
 Our vision is to enable key stakeholders, namely, researchers and the general public, a sense of pride and love of nature surrounding Hong Kong's diverse flora.
 
-## :dart: Non-Technical Objectives
+
+## :dart: Project Objectives
 - Ensure the delivery of a high-quality system within the project scope.
 - To create productivity gains over the current paper-based implementation.
 - Create secure & privacy-compliant software that meets local regulatory and ethical standards.
 - Create a visually compelling, high learnability interface based on client feedback
 - To increase adoption and usage of the software through gamification.
+- Meet all the functional requirments as per outlined in the product scope
+-  Provide a comprehensive & consistent method for both beginner and advanced surveyors to record and retrieve tree species data by oberveration and assess changes associated with particular species over time, others points as per the functional requirments.
 
 ## :minidisc: Software Requirments
 
-- Provide a comprehensive & consistent method for both beginner and advanced surveyors to record and retrieve tree species data by oberveration and assess changes associated with particular species over time, others points as per the functional requirments.
+- This section is updated weekly, refer to [Readme.md](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch)
 
 ## :gift: Product Value
 - Provide a knowledge base on the local trees and diverse fauna in Hong Kong
@@ -131,6 +172,20 @@ Our vision is to enable key stakeholders, namely, researchers and the general pu
 
 
 ## RISK MANAGAMENT PLAN
+
+
+| Risk Identification  | Type    |  Probabilty L/M/H | Mitigation | Owner | Impact Level 1-5 | Impact Description |
+| ----------------- | -------------------- | --| -- | -- | -- | -- |
+| Personnel shortfalls |  Personnel | LOW | None | Group | 5 | If team member drops out, the rest of the group will have to take up the role. |
+| Client requirements changing | Scope Creep  | Low |Communite with client, unable to make large changes, small changes if time persists|Group|3 |Project can be delayed if we accept too many requirements beyond original scope | 
+| Client conflicts with their own requirments| Scope Creep | Medium | Communicate to client |Group|3 | Project Delays |
+| Lack of sample data | Backend  |Medium|Add sample data | Leo |4 |Poor sample data will lead to a poor final demo to clinet|
+| Poor HCI | Frontend  |Medium| Test on all devices, release early |Rishi, Simon |3 |Mobile users may not be able to complete surveys on smaller devices |
+| API SSL | Backend |Medium |Apply Lets encrypt to backend API | Leo |5 |Browser will not be able to send requests to a secure endpoint|
+
+
+
+
 
 ### BUDGET RISK
   - Given that this is a project for an NGO with a minimal budget, we are mandated to keep our costs as low as possible while delivering a high-quality product. Thus a heavy reliance on team cooperation and work ethic are of utmost importance while keeping the budget low.
