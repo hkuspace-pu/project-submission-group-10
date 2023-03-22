@@ -62,7 +62,7 @@ app.component('fa', fa)
 app.use(VueAnimXyz)
 app.use(createPinia())
 app.use(router)
-app.use(plugin, defaultConfig)
+// app.use(plugin, defaultConfig)
 
 app.use(StoryblokVue, {
         accessToken: 'By3wbauW0r2L5NjJLSOlpwtt',

@@ -560,8 +560,8 @@ try {
 var form_data = new FormData();
 
 form_data.append('data', JSON.stringify(fields));
-  const url2 = "http://18.118.83.77:9000"
-  const url = "http://api.hktreewatch.org:9000"
+  // const url2 = "http://18.118.83.77:9000"
+  const url = "https://api.hktreewatch.org"
   const resp = await fetch(url+'/insertSurveyRecord', {
         method: 'POST',
         // body: JSON.stringify(fields)
@@ -595,7 +595,7 @@ const passData = (e) => {
 }
 
 const loadTreeList = async () => {
-  const url = "http://api.hktreewatch.org:9000"
+  const url = "https://api.hktreewatch.org"
   const resp = await fetch(url+'/getCommonAndScientificNameList', {
         method: 'GET',
         // headers : {
