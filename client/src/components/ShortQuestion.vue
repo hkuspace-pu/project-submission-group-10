@@ -10,7 +10,7 @@
             <a class="mark rotate sqAns" :class="{
                 wrongQuiz:wrongAns[index],
                 passQuiz:corrAns[index]
-            }" @click="submitAns(index)" v-for="(item,index) in sData.Ans">{{item}}</a>
+            }" @click="submitAns(index)" v-for="(item,index) in sData.Ans" :key="index">{{item}}</a>
 
             <div class="sqWidth-80" :class="{hidden:!is_submitted}">
                 <a class="mark rotate btnQuiz" @click="showDesc()">Read More</a>
@@ -19,7 +19,7 @@
             </div>
 
             <div :class="{hidden:!_show_desc}">
-                <div class="sqDesc" :class="{spDescBlock:!logined}" v-html="sData.desc"></div>
+                <div class="sqDesc" :class="{sqDescBlock:!logined}" v-html="sData.desc"></div>
 
                 <div class="overFlow" :class="{hidden:logined}">
                     <a class="mark rotate btnQuiz">Login to read more</a>
@@ -320,10 +320,10 @@
 }
 
 .sqDesc {
-    margin: 0px 50px;
+    margin: 0px 10%;
 }
 
-.spDescBlock {
+.sqDescBlock {
     height: 150px;
     overflow: auto;
 }
