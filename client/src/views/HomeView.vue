@@ -5,6 +5,11 @@ import Banner from '@/components/Banner.vue';
 import TheHero from '@/components/TheHero.vue'
 import TheNav from '@/components/TheNav.vue'
 import {useStore} from '@/stores/counter.js'
+import Faq from '@/components/TheFaq.vue'
+import TheFoot from '@/components/TheFoot.vue'
+
+import ShortQuestion from '@/components/ShortQuestion.vue';
+// import Btn from '@/components/Button.vue'
 const store = useStore()
 </script>
 
@@ -32,7 +37,16 @@ const store = useStore()
  
   <TheHero/>
   <Features/>
+<<<<<<< Updated upstream
   <Banner/>
+=======
+
+  <ShortQuestion/> 
+ 
+   <Suspense>
+    <template #default>
+      <Banner />
+>>>>>>> Stashed changes
 
 
 
