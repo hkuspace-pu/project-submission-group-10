@@ -3,37 +3,39 @@
 <div class="formContainer">
   <!-- :submit-label="button_label" -->
   <!-- <FormKit  @submit="submit" type="form" #default="{ value }" >  -->
-
-    <div class="surveySteps">
+    <XyzTransition appear xyz="fade" mode="out-in">
+<div v-if="!formStatus">
+  
+  <div class="surveySteps">
 
       <div @click="step = 1" class="step" :class="step == 1 && 'step_background'">
       <div class="step_number">1</div>
-      <div>Location</div>
+      <div class="attr">Location</div>
       </div>
       <fa icon="chevron-right"/>
       <div @click="step = 2"  class="step" :class="step == 2 && 'step_background'">
       <div class="step_number">2</div>
-      <div>Identification </div>
+      <div class="attr">Identification </div>
       </div>
       <fa icon="chevron-right"/>
       <div @click="step = 3"  class="step" :class="step == 3 && 'step_background'">
       <div class="step_number">3</div>
-      <div>Attributes</div>
+      <div class="attr">Attributes</div>
       </div>
       <fa icon="chevron-right"/>
       <div @click="step = 4"  class="step" :class="step == 4 && 'step_background'">
       <div class="step_number">4</div>
-      <div>Health</div>
+      <div class="attr">Health</div>
       </div>
       <fa icon="chevron-right"/>
       <div @click="step = 5" class="step" :class="step == 5 && 'step_background'">
       <div class="step_number">5</div>
-      <div>Media </div>
+      <div class="attr">Media </div>
       </div>
       <fa icon="chevron-right"/>
       <div @click="step = 6" class="step" :class="step == 6 && 'step_background'">
       <div class="step_number">6</div>
-      <div>Advanced </div>
+      <div class="attr">Advanced </div>
       </div>
      
      
@@ -42,17 +44,26 @@
   type="form"
   #default="{ value }"
   @submit="submit"
+  id="treeform"
   :actions="false"
 >
 
 
+
   <div class="form-body">
+    
+    <div class="step-nav">
+      <FormKit type="button" :disabled="step == 1" @click="step--" v-text="'Previous step'" />
+      <FormKit v-if="step <6" type="button"  class="next"  @click="step++" v-text="nextText"/>
+      <FormKit v-else type="submit" label="Submit Application" />
+    </div>
+
    
-    <XyzTransitionGroup  xyz="down-100% duration-6 ease-in-out out-up-100%" mode="out-in">
+    <XyzTransitionGroup  xyz="right-100% duration-6 out-left-100%" mode="out-in">
       <!-- <XyzTransitionGroup  xyz="" mode="out-in"> -->
 
     <section key=1 v-show="step == 1">
-<div>
+<div class="leftSide">
     <!-- <FormKit type="group" name="locationInfo"> -->
        
       <FormKit
@@ -96,6 +107,9 @@
 
       <div>
         <iframe class="mapBox" frameborder="0" style="border:0" :src="gmapurl" allowfullscreen></iframe>
+        <!-- <GoogleMap :api-key="GOOGLE_API" class="mapBox" :center="center" :zoom="12">
+    <Marker :options="{ position: center }" />
+  </GoogleMap> -->
       </div>
 
     </div>
@@ -115,6 +129,7 @@
       @input="passData"
       name="id"
       id="commonName"
+      inputmode="none"
       prefixIcon="search"
       suffixIcon="info"
       @suffix-icon-click="handleIconClick"
@@ -122,7 +137,7 @@
       selection-appearance="option"
       validation="required"
       placeholder="Example: Mango tree"
-      :options="commonName"
+      :options="store.dropDownTreeList"
     >
 
     <template #option="{ option }">
@@ -137,7 +152,7 @@
       
      </FormKit>
      <div v-if="treeID.longChiDesc" class="details">
-
+    {{ treeID.longChiDesc }}
      
      </div>
 
@@ -146,6 +161,7 @@
       name="tree_tag"
       label="Tree Tags"
       :options="treeTags"
+      validation="required"
       :value=[]
     />
 
@@ -154,15 +170,16 @@
     <div class="rightSide">   
       <XyzTransition appear xyz="fade" mode="out-in">
         <div :key="treeID.imgUrl" v-show="treeID.id">
-        <img width="320" height="320"   :src="treeID.imgUrl"/>
+        <img width="335" height="335"  :src="treeID.imgUrl"/>
       <div class="treeData">
         <p>Common Name : {{ treeID.commonName }} ({{treeID.commonChiName}})</p>
         <p>Scientific Name : {{ treeID.scientificName}}</p>
         <!-- ({{treeID.commonChiName}})</p> -->
       
         <p>Family : {{ treeID.family }}</p>
-        <p><em>{{treeID.longDesc  }}</em></p>
-      <p><em>{{treeID.longChiDesc  }}</em></p>
+        {{ treeID.longChiDesc }}
+        <p><em>{{treeID.shortDesc  }}</em></p>
+      <!-- <p><em>{{treeID.longChiDesc  }}</em></p> -->
       </div>
       </div>
         </XyzTransition>
@@ -185,6 +202,7 @@
   label="Height (meters)"
   name="height"
   suffixIcon="info"
+  validation="required"
   value="25"
   step="1"
 />
@@ -195,7 +213,8 @@
   label="Crown spread width (meters)"
   name="crown"
   suffixIcon="info"
-  value="25"
+  validation="required"
+  value="35"
   step="1"
 />
 
@@ -205,7 +224,8 @@
   label="Stem circumference"
   name="stem_circumference"
   suffixIcon="info"
-  value="25"
+  value="9"
+  validation="required"
   step="1"
 />
 
@@ -218,15 +238,7 @@
   <div class="attributeCrown">{{ value.crown }}</div>
   <div class="attributeHeight">{{ value.height }}</div>
   <div class="attributeStep">{{ value.stem_circumference }}</div>
-  <!-- <input class="inputImage"  type="text"/> -->
-  <!-- <FormKit
-  outer-class="class-append"
-  type="number"
-   inner-class="my-input-class"
-  name="crown"
-  value="25"
-  step="1"
-/> -->
+ 
 </div> </section>
 <!-- </XyzTransition> -->
 
@@ -241,8 +253,9 @@
   min="1"
   step="1"
   max="5"
+  value="3"
   id="health"
-  placeholder="asdasd"
+  validation="required"
   label="Health assessment rating (Vigor):"
 />
 <div class="ratingGuide">
@@ -260,11 +273,13 @@
 <!-- </FormKit> -->
 
 
-    <FormKit
+    <!-- <FormKit
   type="toggle"
   name="dangerous_tree"
+  value="1"
+  validation="required"
   label="Is this tree a potential hazard?"
-/>
+/> -->
     <!-- <FormKit
   v-model="treeValue"
   type="radio"
@@ -273,19 +288,21 @@
   help="Does this tree bring value to its surroundings?"
 /> -->
 
-<FormKit
-      type="dropdown"
-      name="recommendation"
-      label="Your recommendation:"
-      placeholder="Follow-up action"
-      :options="recommendation"
-    />
 
 </div>
 
 
 
-<div>
+<div class="rightSide">
+  <FormKit
+      type="dropdown"
+      
+      name="recommendation"
+      label="Your recommendation:"
+      placeholder="Follow-up action"
+      validation="required"
+      :options="recommendation"
+    />
 
   </div>
 </section>
@@ -299,16 +316,17 @@
 
 <!-- <XyzTransition class="item-group" xyz="fade up-100% out-up" mode="out-in"> -->
 <section key=5 v-show="step == 5">
-  <div>
+  <div class="leftSide">
 <FormKit
   type="file"
   name="file"
+  @input="onfileInput"
   label="Add  media"
+  validation="required"
   accept=".jpg,.mov.,.mp4.,png"
   help="Add images or video"
   multiple
 />
-
 
 <FormKit
   v-model="treeValue"
@@ -317,7 +335,8 @@
   min="1"
   name="amenity_value"
   max="5"
-  
+  value="4"
+  validation="required"
   :options="[{label:'Poor', value:0},{label:'Average', value:1}]"
   help="1 = Low Value, 5 = High Value"
 />
@@ -339,17 +358,24 @@
 
 </div>
 
-<div>
-  <p>someting here</p>
+<div class="rightSide">
+  <p>Images</p>
+  <div  class="preview">
+   <img  src="https://dummyimage.com/180x180/cccccc/c6b6b6.png&text=placeholder" id="file-ip-1-preview">
+ </div>
+
+
 </div>
 </section>
 
 <section key=6 v-show="step == 6">
   <div>
-    <h3>Advanced Options</h3>
+   
 <FormKit type="text"
       prefixIcon="number"
       name="tcmp_id"
+      
+      placeholder="GOVTCP2927S888S"
       label="Government Tree Identification"
       help="Government registered ID"
     
@@ -381,11 +407,11 @@
     <div>
       <FormKit
   type="textarea"
-  label="comments"
+  label="Further comments"
   name="comments"
   rows="5"
-  placeholder="Remember to write in complete sentences."
-  help="I'll know if you didn't read the book!"
+  placeholder="Further comments"
+  help="E.g. The tree is beautiful but needs trimming."
 />
 
 <FormKit
@@ -415,16 +441,26 @@
     </details> -->
   </div>
  
-  <div class="step-nav">
-      <FormKit type="button" :disabled="step == 1" @click="step--" v-text="'Previous step'" />
-      <FormKit v-if="step <6" type="button" class="next"  @click="step++" v-text="nextText"/>
-      <FormKit v-else type="submit" label="Submit Application" />
-    </div>
+ 
     <!-- <pre wrap>{{ value }}</pre> -->
 </FormKit>
 
 
 
+</div>
+
+<div v-else class="success">
+
+<h2 class="dark">Survey submitted.</h2>
+
+<img width="120" src="../assets/sucsess.png"/>
+<p> Thank you, your information will be reviewed.</p>
+
+<button @click="newSurvey" class="btn">Start a new survey</button>
+
+
+</div>
+</XyzTransition>
 
 </div>
 
@@ -432,11 +468,16 @@
 </template>
 
 <script setup>
+import { GoogleMap, Marker } from "vue3-google-map";
 import { ref,reactive,computed, onMounted } from 'vue';
 import { getNode } from '@formkit/core'
+import {Fetch} from '@/controller/BaseAPI.js'
+import {useStore} from '@/stores/state.js'
+const store = useStore()
 // const GOOGLE_API = import.meta.env.'VITE_GOOGLE_API'
 const GOOGLE_API = 'AIzaSyCv6UXTIdpXEKk0eHF7GC42Gv9mxcHd8o4'
-const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=Po+Leung+Kuk,Hong Kong+HK`
+const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=Admiralty+Centre,Hong Kong+HK`
+const center = ref({ lat: 22.2776807, lng: 14.1558142 });
 const cord = reactive({lat:0,long:0})
 // const data = reactive(null);
 // import AddressAutocomplete from 'vue-google-maps-address-autocomplete';
@@ -459,6 +500,7 @@ const selectedTree = "re";
 // const todayDate = '07/07/2022'
 const today = new Date();
 const todayDate = today.toISOString().split('T')[0];
+const formStatus = ref(false);
 // const nextInspectionDate = todayDate+
 // const commonName = ref(null);
 // const address = reactive({ streetName, streetNumber, zipCode, city })
@@ -488,16 +530,23 @@ const nextText = computed(() => {
 })
 
 
-// getlocation(() => {
-//     navigator.getlocation
-// })
 
 
 const handleIconClick = () => {
-console.log('INFO CLICKED')
+
 
 }
+
+const newSurvey = () => {
+  formStatus.value = false;
+  step.value = 1;
+}
+
+
+
 const submit = async (fields) => {
+console.log('submit')
+try {
   if (fields.dangerous_tree) {
     fields.dangerous_tree = 1
   } else {
@@ -510,19 +559,30 @@ const submit = async (fields) => {
  fields.lat = "039333"
  fields.long = "323232"
  delete fields.id
-delete fields.terms
- console.log(fields)
+ delete fields.terms
+var form_data = new FormData();
 
+form_data.append('data', JSON.stringify(fields));
+  const url2 = "http://18.118.83.77:9000"
   const url = "http://api.hktreewatch.org:9000"
-  const resp = await fetch(url+'/InsertSurveyRecord', {
+  const resp = await fetch(url+'/insertSurveyRecord', {
         method: 'POST',
-        body: JSON.stringify(fields)
+        // body: JSON.stringify(fields)
+        body: form_data
       })
+      console.log(resp)
 
+      formStatus.value = true
+    
+    }catch(e) {
+      console.log(e)
+    }
 
   // step.value = 1;
+}
 
-
+const onfileInput = (e) => {
+console.log('on file input')
 }
 
 const passData = (e) => {
@@ -538,45 +598,48 @@ const passData = (e) => {
 }
 
 const loadTreeList = async () => {
-  const url = "http://api.hktreewatch.org:9000"
-  const resp = await fetch(url+'/getCommonAndScientificNameList', {
-        method: 'GET',
-        // headers : {
-        // "Content-type": "application/json;charset=UTF-8",
-        // "Authorization" : btoa(email.value+":"+password.value)}
-    })
-    const {data} = await resp.json()
 
-console.log(data)
-    commonName.value = data
+  // return store.getMasterTreeList();
+  // const url = "http://api.hktreewatch.org:9000"
+  // const resp = await fetch(url+'/getCommonAndScientificNameList', {
+  //       method: 'GET',
+  //       // headers : {
+  //       // "Content-type": "application/json;charset=UTF-8",
+  //       // "Authorization" : btoa(email.value+":"+password.value)}
+  //   })
+  //   let {data} = await resp.json()
+
+  //  data = data.map((item) => {
+  //  return {...item, label : item.value}
+  //     // item.label = item.value
+
+  //   })
+  //   commonName.value = data
     
-    // commonName.value = data.map((result) => {
-    //   return {
-    //     label : result.value,
-    //     value : result.id,
-    //   }
-    // })
 
 
 
   
 }
 
-onMounted(async () => {
+onMounted( async() => {
   console.log('ON MOUNTED ')
+  store.getMasterTreeList();
 
-  loadTreeList()
+  // const tree = new Fetch('getCommonAndScientificNameList', 'GET', null);
+// tree.getMasterTreeList()
+  // loadTreeList()
 
 
 //REQUEST LOCATION FROM THE BROWSER
 
 const sb = (position) => {
-  console.log('geo ok')
-  console.log(position)
-}
+  center.value = {lat: position.coords.latitude ,lng: position.coords.longitude }
+ }
 
 const eb = (error) => {
   console.log('geo error')
+  center.value = {lat: 22.2776807 ,lng: 14.1558142 }
   console.log(error)
 }
 
@@ -586,37 +649,27 @@ navigator.geolocation.getCurrentPosition(sb,eb)
 
 
 
-
 })
 
 </script>
 
-<!-- <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap"></script> -->
 
 <style scoped>
 
 
 
 .form-body {
-  /* height: 100%; */
-
-  /* border:1px solid red; */
-  /* width: 100%; */
-  /* height: 600px; */
-  /* max-height: 50%; */
-  overflow-y: hidden;
   display:flex;
   flex-direction: column;
-  /* justify-content: center; */
   width: 100%;
-  height:550px;
+  height: 100%;
+  margin-bottom:30px;
+  /* height:95%; */
   max-height: calc(100% - 120px);
-  /* margin: 40px 0; */
-  /* border:2px solid green; */
-  /* align-items: center; */
-  /* margin-right:auto; */
-  /* margin-left:auto; */
- 
+  height: 620px;
+ /* overflow-y:hidden; */
+ /* overflow:hidden; */
+ overflow-x:hidden;
 
 }
 
@@ -634,25 +687,23 @@ navigator.geolocation.getCurrentPosition(sb,eb)
   padding:10px;
   height: 100%;
   overflow-y:auto;
+  overflow-x:hidden;
   width: 100%;
-  /* border:1px solid red; */
-  /* margin: auto; */
 
 }
 
 .surveySteps {
-  margin: 25px 0;
+  margin: 25px 10px;
   display:flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* border:1px solid red; */
   gap:20px;
 }
 
 .step {
 display:flex;
-gap:10px;
+gap:5px;
 color:var(--dark);
 cursor: pointer;
 border-radius: 6px;
@@ -691,17 +742,25 @@ align-items: center;
 }
 .step-nav {
   /* margin-top: */
-  width: 100%;
+  /* width: 95%; */
   /* border:1px solid red; */
   display:flex;
-  justify-content: space-between;
+
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom:25px;
   
 }
 
+.leftSide {
+  /* flex:1; */
+}
 .rightSide {
   position:relative;
-  max-width: 320px;
-  height: auto;
+  /* max-width: 365px; */
+  /* flex:1; */
+  /* min-height: 500px; */
+  height: 100%;
 }
 
 .rightSide img {
@@ -732,15 +791,10 @@ input {
 section {
   display:flex;
   flex-direction: row;
-  width: 100%;
+  width: 95%;
   gap:2rem;
-  /* padding:40px 0; */
-  /* margin-top:20px; */
-  /* margin-top:10px; */
-  /* border:1px solid red; */
+/* align-items: center; */
   justify-content: space-evenly;
-  /* align-items: center; */
-  /* border:1px solid red; */
 }
 
 .mapBox {
@@ -755,16 +809,51 @@ img {
   object-fit: cover
 }
 
+
+
+.success {
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid red; */
+  display:flex;
+  flex-direction: column;
+  gap:20px;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+/* .success img {
+width: 120px;
+height: 120px;
+} */
+
 @media only screen and (max-width:800px) {
 section {
   flex-direction: column;
+
+}
+
+
+.attributeCrown, .attributeHeight, .attributeStep {
+  display:none
+}
+.attr {
+  display:none;
+}
+.surveySteps {
+  margin: 10px 3px;
+ gap:6px;
 }
 
 img {
-   width: 100px;
-  height: 100px;
+  /* width: 100%; */
+   width: 180px;
+  height: 180px;
   object-fit: cover
 }
+
+
 .mapBox {
   /* width: 100%; */
   /* margin-left: auto; */

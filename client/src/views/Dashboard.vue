@@ -26,10 +26,17 @@
 
 
 <script setup>
+import {onMounted} from 'vue';
 import DashSideNav from '../components/DashSideNav.vue';
 import DashTopBar from '../components/DashTopBar.vue';
 
 
+onMounted(() => {
+
+
+
+
+});
 
 
 </script>
@@ -40,6 +47,7 @@ import DashTopBar from '../components/DashTopBar.vue';
 
 .dashboardContainer {
 height: 100vh;
+/* height: 100%; */
 width: 100%;
 /* overflow: hidden; */
 
@@ -47,6 +55,7 @@ width: 100%;
 
 .middleContainer {
     height: calc(100% - 65px);
+    /* height: 100%; */
     display:flex;
     flex-direction: row;
 }
@@ -89,6 +98,7 @@ width: 100%;
 
     .dash {
         order:3;
+      
     }
 
     .dashMiddle {

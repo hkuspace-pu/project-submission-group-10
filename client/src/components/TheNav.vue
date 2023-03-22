@@ -32,7 +32,7 @@
 <script setup>
 import Sidebar from './Sidebar.vue';
 import NavMenuContents from '../components/NavMenuContents.vue';
-import {useStore} from '@/stores/counter.js'
+import {useStore} from '@/stores/state.js'
 
 const store = useStore()
 

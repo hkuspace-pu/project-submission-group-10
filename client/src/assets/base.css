@@ -31,6 +31,7 @@ html {
   -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -41,6 +42,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 
  
 }
@@ -63,7 +65,7 @@ h1 {
 h2 {
   color:white;
   font-size:2.2rem;
-  font-size : clamp(1.4rem, 1vw + 1rem, 3rem);
+  font-size : clamp(1.4rem, 1vw + 1.2rem, 3rem);
   font-weight: 400;
   text-align: center;
   white-space: nowrap;
@@ -81,7 +83,9 @@ h4 {
   font-weight: 300;
 }
 
-
+a:hover {
+  text-decoration: none;
+}
 .dark {
   color: #3E3D56;
 }
@@ -139,3 +143,58 @@ input {
  display:inline-block;
   transition: all 150ms ;
 }
+
+.mark {
+  margin: 20px 0;
+  display: inline-block;
+  color: white;
+  background: var(--dg2);
+  padding: 8px 17px;
+  border-radius: 4px;
+}
+
+.rotate {
+  /* transform: rotate(-1deg); */
+  background-color : var(--lightGreen);
+  color: var(--dg2);
+
+}
+
+
+.underline {
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 6px;
+  background-position: 50% 125%;
+  cursor: pointer;
+  transition: background-size 120ms ease-in-out;
+}
+
+.new {
+  /* width: 55px; */
+  /* height: 35px; */
+  border: 1px solid var(--myToastBackColor);
+  background-color: var(--wesYellow);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transform: rotate(-2deg);
+  border-radius: 4px;
+  display: inline-block;
+  color: var(--mondayBlue);
+}
+
+.link {
+  /* color: var(--myLinkBlue); */
+  border-bottom: 1px solid var(--myDarkIconColor);
+  box-shadow: 0 0.4px var(--myLightIconColor);
+  cursor: pointer;
+  padding-bottom: 1px;
+  width: fit-content;
+  transition: box-shadow .20s;
+}
+.link:hover {
+  /* border-bottom: 3px solid var(--myLinkBlue); */
+  box-shadow: 0px 2px var(--myLightIconColor);
+}
+

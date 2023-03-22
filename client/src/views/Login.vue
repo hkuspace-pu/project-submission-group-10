@@ -1,10 +1,15 @@
 <template>
     <div class="loginWrapper">
+        <div class="treeImage">
+            <fa size="2x" icon="tree"/>
+            <p>HK Tree Watch</p>
+               </div>
         <div class="loginBox">
+      
             <div class="leftSide">
                <div class="topBar">
                 <fa size="2x" icon="tree"/>
-                <p>HK TREE WATCH</p>
+  
                </div>
 
                <div class="treeImage">
@@ -40,11 +45,12 @@
                 <p>Don't have a account? Register here</p>
                 </div>
                    </div>
+                  
 
 
 
         </div>
-
+<p v-show="loginError" style="color:red">Please check your login credentials.</p>
 
     </div>
 
@@ -60,39 +66,61 @@ const router = useRouter()
 const email = ref(null);
 const password = ref(null);
 const isLoading = ref(false);
-
+const loginError = ref(false);
 async function login() {
     try {
     isLoading.value = true
-    // const resp = await fetch('https://httpbin.org/get', {
-    //     method: 'GET',
+     loginError.value = false
+
+
+    // API WAY
+    // const url = "http://api.hktreewatch.org:9000"
+
+    // const resp = await fetch(url+'/login', {
+    //     method: 'POST',
+    //     body :  JSON.stringify(btoa(email.value+":"+password.value)),
     //     headers : {
-    //     "Content-type": "application/json;charset=UTF-8",
-    //     "Authorization" : 'Basic '+ btoa(email.value+":"+password.value)}
+    //     // "Content-type": "application/json;charset=UTF-8",
+    //     "Authorization" : btoa(email.value+":"+password.value)
+    // }
     // })
+
+    // console.log(resp)
+
+
+    // SIMON LOCAL JSON WAY
     var url
-    if ( email.value == 'simon@gmail.com' ) {
+    if ( email.value == 'ivy@gmail.com' ) {
         url = 'client.json'
     } else if ( email.value == 'leo@gmail.com' ) {
         url = 'admin.json'
     } else if ( email.value == 'rishi@gmail.com' ) {
         url = 'moderator.json'
     }
-    const resp = await fetch('/src/assets/'+url, {
+    const resp = await fetch(url, {
             method: 'GET'
         })
+
+        console.log(resp)
     const token = await resp.json()
     console.log(token)
     localStorage.setItem('user_info',JSON.stringify(token));
-    router.push({name: 'dashboard'})
-    // return resp2
+    
+    setTimeout(() => {
+        isLoading.value = false
+        router.push({name: 'dashboard'})
+    }, 1200);
+
+
 
 }
     catch(e) {
-        console.log('error : ', e.message)
+        isLoading.value = false
+        loginError.value = true
+        console.log('error1 : ', e.message)
         
     } finally {
-        isLoading.value = false
+        // isLoading.value = false
     }
 
 }
@@ -105,8 +133,10 @@ async function login() {
 
 <style scoped>
 .loginWrapper {
-    min-height: 100vh;
+    /* min-height: 50vh; */
     display:flex;
+    height: 100%;
+    /* overflow-x:auto; */
    flex-direction: column; 
    align-items: center;
    justify-content: center;
@@ -122,15 +152,16 @@ async function login() {
 }
 
 .loginBox {
-    max-width: 960px;
+    max-width: 90%;
  max-height: 600px;
 height: 400px;
-width: 700px;
+width: 650px;
   border-radius: 24px;
- background-color: white;
-  box-shadow: 0 0 60px -20px rgb(0 0 0 / 85%);
+ background-color: var(--backgroundColor);
+  box-shadow: 0 0 60px -20px rgb(0 0 0 / 35%);
   display:flex;
   flex-direction: row;
+  margin: 2rem;
   overflow:hidden;
 }
 
@@ -138,7 +169,7 @@ width: 700px;
 width: 45%;
 padding: 20px;
 padding-bottom: 0;
-background: lightblue;
+background: var(--lightGreen);
 flex-direction: column;
 justify-content: center;
 align-items: center;
@@ -183,12 +214,26 @@ form {
 
 
 .treeImage {
+    color: var(--dg2);
     margin: 2rem 0;
     text-align: center;
    
 }
 .tree {
 width: 220px;
+}
+
+
+@media only screen and (max-width:800px) {
+.leftSide {
+    display:none;
+}
+
+.rightSide {
+
+}
+
+
 }
 
 </style>

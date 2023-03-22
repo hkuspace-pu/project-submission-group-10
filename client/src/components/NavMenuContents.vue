@@ -3,15 +3,20 @@
 <nav>
     <ul>
     
-        <router-link class="link" tag="li" :to="{name:'dashboard'}">
+        <!-- <router-link class="link" tag="li" :to="{name:'dashboard'}">
             <fa v-if="store.isSideBarOpen" size="2x" icon="user"/> <p>About Us</p>
-       </router-link>
-       <router-link class="link" tag="li" :to="{name:'dashboard'}">
+       </router-link> -->
+       <!-- <router-link class="link" tag="li" :to="{name:'dashboard'}">
             <fa v-if="store.isSideBarOpen"  size="2x" icon="user"/> <p>Report</p>
-       </router-link>
-       <router-link class="link" tag="li" :to="{name:'dashboard'}">
+       </router-link> -->
+       <!-- <router-link class="link" tag="li" :to="{path:'/', hash:'#faq'}">
             <fa v-if="store.isSideBarOpen"  size="2x" icon="user"/> <p>FAQ</p>
-       </router-link>
+       </router-link> -->
+       <a class="link" href="#faq">
+        <li>
+            <fa v-if="store.isSideBarOpen"  size="2x" icon="user"/> <p>FAQ</p>
+        </li>
+        </a>
        <router-link class="link" tag="li" :to="{name:'login'}">
             <fa v-if="store.isSideBarOpen"  size="2x" icon="user"/> <p class="rounded">Login</p>
        </router-link>
@@ -24,7 +29,7 @@
 </template>
 
 <script setup>
-import {useStore} from '@/stores/counter.js'
+import {useStore} from '@/stores/state.js'
 const store = useStore()
 </script>
 

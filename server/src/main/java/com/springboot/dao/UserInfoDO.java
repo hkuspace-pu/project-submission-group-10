@@ -21,6 +21,8 @@ public class UserInfoDO {
 	private int status;
 	private int age;
 	private Date createTime;
+	private int role;
+	private String img;
 	
 }
 

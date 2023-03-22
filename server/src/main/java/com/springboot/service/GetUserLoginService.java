@@ -11,4 +11,5 @@ public interface GetUserLoginService {
 
 	List<UserInfoDO> getUserLoginService(String username, String password);
 	
+	List<UserInfoDO> getUserRoleByUserId(int userId);
 }

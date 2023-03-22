@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
 import DashHome from '@/components/DashHome.vue'
 import DashNewSurvey from '@/components/DashNewSurvey.vue'
-
+import Blog from '@/components/Blog.vue'
 import DashChart from '@/components/DashChart.vue'
 import DashSurvey from '@/components/DashSurvey.vue'
 import DashAccount from '@/components/DashAccount.vue'
@@ -15,6 +15,10 @@ import DashTreeLists from '@/components/DashTreeLists.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior(to,from, savedPosition) {
+    return savedPosition || {top:0,behavior: 'smooth'}
+    // return {top:,left;behaviour: }
+  },
   routes: [
     {
       path: '/',
@@ -130,6 +134,15 @@ const router = createRouter({
             }
     
         },
+        {
+          path : 'blog',
+          name : 'blog',
+          component: Blog,
+          meta : {
+            title : 'Blog'
+          }
+  
+      },
 
           {
             path : 'trees',

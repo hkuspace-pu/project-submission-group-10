@@ -1,16 +1,19 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { onMounted } from 'vue';
 import Features from '@/components/Features.vue';
 import Banner from '@/components/Banner.vue';
 import TheHero from '@/components/TheHero.vue'
 import TheNav from '@/components/TheNav.vue'
-import {useStore} from '@/stores/counter.js'
 import Faq from '@/components/TheFaq.vue'
 import TheFoot from '@/components/TheFoot.vue'
-
+import {useStore} from '@/stores/state.js'
 import ShortQuestion from '@/components/ShortQuestion.vue';
 // import Btn from '@/components/Button.vue'
 const store = useStore()
+
+
+
 </script>
 
 <template>
@@ -18,46 +21,55 @@ const store = useStore()
  <!-- <div v-if="store.isSideBarOpen" class="cover"></div> -->
   <main :class="store.isSideBarOpen && 'blur'">
     
-   
-
-    <!-- <div class="cover"></div> -->
-
-  <!-- <header> -->
-    
-
-    <!-- <div class="wrapper"> -->
-     
-
-     <!-- <nav>  -->
-        <!-- <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink> -->
-      <!-- </nav> -->
- 
-  <!-- </header> -->
+<!-- <btn>click me</btn> -->
  
   <TheHero/>
   <Features/>
-<<<<<<< Updated upstream
-  <Banner/>
-=======
 
+  <Banner/>
   <ShortQuestion/> 
  
    <Suspense>
     <template #default>
       <Banner />
->>>>>>> Stashed changes
 
 
+    </template>
+ 
+    <template #fallback>
+      <div>Loading...</div>
+      <!-- <Banner /> -->
+      
+    </template>
+  </Suspense>
+  <Suspense>
+    <template #default>
+      <Faq />
+
+    </template>
+ 
+    <template #fallback>
+      <div>Loading...</div>
+      <!-- <Faq /> -->
+      
+    </template>
+  </Suspense>
+
+  <TheFoot/>
+  
 
   </main>
 </template>
+
+
+
 
 <style scoped>
 
 
 main {
   height: 100%;
+  scroll-behavior: smooth;
   width: 100%;
   position: relative;
 }

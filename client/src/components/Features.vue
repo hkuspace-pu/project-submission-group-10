@@ -1,26 +1,26 @@
 <template>
 
 <div class="featureContainer">
-    <h2 class="dark">Features</h2>
+    <h2 class="mark">Features</h2>
 
     <div class="featureCol">
 
     <div class="featureCategory">
         <img src="../assets/images/knowledge.png"/>
-        <h3 class="dark">Knowledge</h3>
+        <h3 class="mark rotate">Knowledge</h3>
 
     </div>
     
     <div class="featureCategory">
         <img src="../assets/images/report.png"/>
-        <h3 class="dark">Report</h3>
+        <h3 class="mark rotate">Report</h3>
 
 
     </div>
 
     <div class="featureCategory">
         <img src="../assets/images/survey.png"/>
-        <h3 class="dark">Survey</h3>
+        <h3 class="mark rotate">Survey</h3>
     </div>
 
 
@@ -74,5 +74,16 @@
     justify-content: center;
     gap:15px;
     align-items: center;
+
+    padding: 60px;
+    background-image: url('../assets/images/bottom-blob.svg');
+    /* mask-image: url('../assets/images/bottom-blob.svg'); */
+      background-position: top center !important;
+      background-repeat: no-repeat;
+      /* background-color:red; */
+      background-size:cover;
+      /* background-size: 400px; */
+      display: flex;
+      flex-direction: column;
 }
 </style>

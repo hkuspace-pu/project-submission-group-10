@@ -14,4 +14,6 @@ public interface GetUserLoginMapper {
 	@Select("select * from user_info where user_name = #{username} and password = #{password} and status = 1")
 	List<UserInfoDO> getUserLoginService(@Param("username")String username,@Param("password") String password);
 	
+	@Select("select * from user_info where id = #{userId}")
+	List<UserInfoDO> getUserRoleIdByUserId(@Param("userId") int userId);
 }

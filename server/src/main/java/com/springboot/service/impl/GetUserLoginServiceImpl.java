@@ -23,6 +23,11 @@ public class GetUserLoginServiceImpl implements GetUserLoginService{
 		return getUserLoginMapper.getUserLoginService(username, password);
 	}
 
+	@Override
+	public List<UserInfoDO> getUserRoleByUserId(int userId) {
+		return getUserLoginMapper.getUserRoleIdByUserId(userId);
+	}
+
 	
 	
 }

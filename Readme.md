@@ -1,43 +1,35 @@
 <div align="center">
 
-  <img src="assets/logo.png" alt="logo" width="200" height="auto" />
+  <img src="client/src/assets/images/tree.svg" alt="logo" width="200" height="auto" />
   <h1>HONG KONG NATURE WATCH</h1>
   
   <p>
-    Work in progress README.MD for our client project. All items below are demo data.
+    A Natrual Science Survey System for NGO client project
   </p>
   
   
 <!-- Badges -->
 <p>
-  <a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/Louis3797/awesome-readme-template" alt="contributors" />
-  </a>
   <a href="">
-    <img src="https://img.shields.io/github/last-commit/Louis3797/awesome-readme-template" alt="last update" />
+    <img src="https://badgen.net/badge/contributors/3/:color?icon=github" alt="contributors" />
   </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/network/members">
-    <img src="https://img.shields.io/github/forks/Louis3797/awesome-readme-template" alt="forks" />
+   <a href="">
+    <img src="https://badgen.net/badge/build/passing/green" alt="contributors" />
   </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/stargazers">
-    <img src="https://img.shields.io/github/stars/Louis3797/awesome-readme-template" alt="stars" />
+   <a href="">
+    <img src="https://badgen.net/badge/npm/v3.2.45/blue" alt="contributors" />
   </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/issues/">
-    <img src="https://img.shields.io/github/issues/Louis3797/awesome-readme-template" alt="open issues" />
-  </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/Louis3797/awesome-readme-template.svg" alt="license" />
-  </a>
+
 </p>
    
 <h4>
-    <a href="https://github.com/Louis3797/awesome-readme-template/">View Demo</a>
+    <a href="https://hktreewatch.org">View Demo</a>
   <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template">Documentation</a>
+    <a href="#">Documentation</a>
   <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Report Bug</a>
+    <a href="https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/issues">Report Bug</a>
   <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Request Feature</a>
+    <a href="https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/issues">Request Feature</a>
   </h4>
 </div>
 
@@ -61,61 +53,63 @@
 - [Usage](#eyes-usage)
 - [Roadmap](#compass-roadmap)
 - [Contributing](#wave-contributing)
-  * [Code of Conduct](#scroll-code-of-conduct)
-- [FAQ](#grey_question-faq)
 - [License](#warning-license)
-- [Contact](#handshake-contact)
-- [Acknowledgements](#gem-acknowledgements)
+- [Acknowledgements](#Acknowledgements)
+
 
   
 
 <!-- About the Project -->
 ## :star2: About the Project
 
+To realize our client's goals in developing and implementing a Natural science survey system with a primary focus on the surveying and data retrieval of tree species. This new system aims to replace the current antiquated paper-based recording and the problems that arise with manual data entry.
+
+Our vision is to enable key stakeholders, namely, researchers and the general public, a sense of pride and love of nature surrounding Hong Kong's diverse flora
+
+
+
+
+<!-- Contributing -->
+## :wave: Contributing
+
+### GROUP 10
+- [Rishi Uttam - @ricky11](https://github.com/ricky11)
+- [Ho Wing Simon @WSimonHo](https://github.com/WSimonHo)
+- [Leo Xie @keixie838](https://github.com/leoxie838)
 
 <!-- Screenshots -->
 ### :camera: Screenshots
 
 <div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+  <img src="https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/iPhone%2014%20Pro%20in%20deep%20purple%20color_Screenshot%202023-01-08%20at%203.06.39%20AM.png" alt="screenshot" />
+  <img src="https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/iMac%20on%20the%20wooden%20desk%20with%20a%20woman%20phoning_Screenshot%202023-01-08%20at%203.51.30%20AM.png" alt="screenshot" />
 </div>
+
+
 
 
 <!-- TechStack -->
 ### :space_invader: Tech Stack
 
 <details>
-  <summary>Client</summary>
+  <summary>Client (View)</summary>
   <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://nextjs.org/">Next.js</a></li>
-    <li><a href="https://reactjs.org/">React.js</a></li>
-    <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
+    <li><a href="https://vuejs.org/">Vue3</a></li>
   </ul>
 </details>
 
 <details>
-  <summary>Server</summary>
+  <summary>Server (Backend/Controller API)</summary>
   <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-    <li><a href="https://go.dev/">Golang</a></li>
-    <li><a href="https://nestjs.com/">Nest.js</a></li>
-    <li><a href="https://socket.io/">SocketIO</a></li>
-    <li><a href="https://www.prisma.io/">Prisma</a></li>    
-    <li><a href="https://www.apollographql.com/">Apollo</a></li>
-    <li><a href="https://graphql.org/">GraphQL</a></li>
+    <li><a href="https://www.java.com/en/">JAVA</a></li>
+ 
   </ul>
 </details>
 
 <details>
-<summary>Database</summary>
+<summary>Database (Model)</summary>
   <ul>
-    <li><a href="https://www.mysql.com/">MySQL</a></li>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-    <li><a href="https://redis.io/">Redis</a></li>
-    <li><a href="https://neo4j.com/">Neo4j</a></li>
-    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
+    <li><a href="https://mariadb.org/">MariaDB</a></li>
   </ul>
 </details>
 
@@ -123,33 +117,50 @@
 <summary>DevOps</summary>
   <ul>
     <li><a href="https://www.docker.com/">Docker</a></li>
-    <li><a href="https://www.jenkins.io/">Jenkins</a></li>
-    <li><a href="https://circleci.com/">CircleCLI</a></li>
+    <li><a href="https://www.cloudflare.com/">Cloudflare</a></li>
+    <li><a href="https://github.com/">Github</a></li>
   </ul>
 </details>
 
 <!-- Features -->
 ### :dart: Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- Predefined species list
+- Allow users to record new survey information and retrieval
+- Multimedia attachments (Photo/Video)
+- Registration & Login
+- Search, Filter & Sort Records
+- Logging of activity
+- Admins have full role access rights to delete, archive, edit or update survey and user records.
+- Ability to provide different views 
+- Gamification for users to provide engagement
+- Content Management System
+- Exporting & Importing of structured data (tsv)
+
 
 <!-- Color Reference -->
 ### :art: Color Reference
 
+Link to MOOD BOARD : [Brand Color Kit](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/ProjectDocs/Olivia%20Wilson.pdf)
+
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-| Primary Color | ![#222831](https://via.placeholder.com/10/222831?text=+) #222831 |
-| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
-| Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
-| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
+| Primary Color |  ![#87986A](https://via.placeholder.com/15/87986A) |
+| Primary Color | ![#87986A](https://via.placeholder.com/15/87986A) |
+| Secondary Color | ![#393E46](https://via.placeholder.com/15/B8C8AC) |
+| Accent Color | ![#00ADB5](https://via.placeholder.com/15/B8B4B0)  |
+| Text Color | ![#EEEEEE](https://via.placeholder.com/15/EEEEEE)  |
+| Emphasis Color | ![#3E3D56](https://via.placeholder.com/15/3E3D56) |
+
 
 
 <!-- Env Variables -->
 ### :key: Environment Variables
+![alt text](https://via.placeholder.com/100/87986A)
 
 To run this project, you will need to add the following environment variables to your .env file
+
+Please request disclosure of demo API KEYS
 
 `API_KEY`
 
@@ -158,13 +169,19 @@ To run this project, you will need to add the following environment variables to
 <!-- Getting Started -->
 ## 	:toolbox: Getting Started
 
+- Updated latest version of node
+- Updare NPM
+- Clone Repo
+- npm install
+- npm run dev
+
 <!-- Prerequisites -->
 ### :bangbang: Prerequisites
 
-This project uses Yarn as package manager
+This project uses Node & NPM for client side
 
 ```bash
- npm install --global yarn
+ npm install --global npm
 ```
 
 <!-- Installation -->
@@ -192,7 +209,7 @@ To run tests, run the following command
 Clone the project
 
 ```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git
+  https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch.git
 ```
 
 Go to the project directory
@@ -204,13 +221,13 @@ Go to the project directory
 Install dependencies
 
 ```bash
-  yarn install
+  npm install
 ```
 
 Start the server
 
 ```bash
-  yarn start
+  npm run dev
 ```
 
 
@@ -220,59 +237,17 @@ Start the server
 To deploy this project run
 
 ```bash
-  yarn deploy
+  npm run build
 ```
 
 
-<!-- Usage -->
-## :eyes: Usage
-
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
-
-
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
-```
 
 <!-- Roadmap -->
 ## :compass: Roadmap
 
-* [x] Todo 1
-* [ ] Todo 2
-
-
-<!-- Contributing -->
-## :wave: Contributing
-
-<a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" />
-</a>
-
-
-Contributions are always welcome!
-
-See `contributing.md` for ways to get started.
-
-
-<!-- Code of Conduct -->
-### :scroll: Code of Conduct
-
-Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
-
-<!-- FAQ -->
-## :grey_question: FAQ
-
-- Question 1
-
-  + Answer 1
-
-- Question 2
-
-  + Answer 2
+* [x] Build login registration
+* [x] Build Dashboard
+* [ ] Other pls refer to our github project backlog
 
 
 <!-- License -->
@@ -281,25 +256,7 @@ Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-te
 Distributed under the no License. See LICENSE.txt for more information.
 
 
-<!-- Contact -->
-## :handshake: Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
-
-
-<!-- Acknowledgments -->
 ## :gem: Acknowledgements
-
-Use this section to mention useful resources and libraries that you have used in your projects.
-
- - [Shields.io](https://shields.io/)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
- - [Readme Template](https://github.com/othneildrew/Best-README-Template)
-
-
-## :Reference
-- [Plants of the World Online](https://powo.science.kew.org/)
-- [Greening, Landscape & Tree Management Section Development Bureau](https://www.greening.gov.hk/en/community-outreach/qrcode-tree-labels/index.html)
+- [Greening, Landscape & Tree Managment Section](https://www.greening.gov.hk/en/home/index.html)
+- [Tree Register](https://treeregister.greening.gov.hk/map/treeIndex.aspx)

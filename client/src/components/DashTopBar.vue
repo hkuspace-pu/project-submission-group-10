@@ -2,22 +2,18 @@
 
 
 <div class="dashTopBar">
-    <div class="logo">
+    <div @click="$router.push({name : 'dashboard'})" class="logo">
         <fa size="2x" icon="tree"/>
     </div>
-    <div class="dashTopBarContainer">
-
-        <div class="accountName">
+    <div class="rightSide">
+        <router-link tag="div" class="profile" :to="{name:'admin_account'}" >
+            
+        <img :src="`https://avatars.dicebear.com/api/avataaars/${full_name.value}.svg?mouth=smile&radius=50&skinColor=edb98a`"/>     
+            <div class="accountName">
             <p>{{ full_name }}</p>
-            <p>{{ role }}</p>
-        </div>
-        <div>
-            <router-link tag="div" class="row" :to="{name:'admin_account'}" >
-                <div class="account_icon">
-                    <fa class="icon" size="2x" icon="circle-user"/>
-                </div>
-            </router-link>
-        </div>
+            <p style="color:var(--dark)">{{ role }}</p>
+            </div>
+        </router-link>
 
     </div>
 </div>
@@ -47,33 +43,52 @@ export default {
     height: 65px;
     background-color: var(--lightGreen);
     width: 100%;
+    display:flex;
+    padding: 0 0.5rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.dashTopBarContainer {
-    width: calc(95%-7px);
-    padding: 15px 2% 0;
-    color: black !important;
+.logo {
+    color: var(--dg2);
 
-    display: flex;
-    flex-direction: row-reverse;
+}
+.rightSide {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    /* width: calc(95% - 7px); */
+    /* padding: 15px 2% 0; */
+   /* color: black !important; */
+
+}
+
+.rightSide img {
+    height : 35px;
+    width: 35px;
+    border:1px solid var(--brown);
+    background-color: var(--darkGreen);
+    border-radius :50%;
+}
+.profile {
+    display:flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    text-decoration: none;
 }
 
 .accountName {
-    padding: 2px 5px;
-    margin-top: -2px;
-    line-height: 1;
+    display:flex;
+    flex-direction: column;
+   font-size: 13px;
 }   
+
 
 a {
     color: black !important;
 }
 
-.logo {
-    width: 5%;
-    margin-left: 7px;
-    float: left;
-    padding: 15px 2% 0;
-    font-size: 15px;
-    font-weight: 600;
-}
+
 </style>

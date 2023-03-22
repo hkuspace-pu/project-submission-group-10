@@ -135,13 +135,26 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed,onMounted } from 'vue';
 
 // Local reactive state
 const isDataLoading = ref(false);
 const clickedRow = ref(null)
 const itemsSelected = ref([])
 
+//Mounted
+
+onMounted(async () => {
+  console.log('Dash Home Mounted')
+  
+  const url = "http://api.hktreewatch.org:9000"
+const resp = await fetch(url+'/getSurveyRecordByUserId', {
+        method: 'POST',
+        // body: JSON.stringify(fields)
+        body: JSON.stringify({userId: 1})
+      })
+
+})
 // Methods
 const showRow = (index) => {
   clickedRow.value = data[index].advanced
@@ -169,7 +182,7 @@ const headers = [
 
 const data = [
   {
-    "thumbnail": "https://unsplash.it/35?query=trees",
+    "thumbnail": "https://source.unsplash.com/random/400x400/?tree,trees,flowers",
     "common_name": "Bamboo Tree",
     "chinese_name": "杧果",
     // "tags" : "stone wall, dead",
@@ -181,7 +194,7 @@ const data = [
 
     advanced: {
       hktwid: 22,
-      media: ['https://unsplash.it/35?query=trees', 'https://unsplash.it/35?query=tree,green', 'https://unsplash.it/35?query=tree,green'],
+      media: ['https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers,green', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers,green'],
       family_name: 'asdasd',
       scientific_name: 'Ficus microcarpa',
       TCMP_ID: '3453453453453',
@@ -205,8 +218,8 @@ const data = [
       }
     }
   }, {
-    "thumbnail": "https://unsplash.it/35?query=tree",
-    "common_name": "Bamboo Tree",
+    "thumbnail": "https://source.unsplash.com/random/400x400/?trees,bark,flowers",
+    "common_name": "Mangoo Tree",
     "chinese_name": "黃花夾竹桃, 酒杯花",
     // "tags" : "stone wall, dead",
     "health": 1,
@@ -217,7 +230,7 @@ const data = [
 
     advanced: {
       hktwid: 1,
-      media: ['https://unsplash.it/35?query=tree', 'https://unsplash.it/35?query=tree', 'https://unsplash.it/35?query=tree'],
+      media: ['https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers'],
       family_name: 'asdasd',
       scientific_name: 'Ficus microcarpa',
       TCMP_ID: '3453453453453',
@@ -241,8 +254,8 @@ const data = [
       }
     }
   }, {
-    "thumbnail": "https://unsplash.it/35?query=tree",
-    "common_name": "Bamboo Tree",
+    "thumbnail": "https://source.unsplash.com/random/400x400/?flowers, tree",
+    "common_name": "Bannna Tree",
     "chinese_name": "黃花夾竹桃",
     // "tags" : "stone wall, dead",
     "health": 5,
@@ -253,7 +266,7 @@ const data = [
 
     advanced: {
       hktwid: 2,
-      media: ['https://unsplash.it/35?query=tree', 'https://unsplash.it/35?query=tree', 'https://unsplash.it/35?query=tree'],
+      media: ['https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers'],
       family_name: 'asdasd',
       scientific_name: 'Ficus microcarpa',
       TCMP_ID: '3453453453453',
@@ -317,7 +330,7 @@ const data = [
 .mainImage {
   width: 350px;
   height: 350px;
-  background-image: url('../assets/logo.svg');
+  background-image: url('../assets/svgloading.svg');
   background-size: cover;
   background-position: center;
   object-fit: contain;
