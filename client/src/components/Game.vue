@@ -26,9 +26,12 @@
                 <img class="tree" :class="{hidden: cutCount==5}" src="../assets/images/tree.png"/>
             </XyzTransition>
 
-            <img class="tree ax" :class="{ax_rotate: gotoRotate, hidden: cutCount==5}" src="../assets/images/ax.png"/>
+            <XyzTransition appear xyz="fade down delay-2">
+                <img class="tree ax" v-if="showGame" :class="{ax_rotate: gotoRotate, hidden: cutCount==5}" src="../assets/images/ax.png"/>
+            </XyzTransition>
 
-            <a class="mark btn_rotate" @click="btnRotate()" :class="{hidden: cutCount==5}" :disabled="gotoRotate">Click me</a>
+            <a class="mark btn_rotate" @click="gameStart()" :class="{hidden: showGame}">Do you want to play a game?</a>
+            <a class="mark btn_rotate" @click="btnRotate()" :class="{hidden: !showGame, hidden: cutCount==5}" :disabled="gotoRotate">Click me</a>
 
             <XyzTransition appear xyz="fade down delay-2">
                 <p class="qDesc" v-if="showQ" :class="{transform1s: showQBtn}">Is that what you want ?</p>
@@ -62,11 +65,14 @@
                 subTitle: 'A natural science survey system',
                 cutCount: 0,
                 showQ: false,
-                showQBtn: false
+                showQBtn: false,
+                showGame: false
             }
         },
         methods: {
-            
+            gameStart(){
+                this.showGame = true
+            },
             btnRotate() {
                 this.gotoRotate = true
                 setTimeout(() => {
