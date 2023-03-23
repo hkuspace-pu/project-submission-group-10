@@ -4,6 +4,7 @@ import { onMounted } from 'vue';
 import Features from '@/components/Features.vue';
 import Banner from '@/components/Banner.vue';
 import TheHero from '@/components/TheHero.vue'
+import Game from '@/components/Game.vue'
 import TheNav from '@/components/TheNav.vue'
 import Faq from '@/components/TheFaq.vue'
 import TheFoot from '@/components/TheFoot.vue'
@@ -17,6 +18,7 @@ const store = useStore()
 </script>
 
 <template>
+<div>
  <TheNav/>
  <!-- <div v-if="store.isSideBarOpen" class="cover"></div> -->
   <main :class="store.isSideBarOpen && 'blur'">
@@ -24,6 +26,8 @@ const store = useStore()
 <!-- <btn>click me</btn> -->
  
   <TheHero/>
+  <Game/>
+
   <Features/>
 
   <Banner/>
@@ -59,6 +63,7 @@ const store = useStore()
   
 
   </main>
+  </div>
 </template>
 
 
