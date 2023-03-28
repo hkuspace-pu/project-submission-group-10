@@ -26,13 +26,33 @@
                 <img class="tree" :class="{hidden: cutCount==5}" src="../assets/images/tree.png"/>
             </XyzTransition>
 
+            <XyzTransition :class="{hidden: showGame}" appear xyz="fade right delay-6">
+                <img class="bird" src="../assets/images/bird.gif"/>
+            </XyzTransition>
+            <XyzTransition :class="{hidden: showGame}" appear xyz="fade left delay-9">
+                <img class="bird2" src="../assets/images/bird.gif"/>
+            </XyzTransition>
+            <XyzTransition :class="{hidden: showGame}" appear xyz="fade-75 left delay-10">
+                <img class="butterfly" src="../assets/images/butterfly.webp"/>
+            </XyzTransition>
+
             <XyzTransition appear xyz="fade down delay-2">
-                <img class="tree ax" v-if="showGame" :class="{ax_rotate: gotoRotate, hidden: cutCount==5}" src="../assets/images/ax.png"/>
+                <img class="ax" v-if="showGame" 
+                :class="{
+                    ax_rotate: gotoRotate, 
+                    hidden: cutCount==5,
+                    ax_r1: cutCount==1,
+                    ax_r2: cutCount==2,
+                    ax_r3: cutCount==3,
+                    ax_r4: cutCount==4,
+                }" src="../assets/images/ax.png"/>
             </XyzTransition>
 
             <a class="mark btn_rotate" @click="gameStart()" :class="{hidden: showGame}">Do you want to play a game?</a>
-            <a class="mark btn_rotate" @click="btnRotate()" :class="{hidden: !showGame, hidden: cutCount==5}" :disabled="gotoRotate">Click me</a>
-
+            <XyzTransition appear xyz="fade down delay-2">
+                <a class="mark btn_rotate" @click="btnRotate()" v-if="showGame" :class="{hidden: cutCount==5}" :disabled="gotoRotate">Click me</a>
+            </XyzTransition>
+            
             <XyzTransition appear xyz="fade down delay-2">
                 <p class="qDesc" v-if="showQ" :class="{transform1s: showQBtn}">Is that what you want ?</p>
             </XyzTransition>
@@ -143,6 +163,7 @@
 /* z-index:-100; */
     
     /* padding: 2rem; */
+    opacity: 0.9;
     padding-top: 2rem;
 }
 
@@ -151,7 +172,8 @@
     width: 40px;
     top:17%;
     right:10%;
-
+    z-index: 1;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(500%) contrast(100%);
 }
 
 .bird2 {
@@ -159,9 +181,9 @@
     width: 75px;
     top:22%;
     right:9%;
-
+    z-index: 1;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(500%) contrast(100%);
 }
-
 
 .butterfly {
     position:absolute;
@@ -169,7 +191,7 @@
     transform:rotate(20deg);
     top:22%;
     left:9%;
-
+    z-index: 1;
 }
 .heroTitle {
     display:flex;
@@ -197,13 +219,32 @@ p {
     height: 400px;
     /* width: 380px; */
     padding: 10px 0;
+    filter: invert(31%) sepia(99%) saturate(376%) hue-rotate(86deg) brightness(118%) contrast(119%);
 
 }
 
 .ax {
     position: absolute;
+    padding: 10px 0;
     height: 200px;
     margin: 150px 200px 0px 0px !important;
+    filter: invert(53%) sepia(12%) saturate(3901%) hue-rotate(334deg) brightness(91%) contrast(93%);
+}
+
+.ax_r1 {
+    filter: invert(41%) sepia(77%) saturate(4576%) hue-rotate(349deg) brightness(99%) contrast(78%);
+}
+
+.ax_r2 {
+    filter: invert(47%) sepia(45%) saturate(6740%) hue-rotate(342deg) brightness(98%) contrast(98%);
+}
+
+.ax_r3 {
+    filter: invert(43%) sepia(64%) saturate(4471%) hue-rotate(340deg) brightness(104%) contrast(110%);
+}
+
+.ax_r4 {
+    filter: invert(21%) sepia(77%) saturate(7067%) hue-rotate(356deg) brightness(96%) contrast(117%);
 }
 
 .ax_rotate {
@@ -248,12 +289,16 @@ p {
 }
 
 .gameTitle {
-    color: var(--gameTitle)
+    color: var(--gameTitle);
+    -webkit-filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 1));
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 1));
 }
 
 .transform1s {
     transform: translate(0px, -60px);
     transition: 0.6s ease-in;
+    -webkit-filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 1));
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 1));
 }
 
 @media (max-width:600px) {
@@ -368,5 +413,9 @@ p {
     position: relative;
     z-index: 10;
     text-align: center;
+}
+
+.shadow img {
+    height: 600px;
 }
 </style>

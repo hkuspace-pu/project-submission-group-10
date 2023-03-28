@@ -25,7 +25,7 @@ const store = useStore()
     
 <!-- <btn>click me</btn> -->
  
-  <TheHero/>
+  <!-- <TheHero/> -->
   <Game/>
 
   <Features/>
