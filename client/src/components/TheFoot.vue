@@ -4,9 +4,16 @@
     <div class="footerText">
         2023 HK TREE WATCH
     </div>
-    <div>
-        Sitemap • Privacy Policy • Important Notices
-    </div>
+    <ul class="footCrumbs">
+        <li>
+            • Sitemap 
+        </li>
+        <router-link tag="li" :to="{name:'privacy'}">• Privacy Policy</router-link> 
+        <li>
+            • Important Notices
+        </li>
+    </ul>
+      
 
 </div>
 
@@ -17,7 +24,7 @@
 
 <style scoped>
 .footContainer {
-    margin-top:120px;
+    /* margin-top:120px; */
     width: 100%;
     height: 160px;
     background-color: var(--dg2);
@@ -34,5 +41,10 @@
 .footerText {
     margin-bottom:1rem;
     
+}
+
+.footCrumbs {
+    display:flex;
+    gap:10px;
 }
 </style>
