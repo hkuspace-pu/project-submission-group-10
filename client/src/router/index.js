@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 import DashHome from '@/components/DashHome.vue'
 import DashNewSurvey from '@/components/DashNewSurvey.vue'
 import Blog from '@/components/Blog.vue'
@@ -11,6 +12,7 @@ import DashSyncFile from '@/components/DashSyncFile.vue'
 import DashFeature from '@/components/DashFeature.vue'
 import DashUsers from '@/components/DashUsers.vue'
 import DashTreeLists from '@/components/DashTreeLists.vue'
+import Page404 from '../views/Page404.vue'
 // import DashNewFeature from '@/components/DashNewFeature.vue'
 
 const router = createRouter({
@@ -29,6 +31,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register
     },
     {
       path: '/about',
@@ -164,6 +171,15 @@ const router = createRouter({
     
   
     },
+    {
+      path: '/404',
+      name: '404',
+      component: Page404
+    },
+    {
+        path: '/:pathMatch(.*)',
+        redirect: '/404'
+    }
 
   ]
 })
