@@ -4,21 +4,50 @@
             <input type="file" name="" id="" @change="handleFileUpload" />
         </div>
 
-        <div class="file-upload__area">
-            <table>
+         <div :class="{ hidden: items.length == 0 }">
+            <!-- <table>
+                <tr>
+                    <th v-for="( tRow, tIndex ) in tsvTitle" :key="tIndex">
+                        {{ tRow }}
+                    </th>
+                </tr>
                 <tr v-for="( dRow, dIndex ) in tsvData" :key="dIndex" >
                     <td v-for="( tRow, tIndex ) in tsvTitle" :key="tIndex">
                         {{ dRow[tRow] }}
                     </td>
                 </tr>
-            </table>
-        </div>
+            </table> -->
+            <EasyDataTable
+                :headers="headers"
+                :items="items"
+            >
+
+                <!-- <template #expand="data">
+                <div class="tree_container" >
+                    <div>
+                    <img class="tree_icon" src="https://www.greening.gov.hk/filemanager/greening/treeant/31/t_031_Overview.jpg" /> 
+                    </div>
+                    <div class="tree_detail">
+                    <div><label for="scientific_name">Scientific Name </label>{{ data.scientific_name }}</div>
+                    <div><label for="common_name">Common Name: </label>{{ data.common_name }}</div>
+                    <div><label for="chinese_name">Chinese Name: </label>{{ data.chinese_name }}</div>
+                    <div><label for="family_name">Family Name: </label>{{ data.family_name }}</div>
+                    <div><label for="native">Native/Exotic Species: </label>{{ data.native }}</div>
+                    </div>
+
+                </div>
+                </template> -->
+
+            </EasyDataTable>
+
+
+
+        </div>  
     </div>
+
+  
 </template>
 
-<script setup>
-
-</script>
 <script>
     import * as d3 from 'd3'
 
@@ -27,7 +56,9 @@
         data() {
             return {
                 tsvData: [],
-                tsvTitle: []
+                tsvTitle: [],
+                headers: [],
+                items: []
             }
         },
         methods: {
@@ -42,9 +73,29 @@
                         var _res = d3.tsvParse(data)
                         this.tsvData = _res
                         this.tsvTitle = _res.columns
+
+                        var _headers = []
+                        var _items = []
+                        this.tsvTitle.forEach(_tt => {
+                            _headers.push({
+                                text: _tt.toUpperCase(),
+                                value: _tt,
+                                sortable: true
+                            })
+                        });
+                        this.tsvData.forEach(_td => {
+                            _items.push(_td)
+                        });
+
+                        this.headers = _headers
+                        this.items = _items
+
                     }
                     reader.readAsText(file)
                 }
+            },
+            getTsvFile() {
+                
             }
         },
     };
@@ -53,18 +104,24 @@
 <style scoped>
     .file-upload {
         height: 100vh;
-        width: 100%;
-        display: flex;
+        width: 90%;
+        /* display: flex; */
         align-items: flex-start;
         justify-content: center;
+        margin: 0 5% 0;
     }
     .file-upload .file-upload__area {
-        width: 80%;
+        width: 100%;
         min-height: 200px;
         display: flex;
         align-items: center;
         justify-content: center;
         border: 2px dashed #ccc;
         margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .hidden {
+        display: none;
     }
 </style>
