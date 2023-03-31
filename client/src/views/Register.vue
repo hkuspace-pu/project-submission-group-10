@@ -1,10 +1,10 @@
 <template>
-    <div class="loginWrapper">
+    <div class="registerWrapper">
         <div class="treeImage">
             <fa size="2x" icon="tree"/>
             <p>HK Tree Watch</p>
                </div>
-        <div class="loginBox">
+        <div class="registerBox">
       
             <div class="leftSide">
                <div class="topBar">
@@ -21,36 +21,26 @@
 
             <div class="rightSide">
 
-                <form @submit.prevent="login">
-                     <div class="login">
-                    <h3 class="dark">Login</h3>
-                   <label for="username">Email:</label> 
-                   <input required v-model="email" type="text" id="username" name="username"/>
-                   <label for="password">Password</label> 
-                    <input required v-model="password" type="password" id="password" name="password"/>
-                    <button type="submit" class="btn">
-                   
-                 <transition name="spinner" mode="out-in">
-                  <span key="notloading" class="btnText" v-if="!isLoading">Login</span>
-                  <span key="loading" class="btnText" v-else>  <fa size="lg" icon="spinner" pulse> </fa> </span>
-                </transition>
-                    
-                    
-                    </button>    
-                </div>
+                <form @submit.prevent="register">
+                     <div class="register">
+                        <h3 class="dark">Register</h3>
+                        <label for="username">Email:</label> 
+                        <input required v-model="email" type="text" id="username" name="username"/>
+                        <label for="password">Password</label> 
+                        <input required v-model="password" type="password" id="password" name="password"/>
+
+                        <button type="submit" class="btn">
+                            <transition name="spinner" mode="out-in">
+                            <span key="notloading" class="btnText" v-if="!isLoading">register</span>
+                            <span key="loading" class="btnText" v-else>  <fa size="lg" icon="spinner" pulse> </fa> </span>
+                            </transition>
+                        </button>    
+                    </div>
                 </form>
-
-                <div class="otherContent">
-                <p>Forgot password?</p>
-                <p>Don't have a account? Register here</p>
-                </div>
-                   </div>
-                  
-
-
-
+            </div>
         </div>
-<p v-show="loginError" style="color:red">Please check your login credentials.</p>
+        <!-- <p v-show="registerError" style="color:red">Please check your register credentials.</p> -->
+        <p v-show="registerError" style="color:red">Please try again later.</p>
 
     </div>
 
@@ -66,52 +56,39 @@ const router = useRouter()
 const email = ref(null);
 const password = ref(null);
 const isLoading = ref(false);
-const loginError = ref(false);
-async function login() {
+const registerError = ref(false);
+async function register() {
     try {
-    isLoading.value = true
-     loginError.value = false
+        isLoading.value = true
+        registerError.value = false
 
 
-    // API WAY
-    const url = "http://api.hktreewatch.org:9000"
+        // API WAY
+        const url = "http://api.hktreewatch.org:9000"
 
-    const resp = await fetch(url+'/login', {
-        method: 'POST',
-        body :  JSON.stringify(btoa(email.value+":"+password.value)),
-        headers : {
-        // "Content-type": "application/json;charset=UTF-8",
+        const resp = await fetch(url+'/register', {
+            method: 'POST',
+            body :  JSON.stringify(btoa(email.value+":"+password.value)),
+            headers : {
+            // "Content-type": "application/json;charset=UTF-8",
             "Authorization" : btoa(email.value+":"+password.value)
         }
-    })
+        })
 
-    // SIMON LOCAL JSON WAY
-    // var url
-    // if ( email.value == 'ivy@gmail.com' ) {
-    //     url = 'client.json'
-    // } else if ( email.value == 'leo@gmail.com' ) {
-    //     url = 'admin.json'
-    // } else if ( email.value == 'rishi@gmail.com' ) {
-    //     url = 'moderator.json'
-    // }
-    // const resp = await fetch(url, {
-    //         method: 'GET'
-    //     })
+        console.log(resp)
+        const token = await resp.json()
+        console.log(token)
+        localStorage.setItem('user_info',JSON.stringify(token));
+        
+        setTimeout(() => {
+            isLoading.value = false
+            router.push({name: 'dashboard'})
+        }, 1200);
 
-    console.log(resp)
-    const token = await resp.json()
-    console.log(token)
-    localStorage.setItem('user_info',JSON.stringify(token));
-    
-    setTimeout(() => {
-        isLoading.value = false
-        router.push({name: 'dashboard'})
-    }, 1200);
-
-}
+    }
     catch(e) {
         isLoading.value = false
-        loginError.value = true
+        registerError.value = true
         console.log('error1 : ', e.message)
         
     } finally {
@@ -120,14 +97,10 @@ async function login() {
 
 }
 
-
-
-
-
 </script>
 
 <style scoped>
-.loginWrapper {
+.registerWrapper {
     /* min-height: 50vh; */
     display:flex;
     height: 100%;
@@ -135,7 +108,7 @@ async function login() {
    flex-direction: column; 
    align-items: center;
    justify-content: center;
-     background-image: url('../assets/login-background.svg');
+     background-image: url('../assets/register-background.svg');
    background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -146,7 +119,7 @@ async function login() {
   
 }
 
-.loginBox {
+.registerBox {
     max-width: 90%;
  max-height: 600px;
 height: 400px;
@@ -191,7 +164,7 @@ align-items: center;
 form {
     width: 100%;
 }
-.login {
+.register {
     width: 100%;
     display:flex;
     flex-direction: column;
