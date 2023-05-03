@@ -24,10 +24,20 @@
                 <form @submit.prevent="register">
                      <div class="register">
                         <h3 class="dark">Register</h3>
-                        <label for="username">Email:</label> 
-                        <input required v-model="email" type="text" id="username" name="username"/>
+                        <label for="username">Username</label> 
+                        <input required v-model="username" type="username" id="username" name="username"/>
+
+                        <label for="email">Email:</label> 
+                        <input required v-model="email" type="text" id="email" name="email"/>
+
+                        <label for="password">Phone number</label> 
+                        <input required v-model="phoneNumber" type="phoneNumber" id="phoneNumber" name="phoneNumber"/>
+
                         <label for="password">Password</label> 
                         <input required v-model="password" type="password" id="password" name="password"/>
+
+                        <label for="password">Confirm Password</label> 
+                        <input required v-model="cpassword" type="cpassword" id="cpassword" name="cpassword"/>
 
                         <button type="submit" class="btn">
                             <transition name="spinner" mode="out-in">
@@ -55,6 +65,9 @@ import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const email = ref(null);
 const password = ref(null);
+const token = ref(null);
+const phoneNumber = ref(null);
+const username = ref(null);
 const isLoading = ref(false);
 const registerError = ref(false);
 async function register() {
@@ -64,14 +77,14 @@ async function register() {
 
 
         // API WAY
-        const url = "http://api.hktreewatch.org:9000"
+        const url = "http://api.hktreewatch.org"
 
-        const resp = await fetch(url+'/register', {
+        const resp = await fetch(url+'/createUser', {
             method: 'POST',
-            body :  JSON.stringify(btoa(email.value+":"+password.value)),
+            body :  JSON.stringify(btoa(email.value+":"+password.value+":"+phoneNumber.value+":"+username.value)),
             headers : {
             // "Content-type": "application/json;charset=UTF-8",
-            "Authorization" : btoa(email.value+":"+password.value)
+            "Authorization" : btoa(email.value+":"+password.value+":"+phoneNumber.value+":"+username.value)
         }
         })
 
@@ -122,7 +135,7 @@ async function register() {
 .registerBox {
     max-width: 90%;
  max-height: 600px;
-height: 400px;
+height: 600px;
 width: 650px;
   border-radius: 24px;
  background-color: var(--backgroundColor);
