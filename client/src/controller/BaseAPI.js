@@ -1,7 +1,7 @@
 
 export class Fetch {
 
-    baseURL = 'http://api.hktreewatch.org:9000/'
+    baseURL = 'https://api.hktreewatch.org/'
     constructor(endpoint,method,body) {
     this.endpoint = endpoint
     this.method = method

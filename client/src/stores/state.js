@@ -6,7 +6,7 @@ export const useStore = defineStore({
   state: () => ({
   isSideBarOpen : false,
   masterTreeList : [],
-  baseURL : 'http://api.hktreewatch.org:9000/'
+  baseURL : 'http://api.hktreewatch.org/'
   }),  
 
   actions : {

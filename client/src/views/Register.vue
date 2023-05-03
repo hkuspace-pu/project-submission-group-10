@@ -64,7 +64,7 @@ async function register() {
 
 
         // API WAY
-        const url = "http://api.hktreewatch.org:9000"
+        const url = "http://api.hktreewatch.org"
 
         const resp = await fetch(url+'/register', {
             method: 'POST',
