@@ -8,7 +8,7 @@
     <div class="rightSide">
         <router-link tag="div" class="profile" :to="{name:'admin_account'}" >
             
-        <img :src="`https://avatars.dicebear.com/api/avataaars/${full_name.value}.svg?mouth=smile&radius=50&skinColor=edb98a`"/>     
+        <img :src="`https://avatars.dicebear.com/api/avataaars/${full_name}.svg?mouth=smile&radius=50&skinColor=edb98a`"/>     
             <div class="accountName">
             <p>{{ full_name }}</p>
             <p style="color:var(--dark)">{{ role }}</p>
