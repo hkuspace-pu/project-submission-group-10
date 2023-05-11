@@ -35,4 +35,9 @@ public class GetSurveyRecordServiceImpl implements GetSurveyRecordService{
 		return getSurveyRecordMapper.updateSurveyRecordById(surveyRecordsDO);
 	}
 
+	@Override
+	public boolean acceptSurveyRecordById(int id) {
+		return getSurveyRecordMapper.acceptSurveyRecordById(id);
+	}
+
 }

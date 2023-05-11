@@ -28,6 +28,26 @@ public class GetUserLoginServiceImpl implements GetUserLoginService{
 		return getUserLoginMapper.getUserRoleIdByUserId(userId);
 	}
 
+	@Override
+	public List<UserInfoDO> getAllUser() {
+		return getUserLoginMapper.getAllUser();
+	}
+
+	@Override
+	public boolean editUserInfo(UserInfoDO userInfoDO) {
+		return getUserLoginMapper.editUserInfo(userInfoDO);
+	}
+
+	@Override
+	public boolean createUserInfo(UserInfoDO userInfoDO) {
+		return getUserLoginMapper.createUserInfo(userInfoDO);
+	}
+
+	@Override
+	public boolean delUserInfo(int userId) {
+		return getUserLoginMapper.delUserInfo(userId);
+	}
+
 	
 	
 }
