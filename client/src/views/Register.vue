@@ -25,19 +25,22 @@
                      <div class="register">
                         <h3 class="dark">Register</h3>
                         <label for="username">Username</label> 
-                        <input required v-model="username" type="username" id="username" name="username"/>
+                        <input required :class="{invalid: username_invalid}" v-model="username" type="text" id="username" name="username"/>
+
+                        <label for="fullname">Fullname</label> 
+                        <input required :class="{invalid: fullname_invalid}" v-model="fullname" type="text" id="fullname" name="fullname"/>
 
                         <label for="email">Email:</label> 
-                        <input required v-model="email" type="text" id="email" name="email"/>
+                        <input required :class="{invalid: email_invalid}" v-model="email" type="email" id="email" name="email"/>
 
                         <label for="password">Phone number</label> 
-                        <input required v-model="phoneNumber" type="phoneNumber" id="phoneNumber" name="phoneNumber"/>
+                        <input required :class="{invalid: phoneNumber_invalid}" v-model="phoneNumber" type="number" id="phoneNumber" name="phoneNumber"/>
 
                         <label for="password">Password</label> 
-                        <input required v-model="password" type="password" id="password" name="password"/>
+                        <input required :class="{invalid: password_invalid}" v-model="password" type="password" id="password" name="password"/>
 
                         <label for="password">Confirm Password</label> 
-                        <input required v-model="cpassword" type="cpassword" id="cpassword" name="cpassword"/>
+                        <input required :class="{invalid: cpassword_invalid}" v-model="cpassword" type="password" id="cpassword" name="cpassword"/>
 
                         <button type="submit" class="btn">
                             <transition name="spinner" mode="out-in">
@@ -65,26 +68,76 @@ import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const email = ref(null);
 const password = ref(null);
+const cpassword = ref(null);
 const token = ref(null);
 const phoneNumber = ref(null);
+const fullname = ref(null);
 const username = ref(null);
+const role = ref(4);
 const isLoading = ref(false);
 const registerError = ref(false);
+
+const email_invalid = ref(false);
+const password_invalid = ref(false);
+const cpassword_invalid = ref(false);
+const phoneNumber_invalid = ref(false);
+const fullname_invalid = ref(false);
+const username_invalid = ref(false);
+
+const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/ig;
 async function register() {
     try {
-        isLoading.value = true
         registerError.value = false
+        if ( username.value == '' ) {
+            return
+        }
 
+        if ( email.value == '' ) {
+            return
+        }
+        password_invalid.value = false
+        if ( password.value == '' || regex.exec(password.value) != 1 ) {
+            password_invalid.value = true
+            return
+        }
+
+        if ( phoneNumber.value == '' ) {
+            return
+        }
+
+        if ( fullname.value == '' ) {
+            return
+        }
+        cpassword_invalid.value = false
+        if ( cpassword.value == '' || regex.exec(cpassword.value) != 1 ) {
+            cpassword_invalid.value = true
+            return
+        }
+
+        if ( cpassword.value != password.value ) {
+            cpassword_invalid.value = true
+            return
+        }
+
+        isLoading.value = true
 
         // API WAY
         const url = "http://api.hktreewatch.org"
 
+        // var _body = JSON.stringify(btoa(role.value+":"+fullname.value+":"+email.value+":"+password.value+":"+phoneNumber.value+":"+username.value))
         const resp = await fetch(url+'/createUser', {
             method: 'POST',
-            body :  JSON.stringify(btoa(email.value+":"+password.value+":"+phoneNumber.value+":"+username.value)),
+            body :  JSON.stringify({
+                username: username.value,
+                fullname: fullname.value,
+                password: password.value,
+                email: email.value,
+                phoneNumber: phoneNumber.value,
+                role: 4
+            }),
             headers : {
-            // "Content-type": "application/json;charset=UTF-8",
-            "Authorization" : btoa(email.value+":"+password.value+":"+phoneNumber.value+":"+username.value)
+            "Content-type": "application/json;charset=UTF-8",
+            // "Authorization" : btoa(role.value+":"+fullname.value+":"+email.value+":"+password.value+":"+phoneNumber.value+":"+username.value)
         }
         })
 
@@ -212,6 +265,10 @@ width: 220px;
 
 .rightSide {
 
+}
+
+.invalid {
+    border-color: red;
 }
 
 
