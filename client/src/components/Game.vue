@@ -11,11 +11,19 @@
             <!-- <img class="bottom" :class="{transparent:cutCount==1, hidden:cutCount>1}" src="../assets/images/Great-Trossachs-Forest-National-Nature-Reserve.jpg" />
             <img class="top" :class="{transparent:cutCount==2, hidden:cutCount>2}" src="../assets/images/re21.png" /> -->
 
+            <!--
             <img class="bottom" :class="{transparent:cutCount==1, hidden:cutCount>1}" src="../assets/images/Great-Trossachs-Forest-National-Nature-Reserve.jpg" />
             <img class="top" :class="{transparent:cutCount==2, hidden:cutCount>2}" src="../assets/images/re21.png" />
             <img class="top" :class="{transparent:cutCount==3, hidden:cutCount>3}" src="../assets/images/re22.png" />
             <img class="top" :class="{transparent:cutCount==4, hidden:cutCount>4}" src="../assets/images/re23.png" />
             <img class="top" :class="{transparent:cutCount==5, hidden:cutCount>5}" src="../assets/images/re24.png" />
+            -->
+ 
+            <img class="bottom" :class="{hidden:cutCount<1}" src="../assets/images/_99861388_p05cfkst.jpg" />
+            <img class="top hidden" :class="{transparent:cutCount==1, showImg:cutCount==2}" src="../assets/images/re24.png" />
+            <img class="top hidden" :class="{transparent:cutCount==2, showImg:cutCount==3}" src="../assets/images/re23.png" />
+            <img class="top hidden" :class="{transparent:cutCount==3, showImg:cutCount==4}" src="../assets/images/re22.png" />
+            <img class="top hidden" :class="{transparent:cutCount==4, showImg:cutCount==5}" src="../assets/images/Great-Trossachs-Forest-National-Nature-Reserve.jpg" />
         </div>
 
         <div class="heroTitle zIndex5">
@@ -45,7 +53,7 @@
                     ax_r2: cutCount==2,
                     ax_r3: cutCount==3,
                     ax_r4: cutCount==4,
-                }" src="../assets/images/ax.png"/>
+                }" src="../assets/images/bottle.png"/>
             </XyzTransition>
 
             <a class="mark btn_rotate" @click="gameStart()" :class="{hidden: showGame}">Do you want to play a game?</a>
@@ -91,6 +99,7 @@
         },
         methods: {
             gameStart(){
+                this.cutCount++
                 this.showGame = true
             },
             btnRotate() {
@@ -116,11 +125,11 @@
                         break;
                     case 4:
                         this.title = 'One more PLEASE'
-                        this.subTitle = 'I\'m the bad guy ~ ~ ~ '
+                        this.subTitle = 'I\'m the good guy ~ ~ ~ '
                         break;
                     case 5:
                         this.title = 'WOW, Congratulations!!'
-                        this.subTitle = 'You ruined the world. Well done'
+                        this.subTitle = 'You save the world. Well done'
                         setTimeout(() => {
                             this.showDesc()
                         }, 2000);
@@ -151,8 +160,9 @@
     height: 600px;
     width: 100%;
     position:relative;
-    /* background: url('../assets/images/Great-Trossachs-Forest-National-Nature-Reserve.jpg'),#F7FAFC; */
-    background: url('../assets/images/_99861388_p05cfkst.jpg'),#F7FAFC;
+    /* background: url('../assets/images/Great-Trossachs-Forest-National-Nature-Reserve.jpg'),#F7FAFC; 
+    background: url('../assets/images/_99861388_p05cfkst.jpg'),#F7FAFC; */
+    background: url('../assets/images/Great-Trossachs-Forest-National-Nature-Reserve.jpg'),#F7FAFC; 
     background-size:100%;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -228,23 +238,21 @@ p {
     padding: 10px 0;
     height: 200px;
     margin: 150px 200px 0px 0px !important;
-    filter: invert(53%) sepia(12%) saturate(3901%) hue-rotate(334deg) brightness(91%) contrast(93%);
+    filter: invert(47%) sepia(75%) saturate(6740%) hue-rotate(2deg) brightness(158%) contrast(98%)
 }
 
-.ax_r1 {
-    filter: invert(41%) sepia(77%) saturate(4576%) hue-rotate(349deg) brightness(99%) contrast(78%);
-}
+
 
 .ax_r2 {
-    filter: invert(47%) sepia(45%) saturate(6740%) hue-rotate(342deg) brightness(98%) contrast(98%);
+    filter: invert(47%) sepia(45%) saturate(6740%) hue-rotate(42deg) brightness(158%) contrast(98%);
 }
 
 .ax_r3 {
-    filter: invert(43%) sepia(64%) saturate(4471%) hue-rotate(340deg) brightness(104%) contrast(110%);
+    filter: invert(43%) sepia(64%) saturate(4471%) hue-rotate(90deg) brightness(104%) contrast(110%);
 }
 
 .ax_r4 {
-    filter: invert(21%) sepia(77%) saturate(7067%) hue-rotate(356deg) brightness(96%) contrast(117%);
+    filter: invert(31%) sepia(107%) saturate(2076%) hue-rotate(121deg) brightness(299%) contrast(78%);
 }
 
 .ax_rotate {
@@ -394,6 +402,10 @@ p {
 
 .hidden {
     display:none
+}
+
+.showImg {
+    display: block !important;
 }
 
 .sqDesc {
