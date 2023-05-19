@@ -147,7 +147,7 @@ const itemsSelected = ref([])
 onMounted(async () => {
   console.log('Dash Home Mounted')
   
-  const url = "http://api.hktreewatch.org:9000"
+  const url = "https://api.hktreewatch.org"
 const resp = await fetch(url+'/getSurveyRecordByUserId', {
         method: 'POST',
         // body: JSON.stringify(fields)
