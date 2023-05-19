@@ -46,7 +46,7 @@ public class JwtUtil {
 	                //可以将基本信息放到claims中
 	                .withClaim("id", userInfoDO.getId())
 	                .withClaim("userName", userInfoDO.getUserName())
-	                .withClaim("password", userInfoDO.getPassword())
+	                .withClaim("role", userInfoDO.getRole())
 	                .withExpiresAt(expireDate) //超时设置,设置过期的日期
 	                .withIssuedAt(new Date()) //签发时间
 	                .sign(Algorithm.HMAC256(SECRET)); //SECRET加密

@@ -1,6 +1,7 @@
 <template>
 
 <div class="heroContainer">
+<video type=”video/mp4” src="../assets/video/tree.mp4" muted loop autoplay/>
  <div class="heroTitle">
     <XyzTransition appear xyz="fade right delay-6">
     <img class="bird" src="../assets/images/bird.gif"/>
@@ -11,15 +12,21 @@
 <XyzTransition appear xyz="fade-75 left delay-10">
     <img class="butterfly" src="../assets/images/butterfly.webp"/>
     </XyzTransition>
-
-    <h1 class="dark">Hong Kong Tree Watch</h1>
-    <h2 class="dark">A natural science survey system.</h2>
     <XyzTransition appear xyz="fade down delay-2">
-        <img class="tree" src="../assets/images/tree.svg"/>
-
+    <h1 class="">Hong Kong Tree Watch</h1>
+    <h2 class="mark rotate">A natural science survey system.</h2>
     </XyzTransition>
+        <!-- <img class="tree" src="../assets/images/tree.svg"/> -->
+        <!-- <video type=”video/mp4” src="../assets/video/tree2.mp4" muted loop autoplay/> -->
+
+
 
 </div> 
+
+<div class="circle"></div>
+<div class="circle c2"></div>
+<div class="circle c3"></div>
+<div class="circle c4"></div>
 
  </div>
 
@@ -36,27 +43,63 @@ import Button from './Button.vue';
 <style scoped>
 
 .heroContainer {
-    height: 75vh;
+    height: 100vh;
     width: 100%;
     position:relative;
-    background: url('../assets/images/sky3.png'),#F7FAFC;;
+    position:relative;
+
     background-size:100%;
     background-repeat: no-repeat;
     background-position: bottom;
-    overflow:hidden;
-
-    /* background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);  */
-/* background-color: #F7FAFC; */
-/* z-index:-100; */
-    
+    overflow:hidden;    
+    /* object-fit: contain; */
     padding: 2rem;
 }
+
+.heroContainer video {
+    position: absolute;
+    object-fit: contain;
+    top:0;
+    left:0;
+    right:0;
+}
+
+
+.circle {
+position:absolute;
+border-radius: 50%;
+width:225px;
+height: 225px;
+background-color:green;
+opacity:50%;
+/* z-index:99; */
+    }
+
+.c2 {
+top:20%;
+right:5%;
+}
+
+.c3 {
+
+}
+
+
+
+.c4 {
+
+}
+
 .bird {
     position:absolute;
     width: 40px;
     top:17%;
     right:10%;
 
+}
+
+video {
+      /* filter:opacity(60%); */
 }
 
 .bird2 {
@@ -81,6 +124,11 @@ import Button from './Button.vue';
     flex-direction:column;
     justify-content: center;
     align-items: center;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    /* z-index: 3; */
     /* border:1px solid red; */
 
 }

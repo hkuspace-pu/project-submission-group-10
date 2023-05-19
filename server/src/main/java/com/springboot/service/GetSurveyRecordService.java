@@ -14,4 +14,6 @@ public interface GetSurveyRecordService {
 	
 	boolean updateSurveyRecordById(SurveyRecordsDO surveyRecordsDO);
 	
+	boolean acceptSurveyRecordById(int id);
+	
 }

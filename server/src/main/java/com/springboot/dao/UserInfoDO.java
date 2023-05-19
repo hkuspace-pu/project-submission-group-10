@@ -15,6 +15,7 @@ public class UserInfoDO {
 
 	private int id;
 	private String userName;
+	private String fullName;
 	private String phoneNumber;
 	private String email;
 	private String password;
@@ -23,6 +24,7 @@ public class UserInfoDO {
 	private Date createTime;
 	private int role;
 	private String img;
+	private int point;
 	
 }
 

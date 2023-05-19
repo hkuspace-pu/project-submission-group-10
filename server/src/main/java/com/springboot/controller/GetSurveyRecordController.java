@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.springboot.dao.ActivityLogDO;
 import com.springboot.dao.FamilyNamesDO;
 import com.springboot.dao.ScientificNamesDO;
 import com.springboot.dao.SurveyRecordsDO;
@@ -26,6 +28,7 @@ import com.springboot.responseFormat.ReturnTransferFormat;
 import com.springboot.service.GetCommonAndScientificNameService;
 import com.springboot.service.GetSurveyRecordService;
 import com.springboot.service.GetUserLoginService;
+import com.springboot.service.InsertActivityLogService;
 
 @Controller
 public class GetSurveyRecordController {
@@ -41,6 +44,9 @@ public class GetSurveyRecordController {
 	
 	@Autowired
 	ReturnTransferFormat returnTransferFormat;
+	
+	@Autowired
+	InsertActivityLogService insertActivityLogService;
 
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@PostMapping("/getSurveyRecordByUserId")
@@ -220,6 +226,14 @@ public class GetSurveyRecordController {
 			surveyRecordsDO.setUserId(json.getIntValue("user_id"));
 			getSurveyRecordService.insertSurveyRecord(surveyRecordsDO);
 			
+			List<UserInfoDO> userList = getUserLoginService.getUserRoleByUserId(json.getIntValue("user_id"));
+			
+			ActivityLogDO activityLogDO = new ActivityLogDO();
+			activityLogDO.setUserId(json.getIntValue("user_id"));
+			activityLogDO.setUserName(userList.get(0).getUserName());
+			activityLogDO.setActivityLog("insert survey record");
+			insertActivityLogService.insertActivityLog(activityLogDO);
+			
 			return returnTransferFormat.respondTransferFormat(
 					ApiReturnStatusCode.REQUEST_SUCCESS.code(), 
 					ApiReturnStatusCode.REQUEST_SUCCESS.msg(), 
@@ -237,4 +251,5 @@ public class GetSurveyRecordController {
 					new ArrayList<>());	
 		}
 	}
+	
 }
