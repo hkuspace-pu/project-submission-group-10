@@ -43,6 +43,9 @@
 
 
         </div>  
+        <div class="">
+            <button @click="exportFile()">Export data</button>
+        </div>
     </div>
 
   
@@ -50,6 +53,7 @@
 
 <script>
     import * as d3 from 'd3'
+    import { saveAs } from 'file-saver'
 
     export default {
         name: "FileUpload",
@@ -60,6 +64,23 @@
                 headers: [],
                 items: []
             }
+        },
+        mounted() {
+            // console.log('mounted!')
+            // /getTsv
+            const url = "http://api.hktreewatch.org"
+            // const resp = await fetch(url+'/getTsv', {
+            //     method: 'POST',
+            //     body :  JSON.stringify({
+            //         userId: 2,
+            //         roleId: 4
+            //     }),
+            //     headers : {
+            //         "Content-type": "application/json;charset=UTF-8",
+            //     }
+            // })
+
+            // console.log(resp)
         },
         methods: {
             handleFileUpload(ev) {
@@ -93,6 +114,28 @@
                     }
                     reader.readAsText(file)
                 }
+            },
+            exportFile(ev) {
+                let tsvContent = "";
+                var _tsv = [
+                    { id: 1, name: 'xx' },
+                    { id: 2, name: 'yy' }
+                ]
+
+
+                _tsv.forEach(function(rowArray) {
+                    // let keys = Object.keys(rowArray).join("\t")
+                    // tsvKey = keys
+                    let row = Object.values(rowArray).join("\t");
+                    tsvContent += row + "\n";
+                });
+
+                let tsvKey = Object.keys( this.tsvTitle).join("\t")
+
+                tsvContent = tsvKey + "\n" + tsvContent
+                // Save the CSV string as a TSV file
+                const blob = new Blob([tsvContent], { type: 'text/tab-separated-values' })
+                saveAs(blob, 'output.tsv')
             },
             getTsvFile() {
                 
