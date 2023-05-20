@@ -3,7 +3,7 @@
 
 <div class="logo">
   <fa size="2x" icon="tree"/>
-  
+  <span class="logo_text"><span class="hk">HK</span> Tree Watch</span>
 </div>
 
 <NavMenuContents  id="navBarContents" ></NavMenuContents>
@@ -64,11 +64,23 @@ const store = useStore()
   /* background-color: #B2D1BD; */
 }
 
-#navBar
+
 
 .logo {
-  font-size: 15px;
+  font-size: 22px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: var(--dg2);
+  gap:5px;
+  /* border:1px solid red; */
+}
+
+.hk {
   font-weight: 600;
+    font-size: 22px;
+  color: var(--quizBtn);
 }
 
 .bars {
