@@ -84,10 +84,12 @@ const phoneNumber_invalid = ref(false);
 const fullname_invalid = ref(false);
 const username_invalid = ref(false);
 
-const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/ig;
+const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/ig;
 async function register() {
     try {
         registerError.value = false
+
+        console.log( 're' )
         if ( username.value == '' ) {
             return
         }
@@ -96,7 +98,8 @@ async function register() {
             return
         }
         password_invalid.value = false
-        if ( password.value == '' || regex.exec(password.value) != 1 ) {
+        var pTest = regex.test(password.value)
+        if ( password.value == '' || pTest == false ) {
             password_invalid.value = true
             return
         }
@@ -109,10 +112,11 @@ async function register() {
             return
         }
         cpassword_invalid.value = false
-        if ( cpassword.value == '' || regex.exec(cpassword.value) != 1 ) {
-            cpassword_invalid.value = true
-            return
-        }
+        // var cpTest = regex.test(cpassword.value)
+        // if ( cpassword.value == '' || cpTest == false ) {
+        //     cpassword_invalid.value = true
+        //     return
+        // }
 
         if ( cpassword.value != password.value ) {
             cpassword_invalid.value = true
@@ -136,9 +140,9 @@ async function register() {
                 role: 4
             }),
             headers : {
-            "Content-type": "application/json;charset=UTF-8",
-            // "Authorization" : btoa(role.value+":"+fullname.value+":"+email.value+":"+password.value+":"+phoneNumber.value+":"+username.value)
-        }
+                "Content-type": "application/json;charset=UTF-8",
+                // "Authorization" : btoa(role.value+":"+fullname.value+":"+email.value+":"+password.value+":"+phoneNumber.value+":"+username.value)
+            }
         })
 
         console.log(resp)
@@ -268,7 +272,7 @@ width: 220px;
 }
 
 .invalid {
-    border-color: red;
+    border-color: red !important;
 }
 
 
