@@ -58,7 +58,9 @@ import Button from './Button.vue';
 
 .heroContainer video {
     position: absolute;
-    object-fit: contain;
+    object-fit: cover;
+    max-width: 100%;
+    height:auto;
     top:0;
     left:0;
     right:0;
@@ -67,6 +69,11 @@ import Button from './Button.vue';
 
 .circle {
 position:absolute;
+padding: 12px;
+/* outline: 2px; */
+border:5px solid white;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px;
+/* filter:drop-shadow(2px); */
 border-radius: 50%;
 width:225px;
 height: 225px;
@@ -76,12 +83,14 @@ opacity:50%;
     }
 
 .c2 {
+    background-image: url(../assets/images/bird.gif);
 top:20%;
 right:5%;
 }
 
 .c3 {
-
+    top:30%;
+right:15%;
 }
 
 
