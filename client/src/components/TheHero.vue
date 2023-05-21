@@ -63,12 +63,13 @@ import Button from "./Button.vue";
 
 .heroContainer video {
   object-fit: cover;
-  max-width: 100%;
   /* z-index:-1; */
-  height: auto;
+  height: 100vh;
   top: 0;
   left: 0;
   right: 0;
+  width: 100%;
+  /* border:1px solid red; */
 }
 
 .xyz-nested {
@@ -139,7 +140,8 @@ transform:  scale(90%);
 
 
 .c1{
-    top:10%;
+    top:15%;
+    left: 5%;
 
 }
 .c2 {
@@ -155,13 +157,13 @@ transform:  scale(90%);
 
 .c4 {
 
-  top: 45%;
+  top: 55%;
   left: 10%;
 }
 
 .bird {
   position: absolute;
-  width: 40px;
+  width: 90px;
   top: 17%;
   right: 10%;
 }
@@ -175,7 +177,7 @@ transform:  scale(90%);
 
 .butterfly {
   position: absolute;
-  width: 55px;
+  width: 130px;
   transform: rotate(20deg);
   top: 22%;
   left: 9%;
