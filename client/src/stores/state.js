@@ -6,7 +6,8 @@ export const useStore = defineStore({
   state: () => ({
   isSideBarOpen : false,
   masterTreeList : [],
-  baseURL : 'http://api.hktreewatch.org:9000/'
+  userInfo: null,
+  baseURL : 'https://api.hktreewatch.org/'
   }),  
 
   actions : {
@@ -30,6 +31,9 @@ export const useStore = defineStore({
     dropDownTreeList(state) {
       return state.masterTreeList.map(item => ({...item, label : item.value}))
 
-    }
+    },
+    getUserInfo(state){
+      return state.userInfo && state.userInfo.data
+    } 
   }
 })

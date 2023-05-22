@@ -105,6 +105,9 @@ public interface GetSurveyRecordMapper {
 			+ "comments = #{comments} where id = #{id}")
 	boolean updateSurveyRecordById(SurveyRecordsDO surveyRecordsDO);
 	
+	@Update("update survey_records set status = 9 where id = #{id}")
+	boolean acceptSurveyRecordById(@Param("id")int id);
+	
 }
 
 

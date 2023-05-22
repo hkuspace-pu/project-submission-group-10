@@ -126,7 +126,7 @@ async function register() {
         isLoading.value = true
 
         // API WAY
-        const url = "http://api.hktreewatch.org"
+        const url = "https://api.hktreewatch.org"
 
         // var _body = JSON.stringify(btoa(role.value+":"+fullname.value+":"+email.value+":"+password.value+":"+phoneNumber.value+":"+username.value))
         const resp = await fetch(url+'/createUser', {
