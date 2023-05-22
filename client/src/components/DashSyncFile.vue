@@ -65,24 +65,48 @@
                 items: []
             }
         },
-        mounted() {
+        async mounted() {
             // /getTsv
             const data = new URLSearchParams();
             data.append('userId', 4);
             data.append('roleId', 4);
 
             const url = "https://api.hktreewatch.org"
-            const resp =  fetch(url+'/getTsv', { 
+            const resp = await fetch(url+'/getTsv', { 
                 method: 'POST',
                 body :  data
             })
 
-            console.log(resp)
-            if ( resp.data && resp.data.length > 0 ) {
+            var _res = await resp.json()
+            if ( _res.data && _res.data.length > 0 ) {
+                var _data = _res.data[0].tsvString //\n
                 
+                var d3Res = d3.tsvParse(_data)
+                this.tsvData = d3Res
+                this.tsvTitle = d3Res.columns
+
+                var _headers = []
+                var _items = []
+                this.tsvTitle.forEach(_tt => {
+                    _headers.push({
+                        text: _tt.toUpperCase(),
+                        value: _tt,
+                        sortable: true
+                    })
+                });
+                this.tsvData.forEach(_td => {
+                    _items.push(_td)
+                });
+
+                this.headers = _headers
+                this.items = _items
             }
         },
         methods: {
+            replaceAll( st, rep, repWith ) {
+                const result = st.split(rep).join(repWith)
+                return result;
+            },
             handleFileUpload(ev) {
                 const file = ev.target.files[0]
                 if ( file ) {
@@ -97,18 +121,18 @@
 
                         var _headers = []
                         var _items = []
-                        this.tsvTitle.forEach(_tt => {
-                            _headers.push({
-                                text: _tt.toUpperCase(),
-                                value: _tt,
-                                sortable: true
-                            })
-                        });
+                        // this.tsvTitle.forEach(_tt => {
+                        //     _headers.push({
+                        //         text: _tt.toUpperCase(),
+                        //         value: _tt,
+                        //         sortable: true
+                        //     })
+                        // });
                         this.tsvData.forEach(_td => {
                             _items.push(_td)
                         });
 
-                        this.headers = _headers
+                        // this.headers = _headers
                         this.items = _items
 
                     }
