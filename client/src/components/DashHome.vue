@@ -148,12 +148,15 @@ const store = useStore();
 onMounted(async () => {
   console.log('Dash Home Mounted')
 
-  let userRole = store.getUserInfo[0].role
+  let userId = store.getUserInfo[0].userId
   const url = "https://api.hktreewatch.org"
+  const formData  = new FormData();
+ 
+    formData.append('userId', userId);
+
 const resp = await fetch(url+'/getSurveyRecordByUserId', {
         method: 'POST',
-        // body: JSON.stringify(fields)
-        body: JSON.stringify({userId: userRole})
+        body: formData
       })
 
 })
