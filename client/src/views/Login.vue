@@ -106,6 +106,7 @@ try {
     localStorage.setItem('user_info',JSON.stringify(token));
     store.userInfo = token
     router.push({name: 'dashboard'})
+    console.log('USERID' , store.getUserInfo[0].userId)
    
 
 } catch(e) {

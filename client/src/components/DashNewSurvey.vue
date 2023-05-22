@@ -577,8 +577,9 @@ const submit = async (fields) => {
       fields.dangerous_tree = 0;
     }
 
+
     fields.tree_type_id = treeID.value.id;
-    fields.user_id = 1;
+    fields.user_id = store.getUserInfo[0].userId
     fields.lat = "039333";
     fields.long = "323232";
     delete fields.id;
@@ -586,7 +587,6 @@ const submit = async (fields) => {
     var form_data = new FormData();
 
     form_data.append("data", JSON.stringify(fields));
-    // const url2 = "http://18.118.83.77:9000"
     const url = "https://api.hktreewatch.org";
     const resp = await fetch(url + "/insertSurveyRecord", {
       method: "POST",
