@@ -128,19 +128,20 @@ async function register() {
         // API WAY
         const url = "https://api.hktreewatch.org"
 
+        const data = new URLSearchParams();
+        data.append('username', username.value);
+        data.append('fullname', fullname.value);
+        data.append('password', password.value);
+        data.append('email', email.value);
+        data.append('phoneNumber', phoneNumber.value);
+        data.append('role', 4);
+
         // var _body = JSON.stringify(btoa(role.value+":"+fullname.value+":"+email.value+":"+password.value+":"+phoneNumber.value+":"+username.value))
         const resp = await fetch(url+'/createUser', {
             method: 'POST',
-            body :  JSON.stringify({
-                username: username.value,
-                fullname: fullname.value,
-                password: password.value,
-                email: email.value,
-                phoneNumber: phoneNumber.value,
-                role: 4
-            }),
+            body :  data,
             headers : {
-                "Content-type": "application/json;charset=UTF-8",
+                // "Content-type": "application/json;charset=UTF-8",
                 // "Authorization" : btoa(role.value+":"+fullname.value+":"+email.value+":"+password.value+":"+phoneNumber.value+":"+username.value)
             }
         })
