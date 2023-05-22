@@ -62,6 +62,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
+import { useStore } from "@/stores/state.js";
+const store = useStore();
 const router = useRouter()
 const email = ref(null);
 const password = ref(null);
@@ -97,17 +99,21 @@ async function login() {
     // const resp = await fetch(url, {
     //         method: 'GET'
     //     })
-
+try {
     console.log(resp)
     const token = await resp.json()
-    console.log(token)
+     console.log(token)
     localStorage.setItem('user_info',JSON.stringify(token));
-    
-    setTimeout(() => {
-        isLoading.value = false
-        router.push({name: 'dashboard'})
-    }, 1200);
+    store.userInfo = token
+    router.push({name: 'dashboard'})
+   
 
+} catch(e) {
+  console.log('LOGGIN FAILED')
+}    
+    
+   
+  
 }
     catch(e) {
         isLoading.value = false
@@ -130,7 +136,7 @@ async function login() {
 .loginWrapper {
     /* min-height: 50vh; */
     display:flex;
-    height: 100%;
+    height: 100vh;
     /* overflow-x:auto; */
    flex-direction: column; 
    align-items: center;
@@ -141,6 +147,7 @@ async function login() {
     background-size: cover;
     background-position: bottom;
     padding: 12px;
+
     /* height: 400px; */
     /* width: 500px; */
   

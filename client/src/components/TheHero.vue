@@ -12,19 +12,23 @@
         <img class="butterfly" src="../assets/images/butterfly.webp" />
       </XyzTransition>
       <XyzTransition appear xyz="fade down delay-12">
-        <h1 class="">A Natrual Science Survey System</h1>
+        <h1 class="">A Natural Science Survey System</h1>
       </XyzTransition>
       <!-- <img class="tree" src="../assets/images/tree.svg"/> -->
     </div>
     <XyzTransition appear xyz="fade left delay-1">
       <div class="circle c1">
         <img src="../assets/images/child_image.png" />
+        <div class="shownText">Learn</div>
         <div class="hiddenText">Learn to plant</div>
+        
       </div>
     </XyzTransition>
     <XyzTransition appear xyz="fade right delay-4">
       <div class="circle c2">
+    
        <img src="../assets/images/adult1.png" />
+         <div class="shownText">Help</div>
        <div class="hiddenText">Help Survey</div>
   
       </div>
@@ -32,12 +36,14 @@
     <XyzTransition appear xyz="fade right delay-6">
           <div class="circle c3">
          <img src="../assets/images/qr_code_scan.png" />
+           <div class="shownText">Research</div>
        <div class="hiddenText">Tree QR Code</div>
        </div>
     </XyzTransition>
     <XyzTransition appear xyz="fade left delay-8">
          <div class="circle c4">
          <img src="../assets/images/fallen_tree.png" />
+             <div class="shownText">Report</div>
                 <div class="hiddenText">Report fallen tree</div>
            </div>
     </XyzTransition>
@@ -115,6 +121,18 @@ pointer-events: none;
 
 }
 
+.shownText {
+  padding: 6px 12px;
+  border-radius: 6px;
+  background-color: var(--quizBtnTransparent);
+  color:white;
+  font-size: 20px;
+  position : absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .circle img:hover {
   opacity: 0.3;
 transform:  scale(90%);
@@ -126,6 +144,9 @@ transform:  scale(90%);
   /* transform: scale(40%); */
 }
 
+.circle:hover .shownText {
+  visibility: hidden;
+}
 
 
 .circleShade {
@@ -217,6 +238,16 @@ p {
 @media (max-width: 600px) {
   .tree {
     width: 280px;
+  }
+
+  .circle {
+    width: 140px;
+    height: 90px;
+    border-radius:20px;
+  }
+
+  .butterfly {
+    visibility: hidden;
   }
 }
 </style>

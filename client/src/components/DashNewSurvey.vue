@@ -52,16 +52,6 @@
 
   <div class="form-body">
     
-    <div class="step-nav">
-      <FormKit type="button" :disabled="step == 1" @click="step--" v-text="'Previous step'" />
-      <FormKit v-if="step <6" type="button"  class="next"  @click="step++" v-text="nextText"/>
-      <FormKit v-else type="submit" label="Submit Application" />
-    </div>
-
-   
-    <XyzTransitionGroup  xyz="right-100% duration-6 out-left-100%" mode="out-in">
-      <!-- <XyzTransitionGroup  xyz="" mode="out-in"> -->
-
     <section key=1 v-show="step == 1">
 <div class="leftSide">
     <!-- <FormKit type="group" name="locationInfo"> -->
@@ -74,11 +64,13 @@
       :options="district"
       help="E.g Central, Wanchai etc."
       validation="required"
+      value="Central"
     />
 
       <FormKit type="text"
       prefixIcon="flag"
       name="location"
+      value="18號 Harcourt Rd, Central"
       label="*Tree location"
       help="E.g. No. 8 Tai Tong Street, Sha Tin"
       validation="required"
@@ -134,6 +126,7 @@
       suffixIcon="info"
       @suffix-icon-click="handleIconClick"
       label="Common name"
+      v-model="selectedTree"
       selection-appearance="option"
       validation="required"
       placeholder="Example: Mango tree"
@@ -151,7 +144,7 @@
       </template>
       
      </FormKit>
-     <div v-if="treeID.longChiDesc" class="details">
+     <div v-if="treeID" class="details">
     {{ treeID.longChiDesc }}
      
      </div>
@@ -167,23 +160,25 @@
 
     </div>
 
-    <div class="rightSide">   
-      <XyzTransition appear xyz="fade" mode="out-in">
-        <div :key="treeID.imgUrl" v-show="treeID.id">
+
+
+    <div  class="rightSide"> 
+        <XyzTransition appear xyz="fade" mode="out-in">  
+        <div  v-if="treeID" :key="treeID.imgUrl" >
         <img width="335" height="335"  :src="treeID.imgUrl"/>
       <div class="treeData">
         <p>Common Name : {{ treeID.commonName }} ({{treeID.commonChiName}})</p>
         <p>Scientific Name : {{ treeID.scientificName}}</p>
-        <!-- ({{treeID.commonChiName}})</p> -->
+       <p> {{treeID.commonChiName}}</p>
       
         <p>Family : {{ treeID.family }}</p>
         {{ treeID.longChiDesc }}
         <p><em>{{treeID.shortDesc  }}</em></p>
-      <!-- <p><em>{{treeID.longChiDesc  }}</em></p> -->
+      <p><em>{{treeID.longChiDesc  }}</em></p>
       </div>
       </div>
-        </XyzTransition>
- 
+   
+      </XyzTransition>
     </div>
 
 
@@ -250,6 +245,8 @@
 <FormKit
   type="rating"
   name="health"  
+  rating-icon="heart"
+  on-color="#DA012D"
   min="1"
   step="1"
   max="5"
@@ -429,11 +426,14 @@
     
     </section>
 
-    </XyzTransitionGroup>
 
 
 
-
+  <div class="step-nav">
+      <FormKit type="button" :disabled="step == 1" @click="step--" v-text="'Previous step'" />
+      <FormKit v-if="step <6" type="button"  class="next"  @click="step++" v-text="nextText"/>
+      <FormKit v-else type="submit" label="Submit Application" />
+    </div>
 
     <!-- <details>
       <summary>Form data</summary>
@@ -469,255 +469,256 @@
 
 <script setup>
 import { GoogleMap, Marker } from "vue3-google-map";
-import { ref,reactive,computed, onMounted } from 'vue';
-import { getNode } from '@formkit/core'
-import {Fetch} from '@/controller/BaseAPI.js'
-import {useStore} from '@/stores/state.js'
-const store = useStore()
+import { ref, reactive, computed, onMounted } from "vue";
+import { getNode } from "@formkit/core";
+import { Fetch } from "@/controller/BaseAPI.js";
+import { useStore } from "@/stores/state.js";
+const store = useStore();
 // const GOOGLE_API = import.meta.env.'VITE_GOOGLE_API'
-const GOOGLE_API = 'AIzaSyCv6UXTIdpXEKk0eHF7GC42Gv9mxcHd8o4'
-const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=Admiralty+Centre,Hong Kong+HK`
+const GOOGLE_API = "AIzaSyCv6UXTIdpXEKk0eHF7GC42Gv9mxcHd8o4";
+const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=Admiralty+Centre,Hong Kong+HK`;
 const center = ref({ lat: 22.2776807, lng: 14.1558142 });
-const cord = reactive({lat:0,long:0})
+const cord = reactive({ lat: 0, long: 0 });
 // const data = reactive(null);
 // import AddressAutocomplete from 'vue-google-maps-address-autocomplete';
 const step = ref(1);
-const commonName = ref([{commonName:'Fig tree (无花果树)', value : 'Fig tree (无花果树)', logo: '../assets/images/butterfly.webp', other : 'werwerwre', somethingelse: 'werwerwr' }, {commonName :'Gingko tree (银杏树)', value: 'Gingko tree (银杏树)',logo: '../assets/images/bird.gif',other : 'werwerwred', somethingelse: 'werdwerwr' }]);
+const commonName = ref([
+  {
+    commonName: "Fig tree (无花果树)",
+    value: "Fig tree (无花果树)",
+    logo: "../assets/images/butterfly.webp",
+    other: "werwerwre",
+    somethingelse: "werwerwr",
+  },
+  {
+    commonName: "Gingko tree (银杏树)",
+    value: "Gingko tree (银杏树)",
+    logo: "../assets/images/bird.gif",
+    other: "werwerwred",
+    somethingelse: "werdwerwr",
+  },
+]);
 // const commonName = ref([{}]);
 
-const treeTags = ref(['Stone wall', 'Old & valuable','Juvenile (sapling)','Mature', ])
+const treeTags = ref([
+  "Stone wall",
+  "Old & valuable",
+  "Juvenile (sapling)",
+  "Mature",
+]);
 const selected = ref(null);
-const options = ref(['Stone Wall', 'Dead', 'Alive']);
-const stepNames = reactive(['locationInfo', 'basicInfo', 'advancedInfo'])
-const recommendation = ref(['Retain', 'Transplant', 'Trim', 'Removal','Request furthur inspection'])
-const district = ref(['Central', 'Western', 'Peak', 'Midlevels'])
-const department = ref(['AFCD', 'LCSD','Highways Dept', 'Water Supplies Dept.', 'Housing Dept.'])
+const options = ref(["Stone Wall", "Dead", "Alive"]);
+const stepNames = reactive(["locationInfo", "basicInfo", "advancedInfo"]);
+const recommendation = ref([
+  "Retain",
+  "Transplant",
+  "Trim",
+  "Removal",
+  "Request furthur inspection",
+]);
+const district = ref(["Admiralty", "Central", "Western", "Peak", "Midlevels"]);
+const department = ref([
+  "AFCD",
+  "LCSD",
+  "Highways Dept",
+  "Water Supplies Dept.",
+  "Housing Dept.",
+]);
 const treeValue = ref(null);
-const treeID = ref({imgUrl: null});
+const treeID = ref({ imgUrl: null });
 const checkBoxValue = ref(null);
-const selectedTree = "re";
+const selectedTree = reactive(null);
 // const todayDate = new Date(Date.now()).toLocaleString();
 // const todayDate = '07/07/2022'
 const today = new Date();
-const todayDate = today.toISOString().split('T')[0];
+const todayDate = today.toISOString().split("T")[0];
 const formStatus = ref(false);
+
 // const nextInspectionDate = todayDate+
 // const commonName = ref(null);
 // const address = reactive({ streetName, streetNumber, zipCode, city })
 
 // const nextText = 'asdasd';
 const button_label = computed(() => {
-  return (step.value != 4) ? 'Next' : 'Submit'
-})
+  return step.value != 4 ? "Next" : "Submit";
+});
 
 const nextText = computed(() => {
   switch (step.value) {
     case 1:
-      return 'Next (Identification)'
-      case 2:
-      return 'Next (Attributes)'
-      case 3:
-      return 'Next (Health)'
-      case 4:
-      return 'Next (Media)'
-      case 5:
-      return 'Next (Advanced)'
-  
+      return "Next (Identification)";
+    case 2:
+      return "Next (Attributes)";
+    case 3:
+      return "Next (Health)";
+    case 4:
+      return "Next (Media)";
+    case 5:
+      return "Next (Advanced)";
+
     default:
-    return 'Next'
-  
+      return "Next";
   }
-})
+});
 
-
-
-
-const handleIconClick = () => {
-
-
-}
+const handleIconClick = () => {};
 
 const newSurvey = () => {
   formStatus.value = false;
   step.value = 1;
-}
-
-
+};
 
 const submit = async (fields) => {
-console.log('submit')
-try {
-  if (fields.dangerous_tree) {
-    fields.dangerous_tree = 1
-  } else {
-    fields.dangerous_tree = 0
-  }
-
-
- fields.tree_type_id = treeID.value.id
- fields.user_id = 1
- fields.lat = "039333"
- fields.long = "323232"
- delete fields.id
- delete fields.terms
-var form_data = new FormData();
-
-form_data.append('data', JSON.stringify(fields));
-  // const url2 = "http://18.118.83.77:9000"
-  const url = "https://api.hktreewatch.org"
-  const resp = await fetch(url+'/insertSurveyRecord', {
-        method: 'POST',
-        // body: JSON.stringify(fields)
-        body: form_data
-      })
-      console.log(resp)
-
-      formStatus.value = true
-    
-    }catch(e) {
-      console.log(e)
+  console.log("submit");
+  try {
+    if (fields.dangerous_tree) {
+      fields.dangerous_tree = 1;
+    } else {
+      fields.dangerous_tree = 0;
     }
 
+    fields.tree_type_id = treeID.value.id;
+    fields.user_id = 1;
+    fields.lat = "039333";
+    fields.long = "323232";
+    delete fields.id;
+    delete fields.terms;
+    var form_data = new FormData();
+
+    form_data.append("data", JSON.stringify(fields));
+    // const url2 = "http://18.118.83.77:9000"
+    const url = "https://api.hktreewatch.org";
+    const resp = await fetch(url + "/insertSurveyRecord", {
+      method: "POST",
+      // body: JSON.stringify(fields)
+      body: form_data,
+    });
+    console.log(resp);
+
+    formStatus.value = true;
+  } catch (e) {
+    console.log(e);
+  }
+
   // step.value = 1;
-}
+};
 
 const onfileInput = (e) => {
-console.log('on file input')
-}
+  console.log("on file input");
+};
 
 const passData = (e) => {
-  console.log('data passe ', e)
-  if (e) {
-    treeID.value = commonName.value.find(name => e == name.value)
-  } else {
-     console.log('no image')
-    // treeID.value.imgUrl = '../assets/images/tree2.svg'
-  }
+  console.log("data passe ", e);
+  treeID.value = store.dropDownTreeList.find((tree) => tree.label === e);
+  console.log(treeID);
+  //  selectedTree.value =
+  // treeID.value ==
+  //  treeID.value = commonName.value.find(name => e == name.value)
+  // treeID.value.imgUrl = '../assets/images/adult1.png'
+  // if (e) {
+  //   treeID.value = commonName.value.find(name => e == name.value)
+  // } else {
+  //    console.log('no image')
+  //   // treeID.value.imgUrl = '../assets/images/tree2.svg'
+  // }
   // console.log(treeID)
- 
-}
+};
 
-const loadTreeList = async () => {
-  const url = "https://api.hktreewatch.org"
-  const resp = await fetch(url+'/getCommonAndScientificNameList', {
-        method: 'GET',
-        // headers : {
-        // "Content-type": "application/json;charset=UTF-8",
-        // "Authorization" : btoa(email.value+":"+password.value)}
-    })
-    let {data} = await resp.json()
+// const loadTreeList = async () => {
+//   const url = "https://api.hktreewatch.org"
+//   const resp = await fetch(url+'/getCommonAndScientificNameList', {
+//         method: 'GET',
+//         // headers : {
+//         // "Content-type": "application/json;charset=UTF-8",
+//         // "Authorization" : btoa(email.value+":"+password.value)}
+//     })
+//     let {data} = await resp.json()
 
-  // return store.getMasterTreeList();
-  // const url = "http://api.hktreewatch.org:9000"
-  // const resp = await fetch(url+'/getCommonAndScientificNameList', {
-  //       method: 'GET',
-  //       // headers : {
-  //       // "Content-type": "application/json;charset=UTF-8",
-  //       // "Authorization" : btoa(email.value+":"+password.value)}
-  //   })
-  //   let {data} = await resp.json()
+// }
 
-  //  data = data.map((item) => {
-  //  return {...item, label : item.value}
-  //     // item.label = item.value
-
-  //   })
-  //   commonName.value = data
-    
-
-
-
-  
-}
-
-onMounted( async() => {
-  console.log('ON MOUNTED ')
+onMounted(async () => {
+  console.log("ON MOUNTED ");
   store.getMasterTreeList();
 
-  // const tree = new Fetch('getCommonAndScientificNameList', 'GET', null);
-// tree.getMasterTreeList()
-  // loadTreeList()
+  //REQUEST LOCATION FROM THE BROWSER
 
+  const sb = (position) => {
+    center.value = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude,
+    };
+  };
 
-//REQUEST LOCATION FROM THE BROWSER
+  const eb = (error) => {
+    console.log("geo error");
+    center.value = { lat: 22.2776807, lng: 14.1558142 };
+    console.log(error);
+  };
 
-const sb = (position) => {
-  center.value = {lat: position.coords.latitude ,lng: position.coords.longitude }
- }
+  console.log("getting geo location");
 
-const eb = (error) => {
-  console.log('geo error')
-  center.value = {lat: 22.2776807 ,lng: 14.1558142 }
-  console.log(error)
-}
-
-console.log('getting geo location')
-
-navigator.geolocation.getCurrentPosition(sb,eb)
-
-
-
-})
-
+  navigator.geolocation.getCurrentPosition(sb, eb);
+});
 </script>
 
 
 <style scoped>
-
-
-
 .form-body {
-  display:flex;
+  display: flex;
   flex-direction: column;
-  width: 100%;
+  max-width: 1200px;
   height: 100%;
-  margin-bottom:30px;
+  /* margin-bottom: 30px; */
   /* height:95%; */
   max-height: calc(100% - 120px);
-  height: 620px;
- /* overflow-y:hidden; */
- /* overflow:hidden; */
- overflow-x:hidden;
-
+  height: 660px;
+  /* overflow-y:hidden; */
+  margin: 30px auto;
+  /* overflow:hidden; */
+  overflow-x: hidden;
+  background-color : var(--backgroundColor);
+  padding:15px;
+  border-radius: 12px;
+  
 }
-
 
 .ratingGuide {
-  margin-top:-15px;
-  margin-bottom:20px;
+  margin-top: -15px;
+  margin-bottom: 20px;
 }
-.ratingGuide p, .amenity p {
-  font-size:12px;
-
+.ratingGuide p,
+.amenity p {
+  font-size: 12px;
 }
 
 .formContainer {
-  padding:10px;
+  padding: 10px;
   height: 100%;
-  overflow-y:auto;
-  overflow-x:hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   width: 100%;
-
 }
 
 .surveySteps {
-  margin: 25px 10px;
-  display:flex;
+  margin: 35px 25px;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap:20px;
+  gap: 20px;
+
 }
 
 .step {
-display:flex;
-gap:5px;
-color:var(--dark);
-cursor: pointer;
-border-radius: 6px;
-padding: 5px 8px;
-justify-content: center;
-align-items: center;
+  display: flex;
+  gap: 15px;
+  color: var(--dark);
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 5px 8px;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
 }
 
 .step:hover {
@@ -726,66 +727,72 @@ align-items: center;
 
 .step_background {
   background-color: var(--lightGreen);
+  transform: scale(125%);
 }
 
 .step_number {
   height: 20px;
   width: 20px;
-font-size:13px;
-font-weight: 600;
-display:flex;
-justify-content: center;
-align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--dg2);
-  color:white;
+  color: white;
   border-radius: 50%;
+
 }
 
 .color {
   background-color: var(--lightGreen);
   color: var(--dark);
-  margin-bottom:20px;
+  margin-bottom: 20px;
   /* color:red !important; */
-/* color:red; */
+  /* color:red; */
 }
 .step-nav {
+  flex:0.5;
   /* margin-top: */
   /* width: 95%; */
   /* border:1px solid red; */
-  display:flex;
-
+  display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  margin-bottom:25px;
-  
+  justify-content: flex-end;
+  /* margin: 30px 0; */
+  /* margin-bottom: 25px; */
 }
 
 .leftSide {
   /* flex:1; */
 }
 .rightSide {
-  position:relative;
-  /* max-width: 365px; */
+  position: relative;
+  /* border: 1px solid red; */
+  /* width: 300px; */
+  max-width: 365px;
   /* flex:1; */
   /* min-height: 500px; */
-  height: 100%;
+  /* height: 100%; */
+  /* height: 100px; */
+  /* width: 100px; */
 }
 
 .rightSide img {
   object-fit: cover;
-  border:1px solid grey;
+  border: 1px solid grey;
   border-radius: 16px;
   /* width: 100%; */
   /* height: 100%; */
 }
-.class-append{
-  border:1px solid red;
+.class-append {
+  border: 1px solid red;
 }
 
 .inputImage {
-  position : absolute;
-  top:100px;
-  right:150px;
+  position: absolute;
+  top: 100px;
+  right: 150px;
   /* left:0; */
 }
 
@@ -797,12 +804,14 @@ input {
   width: 80px;
 }
 section {
-  display:flex;
+  flex:3;
+  display: flex;
   flex-direction: row;
-  width: 95%;
-  gap:2rem;
-/* align-items: center; */
-  justify-content: space-evenly;
+  /* width: fit-content; */
+  gap: 4rem;
+  /* align-items: center; */
+  justify-content: center;
+
 }
 
 .mapBox {
@@ -810,25 +819,21 @@ section {
   height: 350px;
 }
 
-
 img {
   /* width: 300px; */
   /* height: 300px; */
-  object-fit: cover
+  object-fit: cover;
 }
-
-
 
 .success {
   height: 100%;
   width: 100%;
   /* border: 1px solid red; */
-  display:flex;
+  display: flex;
   flex-direction: column;
-  gap:20px;
+  gap: 20px;
   justify-content: center;
   align-items: center;
-  
 }
 
 /* .success img {
@@ -836,85 +841,81 @@ width: 120px;
 height: 120px;
 } */
 
-@media only screen and (max-width:800px) {
-section {
-  flex-direction: column;
+@media only screen and (max-width: 800px) {
+  section {
+    flex-direction: column;
+  }
 
+  .attributeCrown,
+  .attributeHeight,
+  .attributeStep {
+    display: none;
+  }
+  .attr {
+    display: none;
+  }
+  .surveySteps {
+    margin: 10px 3px;
+    gap: 6px;
+  }
+
+  img {
+    /* width: 100%; */
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .mapBox {
+    /* width: 100%; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* margin-left: 100px; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* margin:auto; */
+    width: 100%;
+    height: auto;
+  }
 }
-
-
-.attributeCrown, .attributeHeight, .attributeStep {
-  display:none
-}
-.attr {
-  display:none;
-}
-.surveySteps {
-  margin: 10px 3px;
- gap:6px;
-}
-
-img {
-  /* width: 100%; */
-   width: 180px;
-  height: 180px;
-  object-fit: cover
-}
-
-
-.mapBox {
-  /* width: 100%; */
-  /* margin-left: auto; */
-  /* margin-right: auto; */
-  /* margin-left: 100px; */
-  /* margin-left: auto; */
-  /* margin-right: auto; */
-  /* margin:auto; */
-  width: 100%;
-  height: auto;
-}
-
-}
-
 </style>
 
 <style>
-
 [rating] .formkit-outer {
-  margin-top:0;
+  margin-top: 0;
 }
-.attributeCrown{
-  position:absolute;
-  top:165px;
-  color:rgb(213, 18, 18);
-  font-size:22px;
+.attributeCrown {
+  position: absolute;
+  top: 165px;
+  color: rgb(213, 18, 18);
+  font-size: 22px;
   width: 80px;
-  left:235px;
+  left: 235px;
 }
 
 .attributeHeight {
-  position:absolute;
-  top:185px;
+  position: absolute;
+  top: 185px;
   transform: rotate(-90deg);
-  color:rgb(213, 18, 18);
-  font-size:22px;
+  color: rgb(213, 18, 18);
+  font-size: 22px;
   width: 80px;
-  left:15px;
+  left: 15px;
 }
 
 .attributeStep {
-  position:absolute;
-  top:422px;
-  color:rgb(213, 18, 18);
-  font-size:22px;
+  position: absolute;
+  top: 422px;
+  color: rgb(213, 18, 18);
+  font-size: 22px;
   width: 80px;
-  left:345px;
+  left: 345px;
 }
 
 .my-input-class {
-  color:red;
-  background-color:rgba(250, 235, 215, 0.397);
-  border:1px solid red;
+  color: red;
+  background-color: rgba(250, 235, 215, 0.397);
+  border: 1px solid red;
 }
 .formkit-inner {
   /* p/: 10px; */
@@ -931,11 +932,10 @@ img {
   /* border:2px solid orange; */
   /* max-width: unset !important; */
   /* : 10px; */
-  
 }
 
 .formkit-outer {
-  padding:5px;
+  padding: 5px;
   /* border:2px solid green; */
   /* display:flex;
   flex-direction: column;
@@ -943,7 +943,6 @@ img {
   overflow:hidden;
   align-items: center; */
   /* display:flex */
-
 }
 
 .formkit-option {
@@ -957,12 +956,8 @@ img {
   margin-right: 10px;
 }
 
-
 .formkit-suffix-icon:hover {
   cursor: pointer;
   color: var(--fk-color-primary);
 }
-
-
-
 </style>

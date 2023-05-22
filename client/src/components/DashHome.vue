@@ -141,17 +141,19 @@ import { ref, computed,onMounted } from 'vue';
 const isDataLoading = ref(false);
 const clickedRow = ref(null)
 const itemsSelected = ref([])
-
+import { useStore } from "@/stores/state.js";
+const store = useStore();
 //Mounted
 
 onMounted(async () => {
   console.log('Dash Home Mounted')
-  
+
+  let userRole = store.getUserInfo[0].role
   const url = "https://api.hktreewatch.org"
 const resp = await fetch(url+'/getSurveyRecordByUserId', {
         method: 'POST',
         // body: JSON.stringify(fields)
-        body: JSON.stringify({userId: 1})
+        body: JSON.stringify({userId: userRole})
       })
 
 })
