@@ -66,21 +66,21 @@
             }
         },
         mounted() {
-            // console.log('mounted!')
             // /getTsv
-            const url = "http://api.hktreewatch.org"
-            // const resp = await fetch(url+'/getTsv', {
-            //     method: 'POST',
-            //     body :  JSON.stringify({
-            //         userId: 2,
-            //         roleId: 4
-            //     }),
-            //     headers : {
-            //         "Content-type": "application/json;charset=UTF-8",
-            //     }
-            // })
+            const data = new URLSearchParams();
+            data.append('userId', 4);
+            data.append('roleId', 4);
 
-            // console.log(resp)
+            const url = "https://api.hktreewatch.org"
+            const resp =  fetch(url+'/getTsv', { 
+                method: 'POST',
+                body :  data
+            })
+
+            console.log(resp)
+            if ( resp.data && resp.data.length > 0 ) {
+                
+            }
         },
         methods: {
             handleFileUpload(ev) {
