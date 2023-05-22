@@ -136,19 +136,14 @@ async function register() {
         data.append('phoneNumber', phoneNumber.value);
         data.append('role', 4);
 
-        // var _body = JSON.stringify(btoa(role.value+":"+fullname.value+":"+email.value+":"+password.value+":"+phoneNumber.value+":"+username.value))
         const resp = await fetch(url+'/createUser', {
             method: 'POST',
-            body :  data,
-            headers : {
-                // "Content-type": "application/json;charset=UTF-8",
-                // "Authorization" : btoa(role.value+":"+fullname.value+":"+email.value+":"+password.value+":"+phoneNumber.value+":"+username.value)
-            }
+            body :  data
         })
 
-        console.log(resp)
+
         const token = await resp.json()
-        console.log(token)
+
         localStorage.setItem('user_info',JSON.stringify(token));
         
         setTimeout(() => {
