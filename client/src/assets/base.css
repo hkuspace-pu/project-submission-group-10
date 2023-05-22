@@ -4,6 +4,7 @@
   --dark: #3E3D56;
   --darkGreen : #87986A;
   --dg2 : #034F32;
+  --blue : #6762f0;
   --lightGreen : #B8C8AC;
   --brightGreen : #D0E1AC;
   --brown : #B8B4B0;
@@ -205,6 +206,6 @@ input {
 }
 .link:hover {
   /* border-bottom: 3px solid var(--myLinkBlue); */
-  box-shadow: 0px 2px var(--myLightIconColor);
+  /* box-shadow: 0px 2px var(--myLightIconColor); */
 }
 
