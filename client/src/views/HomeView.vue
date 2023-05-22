@@ -63,7 +63,11 @@ const store = useStore()
   
 
   </main>
+
+
+
   </div>
+  
 </template>
 
 
