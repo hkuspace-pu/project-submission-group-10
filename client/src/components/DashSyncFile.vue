@@ -41,7 +41,7 @@
 
         </div>  
 
-        <p>Please choose and upload your tsv file</p>
+        <p>Please choose and upload your tsv file. <span>Please follow the <a href="/src/assets/tsv/template.tsv">template</a></span></p>
         <div class="file-upload__area">
             <input type="file" name="" id="" @change="handleFileUpload" />
         </div>
@@ -161,8 +161,8 @@
                 const blob = new Blob([tsvContent], { type: 'text/tab-separated-values' })
                 saveAs(blob, 'output.tsv')
             },
-            getTsvFile() {
-                
+            downloadTemplate() {
+
             }
         },
     };
