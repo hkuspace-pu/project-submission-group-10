@@ -23,7 +23,7 @@
             <fa class="icon" size="2x" icon="tree" :class="$route.name=='trees' && 'focused'"/>
         </router-link>
 
-        <router-link v-if="role=='Admin'||role=='Moderator'" tag="div" class="row" :to="{name:'syncfile'}" >
+        <router-link tag="div" class="row" :to="{name:'syncfile'}" >
             <fa class="icon" size="2x" icon="file-arrow-up" :class="$route.name=='syncfile' && 'focused'"/>
         </router-link>
 
