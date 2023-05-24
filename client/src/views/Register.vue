@@ -41,6 +41,9 @@
 
                         <label for="password">Confirm Password</label> 
                         <input required :class="{invalid: cpassword_invalid}" v-model="cpassword" type="password" id="cpassword" name="cpassword"/>
+                        <div class="cpassword_invalid" v-show="cpassword_invalid||password_invalid">
+                            Please set a password with more than 8 characters. It is recommended that you use a mix of letters, numbers and symbols.
+                        </div>
 
                         <button type="submit" class="btn">
                             <transition name="spinner" mode="out-in">
@@ -89,7 +92,6 @@ async function register() {
     try {
         registerError.value = false
 
-        console.log( 're' )
         if ( username.value == '' ) {
             return
         }
@@ -143,12 +145,17 @@ async function register() {
 
 
         const token = await resp.json()
+        if ( token.errorNo == 401 ) {
+            this.registerError = true
+            return
+        }
 
         localStorage.setItem('user_info',JSON.stringify(token));
         
         setTimeout(() => {
             isLoading.value = false
-            router.push({name: 'dashboard'})
+            // router.push({name: 'dashboard'})
+            router.push({name: 'login'})
         }, 1200);
 
     }
@@ -166,6 +173,9 @@ async function register() {
 </script>
 
 <style scoped>
+input {
+        padding: 5px 10px;
+}
 .registerWrapper {
     /* min-height: 50vh; */
     display:flex;
@@ -195,7 +205,7 @@ width: 650px;
   box-shadow: 0 0 60px -20px rgb(0 0 0 / 35%);
   display:flex;
   flex-direction: row;
-  margin: 2rem;
+  margin: 1rem 2rem;
   overflow:hidden;
 }
 
@@ -215,7 +225,7 @@ align-items: center;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding: 5px 1rem;
     flex:1;
     /* border:1px solid red; */
     /* width: 500px; */
@@ -249,12 +259,22 @@ form {
 
 .treeImage {
     color: var(--dg2);
-    margin: 2rem 0;
+    margin: 5px 0;
     text-align: center;
    
 }
 .tree {
 width: 220px;
+}
+
+.invalid {
+    border-color: red !important;
+}
+
+.cpassword_invalid {
+    color: red;
+    font-size: 1px;
+    line-height: 10px;
 }
 
 
@@ -265,10 +285,6 @@ width: 220px;
 
 .rightSide {
 
-}
-
-.invalid {
-    border-color: red !important;
 }
 
 
