@@ -24,10 +24,23 @@
                 <form @submit.prevent="register">
                      <div class="register">
                         <h3 class="dark">Register</h3>
-                        <label for="username">Email:</label> 
-                        <input required v-model="email" type="text" id="username" name="username"/>
+                        <label for="username">Username</label> 
+                        <input required :class="{invalid: username_invalid}" v-model="username" type="text" id="username" name="username"/>
+
+                        <label for="fullname">Fullname</label> 
+                        <input required :class="{invalid: fullname_invalid}" v-model="fullname" type="text" id="fullname" name="fullname"/>
+
+                        <label for="email">Email:</label> 
+                        <input required :class="{invalid: email_invalid}" v-model="email" type="email" id="email" name="email"/>
+
+                        <label for="password">Phone number</label> 
+                        <input required :class="{invalid: phoneNumber_invalid}" v-model="phoneNumber" type="number" id="phoneNumber" name="phoneNumber"/>
+
                         <label for="password">Password</label> 
-                        <input required v-model="password" type="password" id="password" name="password"/>
+                        <input required :class="{invalid: password_invalid}" v-model="password" type="password" id="password" name="password"/>
+
+                        <label for="password">Confirm Password</label> 
+                        <input required :class="{invalid: cpassword_invalid}" v-model="cpassword" type="password" id="cpassword" name="cpassword"/>
 
                         <button type="submit" class="btn">
                             <transition name="spinner" mode="out-in">
@@ -55,29 +68,82 @@ import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const email = ref(null);
 const password = ref(null);
+const cpassword = ref(null);
+const token = ref(null);
+const phoneNumber = ref(null);
+const fullname = ref(null);
+const username = ref(null);
+const role = ref(4);
 const isLoading = ref(false);
 const registerError = ref(false);
+
+const email_invalid = ref(false);
+const password_invalid = ref(false);
+const cpassword_invalid = ref(false);
+const phoneNumber_invalid = ref(false);
+const fullname_invalid = ref(false);
+const username_invalid = ref(false);
+
+const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/ig;
 async function register() {
     try {
-        isLoading.value = true
         registerError.value = false
 
+        console.log( 're' )
+        if ( username.value == '' ) {
+            return
+        }
+
+        if ( email.value == '' ) {
+            return
+        }
+        password_invalid.value = false
+        var pTest = regex.test(password.value)
+        if ( password.value == '' || pTest == false ) {
+            password_invalid.value = true
+            return
+        }
+
+        if ( phoneNumber.value == '' ) {
+            return
+        }
+
+        if ( fullname.value == '' ) {
+            return
+        }
+        cpassword_invalid.value = false
+        // var cpTest = regex.test(cpassword.value)
+        // if ( cpassword.value == '' || cpTest == false ) {
+        //     cpassword_invalid.value = true
+        //     return
+        // }
+
+        if ( cpassword.value != password.value ) {
+            cpassword_invalid.value = true
+            return
+        }
+
+        isLoading.value = true
 
         // API WAY
         const url = "https://api.hktreewatch.org"
 
-        const resp = await fetch(url+'/register', {
+        const data = new URLSearchParams();
+        data.append('username', username.value);
+        data.append('fullname', fullname.value);
+        data.append('password', password.value);
+        data.append('email', email.value);
+        data.append('phoneNumber', phoneNumber.value);
+        data.append('role', 4);
+
+        const resp = await fetch(url+'/createUser', {
             method: 'POST',
-            body :  JSON.stringify(btoa(email.value+":"+password.value)),
-            headers : {
-            // "Content-type": "application/json;charset=UTF-8",
-            "Authorization" : btoa(email.value+":"+password.value)
-        }
+            body :  data
         })
 
-        console.log(resp)
+
         const token = await resp.json()
-        console.log(token)
+
         localStorage.setItem('user_info',JSON.stringify(token));
         
         setTimeout(() => {
@@ -122,7 +188,7 @@ async function register() {
 .registerBox {
     max-width: 90%;
  max-height: 600px;
-height: 400px;
+height: 600px;
 width: 650px;
   border-radius: 24px;
  background-color: var(--backgroundColor);
@@ -199,6 +265,10 @@ width: 220px;
 
 .rightSide {
 
+}
+
+.invalid {
+    border-color: red !important;
 }
 
 

@@ -43,6 +43,9 @@
 
 
         </div>  
+        <div class="">
+            <button @click="exportFile()">Export data</button>
+        </div>
     </div>
 
   
@@ -50,6 +53,7 @@
 
 <script>
     import * as d3 from 'd3'
+    import { saveAs } from 'file-saver'
 
     export default {
         name: "FileUpload",
@@ -61,7 +65,48 @@
                 items: []
             }
         },
+        async mounted() {
+            // /getTsv
+            const data = new URLSearchParams();
+            data.append('userId', 4);
+            data.append('roleId', 4);
+
+            const url = "https://api.hktreewatch.org"
+            const resp = await fetch(url+'/getTsv', { 
+                method: 'POST',
+                body :  data
+            })
+
+            var _res = await resp.json()
+            if ( _res.data && _res.data.length > 0 ) {
+                var _data = _res.data[0].tsvString //\n
+                
+                var d3Res = d3.tsvParse(_data)
+                this.tsvData = d3Res
+                this.tsvTitle = d3Res.columns
+
+                var _headers = []
+                var _items = []
+                this.tsvTitle.forEach(_tt => {
+                    _headers.push({
+                        text: _tt.toUpperCase(),
+                        value: _tt,
+                        sortable: true
+                    })
+                });
+                this.tsvData.forEach(_td => {
+                    _items.push(_td)
+                });
+
+                this.headers = _headers
+                this.items = _items
+            }
+        },
         methods: {
+            replaceAll( st, rep, repWith ) {
+                const result = st.split(rep).join(repWith)
+                return result;
+            },
             handleFileUpload(ev) {
                 const file = ev.target.files[0]
                 if ( file ) {
@@ -76,23 +121,45 @@
 
                         var _headers = []
                         var _items = []
-                        this.tsvTitle.forEach(_tt => {
-                            _headers.push({
-                                text: _tt.toUpperCase(),
-                                value: _tt,
-                                sortable: true
-                            })
-                        });
+                        // this.tsvTitle.forEach(_tt => {
+                        //     _headers.push({
+                        //         text: _tt.toUpperCase(),
+                        //         value: _tt,
+                        //         sortable: true
+                        //     })
+                        // });
                         this.tsvData.forEach(_td => {
                             _items.push(_td)
                         });
 
-                        this.headers = _headers
+                        // this.headers = _headers
                         this.items = _items
 
                     }
                     reader.readAsText(file)
                 }
+            },
+            exportFile(ev) {
+                let tsvContent = "";
+                var _tsv = [
+                    { id: 1, name: 'xx' },
+                    { id: 2, name: 'yy' }
+                ]
+
+
+                _tsv.forEach(function(rowArray) {
+                    // let keys = Object.keys(rowArray).join("\t")
+                    // tsvKey = keys
+                    let row = Object.values(rowArray).join("\t");
+                    tsvContent += row + "\n";
+                });
+
+                let tsvKey = Object.keys( this.tsvTitle).join("\t")
+
+                tsvContent = tsvKey + "\n" + tsvContent
+                // Save the CSV string as a TSV file
+                const blob = new Blob([tsvContent], { type: 'text/tab-separated-values' })
+                saveAs(blob, 'output.tsv')
             },
             getTsvFile() {
                 

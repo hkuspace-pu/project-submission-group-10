@@ -50,12 +50,15 @@
 
 <script>
 import { ref,computed } from 'vue';
+import { useStore } from "@/stores/state.js";
+const store = useStore();
 // localStorage.getItem('key');
 export default {
     data() {
         var user_info = JSON.parse(localStorage.getItem('user_info'))
-        console.log( 'user_info', user_info )
-        var role = user_info.role
+        var _uInfo = user_info.data[0]
+        // console.log( 'user_info', user_info )
+        var role = _uInfo.role == 4 ? 'Admin' : 'Client'
         return {
             role
         }
