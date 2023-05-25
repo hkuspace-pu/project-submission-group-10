@@ -146,8 +146,6 @@ const store = useStore();
 //Mounted
 
 onMounted(async () => {
-  console.log('Dash Home Mounted')
-  console.log( 'userId', store.getUserInfo )
   let userId = store.getUserInfo[0].userId
   const url = "https://api.hktreewatch.org"
   const formData  = new FormData();

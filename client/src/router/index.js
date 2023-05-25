@@ -52,6 +52,13 @@ const router = createRouter({
     },
 
     {
+      path : '/testsyncfile',
+      name : 'testsyncfile',
+      component: DashSyncFile
+
+    },
+
+    {
       path: '/dash',
       // name: 'dashboard',
       component : () => import('../views/Dashboard.vue'),
