@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,6 +26,7 @@ import com.springboot.enums.ApiReturnStatusCode;
 import com.springboot.responseFormat.ReturnTransferFormat;
 import com.springboot.service.GetUserLoginService;
 import com.springboot.service.InsertActivityLogService;
+import com.springboot.utils.TokenKey;
 
 /**
  * @author leo
@@ -74,6 +76,8 @@ public class UserLoginController {
 			String[] decodeList = decodedString.split(":");
 			String username = decodeList[0];
 			String password = decodeList[1];
+			//sha256 hashing the password
+			password = new SimpleHash("SHA-256", password, TokenKey.SALT, 1024).toString();	
 			List<HashMap<String, Object>> returnList = new ArrayList<>();
 			List<UserInfoDO> userInfoList = new ArrayList<UserInfoDO>();
 			
@@ -101,6 +105,8 @@ public class UserLoginController {
 					map1.put("email", userInfoList.get(0).getEmail());
 					map1.put("point", userInfoList.get(0).getPoint());
 					map1.put("userId", userInfoList.get(0).getId());
+					map1.put("createTime", userInfoList.get(0).getCreateTime());
+					map1.put("fullName", userInfoList.get(0).getFullName());
 					returnList.add(map1);
 					
 					ActivityLogDO activityLogDO = new ActivityLogDO();
@@ -155,10 +161,13 @@ public class UserLoginController {
 			int role) {
 		
 		try {
+			
+			String hashPassword = new SimpleHash("SHA-256", password, TokenKey.SALT, 1024).toString();
+			
 			UserInfoDO userInfoDO = new UserInfoDO();
 			userInfoDO.setUserName(username);
 			userInfoDO.setFullName(fullname);
-			userInfoDO.setPassword(password);
+			userInfoDO.setPassword(hashPassword);
 			userInfoDO.setEmail(email);
 			userInfoDO.setPhoneNumber(phoneNumber);
 			userInfoDO.setRole(role);

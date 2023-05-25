@@ -7,4 +7,6 @@ public class TokenKey {
 
 	public static final String TOKEN_KEY = "natureWatch";
 	
+	public static final String SALT = "natureWatch";
+	
 }
