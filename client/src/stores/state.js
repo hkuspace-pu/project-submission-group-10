@@ -18,6 +18,7 @@ export const useStore = defineStore({
     //Get Master Tree List Data From API
     async getMasterTreeList() {
       const resp = await fetch(this.baseURL + 'getCommonAndScientificNameList', {
+        //  const resp = await fetch(this.baseURL + 'getAllMasterTreeTableList', {
       method: 'GET'
       })
       const { data }= await resp.json()
