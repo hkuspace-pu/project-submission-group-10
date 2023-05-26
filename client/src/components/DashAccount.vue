@@ -6,6 +6,8 @@
     </div>
     <div class="account_detail">
       <div><label for="name">Name: </label>{{ full_name }}</div>
+      <div><label for="date">Email: </label>{{ email }}</div>
+      <div><label for="date">Contnet: </label>{{ phoneNumber }}</div>
       <div><label for="points">Points: </label>{{ points }}</div>
       <div><label for="date">Joined: </label>{{ join_date }}</div>
       <div><label for="location">
@@ -23,13 +25,21 @@ import { ref,computed } from 'vue';
 export default {
     data() {
         var user_info = JSON.parse(localStorage.getItem('user_info'))
-        console.log( 'user_info', user_info )
-        var full_name = user_info.full_name
-        var points = user_info.points
-        var join_date = user_info.join_date
-        var location = user_info.location
+        var _uInfo = user_info.data[0]
+        var email  = _uInfo.email
+        var phoneNumber  = _uInfo.phoneNumber
+        var role  = _uInfo.role
+        var full_name = _uInfo.userName
+        var points = _uInfo.point
+        var createTime = new Date(_uInfo.createTime)
+        var join_date = createTime.getDate()+
+           "/"+(createTime.getMonth()+1)+
+           "/"+createTime.getFullYear()+
+           " "+createTime.getHours()+
+           ":"+createTime.getMinutes()+
+           ":"+createTime.getSeconds()
         return {
-            full_name, points, join_date, location
+            full_name, points, join_date, email, phoneNumber
         }
     },
 };
