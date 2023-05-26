@@ -50,7 +50,8 @@
 
 
         </div>
-<p v-show="loginError" style="color:red">Please check your login credentials.</p>
+        <p v-show="loginFail" style="color:red">Email or Password is/are wrong</p>
+        <p v-show="loginError" style="color:red">Please check your login credentials.</p>
 
     </div>
 
@@ -69,11 +70,12 @@ const email = ref(null);
 const password = ref(null);
 const isLoading = ref(false);
 const loginError = ref(false);
+const loginFail = ref(false);
 async function login() {
     try {
     isLoading.value = true
-     loginError.value = false
-
+    loginError.value = false
+    loginFail.value = false
 
     // API WAY
     const url = "https://api.hktreewatch.org"
@@ -100,16 +102,23 @@ async function login() {
     //         method: 'GET'
     //     })
 try {
-    console.log(resp)
+    // console.log(resp)
+    isLoading.value = false
     const token = await resp.json()
-     console.log(token)
+    if ( token.errorNo == 401 ) {
+        loginFail.value = true
+        return
+    }
+
     localStorage.setItem('user_info',JSON.stringify(token));
     store.userInfo = token
     router.push({name: 'dashboard'})
-    console.log('USERID' , store.getUserInfo[0].userId)
+    // console.log('USERID' , store.getUserInfo[0].userId)
    
 
 } catch(e) {
+    isLoading.value = false
+    loginError.value = true
   console.log('LOGGIN FAILED')
 }    
     

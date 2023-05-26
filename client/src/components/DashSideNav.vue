@@ -23,7 +23,7 @@
             <fa class="icon" size="2x" icon="tree" :class="$route.name=='trees' && 'focused'"/>
         </router-link>
 
-        <router-link v-if="role=='Admin'||role=='Moderator'" tag="div" class="row" :to="{name:'syncfile'}" >
+        <router-link tag="div" class="row" :to="{name:'syncfile'}" >
             <fa class="icon" size="2x" icon="file-arrow-up" :class="$route.name=='syncfile' && 'focused'"/>
         </router-link>
 
@@ -55,10 +55,12 @@ const store = useStore();
 // localStorage.getItem('key');
 export default {
     data() {
+        var role = 'Client'
         var user_info = JSON.parse(localStorage.getItem('user_info'))
-        var _uInfo = user_info.data[0]
-        // console.log( 'user_info', user_info )
-        var role = _uInfo.role == 4 ? 'Admin' : 'Client'
+        if ( user_info && user_info.data && user_info.data.length > 0 ) {
+            var _uInfo = user_info.data[0]
+            if ( _uInfo.role == 4 ) role = 'Admin'
+        }   
         return {
             role
         }

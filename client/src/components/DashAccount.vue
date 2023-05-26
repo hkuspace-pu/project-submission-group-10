@@ -15,15 +15,25 @@
       </label> {{ location }}</div>
     </div>
 
+    <div>
+      <button class="btn_loggout" @click="loggout()">
+        Loggout
+      </button>
+    </div>
+
   </div>
 
 </template>
 
 <script>
 import { ref,computed } from 'vue';
+import { useStore } from "@/stores/state.js";
 // localStorage.getItem('key');
 export default {
     data() {
+        const store = useStore();
+        console.log( store.getUserInfo )
+
         var user_info = JSON.parse(localStorage.getItem('user_info'))
         var _uInfo = user_info.data[0]
         var email  = _uInfo.email
@@ -42,6 +52,12 @@ export default {
             full_name, points, join_date, email, phoneNumber
         }
     },
+    methods: {
+      loggout() {
+        localStorage.removeItem("user_info");
+        window.location.href = '/login'
+      }
+    }
 };
 
 </script>
@@ -68,6 +84,16 @@ export default {
 
 .account_detail {
   width: 48%
+}
+
+.btn_loggout {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px;
+    margin: 10px;
+    background-color: #2E7D32;
+    color: white;
+    font-size: 15px;
 }
 
 </style>

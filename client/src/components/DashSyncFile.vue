@@ -1,9 +1,6 @@
 <template>
     <div class="file-upload">
-        <div class="file-upload__area">
-            <input type="file" name="" id="" @change="handleFileUpload" />
-        </div>
-
+        <p>Here is the preview of the tsv data</p>
          <div :class="{ hidden: items.length == 0 }">
             <!-- <table>
                 <tr>
@@ -43,8 +40,14 @@
 
 
         </div>  
-        <div class="">
-            <button @click="exportFile()">Export data</button>
+
+        <p>Please choose and upload your tsv file. <span>Please follow the <a href="/src/assets/tsv/template.tsv">template</a></span></p>
+        <div class="file-upload__area">
+            <input type="file" name="" id="" @change="handleFileUpload" />
+        </div>
+
+        <div >
+            <button class="btn_export" @click="exportFile()">Export data</button>
         </div>
     </div>
 
@@ -133,7 +136,7 @@
                         });
 
                         // this.headers = _headers
-                        this.items = _items
+                        this.items = this.items.concat(_items);
 
                     }
                     reader.readAsText(file)
@@ -141,28 +144,25 @@
             },
             exportFile(ev) {
                 let tsvContent = "";
-                var _tsv = [
-                    { id: 1, name: 'xx' },
-                    { id: 2, name: 'yy' }
-                ]
 
+                let tsvKey = ''
+                this.headers.forEach(head => {
+                    tsvKey += head['value'] + "\t";
+                });
 
-                _tsv.forEach(function(rowArray) {
-                    // let keys = Object.keys(rowArray).join("\t")
-                    // tsvKey = keys
-                    let row = Object.values(rowArray).join("\t");
+                this.items.forEach(it => {
+                    let row = Object.values(it).join("\t");
                     tsvContent += row + "\n";
                 });
 
-                let tsvKey = Object.keys( this.tsvTitle).join("\t")
-
                 tsvContent = tsvKey + "\n" + tsvContent
+
                 // Save the CSV string as a TSV file
                 const blob = new Blob([tsvContent], { type: 'text/tab-separated-values' })
                 saveAs(blob, 'output.tsv')
             },
-            getTsvFile() {
-                
+            downloadTemplate() {
+
             }
         },
     };
@@ -184,11 +184,25 @@
         align-items: center;
         justify-content: center;
         border: 2px dashed #ccc;
-        margin-top: 40px;
-        margin-bottom: 40px;
+        /* margin-top: 40px; */
+        margin-bottom: 20px;
     }
 
     .hidden {
         display: none;
+    }
+
+    .btn_export {
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px;
+        margin: 10px 10px 10px 0;
+        background-color: #2E7D32;
+        color: white;
+        font-size: 15px;
+    }
+
+    p {
+        margin-top: 20px;
     }
 </style>
