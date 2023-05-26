@@ -1,7 +1,10 @@
 package com.springboot;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.springboot.utils.TokenKey;
 
 /**
  * Hk comp 2003 HongKongNatureWatch group pro

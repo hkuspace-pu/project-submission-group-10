@@ -3,8 +3,8 @@
   <!-- Using easy data table to display data https://www.npmjs.com/package/vue3-easy-data-table -->
   <EasyDataTable :headers="headers" :items="data" alternating show-index table-class-name="customize-table"
     v-model:items-selected="itemsSelected" :loading=isDataLoading @expand-row="showRow">
-    <template #item-image="{ thumbnail, name }">
-      <img class="thumbnail" :src="thumbnail" />
+    <template #item-image="{ uploadImg, name }">
+      <img class="thumbnail" :src="uploadImg" />
       {{ name }}
     </template>
 
@@ -31,9 +31,9 @@
     <template #expand="data">
       <div class="dataContainer">
         <div class="topBar">
-          <h4 class="dark">{{ data.common_name }} ~ <em>{{ data.advanced.scientific_name }}</em></h4>
+          <h4 class="dark">{{ data.commonName }} ~ <em>{{ data.scientificName}}</em></h4>
           <div class="tags">
-            <div v-for="pill in data.advanced.tags" :key="pill" class="pill">
+            <div v-for="pill in data.treeType" :key="pill" class="pill">
               {{ pill }}
             </div>
        </div>
@@ -46,7 +46,7 @@
                 <img class="mainImage" :src="selectedImage" />
               </div>
               <div class="thumbnail_group">
-                <img class="thumbnail" v-for="media in data.advanced.media" :src="media" :key="media" />
+                <img class="thumbnail" v-for="media in data.uploadImg" :src="media" :key="media" />
               </div>
             </div>
           </div>
@@ -62,23 +62,24 @@
               <tbody>
                 <tr>
                   <td>Common Name</td>
-                  <td>{{ data.common_name }}</td>
+                  <td>{{ data.commonName }}</td>
                 </tr>
                 <tr>
                   <td>Scientific Name</td>
-                  <td>{{ data.advanced.scientific_name }}</td>
+                  <td>{{ data.scientificName }}</td>
                 </tr>
                 <tr>
                   <td>HK Tree Watch ID</td>
-                  <td>{{ data.advanced.hktwid }}</td>
+                      <td>001</td>
+                  <!-- <td>{{ data.advanced.hktwid }}</td> -->
                 </tr>
                 <tr>
                   <td>TCMP ID</td>
-                  <td>{{ data.advanced.TCMP_ID }}</td>
+                  <td>{{ data.tcmpId }}</td>
                 </tr>
                 <tr>
                   <td>Location</td>
-                  <td>{{ data.advanced.location }}</td>
+                  <td>{{ data.location }}</td>
                 </tr>
                 <tr>
                   <td>District</td>
@@ -86,15 +87,15 @@
                 </tr>
                 <tr>
                   <td>Responsible Dept.</td>
-                  <td>{{ data.advanced.responsible_dept }}</td>
+                  <td>{{ data.responsibleDept }}</td>
                 </tr>
                 <tr>
                   <td>Native / Exotic</td>
-                  <td>{{ data.advanced.native_exotic }}</td>
+                  <td>{{ data.nativeExotic }}</td>
                 </tr>
                 <tr>
                   <td>Height</td>
-                  <td>{{ data.advanced.height }}
+                  <td>{{ data.height }}
                   </td>
                 </tr>
                 <tr>
@@ -108,20 +109,20 @@
                 </tr>
                 <tr>
                   <td>Crown spread</td>
-                  <td>{{ data.advanced.crown_spread }}</td>
+                  <td>{{ data.crownSpread }}</td>
                 </tr>
                 <tr>
                   <td>Latitude</td>
-                  <td>{{ data.advanced.x_cord }}</td>
+                  <td>{{ data.latitude }}</td>
                 </tr>
                 <tr>
                   <td>Longitude</td>
-                  <td>{{ data.advanced.y_cord }}</td>
+                  <td>{{ data.longtitude }}</td>
                 </tr>
                 <tr>
                   <td>Health tags</td>
                   <td>
-                    <div class="pill" v-for="tag in data.advanced.condition.tags">{{ tag }}</div>
+                    <div class="pill" v-for="tag in data.healthTag">{{ tag }}</div>
                   </td>
                 </tr>
               </tbody>
@@ -141,160 +142,198 @@ import { ref, computed,onMounted } from 'vue';
 const isDataLoading = ref(false);
 const clickedRow = ref(null)
 const itemsSelected = ref([])
+let data = ref([])
+import { useRouter, useRoute } from 'vue-router'
+const router = useRouter()
 import { useStore } from "@/stores/state.js";
 const store = useStore();
 //Mounted
 
 onMounted(async () => {
+
+  console.log('Dash Home Mounted')
+  if (!store.getUserInfo) {
+    router.push({name: 'login'})
+  }
+  console.log( 'userId', store.getUserInfo[0].value )
   let userId = store.getUserInfo[0].userId
   const url = "https://api.hktreewatch.org"
   const formData  = new FormData();
- 
-    formData.append('userId', userId);
+  let path
+  
 
-const resp = await fetch(url+'/getSurveyRecordByUserId', {
+if (store.getUserInfo[0].role === 4) {
+  console.log("USER IS ADMIN")
+  formData.append('roleId', store.getUserInfo[0].role);
+path = '/getAllSurveyRecord'
+} else {
+  formData.append('userId', userId);
+ path = '/getSurveyRecordByUserId' 
+}
+
+try {
+
+ isDataLoading.value = true;
+const resp = await fetch(url+path, {
         method: 'POST',
         body: formData
       })
+    const jsonData = await resp.json();
+    console.log("data loaded")
+      data = jsonData.data
+      console.log(data)
+}catch(e){
+  console.log('ERROR LOADING DATA ', e)
+}finally{
+     isDataLoading.value = false
+}
 
 })
+
+
+
 // Methods
 const showRow = (index) => {
-  clickedRow.value = data[index].advanced
+  clickedRow.value = data[index]
 };
 
 // Computed Cached 
 const selectedImage = computed(() => {
-  return clickedRow.value.media[0]
+  // console.log(clickedRow.value)
+  return clickedRow.value.uploadImg[0]
 })
 
+const changeDate = (() => {
+  return new Date(createTime).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
+})
 
 // Dummy Json Data
 const headers = [
   { text: "Image", value: "image" },
-  { text: "Common Name", value: "common_name" },
-  { text: "Chinese name", value: "chinese_name" },
+  { text: "Common Name", value: "commonName" },
+  { text: "Chinese name", value: "chineseName" },
   { text: "Health", value: "health", sortable: true },
 
   { text: "Height", value: "height", sortable: true },
   { text: "District", value: "district", sortable: true },
-  { text: "Created At", value: "creation_date", sortable: true },
+  { text: "Created At", value: "createTime", sortable: true },
   { text: "Status", value: "status", sortable: true },
 
 ];
 
-const data = [
-  {
-    "thumbnail": "https://source.unsplash.com/random/400x400/?tree,trees,flowers",
-    "common_name": "Bamboo Tree",
-    "chinese_name": "杧果",
-    // "tags" : "stone wall, dead",
-    "health": 3,
-    "height": 55,
-    "district": "Central",
-    "creation_date": "23/11/2019",
-    "status": "Approved",
 
-    advanced: {
-      hktwid: 22,
-      media: ['https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers,green', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers,green'],
-      family_name: 'asdasd',
-      scientific_name: 'Ficus microcarpa',
-      TCMP_ID: '3453453453453',
-      location: '34 conduit road',
-      tags: ['stone wall', 'dead'],
-      responsible_dept: 'Highways Dept',
-      native_exotic: 'native',
-      updated_at: '23/11/2910',
-      triage_color: 'yellow',
-      x_cord: 234234,
-      y_cord: 234234,
-      height: 4,
-      crown_spread: 4,
-      condition: {
-        overall: 'fair',
-        tags: ['fugs', 'dead wood']
-      },
-      mitigation_measures: ['sdfsf', 'sdfsfd'],
-      conservation_status: {
+// const data = [
+//   {
+//     "thumbnail": "https://source.unsplash.com/random/400x400/?tree,trees,flowers",
+//     "common_name": "Bamboo Tree",
+//     "chinese_name": "杧果",
+//     // "tags" : "stone wall, dead",
+//     "health": 3,
+//     "height": 55,
+//     "district": "Central",
+//     "creation_date": "23/11/2019",
+//     "status": "Approved",
 
-      }
-    }
-  }, {
-    "thumbnail": "https://source.unsplash.com/random/400x400/?trees,bark,flowers",
-    "common_name": "Mangoo Tree",
-    "chinese_name": "黃花夾竹桃, 酒杯花",
-    // "tags" : "stone wall, dead",
-    "health": 1,
-    "height": '20',
-    "district": "Central",
-    "creation_date": "23/11/2019",
-    "status": "Pending",
+//     advanced: {
+//       hktwid: 22,
+//       media: ['https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers,green', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers,green'],
+//       family_name: 'asdasd',
+//       scientific_name: 'Ficus microcarpa',
+//       TCMP_ID: '3453453453453',
+//       location: '34 conduit road',
+//       tags: ['stone wall', 'dead'],
+//       responsible_dept: 'Highways Dept',
+//       native_exotic: 'native',
+//       updated_at: '23/11/2910',
+//       triage_color: 'yellow',
+//       x_cord: 234234,
+//       y_cord: 234234,
+//       height: 4,
+//       crown_spread: 4,
+//       condition: {
+//         overall: 'fair',
+//         tags: ['fugs', 'dead wood']
+//       },
+//       mitigation_measures: ['sdfsf', 'sdfsfd'],
+//       conservation_status: {
 
-  advanced: {
-      hktwid: 1,
-      media: ['https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers'],
-      family_name: 'asdasd',
-      scientific_name: 'Ficus microcarpa',
-      TCMP_ID: '3453453453453',
-      location: '34 conduit road',
-      tags: ['stone wall', 'dead'],
-      responsible_dept: 'Highways Dept',
-      native_exotic: 'native',
-      updated_at: '23/11/2910',
-      triage_color: 'yellow',
-      x_cord: 234234,
-      y_cord: 234234,
-      height: '',
-      crown_spread: '',
-      condition: {
-        overall: 'fair',
-        tags: ['fugs', 'dead wood']
-      },
-      mitigation_measures: ['sdfsf', 'sdfsfd'],
-      conservation_status: {
+//       }
+//     }
+//   }, {
+//     "thumbnail": "https://source.unsplash.com/random/400x400/?trees,bark,flowers",
+//     "common_name": "Mangoo Tree",
+//     "chinese_name": "黃花夾竹桃, 酒杯花",
+//     // "tags" : "stone wall, dead",
+//     "health": 1,
+//     "height": '20',
+//     "district": "Central",
+//     "creation_date": "23/11/2019",
+//     "status": "Pending",
 
-      }
-    }
-  }, {
-    "thumbnail": "https://source.unsplash.com/random/400x400/?flowers, tree",
-    "common_name": "Bannna Tree",
-    "chinese_name": "黃花夾竹桃",
-    // "tags" : "stone wall, dead",
-    "health": 5,
-    "height": '15',
-    "district": "Central",
-    "creation_date": "23/11/2019",
-    "status": "Denied",
+//   advanced: {
+//       hktwid: 1,
+//       media: ['https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers'],
+//       family_name: 'asdasd',
+//       scientific_name: 'Ficus microcarpa',
+//       TCMP_ID: '3453453453453',
+//       location: '34 conduit road',
+//       tags: ['stone wall', 'dead'],
+//       responsible_dept: 'Highways Dept',
+//       native_exotic: 'native',
+//       updated_at: '23/11/2910',
+//       triage_color: 'yellow',
+//       x_cord: 234234,
+//       y_cord: 234234,
+//       height: '',
+//       crown_spread: '',
+//       condition: {
+//         overall: 'fair',
+//         tags: ['fugs', 'dead wood']
+//       },
+//       mitigation_measures: ['sdfsf', 'sdfsfd'],
+//       conservation_status: {
 
-    advanced: {
-      hktwid: 2,
-      media: ['https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers'],
-      family_name: 'asdasd',
-      scientific_name: 'Ficus microcarpa',
-      TCMP_ID: '3453453453453',
-      location: '34 conduit road',
-      tags: ['stone wall', 'dead'],
-      responsible_dept: 'Highways Dept',
-      native_exotic: 'native',
-      updated_at: '23/11/2910',
-      triage_color: 'yellow',
-      x_cord: 234234,
-      y_cord: 234234,
-      height: '',
-      crown_spread: '',
-      condition: {
-        overall: 'fair',
-        tags: ['fugs', 'dead wood']
-      },
-      mitigation_measures: ['sdfsf', 'sdfsfd'],
-      conservation_status: {
+//       }
+//     }
+//   }, {
+//     "thumbnail": "https://source.unsplash.com/random/400x400/?flowers, tree",
+//     "common_name": "Bannna Tree",
+//     "chinese_name": "黃花夾竹桃",
+//     // "tags" : "stone wall, dead",
+//     "health": 5,
+//     "height": '15',
+//     "district": "Central",
+//     "creation_date": "23/11/2019",
+//     "status": "Denied",
 
-      }
-    }
-  }
+//     advanced: {
+//       hktwid: 2,
+//       media: ['https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers', 'https://source.unsplash.com/random/400x400/?tree,trees,flowers'],
+//       family_name: 'asdasd',
+//       scientific_name: 'Ficus microcarpa',
+//       TCMP_ID: '3453453453453',
+//       location: '34 conduit road',
+//       tags: ['stone wall', 'dead'],
+//       responsible_dept: 'Highways Dept',
+//       native_exotic: 'native',
+//       updated_at: '23/11/2910',
+//       triage_color: 'yellow',
+//       x_cord: 234234,
+//       y_cord: 234234,
+//       height: '',
+//       crown_spread: '',
+//       condition: {
+//         overall: 'fair',
+//         tags: ['fugs', 'dead wood']
+//       },
+//       mitigation_measures: ['sdfsf', 'sdfsfd'],
+//       conservation_status: {
 
-];
+//       }
+//     }
+//   }
+
+// ];
 
 </script>
 

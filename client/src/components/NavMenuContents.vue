@@ -22,7 +22,7 @@
             <fa v-if="store.isSideBarOpen"  size="2x" icon="user"/> <p>Donate</p>
         </li>
         </a>
-         <router-link class="link" tag="li" :to="{name:'login'}">
+         <router-link class="link" tag="li" :to="{name:'register'}">
             <fa v-if="store.isSideBarOpen"  size="2x" icon="user"/> <p class="rounded dg">Create account</p>
        </router-link>
        <router-link class="link" tag="li" :to="{name:'login'}">
