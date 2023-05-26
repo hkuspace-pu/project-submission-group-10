@@ -31,7 +31,7 @@
     <template #expand="data">
       <div class="dataContainer">
         <div class="topBar">
-          <h4 class="dark">{{ data.commonNane }} ~ <em>{{ data.scientificName}}</em></h4>
+          <h4 class="dark">{{ data.commonName }} ~ <em>{{ data.scientificName}}</em></h4>
           <div class="tags">
             <div v-for="pill in data.treeType" :key="pill" class="pill">
               {{ pill }}
@@ -62,7 +62,7 @@
               <tbody>
                 <tr>
                   <td>Common Name</td>
-                  <td>{{ data.common_name }}</td>
+                  <td>{{ data.commonName }}</td>
                 </tr>
                 <tr>
                   <td>Scientific Name</td>
@@ -70,7 +70,8 @@
                 </tr>
                 <tr>
                   <td>HK Tree Watch ID</td>
-                  <td>{{ data.advanced.hktwid }}</td>
+                      <td>001</td>
+                  <!-- <td>{{ data.advanced.hktwid }}</td> -->
                 </tr>
                 <tr>
                   <td>TCMP ID</td>
@@ -180,6 +181,7 @@ const resp = await fetch(url+path, {
     const jsonData = await resp.json();
     console.log("data loaded")
       data = jsonData.data
+      console.log(data)
 }catch(e){
   console.log('ERROR LOADING DATA ', e)
 }finally{
@@ -192,25 +194,29 @@ const resp = await fetch(url+path, {
 
 // Methods
 const showRow = (index) => {
-  clickedRow.value = data[index].advanced
+  clickedRow.value = data[index]
 };
 
 // Computed Cached 
 const selectedImage = computed(() => {
+  // console.log(clickedRow.value)
   return clickedRow.value.uploadImg[0]
 })
 
+const changeDate = (() => {
+  return new Date(createTime).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
+})
 
 // Dummy Json Data
 const headers = [
   { text: "Image", value: "image" },
-  { text: "Common Name", value: "common_name" },
-  { text: "Chinese name", value: "chinese_name" },
+  { text: "Common Name", value: "commonName" },
+  { text: "Chinese name", value: "chineseName" },
   { text: "Health", value: "health", sortable: true },
 
   { text: "Height", value: "height", sortable: true },
   { text: "District", value: "district", sortable: true },
-  { text: "Created At", value: "creation_date", sortable: true },
+  { text: "Created At", value: "createTime", sortable: true },
   { text: "Status", value: "status", sortable: true },
 
 ];
