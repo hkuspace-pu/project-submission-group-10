@@ -141,22 +141,35 @@ import { ref, computed,onMounted } from 'vue';
 const isDataLoading = ref(false);
 const clickedRow = ref(null)
 const itemsSelected = ref([])
+
+import { useRouter, useRoute } from 'vue-router'
+const router = useRouter()
 import { useStore } from "@/stores/state.js";
 const store = useStore();
 //Mounted
 
 onMounted(async () => {
   console.log('Dash Home Mounted')
-  console.log( 'userId', store.getUserInfo )
+  if (!store.getUserInfo) {
+    router.push({name: 'login'})
+  }
+  console.log( 'userId', store.getUserInfo[0].value )
   let userId = store.getUserInfo[0].userId
   const url = "https://api.hktreewatch.org"
   const formData  = new FormData();
- 
+  let path
     formData.append('userId', userId);
 
-const resp = await fetch(url+'/getSurveyRecordByUserId', {
+if (store.getUserInfo[0].role === 4) {
+  console.log("USER IS ADMIN")
+path = '/getAllSurveyRecord'
+} else {
+ path = '/getSurveyRecordByUserId' 
+}
+
+const resp = await fetch(url+path, {
         method: 'POST',
-        body: formData
+        // body: formData.append('roleId', store.getUserInfo[0].role)
       })
 
 })
