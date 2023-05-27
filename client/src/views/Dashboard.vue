@@ -29,11 +29,16 @@
 import {onMounted} from 'vue';
 import DashSideNav from '../components/DashSideNav.vue';
 import DashTopBar from '../components/DashTopBar.vue';
-
+import { useStore } from "@/stores/state.js";
+import { useRouter, useRoute } from 'vue-router'
+const router = useRouter()
+const store = useStore();
 
 onMounted(() => {
-
-
+    console.log('CHECKING IF USER IS LOGGED IN')
+  if (!store.getUserInfo) {
+    router.push({name: 'login'})
+  }
 
 
 });

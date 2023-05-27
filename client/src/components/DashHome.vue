@@ -149,12 +149,16 @@ import { useStore } from "@/stores/state.js";
 const store = useStore();
 //Mounted
 
+const changeDate = ((createTime) => {
+  return new Date(createTime).toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"}) 
+})
+
+console.log(changeDate(1673256366000))
+
 onMounted(async () => {
 
   console.log('Dash Home Mounted')
-  if (!store.getUserInfo) {
-    router.push({name: 'login'})
-  }
+
   console.log( 'userId', store.getUserInfo[0].value )
   let userId = store.getUserInfo[0].userId
   const url = "https://api.hktreewatch.org"
@@ -181,6 +185,9 @@ const resp = await fetch(url+path, {
     const jsonData = await resp.json();
     console.log("data loaded")
       data = jsonData.data
+     data = data.map((element) => {
+      return {...element, createTime : changeDate(element.createTime)}
+     })
       console.log(data)
 }catch(e){
   console.log('ERROR LOADING DATA ', e)
@@ -203,9 +210,7 @@ const selectedImage = computed(() => {
   return clickedRow.value.uploadImg[0]
 })
 
-const changeDate = (() => {
-  return new Date(createTime).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-})
+
 
 // Dummy Json Data
 const headers = [
