@@ -1,11 +1,13 @@
 <template>
 
   <!-- Using easy data table to display data https://www.npmjs.com/package/vue3-easy-data-table -->
-  <EasyDataTable :headers="headers" :items="data" alternating show-index table-class-name="customize-table"
-    v-model:items-selected="itemsSelected" :loading=isDataLoading @expand-row="showRow">
-    <template #item-image="{ uploadImg, name }">
-      <img class="thumbnail" :src="uploadImg" />
+  <EasyDataTable :headers="headers" :items="store.surveyData" alternating show-index table-class-name="customize-table"
+    v-model:items-selected="store.surveyItemsSelected" :loading="store.surveyLoading" @expand-row="showRow">
+    
+    <template #item-image="{ uploadImg, id, name }">
+      <img class="thumbnail" :src="getFirstImage(uploadImg,id)" />
       {{ name }}
+    
     </template>
 
     <!-- Display custom hearts for tree health -->
@@ -43,10 +45,12 @@
           <div class="leftSide">
             <div class="media">
               <div>
-                <img class="mainImage" :src="selectedImage" />
+                <!-- <img class="mainImage" :src="selectedImage" /> -->
+                <img class="mainImage" :src="getFirstImage(data.uploadImg,data.id)" />
               </div>
               <div class="thumbnail_group">
-                <img class="thumbnail" v-for="media in data.uploadImg" :src="media" :key="media" />
+                <!-- {{changeArray(data.uploadImg)}} -->
+                <img @click="getFirstImage(media, data.id)" class="thumbnail" v-for="media in changeArray(data.uploadImg)" :src="`https://hktreewatch.oss-cn-hongkong.aliyuncs.com/${store.getUserInfo[0].userId}/${data.id}/${media}`" :key="media" />
               </div>
             </div>
           </div>
@@ -142,58 +146,44 @@ import { ref, computed,onMounted } from 'vue';
 const isDataLoading = ref(false);
 const clickedRow = ref(null)
 const itemsSelected = ref([])
-let data = ref([])
+
 import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 import { useStore } from "@/stores/state.js";
 const store = useStore();
+// let data = ref([])
+
+let userId = ref(null)
 //Mounted
 
 const changeDate = ((createTime) => {
   return new Date(createTime).toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"}) 
 })
 
-console.log(changeDate(1673256366000))
+
+const changeArray = ((array) => {
+  const arr = array.substr(1, array.length - 2).split(", ");
+  console.log(arr)
+  return arr
+})
+
+
+
+const getFirstImage = ((uploadImg,id) => {
+console.log(uploadImg)
+// console.log("ID ", id)
+const arr = uploadImg.substr(1, uploadImg.length - 2).split(", ");
+// console.log(arr)
+// console.log(JSON.parse(uploadImg))
+  return `https://hktreewatch.oss-cn-hongkong.aliyuncs.com/${store.getUserInfo[0].userId}/${id}/${arr[0]}`
+})
+
 
 onMounted(async () => {
 
-  console.log('Dash Home Mounted')
 
-  console.log( 'userId', store.getUserInfo[0].value )
-  let userId = store.getUserInfo[0].userId
-  const url = "https://api.hktreewatch.org"
-  const formData  = new FormData();
-  let path
-  
+await store.getSurvey()
 
-if (store.getUserInfo[0].role === 4) {
-  console.log("USER IS ADMIN")
-  formData.append('roleId', store.getUserInfo[0].role);
-path = '/getAllSurveyRecord'
-} else {
-  formData.append('userId', userId);
- path = '/getSurveyRecordByUserId' 
-}
-
-try {
-
- isDataLoading.value = true;
-const resp = await fetch(url+path, {
-        method: 'POST',
-        body: formData
-      })
-    const jsonData = await resp.json();
-    console.log("data loaded")
-      data = jsonData.data
-     data = data.map((element) => {
-      return {...element, createTime : changeDate(element.createTime)}
-     })
-      console.log(data)
-}catch(e){
-  console.log('ERROR LOADING DATA ', e)
-}finally{
-     isDataLoading.value = false
-}
 
 })
 
@@ -201,7 +191,7 @@ const resp = await fetch(url+path, {
 
 // Methods
 const showRow = (index) => {
-  clickedRow.value = data[index]
+  clickedRow.value = store.surveyData[index]
 };
 
 // Computed Cached 

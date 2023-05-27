@@ -8,7 +8,13 @@
     <DashSideNav class="dash"></DashSideNav>
     
     <div class="dashMiddle">
-        {{$route.meta.title}}
+        <div class="dashMenu">
+       <div class="title"> {{$route.meta.title}}</div>
+       <div class="dashIcons">
+       <div @click="refreshData"  class="refresh"><fa size="lg" :spin="store.surveyLoading" icon="arrows-rotate"/></div>
+       <fa @click="store.deleteSurvey()" v-if="store.surveyItemsSelected.length"  size="lg" icon="trash"/>
+        </div>
+        </div>
         <div class="dashMiddleBox">
             <!-- <router-view :key="$route.fullPath"></router-view> -->
             <router-view ></router-view>
@@ -26,6 +32,7 @@
 
 
 <script setup>
+
 import {onMounted} from 'vue';
 import DashSideNav from '../components/DashSideNav.vue';
 import DashTopBar from '../components/DashTopBar.vue';
@@ -34,6 +41,10 @@ import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const store = useStore();
 
+
+
+
+
 onMounted(() => {
     console.log('CHECKING IF USER IS LOGGED IN')
   if (!store.getUserInfo) {
@@ -41,8 +52,15 @@ onMounted(() => {
   }
 
 
+
 });
 
+
+const refreshData = async () => {
+    console.log("Refreshing DAta")
+    store.surveyData = []
+await store.getSurvey()
+}
 
 </script>
 
@@ -80,6 +98,23 @@ width: 100%;
     height: 100%;
     order:1;
 
+}
+
+.dashMenu {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dashIcons {
+    color: var(--dg2);
+    display:flex;
+    flex-direction: row;
+    gap:2rem;
+}
+.title {
+    font-size: 20px;
+    margin-bottom:1rem;
 }
 
 .dashMiddleBox {

@@ -7,7 +7,10 @@ export const useStore = defineStore({
   isSideBarOpen : false,
   masterTreeList : [],
   userInfo: null,
-  baseURL : 'https://api.hktreewatch.org/'
+  surveyLoading : false,
+  baseURL : 'https://api.hktreewatch.org/',
+  surveyData : [],
+  surveyItemsSelected : [],
   }),  
 
   actions : {
@@ -23,7 +26,72 @@ export const useStore = defineStore({
       })
       const { data }= await resp.json()
       this.masterTreeList = data
-  }
+  },
+
+ async getSurvey() {
+      let path
+      this.surveyItemsSelected = []
+      const changeDate = ((createTime) => {
+        return new Date(createTime).toLocaleDateString('en-us', { year: "numeric", month: "short", day: "numeric" })
+      })
+
+
+      const formData = new FormData();
+      if (this.getUserInfo[0].role === 4) {
+        console.log("USER IS ADMIN")
+        formData.append('roleId', this.getUserInfo[0].role);
+        path = '/getAllSurveyRecord'
+      } else {
+        formData.append('userId', this.getUserInfo[0].userId);
+        path = '/getSurveyRecordByUserId'
+      }
+
+
+      //  isDataLoading.value = true;
+      this.surveyLoading = true 
+      const resp = await fetch(this.baseURL + path, {
+        method: 'POST',
+        body: formData
+      })
+      const jsonData = await resp.json();
+
+      this.surveyData = jsonData.data
+      this.surveyData = this.surveyData.map((element) => {
+        return { ...element, createTime: changeDate(element.createTime) }
+      })
+      this.surveyLoading = false
+    },
+
+  async deleteSurvey(surveyArray = this.surveyItemsSelected) {
+      console.log("STARTING TO DELETE")
+      let path 
+      path = '/delSurveyRecord' 
+     
+      const promises = []
+      
+      const formData = new FormData()
+      formData.append('userId',this.getUserInfo[0].userId)
+      formData.append('roleId', 4)
+      console.log(surveyArray.length)
+      console.log(surveyArray)
+
+      for (let i = 0; i < surveyArray.length; i++) {
+        formData.set('surveyRecordId', surveyArray[i].id)
+      const resp = await fetch(this.baseURL + path, {
+        method: 'DELETE',
+        body: formData
+      })
+      promises.push(resp);
+      console.log("Delete Status : ", resp)
+      }
+
+      // await Promise.all(promises);
+      // console.log('EVERYTHING Fin, refreshing')
+      // this.getSurvey()
+  },
+
+
+
   },
   getters : {
     getIsOpen() {

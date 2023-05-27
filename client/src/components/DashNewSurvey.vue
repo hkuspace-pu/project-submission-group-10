@@ -128,7 +128,6 @@
       label="Common name"
       v-model="selectedTree"
       selection-appearance="option"
-      validation="required"
       placeholder="Example: Mango tree"
       :options="store.dropDownTreeList"
     >
@@ -252,7 +251,6 @@
   max="5"
   value="3"
   id="health"
-  validation="required"
   label="Health assessment rating (Vigor):"
 />
 <div class="ratingGuide">
@@ -317,12 +315,11 @@
 <FormKit
   type="file"
   name="file"
-  @input="onfileInput"
   label="Add  media"
   validation="required"
-  accept=".jpg,.mov.,.mp4.,png"
+  accept=".jpg"
   help="Add images or video"
-  multiple
+  multiple="true"
 />
 
 <FormKit
@@ -469,6 +466,8 @@
 
 <script setup>
 import { GoogleMap, Marker } from "vue3-google-map";
+import OSS from 'ali-oss';
+import { toRaw } from 'vue';
 import { ref, reactive, computed, onMounted } from "vue";
 import { getNode } from "@formkit/core";
 import { Fetch } from "@/controller/BaseAPI.js";
@@ -479,9 +478,30 @@ const GOOGLE_API = "AIzaSyCv6UXTIdpXEKk0eHF7GC42Gv9mxcHd8o4";
 const gmapurl = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API}&q=Admiralty+Centre,Hong Kong+HK`;
 const center = ref({ lat: 22.2776807, lng: 14.1558142 });
 const cord = reactive({ lat: 0, long: 0 });
+const endpoint = 'https://hktreewatch.oss-cn-hongkong.aliyuncs.com'
 // const data = reactive(null);
 // import AddressAutocomplete from 'vue-google-maps-address-autocomplete';
 const step = ref(1);
+
+const uploadFile = (async (obj) => {
+  console.log(obj)
+  console.log('UPLOADING FILE ', obj.file.name)
+  console.log('file type', obj.file.file.type)
+    const objectkey = `${store.getUserInfo[0].userId}/${obj.survId}/${obj.file.name}`
+    const uploadURL = `${endpoint}/${objectkey}`
+ const response = await fetch(uploadURL,{
+    method: 'PUT',
+    body:obj.file.file,
+    headers :{
+        'Content-Type': obj.file.file.type,
+        'x-oss-object-acl':'public-read',
+    }
+
+ })
+ return response
+
+})
+
 const commonName = ref([
   {
     commonName: "Fig tree (无花果树)",
@@ -569,6 +589,9 @@ const newSurvey = () => {
 };
 
 const submit = async (fields) => {
+
+
+
   console.log("submit");
   try {
     if (fields.dangerous_tree) {
@@ -577,8 +600,8 @@ const submit = async (fields) => {
       fields.dangerous_tree = 0;
     }
 
-
-    fields.tree_type_id = treeID.value.id;
+    fields.health = 1
+    fields.tree_type_id = treeID.value.id || 1
     fields.user_id = store.getUserInfo[0].userId
     fields.lat = "039333";
     fields.long = "323232";
@@ -586,14 +609,30 @@ const submit = async (fields) => {
     delete fields.terms;
     var form_data = new FormData();
 
+   
     form_data.append("data", JSON.stringify(fields));
     const url = "https://api.hktreewatch.org";
-    const resp = await fetch(url + "/insertSurveyRecord", {
+    const survResp = await fetch(url + "/insertSurveyRecord", {
       method: "POST",
       // body: JSON.stringify(fields)
       body: form_data,
     });
-    console.log(resp);
+    const survRespJson = await survResp.json()
+    console.log(survRespJson.data[0].id);
+
+
+//try uploading images
+
+// console.log(fields.treeImages)
+
+ for (let i = 0; i < fields.file.length; i++) {
+  // console.log(fields.file.files[0])
+      const resp =  await uploadFile({file : fields.file[i], survId : survRespJson.data[0].id})
+      console.log(resp)
+      // uploadPromises.push(uploadFileToOSS(files[i]));
+    }
+///
+
 
     formStatus.value = true;
   } catch (e) {
@@ -603,9 +642,10 @@ const submit = async (fields) => {
   // step.value = 1;
 };
 
-const onfileInput = (e) => {
-  console.log("on file input");
-};
+const onfileInput = (event) => {
+  // const files = toRaw(event.target.files);
+  // console.log(files)
+  };
 
 const passData = (e) => {
   console.log("data passe ", e);
