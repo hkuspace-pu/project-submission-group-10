@@ -14,7 +14,9 @@
   --quizBg: rgba(0, 240, 130,0.2);
   --quizBtn: #2E7D32;
   --quizBtnTransparent: #2e7d32e9;
-  --gameTitle: #FF6F00
+  --gameTitle: #FF6F00;
+  --wrongingBtn: #ff8e25;
+  --deletBtn : #f94e3f;
 }
 
 
