@@ -13,6 +13,7 @@ import DashFeature from '@/components/DashFeature.vue'
 import DashUsers from '@/components/DashUsers.vue'
 import DashTreeLists from '@/components/DashTreeLists.vue'
 import Page404 from '../views/Page404.vue'
+import Classify from '@/components/Classify.vue'
 // import DashNewFeature from '@/components/DashNewFeature.vue'
 
 const router = createRouter({
@@ -114,6 +115,15 @@ const router = createRouter({
             }
     
         },
+        {
+          path : 'ml',
+          name : 'ml',
+          component: Classify,
+          meta : {
+            title : 'Classification'
+          }
+  
+      },
 
           {
             path : 'syncfile',

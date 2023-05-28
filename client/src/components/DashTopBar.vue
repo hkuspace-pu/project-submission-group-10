@@ -1,11 +1,12 @@
 <template>
 
 
-<div class="dashTopBar">
+<div v-if="store.getUserInfo" class="dashTopBar">
     <div @click="$router.push({name : 'dashboard'})" class="logo">
         <fa size="2x" icon="tree"/>
     </div>
     <div class="rightSide">
+
         <router-link tag="div" class="profile" :to="{name:'admin_account'}" >
             
         <img :src="`https://avatars.dicebear.com/api/avataaars/${email}.svg?mouth=smile&radius=50&skinColor=edb98a`"/>     
@@ -20,11 +21,15 @@
 
 </template>
 <script setup>
-import { ref,computed } from 'vue';
+import { ref,computed,onMounted, reactive} from 'vue';
 import { useStore } from "@/stores/state.js";
+import { useRouter, useRoute } from 'vue-router'
+const router = useRouter()
 const store = useStore();
-const email = ref(store.getUserInfo[0].email)
-const role = ref(store.getUserInfo[0].role)
+let role = ref()
+let email = ref()
+
+
 // localStorage.getItem('key');
 // export default {
 //     data() {
@@ -38,6 +43,21 @@ const role = ref(store.getUserInfo[0].role)
 //     },
 // };
 
+onMounted(async () => {
+
+  if (!store.getUserInfo) {
+    router.push({name: 'login'})
+  }
+role.value = store.getUserInfo[0].role
+email.value = store.getUserInfo[0].email
+// if (store.getUserInfo) {
+// // let role = reactive(store.getUserInfo[0].role)
+// // let email = reactive(store.getUserInfo[0].email)
+// email.value = store.getUserInfo[0].email
+// role.value = store.getUserInfo[0].role
+// }
+})
+
 const roleCheck = (() => {
    if (role.value == 4) {
     return 'Admin'
@@ -45,6 +65,8 @@ const roleCheck = (() => {
     return 'User'
    }
     })
+
+
 </script>
 
 
