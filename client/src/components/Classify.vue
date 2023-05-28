@@ -41,13 +41,13 @@
 </template>
 
 <script setup>
-import ml5 from "ml5";
+import {imageClassifier} from "ml5";
 
 import { ref, reactive, computed, onMounted } from "vue";
 const imagePath = ref();
 const loadingModel = ref(true);
 const classifyResults = ref([]);
-console.log(ml5.version);
+// console.log(ml5.version);
 const previewImage = ref(null);
 let classifier = ref(null);
 
@@ -68,7 +68,7 @@ const imageChange = (e) => {
 };
 
 onMounted(async () => {
-  classifier = ml5.imageClassifier(
+  classifier = imageClassifier(
     "https://teachablemachine.withgoogle.com/models/GbGUdIUyZ/",
     modelLoaded
   );
