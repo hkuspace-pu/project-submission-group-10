@@ -11,8 +11,10 @@
         <div class="dashMenu">
        <div class="title"> {{$route.meta.title}}</div>
        <div class="dashIcons">
-       <div @click="refreshData"  class="refresh"><fa size="lg" :spin="store.surveyLoading" icon="arrows-rotate"/></div>
-       <fa @click="store.deleteSurvey()" v-if="store.surveyItemsSelected.length"  size="lg" icon="trash"/>
+       <div @click="refreshData" v-if="$route.path == '/dash' && !store.surveyItemsSelected.length" class="refresh"><fa size="2x" :spin="store.surveyLoading" icon="arrows-rotate"/></div>
+       <fa @click="store.deleteSurvey()" v-if="store.surveyItemsSelected.length && $route.path == '/dash'"  size="2x" icon="trash"/>
+       <fa @click="store.approveSurvey(undefined,9)" style="color:var(--accept)" v-if="store.surveyItemsSelected.length && $route.path == '/dash' && isAdmin"  size="2x" icon="thumbs-up"/>
+        <fa @click="store.approveSurvey(undefined,2)" style="color:var(--warning)" v-if="store.surveyItemsSelected.length && $route.path == '/dash' && isAdmin"  size="2x" icon="thumbs-down"/>
         </div>
         </div>
         <div class="dashMiddleBox">
@@ -33,7 +35,7 @@
 
 <script setup>
 
-import {onMounted} from 'vue';
+import {onMounted,computed, reactive} from 'vue';
 import DashSideNav from '../components/DashSideNav.vue';
 import DashTopBar from '../components/DashTopBar.vue';
 import { useStore } from "@/stores/state.js";
@@ -42,7 +44,13 @@ const router = useRouter()
 const store = useStore();
 
 
-
+const isAdmin = computed(() =>{
+    if (store.getUserInfo[0].role == 4) {
+        return true
+    } else {
+        return false
+    }
+})
 
 
 onMounted(() => {
@@ -104,6 +112,8 @@ width: 100%;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center; 
+    margin: 0.5rem;
 }
 
 .dashIcons {
@@ -111,10 +121,25 @@ width: 100%;
     display:flex;
     flex-direction: row;
     gap:2rem;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    border:1px solid red;
+    background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
 }
+
+.dashIcons  :nth-child():hover{
+ opacity: 0.5;
+}
+
 .title {
     font-size: 20px;
-    margin-bottom:1rem;
+    /* margin-bottom:1rem; */
 }
 
 .dashMiddleBox {

@@ -4,8 +4,8 @@
   <EasyDataTable :headers="headers" :items="store.surveyData" alternating show-index table-class-name="customize-table"
     v-model:items-selected="store.surveyItemsSelected" :loading="store.surveyLoading" @expand-row="showRow">
     
-    <template #item-image="{ uploadImg, id, name }">
-      <img class="thumbnail" :src="getFirstImage(uploadImg,id)" />
+    <template #item-image="{ uploadImg, id, name,userId }">
+      <img class="thumbnail" :src="getFirstImage(uploadImg,id,userId)" />
       {{ name }}
     
     </template>
@@ -24,8 +24,8 @@
     <!-- Display custom tags -->
     <template #item-status="item">
       <div class="pill"
-        :class="item.status == 'Approved' && 'pill_approved', item.status == 'Pending' && 'pill_pending', item.status == 'Denied' && 'pill_denied'">
-        {{ item.status }}
+        :class="item.status == 9 && 'pill_approved', item.status == 1 && 'pill_pending', item.status == 2 && 'pill_denied'">
+        {{ itemStatus(item.status)}}
       </div>
     </template>
 
@@ -46,11 +46,11 @@
             <div class="media">
               <div>
                 <!-- <img class="mainImage" :src="selectedImage" /> -->
-                <img class="mainImage" :src="getFirstImage(data.uploadImg,data.id)" />
+                <img class="mainImage" :src="getFirstImage(data.uploadImg,data.id,data.userId)" />
               </div>
               <div class="thumbnail_group">
                 <!-- {{changeArray(data.uploadImg)}} -->
-                <img @click="getFirstImage(media, data.id)" class="thumbnail" v-for="media in changeArray(data.uploadImg)" :src="`https://hktreewatch.oss-cn-hongkong.aliyuncs.com/${store.getUserInfo[0].userId}/${data.id}/${media}`" :key="media" />
+                <img @click="getFirstImage(media, data.id)" class="thumbnail" v-for="media in changeArray(data.uploadImg)" :src="`https://hktreewatch.oss-cn-hongkong.aliyuncs.com/${data.userId}/${data.id}/${media}`" :key="media" />
               </div>
             </div>
           </div>
@@ -169,13 +169,13 @@ const changeArray = ((array) => {
 
 
 
-const getFirstImage = ((uploadImg,id) => {
+const getFirstImage = ((uploadImg,id,userId) => {
 console.log(uploadImg)
 // console.log("ID ", id)
 const arr = uploadImg.substr(1, uploadImg.length - 2).split(", ");
 // console.log(arr)
 // console.log(JSON.parse(uploadImg))
-  return `https://hktreewatch.oss-cn-hongkong.aliyuncs.com/${store.getUserInfo[0].userId}/${id}/${arr[0]}`
+  return `https://hktreewatch.oss-cn-hongkong.aliyuncs.com/${userId}/${id}/${arr[0]}`
 })
 
 
@@ -186,6 +186,19 @@ await store.getSurvey()
 
 
 })
+
+const itemStatus = (status)=> {
+  switch (status) {
+    case 1:
+      return 'Pending';
+    case  2:
+      return  'Denied';
+    case 9:
+      return 'Approved';
+    default:
+      return 'Pending';
+  }
+}
 
 
 

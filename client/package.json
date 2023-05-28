@@ -9,6 +9,7 @@
   "dependencies": {
     "@animxyz/core": "^0.6.6",
     "@animxyz/vue3": "^0.6.7",
+    "@fireworks-js/vue": "^2.10.4",
     "@formkit/pro": "^0.112.5",
     "@formkit/themes": "^0.17.2",
     "@formkit/vue": "^0.17.2",

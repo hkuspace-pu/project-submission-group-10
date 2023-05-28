@@ -74,7 +74,7 @@ export const useStore = defineStore({
       formData.append('roleId', 4)
       console.log(surveyArray.length)
       console.log(surveyArray)
-
+      this.surveyLoading = true
       for (let i = 0; i < surveyArray.length; i++) {
         formData.set('surveyRecordId', surveyArray[i].id)
       const resp = await fetch(this.baseURL + path, {
@@ -87,8 +87,35 @@ export const useStore = defineStore({
 
       // await Promise.all(promises);
       // console.log('EVERYTHING Fin, refreshing')
-      // this.getSurvey()
+      this.getSurvey()
   },
+
+    async approveSurvey(id = this.surveyItemsSelected,status) {
+      console.log('status', status)
+      let formData = new FormData()
+      this.surveyLoading = true
+      for (let i = 0; i < id.length; i++) {
+    
+      formData.set('surveyRecordId', id[i].id)
+      formData.set('userId', this.getUserInfo[0].userId)
+      formData.set('roleId',this.getUserInfo[0].role) 
+      formData.set('statusCode',status) 
+      const resp = await fetch(this.baseURL + '/acceptSurveyRecord', {
+        method: 'PUT',
+        body: formData
+      })
+      console.log(i, 'done')
+
+    }
+      console.log('LOOP DONE', )
+      this.surveyLoading = false
+      this.getSurvey()
+
+    },
+
+    async  denySurvey(id) {
+      console.log("Deny Survey")
+    }
 
 
 
