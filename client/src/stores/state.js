@@ -11,6 +11,11 @@ export const useStore = defineStore({
   baseURL : 'https://api.hktreewatch.org/',
   surveyData : [],
   surveyItemsSelected : [],
+  familyData: [],
+  treeLists: [],
+  userLists: [],
+  deleteUserId: null,
+  updateUserJson: null,
   }),  
 
   actions : {
@@ -90,7 +95,74 @@ export const useStore = defineStore({
       // this.getSurvey()
   },
 
+  async getFamilyList() {
+    let path 
+    path = '/getAllFamilyList' 
 
+    const resp = await fetch(this.baseURL + path, {
+      method: 'GET',
+    })
+
+    const jsonData = await resp.json();
+    this.familyData = jsonData.data
+  },
+
+  async getMasterTreeList() {
+    let path 
+    path = '/getAllMasterTreeTableList' 
+
+    const resp = await fetch(this.baseURL + path, {
+      method: 'GET',
+    })
+
+    const jsonData = await resp.json();
+    this.treeLists = jsonData.data
+  },
+
+  // user api request
+  async getAllUser() {
+    let path = 'getAllUser'
+
+    const formData = new FormData()
+    formData.append('roleId',this.getUserInfo[0].role)
+
+    const resp = await fetch(this.baseURL + path, {
+      method: "POST",
+      body: formData,
+    });
+    const jsonData = await resp.json();
+    this.userLists = jsonData.data
+  },
+
+  async deleteUser( userId = this.deleteUserId ) {
+    let path = 'delUser'
+    const formData = new FormData();
+    formData.append("userId", userId);
+
+    const deleteResp = await fetch(this.baseURL + path, {
+      method: "DELETE",
+      body:  formData
+    });
+    const delete_user = await deleteResp.json();
+    return delete_user
+  },
+
+  async updateUser( _user = this.updateUserJson ) {
+    let path = 'editUser'
+    const formData = new FormData();
+    formData.append("userId", _user['userId']);
+    formData.append("username", _user['username']);
+    formData.append("phoneNumber", _user['phoneNumber']);
+    formData.append("email", _user['email']);
+    formData.append("role", _user['role']);
+
+    const updateResp = await fetch(this.baseURL + path, {
+      method: "PUT",
+      body:  formData
+    });
+    const update_resp = await updateResp.json();
+    return update_resp
+  }
 
   },
   getters : {
@@ -103,6 +175,6 @@ export const useStore = defineStore({
     },
     getUserInfo(state){
       return state.userInfo && state.userInfo.data
-    } 
+    },
   }
 })

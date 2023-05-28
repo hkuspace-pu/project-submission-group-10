@@ -17,11 +17,11 @@
           <div><label for="commonChiName">Common Chinese Name: </label>{{ data.commonChiName }}</div>
 
           <div><label for="family">Family Name: </label>{{ data.familyFi }}</div>
-          <div><label for="shortDesc">Desc: </label>{{ data.shortDesc }}</div>
-          <div><label for="shortChiDesc">Desc (Chinese): </label>{{ data.shortChiDesc }}</div>
+          <div><label for="shortDesc">Short Desc: </label>{{ data.shortDesc }}</div>
+          <div><label for="shortChiDesc">Short Desc (Chinese): </label>{{ data.shortChiDesc }}</div>
 
-          <div><label for="longDesc">Desc: </label>{{ data.longDesc }}</div>
-          <div><label for="longChiDesc">Desc (Chinese): </label>{{ data.longChiDesc }}</div>
+          <div><label for="longDesc">Long Desc: </label>{{ data.longDesc }}</div>
+          <div><label for="longChiDesc">Long Desc (Chinese): </label>{{ data.longChiDesc }}</div>
 
           <div><label for="nativeExotic">Native/Exotic Species: </label>{{ data.nativeExoticFi }}</div>
           <div><label for="status">Create Date: </label>{{ data.createTimeFi }}</div>
@@ -40,12 +40,45 @@
   </EasyDataTable>
 
   <Modal v-model:visible="isVisible" :okButton="confirmBtn">
-    <!-- <div class="dialog-div"><label for="name">User Name: </label>
-        <input required v-model="editData.userName" type="text" id="edFullName" name="userName"/></div>
-    <div class="dialog-div"><label for="date">Email: </label>
-        <input required v-model="editData.email" type="text" id="edEmail" name="email"/></div>
-    <div class="dialog-div"><label for="date">Contnet: </label>
-        <input required v-model="editData.phoneNumber" type="text" id="edPhoneNumber" name="phoneNumber"/></div> -->
+    "id": _data['id'],
+		"scientific_name" : _data['scientificName'],
+		"scientific_chi_name" : _data['scientificChiName'],
+		"family" : _data['family'],
+		"status" : 1,
+		"common_name" : _data['commonName'],
+    "common_chi_name" : _data['commonChiName'],
+    "img_url" : _data['imgUrl'],
+    "short_desc" : _data['shortDesc'],
+    "long_desc" : _data['longDesc'],
+    "native_exotic" : _data['nativeExotic'],
+    "short_chi_desc" : _data['shortChiDesc'],
+    "long_chi_desc" : _data['longChiDesc'],
+    "create_time" : _data['createTime'],
+
+    <div><label for="scientificName">Scientific Name </label>{{ data.scientificName }}
+        <input required v-model="editData.scientificName" type="text" id="scientificName" name="scientificName"/></div>
+    <div><label for="scientificChiName">Scientific Chinese Name </label>
+        <input required v-model="editData.scientificChiName" type="text" id="scientificChiName" name="scientificChiName"/></div>
+    <div><label for="commonName">Common Name: </label>
+        <input required v-model="editData.commonName" type="text" id="commonName" name="commonName"/></div>
+    <div><label for="commonChiName">Common Chinese Name: </label>
+        <input required v-model="editData.commonChiName" type="text" id="commonChiName" name="commonChiName"/></div>
+
+    <!-- <div><label for="family">Family Name: </label>
+        <input required v-model="editData.scientificName" type="text" id="scientificName" name="scientificName"/></div> -->
+    <div><label for="shortDesc">Short Desc: </label>
+        <input required v-model="editData.shortDesc" type="text" id="shortDesc" name="shortDesc"/></div>
+    <div><label for="shortChiDesc">Short Desc (Chinese): </label>
+        <input required v-model="editData.shortChiDesc" type="text" id="shortChiDesc" name="shortChiDesc"/></div>
+
+    <div><label for="longDesc">Long Desc: </label>
+        <input required v-model="editData.longDesc" type="text" id="longDesc" name="longDesc"/></div>
+    <div><label for="longChiDesc">Long Desc (Chinese): </label>
+        <input required v-model="editData.longChiDesc" type="text" id="longChiDesc" name="longChiDesc"/></div>
+
+    <div><label for="nativeExotic">Native/Exotic Species: </label>
+        <input required v-model="editData.nativeExoticFi" type="text" id="nativeExoticFi" name="nativeExoticFi"/></div>
+    <div><label for="status">Status: </label>{{ data.status }}</div>
   </Modal>
   
 
@@ -96,22 +129,16 @@ onMounted(async () => {
 
   try {
     isDataLoading.value = true;
-    const familyResp = await fetch(url + '/getAllFamilyList', {
-      method: "GET"
-    });
-    const familyData = await familyResp.json();
-    familyLists = familyData.data;
+    await store.getFamilyList()
 
-    const resp = await fetch(url + '/getAllMasterTreeTableList', {
-      method: "GET"
-    });
-    const jsonData = await resp.json();
-    jsonData.data.forEach(jEle => {
+    await store.getMasterTreeList()
+    var jsonData = store.treeLists
+    jsonData.forEach(jEle => {
       jEle['createTimeFi'] = dateFormat( jEle['createTime'] )
       jEle['familyFi'] = filterFamily( jEle['family'] )
       jEle['nativeExoticFi'] = filterNativeExotic( jEle['nativeExotic'] )
     });
-    items = jsonData.data;
+    items = jsonData;
   } catch (e) {
     console.log("ERROR LOADING DATA ", e);
   } finally {
@@ -120,7 +147,7 @@ onMounted(async () => {
 });
 
 const filterFamily = ( _family ) => {
-  var filterList = familyLists.filter(( _lists ) => {
+  var filterList = store.familyData.filter(( _lists ) => {
     return _family == _lists['id']
   });
 
@@ -170,7 +197,13 @@ const editTree = ( treeData ) => {
 
 const updateTree = async () => {
   const formData = new FormData();
-  formData.append("data", JSON.stringify(editData.valie));
+
+  console.log( 'updateData', JSON.stringify(editData.valie) )
+
+  // {"district":"Central","location":"18號 Harcourt Rd, Central","survey_date":"2023-05-28","id":null,"tree_tag":["Old & valuable"],"height":"25","crown":"35","stem_circumference":"9","health":3,"recommendation":"Trim","file":[{"name":"sprint_screen.jpeg","file":{}}],"amenity_value":"2","next_inspection_date":"2023-06-01","terms":true}
+  // {"id":1,"scientific_name":"Araucaria columnaris","scientific_chi_name":"柱狀南洋杉","family":1,"status":1,"common_name":"Cook Pine","common_chi_name":"柱狀南洋杉","img_url":"https://www.greening.gov.hk/filemanager/greening/en/content_83/Ara_col.jpg","short_desc":"Elegant upright tree with outstanding columnar shape..","long_desc":"Cook Pine is a native species of New Caledonia, an island located within Oceania in the Southern Hemisphere. The species is widely planted as street trees and horticultural plants across the tropics and subtropics. Being a tropical coastal plant, it is less tolerant to the cold.","native_exotic":2,"short_chi_desc":"優雅樹木，具顯眼的直立柱狀樹型。","long_chi_desc":"優雅樹木，具顯眼的直立柱狀樹型。","create_time":1672571097000}
+
+  formData.append("data", JSON.stringify(editData.value));
   // formData.append("data", JSON.stringify(_json));
   const updateResp = await fetch(url + '/updateMasterTreeTableById', {
     method: "POST",
@@ -361,5 +394,9 @@ height: 100%;
     background-color: var(--deletBtn);
     border-radius: 4px;
     color: white;
+}
+
+.dialog-div {
+    margin: 10px 0;
 }
 </style>

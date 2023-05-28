@@ -84,19 +84,14 @@ onMounted(async () => {
 });
 
 const loadUsers = async () => {
-  const formData = new URLSearchParams();
-  formData.append("roleId", store.getUserInfo[0].role);
   try {
     isDataLoading.value = true;
-    const resp = await fetch(url + '/getAllUser', {
-      method: "POST",
-      body: formData,
-    });
-    const jsonData = await resp.json();
-    jsonData.data.forEach(jEle => {
+    await store.getAllUser()
+    const jsonData = store.userLists
+    jsonData.forEach(jEle => {
       jEle['createTimeFi'] = dateFormat( jEle['createTime'] )
     });
-    items = jsonData.data;
+    items = jsonData;
   } catch (e) {
     console.log("ERROR LOADING DATA ", e);
   } finally {
@@ -123,14 +118,8 @@ const dateFormat = ( _dateTime ) => {
 }
 
 const deleteUser = async ( _id ) => {
-  const formData = new URLSearchParams();
-  formData.append("userId", _id);
-
-  const deleteResp = await fetch(url + '/delUser', {
-    method: "DELETE",
-    body:  formData
-  });
-  const delete_user = await deleteResp.json();
+  store.deleteUserId = _id
+  const delete_user = await store.deleteUser()
   console.log( 'delete_user', delete_user )
 
   if ( delete_user.errorNo == 200 ) {
@@ -141,27 +130,35 @@ const deleteUser = async ( _id ) => {
 }
 
 const editUser = ( _data ) => {
-  // console.log( 'edit', _data )
   editData.value = _data
   isVisible.value = true
-  // updateUser( _json, 'editUser' )
 }
 
 const updateUser = async () => {
   console.log( 'updateUser', editData.value )
 
-  const formData = new URLSearchParams();
-  formData.append("userId", editData.value['id']);
-  formData.append("username", editData.value['userName']);
-  formData.append("phoneNumber", editData.value['phoneNumber']);
-  formData.append("email", editData.value['email']);
-  formData.append("role", editData.value['role']);
+  // const formData = new URLSearchParams();
+  // formData.append("userId", editData.value['id']);
+  // formData.append("username", editData.value['userName']);
+  // formData.append("phoneNumber", editData.value['phoneNumber']);
+  // formData.append("email", editData.value['email']);
+  // formData.append("role", editData.value['role']);
 
-  const editResp = await fetch(url + '/editUser', {
-    method: "PUT",
-    body:  formData
-  });
-  const edit_user = await editResp.json();
+  // const editResp = await fetch(url + '/editUser', {
+  //   method: "PUT",
+  //   body:  formData
+  // });
+  // const edit_user = await editResp.json();
+  var _json = {
+    userId: editData.value['id'],
+    username: editData.value['userName'],
+    phoneNumber: editData.value['phoneNumber'],
+    email: editData.value['email'],
+    role: editData.value['role'],
+  }
+  store.updateUserJson = _json
+
+  const edit_user = await store.updateUser()
   console.log( 'edit_user', edit_user )
 
   if ( edit_user.errorNo == 200 ) {
