@@ -133,10 +133,6 @@ backdrop-filter: blur(5px);
 border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.dashIcons  :nth-child():hover{
- opacity: 0.5;
-}
-
 .title {
     font-size: 20px;
     /* margin-bottom:1rem; */
