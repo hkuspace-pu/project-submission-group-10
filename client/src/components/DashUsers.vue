@@ -35,6 +35,15 @@
     </template>
   </EasyDataTable>
 
+
+<Modal v-model:visible="isVisible" :okButton="confirmBtn">
+    <div class="dialog-div"><label for="name">User Name: </label>
+        <input required v-model="editData.userName" type="text" id="edFullName" name="userName"/></div>
+    <div class="dialog-div"><label for="date">Email: </label>
+        <input required v-model="editData.email" type="text" id="edEmail" name="email"/></div>
+    <div class="dialog-div"><label for="date">Contnet: </label>
+        <input required v-model="editData.phoneNumber" type="text" id="edPhoneNumber" name="phoneNumber"/></div>
+</Modal>
   <!-- </div> -->
 </template>
 
@@ -42,6 +51,7 @@
 import { ref, computed,onMounted } from 'vue';
 import { useStore } from "@/stores/state.js";
 import { useRouter, useRoute } from 'vue-router'
+import { Modal } from 'usemodal-vue3';
 const router = useRouter()
 const store = useStore();
 
@@ -49,6 +59,8 @@ const isDataLoading = ref(false);
 const clickedRow = ref(null);
 const itemsSelected = ref([]);
 let items = ref([]);
+let isVisible = ref(false);
+let editData = ref({})
 
 const url = "https://api.hktreewatch.org";
 
@@ -129,9 +141,43 @@ const deleteUser = async ( _id ) => {
 }
 
 const editUser = ( _data ) => {
-  console.log( 'edit', _data )
+  // console.log( 'edit', _data )
+  editData.value = _data
+  isVisible.value = true
   // updateUser( _json, 'editUser' )
 }
+
+const updateUser = async () => {
+  console.log( 'updateUser', editData.value )
+
+  const formData = new URLSearchParams();
+  formData.append("userId", editData.value['id']);
+  formData.append("username", editData.value['userName']);
+  formData.append("phoneNumber", editData.value['phoneNumber']);
+  formData.append("email", editData.value['email']);
+  formData.append("role", editData.value['role']);
+
+  const editResp = await fetch(url + '/editUser', {
+    method: "PUT",
+    body:  formData
+  });
+  const edit_user = await editResp.json();
+  console.log( 'edit_user', edit_user )
+
+  if ( edit_user.errorNo == 200 ) {
+    isVisible.value = false
+    loadUsers()
+  } else {
+    console.log( 'fail to edit', edit_user.errMsg )
+  }
+}
+
+let confirmBtn = ref({
+  text: 'Confirm', 
+  onclick: () => {
+    updateUser()
+  }
+})
 </script>
 
 <style scoped>
@@ -314,5 +360,9 @@ table.dataTable {
     background-color: var(--deletBtn);
     border-radius: 4px;
     color: white;
+}
+
+.dialog-div {
+    margin: 10px 0;
 }
 </style>
