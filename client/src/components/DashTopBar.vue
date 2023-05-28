@@ -8,10 +8,10 @@
     <div class="rightSide">
         <router-link tag="div" class="profile" :to="{name:'admin_account'}" >
             
-        <img :src="`https://avatars.dicebear.com/api/avataaars/${full_name}.svg?mouth=smile&radius=50&skinColor=edb98a`"/>     
+        <img :src="`https://avatars.dicebear.com/api/avataaars/${email}.svg?mouth=smile&radius=50&skinColor=edb98a`"/>     
             <div class="accountName">
-            <p>{{ full_name }}</p>
-            <p style="color:var(--dark)">{{ role }}</p>
+            <p>{{ email }}</p>
+            <p :class="roleCheck() == 'Admin' ? 'red' : 'dark'">{{roleCheck()}}</p>
             </div>
         </router-link>
 
@@ -19,21 +19,32 @@
 </div>
 
 </template>
-<script>
+<script setup>
 import { ref,computed } from 'vue';
+import { useStore } from "@/stores/state.js";
+const store = useStore();
+const email = ref(store.getUserInfo[0].email)
+const role = ref(store.getUserInfo[0].role)
 // localStorage.getItem('key');
-export default {
-    data() {
-        var user_info = JSON.parse(localStorage.getItem('user_info'))
-        console.log( 'user_info', user_info )
-        var full_name = user_info.full_name
-        var role = user_info.role
-        return {
-            full_name, role
-        }
-    },
-};
+// export default {
+//     data() {
+//         var user_info = JSON.parse(localStorage.getItem('user_info'))
+//         console.log( 'user_info', user_info )
+//         var full_name = user_info.full_name
+//         var role = user_info.role
+//         return {
+//             full_name, role
+//         }
+//     },
+// };
 
+const roleCheck = (() => {
+   if (role.value == 4) {
+    return 'Admin'
+   } else {
+    return 'User'
+   }
+    })
 </script>
 
 
@@ -64,9 +75,17 @@ export default {
 
 }
 
+.red {
+    color: red;
+    font-weight: 600;
+}
+
+.dark {
+    color:black;
+}
 .rightSide img {
-    height : 35px;
-    width: 35px;
+    height : 50px;
+    width: 50px;
     border:1px solid var(--brown);
     background-color: var(--darkGreen);
     border-radius :50%;

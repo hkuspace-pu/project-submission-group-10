@@ -317,7 +317,7 @@
   name="file"
   label="Add  media"
   validation="required"
-  accept=".jpg"
+  accept=".jpg,.png.,webp"
   help="Add images or video"
   multiple="true"
 />
@@ -446,12 +446,13 @@
 
 </div>
 
-<div v-else class="success">
+<div ref="success" v-show="formStatus" class="success">
 
 <h2 class="dark">Survey submitted.</h2>
 
 <img width="120" src="../assets/sucsess.png"/>
 <p> Thank you, your information will be reviewed.</p>
+<p> <em>25 points</em> will be added to your profile, once your survey is approved!</p>
 
 <button @click="newSurvey" class="btn">Start a new survey</button>
 
@@ -467,11 +468,17 @@
 <script setup>
 import { GoogleMap, Marker } from "vue3-google-map";
 import OSS from 'ali-oss';
-import { toRaw } from 'vue';
-import { ref, reactive, computed, onMounted } from "vue";
+import { getCurrentInstance, toRaw } from 'vue';
+import { ref, reactive, computed, onMounted,nextTick } from "vue";
 import { getNode } from "@formkit/core";
 import { Fetch } from "@/controller/BaseAPI.js";
 import { useStore } from "@/stores/state.js";
+
+import { Fireworks } from 'fireworks-js'
+
+// const container = document.querySelector('.success')
+
+
 const store = useStore();
 // const GOOGLE_API = import.meta.env.'VITE_GOOGLE_API'
 const GOOGLE_API = "AIzaSyCv6UXTIdpXEKk0eHF7GC42Gv9mxcHd8o4";
@@ -631,10 +638,25 @@ const submit = async (fields) => {
       console.log(resp)
       // uploadPromises.push(uploadFileToOSS(files[i]));
     }
-///
+
+
 
 
     formStatus.value = true;
+   const success = ref(null)
+//start firework show
+
+
+ nextTick(() => {
+
+const container = success.value
+console.log('CONTAINER ' , container)
+const fireworks = new Fireworks(container, { /* options */ })
+fireworks.start()
+
+  })
+
+
   } catch (e) {
     console.log(e);
   }
@@ -651,33 +673,14 @@ const passData = (e) => {
   console.log("data passe ", e);
   treeID.value = store.dropDownTreeList.find((tree) => tree.label === e);
   console.log(treeID);
-  //  selectedTree.value =
-  // treeID.value ==
-  //  treeID.value = commonName.value.find(name => e == name.value)
-  // treeID.value.imgUrl = '../assets/images/adult1.png'
-  // if (e) {
-  //   treeID.value = commonName.value.find(name => e == name.value)
-  // } else {
-  //    console.log('no image')
-  //   // treeID.value.imgUrl = '../assets/images/tree2.svg'
-  // }
-  // console.log(treeID)
+
 };
 
-// const loadTreeList = async () => {
-//   const url = "https://api.hktreewatch.org"
-//   const resp = await fetch(url+'/getCommonAndScientificNameList', {
-//         method: 'GET',
-//         // headers : {
-//         // "Content-type": "application/json;charset=UTF-8",
-//         // "Authorization" : btoa(email.value+":"+password.value)}
-//     })
-//     let {data} = await resp.json()
 
-// }
 
 onMounted(async () => {
   console.log("ON MOUNTED ");
+  
   store.getMasterTreeList();
 
   //REQUEST LOCATION FROM THE BROWSER
@@ -699,6 +702,10 @@ onMounted(async () => {
 
   navigator.geolocation.getCurrentPosition(sb, eb);
 });
+
+
+
+
 </script>
 
 
