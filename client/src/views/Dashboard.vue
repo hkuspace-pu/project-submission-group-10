@@ -90,8 +90,8 @@ width: 100%;
     height: calc( 100% - 25px);
     /* height: 100px; */
     width: 100%;
-    overflow:hidden;
-    /* overflow:scroll; */
+    /* overflow:hidden; */
+    overflow:scroll;
     box-shadow: 10px 10px 12px -12px rgba(0,0,0,0.25);
 }
 
