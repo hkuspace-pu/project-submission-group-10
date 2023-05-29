@@ -23,9 +23,6 @@ import Vue3EasyDataTable from 'vue3-easy-data-table';
 import 'vue3-easy-data-table/dist/style.css';
 
 
-
-// // const app = createApp(App);
-
 import App from './App.vue'
 import router from './router'
 
@@ -35,17 +32,10 @@ import Page from "./components/Page.vue";
 import Teaser from "./components/Teaser.vue";
 import Feature from "./components/Feature.vue";
 
-
-// import { plugin, defaultConfig } from '@formkit/vue'
-// import { createProPlugin, rating, toggle, dropdown } from '@formit/pro'
-// import '@formkit/themes/genesis'
-// import '@formkit/pro/genesis'
-// import '@formkit/themes/genesis'
 import './assets/main.css'
 import '@animxyz/core'
 
 
-// const pro = createProPlugin('fk-577218191f7', {rating,toggle,dropdown})
 
 const app = createApp(App)
 app.use(plugin, defaultConfig(formKitConfig))
@@ -57,14 +47,6 @@ app.component("Feature", Feature);
 
 
 
-// app.use(pro, defaultConfig({ plugins: [pro] }))
-// const proPlugin = createProPlugin('fk-577218191f7', {
-//         rating,
-//         toggle,
-//         dropdown
-//         // ... and any other Pro Inputs
-//       })
-//       app.use(proPlugin, defaultConfig)
 app.component('fa', fa)
 app.use(VueAnimXyz)
 app.use(createPinia())

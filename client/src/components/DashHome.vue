@@ -170,7 +170,6 @@ const changeArray = ((array) => {
 
 
 const getFirstImage = ((uploadImg,id,userId) => {
-console.log(uploadImg)
 // console.log("ID ", id)
 const arr = uploadImg.substr(1, uploadImg.length - 2).split(", ");
 // console.log(arr)
@@ -181,7 +180,7 @@ const arr = uploadImg.substr(1, uploadImg.length - 2).split(", ");
 
 onMounted(async () => {
 
-
+store.getMasterTreeList();
 await store.getSurvey()
 
 

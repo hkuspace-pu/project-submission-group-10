@@ -3,7 +3,7 @@
 <div class="formContainer">
   <!-- :submit-label="button_label" -->
   <!-- <FormKit  @submit="submit" type="form" #default="{ value }" >  -->
-    <XyzTransition appear xyz="fade" mode="out-in">
+    <!-- <XyzTransition appear xyz="fade" mode="out-in"> -->
 <div v-if="!formStatus">
   
   <div class="surveySteps">
@@ -136,7 +136,7 @@
         <div class="formkit-option">
           <img :src="option.imgUrl" width="20px"/>
           <span>
-            {{ option.value }}
+            {{ option.label }}
           </span>
         </div>
         
@@ -459,7 +459,7 @@
 
 
 </div>
-</XyzTransition>
+<!-- </XyzTransition> -->
 
 </div>
 
@@ -469,15 +469,12 @@
 <script setup>
 import { GoogleMap, Marker } from "vue3-google-map";
 import OSS from 'ali-oss';
-import { getCurrentInstance, toRaw } from 'vue';
 import { ref, reactive, computed, onMounted,nextTick } from "vue";
 import { getNode } from "@formkit/core";
 import { Fetch } from "@/controller/BaseAPI.js";
 import { useStore } from "@/stores/state.js";
 
 import { Fireworks } from 'fireworks-js'
-
-// const container = document.querySelector('.success')
 
 
 const store = useStore();
