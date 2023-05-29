@@ -116,7 +116,7 @@ onMounted(async () => {
     isDataLoading.value = true;
     await store.getFamilyList()
 
-    await store.getMasterTreeList()
+    await store.getTreeList()
     var jsonData = store.treeLists
     jsonData.forEach(jEle => {
       jEle['createTimeFi'] = dateFormat( jEle['createTime'] )

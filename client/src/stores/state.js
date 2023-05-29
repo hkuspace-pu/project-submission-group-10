@@ -133,7 +133,7 @@ export const useStore = defineStore({
     this.familyData = jsonData.data
   },
 
-  async getMasterTreeList() {
+  async getTreeList() {
     console.log('GET MASTER TREE LIST')
     let path 
     path = '/getAllMasterTreeTableList' 
@@ -197,8 +197,9 @@ export const useStore = defineStore({
       return this.isSideBarOpen
     },
     dropDownTreeList(state) {
-      // return state.masterTreeList.map(item => ({...item, label : item.value}))
-      return state.treeLists.map(item => ({...item, label : item.commonName}))
+      return state.masterTreeList.map(item => ({...item, label : item.value}))
+      // return state.treeLists.map(item => ({...item, label : item.value}))
+      // .filter(item => item.status != 0);
 
     },
     getUserInfo(state){

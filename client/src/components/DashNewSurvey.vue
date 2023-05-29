@@ -136,7 +136,7 @@
         <div class="formkit-option">
           <img :src="option.imgUrl" width="20px"/>
           <span>
-            {{ option.label }}
+            {{ option.value }}
           </span>
         </div>
         
@@ -240,8 +240,16 @@
 <!-- <XyzTransition class="item-group" xyz="fade up-100% out-up" mode="out-in"> -->
 <section key=4 v-show="step == 4">
   <div>
-<!-- <FormKit type="group" name="health"> -->
 <FormKit
+  type="rating"
+  name="health"
+  rating-icon="heart"
+  on-color="#DA012D"
+  id="health"
+  label="Health assessment rating (Vigor):"
+/>
+<!-- <FormKit type="group" name="health"> -->
+<!-- <FormKit
   type="rating"
   name="health"  
   rating-icon="heart"
@@ -252,7 +260,7 @@
   value="3"
   id="health"
   label="Health assessment rating (Vigor):"
-/>
+/> -->
 <div class="ratingGuide">
 <p>1 = Tree is weak with high stress and rot.</p>
 <p>2 = Tree has poor vigor and/or disease infection. </p>

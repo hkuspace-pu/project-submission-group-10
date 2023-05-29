@@ -18,10 +18,10 @@
 
 import "@formkit/themes/genesis"
 import { genesisIcons } from "@formkit/icons"
-import { createProPlugin, inputs } from '@formkit/pro'
+import { createProPlugin, inputs, dropdown,rating } from '@formkit/pro'
 import '@formkit/pro/genesis'
 
-const pro = createProPlugin('fk-577218191f7', inputs)
+const pro = createProPlugin('fk-577218191f7', inputs, dropdown,rating)
 
 const config = {
   plugins: [pro],
