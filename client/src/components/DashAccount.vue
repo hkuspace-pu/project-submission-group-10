@@ -40,9 +40,6 @@ const store = useStore();
 // localStorage.getItem('key');
 export default {
     data() {
-        const store = useStore();
-        // console.log( store.getUserInfo )
-
         var user_info = JSON.parse(localStorage.getItem('user_info'))
         var _uInfo = user_info.data[0]
         var email  = _uInfo.email
