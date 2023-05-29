@@ -68,6 +68,13 @@ const imageChange = (e) => {
 };
 
 onMounted(async () => {
+  const script = document.createElement('script');
+  script.src = 'https://unpkg.com/ml5@0.12.2/dist/ml5.min.js';
+  script.type = 'text/javascript';
+  script.async = true;
+  document.body.appendChild(script);
+
+
   classifier = ml5.imageClassifier(
     "https://teachablemachine.withgoogle.com/models/GbGUdIUyZ/",
     modelLoaded

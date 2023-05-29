@@ -17,7 +17,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      ml5: 'ml5/dist/ml5.min.js',
+      // ml5: 'ml5/dist/ml5.min.js',
     }
   },
   server: {
