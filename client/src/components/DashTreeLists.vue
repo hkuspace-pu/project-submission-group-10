@@ -27,7 +27,7 @@
           <div><label for="status">Create Date: </label>{{ data.createTimeFi }}</div>
           <div><label for="status">Status: </label>{{ data.status }}</div>
 
-          <div class="btnClass" >
+          <div class="btnClass" v-if="role==4">
             <button class="edit_btn" @click="editTree(data)"> Edit </button>
             <button class="delete_btn" @click="deleteTree(data)"> Delete </button>
           </div>
@@ -65,6 +65,35 @@
         <input required v-model="editData.nativeExoticFi" type="text" id="nativeExoticFi" name="nativeExoticFi"/></div>
     <div class="dialog-div"><label for="status">Status: </label>{{ editData.status }}</div>
   </Modal>
+
+  <Modal v-model:visible="store.isCreateNewTree" :okButton="createTreeBtn">
+    <div class="dialog-div"><label for="scientificName">Scientific Name </label>
+        <input required v-model="store.createTree.scientific_name" type="text" id="scientificName" name="scientificName"/></div>
+    <div class="dialog-div"><label for="scientificChiName">Scientific Chinese Name </label>
+        <input required v-model="store.createTree.scientific_chi_name" type="text" id="scientificChiName" name="scientificChiName"/></div>
+    <div class="dialog-div"><label for="commonName">Common Name: </label>
+        <input required v-model="store.createTree.common_name" type="text" id="commonName" name="commonName"/></div>
+    <div class="dialog-div"><label for="commonChiName">Common Chinese Name: </label>
+        <input required v-model="store.createTree.common_chi_name" type="text" id="commonChiName" name="commonChiName"/></div>
+
+    <div class="dialog-div"><label for="family">Family Name: </label>
+        <input required v-model="editData.family" type="text" id="family" name="family"/></div>
+    <div class="dialog-div"><label for="img_url">Img Url: </label>
+        <input required v-model="editData.img_url" type="text" id="img_url" name="img_url"/></div>
+        
+    <div class="dialog-div"><label for="shortDesc">Short Desc: </label>
+        <input required v-model="store.createTree.short_desc" type="text" id="shortDesc" name="shortDesc"/></div>
+    <div class="dialog-div"><label for="shortChiDesc">Short Desc (Chinese): </label>
+        <input required v-model="store.createTree.short_chi_desc" type="text" id="shortChiDesc" name="shortChiDesc"/></div>
+
+    <div class="dialog-div"><label for="longDesc">Long Desc: </label>
+        <input required v-model="store.createTree.long_desc" type="text" id="longDesc" name="longDesc"/></div>
+    <div class="dialog-div"><label for="longChiDesc">Long Desc (Chinese): </label>
+        <input required v-model="store.createTree.long_chi_desc" type="text" id="longChiDesc" name="longChiDesc"/></div>
+
+    <div class="dialog-div"><label for="nativeExotic">Native/Exotic Species: </label>
+        <input required v-model="store.createTree.native_exotic" type="text" id="nativeExoticFi" name="nativeExoticFi"/></div>
+  </Modal>
   
 
 <!-- </div> -->
@@ -86,6 +115,7 @@ let items = ref([]);
 let familyLists = ref([])
 let isVisible = ref(false);
 let editData = ref({})
+let role = ref(store.getUserInfo[0].role)
 
 const url = "https://api.hktreewatch.org";
 
@@ -116,6 +146,15 @@ onMounted(async () => {
     isDataLoading.value = true;
     await store.getFamilyList()
 
+    await getTreeList()
+  } catch (e) {
+    console.log("ERROR LOADING DATA ", e);
+  } finally {
+    isDataLoading.value = false;
+  }
+});
+
+const getTreeList = async () => {
     await store.getMasterTreeList()
     var jsonData = store.treeLists
     jsonData.forEach(jEle => {
@@ -123,13 +162,8 @@ onMounted(async () => {
       jEle['familyFi'] = filterFamily( jEle['family'] )
       jEle['nativeExoticFi'] = filterNativeExotic( jEle['nativeExotic'] )
     });
-    items = jsonData;
-  } catch (e) {
-    console.log("ERROR LOADING DATA ", e);
-  } finally {
-    isDataLoading.value = false;
-  }
-});
+    items.value = jsonData;
+}
 
 const filterFamily = ( _family ) => {
   var filterList = store.familyData.filter(( _lists ) => {
@@ -154,13 +188,12 @@ const dateFormat = ( _dateTime ) => {
 }
 
 const deleteTree = async ( _data ) => {
-  console.log( '_data', _data)
   var _json = {
 		"id": _data['id'],
 		"scientific_name" : _data['scientificName'],
 		"scientific_chi_name" : _data['scientificChiName'],
 		"family" : _data['family'],
-		"status" : 1,
+		"status" : 2,
 		"common_name" : _data['commonName'],
     "common_chi_name" : _data['commonChiName'],
     "img_url" : _data['imgUrl'],
@@ -171,38 +204,55 @@ const deleteTree = async ( _data ) => {
     "long_chi_desc" : _data['longChiDesc'],
     "create_time" : _data['createTime'],
 	}
-  editData.value = _json
   updateTree( _json )
 }
 
 const editTree = ( treeData ) => {
-  console.log( 'treeData', treeData )
   editData.value = treeData
   isVisible.value = true
 }
 
 const updateTree = async ( _json ) => {
-  const formData = new FormData();
+  store.updateTreeData = _json
+  await store.updateTree()
+  await getTreeList()
+  isVisible.value = true
 
-  console.log( 'updateData', JSON.stringify(_json) )
+}
 
-  // {"district":"Central","location":"18號 Harcourt Rd, Central","survey_date":"2023-05-28","id":null,"tree_tag":["Old & valuable"],"height":"25","crown":"35","stem_circumference":"9","health":3,"recommendation":"Trim","file":[{"name":"sprint_screen.jpeg","file":{}}],"amenity_value":"2","next_inspection_date":"2023-06-01","terms":true}
-  // {"id":1,"scientific_name":"Araucaria columnaris","scientific_chi_name":"柱狀南洋杉","family":1,"status":1,"common_name":"Cook Pine","common_chi_name":"柱狀南洋杉","img_url":"https://www.greening.gov.hk/filemanager/greening/en/content_83/Ara_col.jpg","short_desc":"Elegant upright tree with outstanding columnar shape..","long_desc":"Cook Pine is a native species of New Caledonia, an island located within Oceania in the Southern Hemisphere. The species is widely planted as street trees and horticultural plants across the tropics and subtropics. Being a tropical coastal plant, it is less tolerant to the cold.","native_exotic":2,"short_chi_desc":"優雅樹木，具顯眼的直立柱狀樹型。","long_chi_desc":"優雅樹木，具顯眼的直立柱狀樹型。","create_time":1672571097000}
-
-  formData.append("data", JSON.stringify(_json));
-  // formData.append("data", JSON.stringify(_json));
-  const updateResp = await fetch(url + '/updateMasterTreeTableById', {
-    method: "POST",
-    body:  formData
-  });
-  const updateData = await updateResp.json();
-  console.log( 'updateData', updateData )
+const createTree = async () => {
+  await store.submitCreateTree()
+  await getTreeList()
+  isVisible.value = false
 }
 
 let confirmBtn = ref({
   text: 'Confirm', 
   onclick: () => {
-    updateTree( {} )
+    var _json = {
+      "id": editData.value['id'],
+      "scientific_name" : editData.value['scientificName'],
+      "scientific_chi_name" : editData.value['scientificChiName'],
+      "family" : editData.value['family'],
+      "status" : editData.value['status'],
+      "common_name" : editData.value['commonName'],
+      "common_chi_name" : editData.value['commonChiName'],
+      "img_url" : editData.value['imgUrl'],
+      "short_desc" : editData.value['shortDesc'],
+      "long_desc" : editData.value['longDesc'],
+      "native_exotic" : editData.value['nativeExotic'],
+      "short_chi_desc" : editData.value['shortChiDesc'],
+      "long_chi_desc" : editData.value['longChiDesc'],
+      "create_time" : editData.value['createTime'],
+	  }
+    updateTree( _json )
+  }
+})
+
+let createTreeBtn = ref({
+  text: 'Create', 
+  onclick: () => {
+    createTree()
   }
 })
 

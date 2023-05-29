@@ -1,5 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import * as d3 from 'd3'
+import { saveAs } from 'file-saver'
 
 export const useStore = defineStore({
   id: 'store',
@@ -16,6 +18,10 @@ export const useStore = defineStore({
   userLists: [],
   deleteUserId: null,
   updateUserJson: null,
+  exportSurveyTsv: false,
+  isCreateNewTree: false,
+  createTree: null,
+  updateTreeData: null
   }),  
 
   actions : {
@@ -188,6 +194,76 @@ export const useStore = defineStore({
     });
     const update_resp = await updateResp.json();
     return update_resp
+  },
+
+  async downloadTsv() {
+      let tsvContent = "";
+      let tsvKey = ''
+
+      tsvKey = Object.keys( this.surveyItemsSelected[0] ).join("\t");
+
+      this.surveyItemsSelected.forEach(it_select => {
+          let row = Object.values(it_select).join("\t");
+          tsvContent += row + "\n";
+      });
+
+      tsvContent = tsvKey + "\n" + tsvContent
+
+      // // Save the CSV string as a TSV file
+      const blob = new Blob([tsvContent], { type: 'text/tab-separated-values' })
+      saveAs(blob, 'output.tsv')
+
+  },
+
+  async createNewTree() {
+    this.createTree = {
+      "scientific_name" : '',
+      "scientific_chi_name" : '',
+      "family" : '',
+      "common_name" : '',
+      "common_chi_name" : '',
+      "img_url" : '',
+      "short_desc" : '',
+      "long_desc" : '',
+      "native_exotic" : '',
+      "short_chi_desc" : '',
+      "long_chi_desc" : '',
+    }
+    this.isCreateNewTree = true
+  },
+
+  async submitCreateTree() {
+    let path = 'insertMasterTreeTable'
+    let cData = {
+      data: this.createTree
+    }
+    console.log( 'createTree', cData )
+    const updateResp = await fetch(this.baseURL + path, {
+      method: "POST",
+      body: JSON.stringify(cData),
+      headers : {
+        "Content-type": "application/json;charset=UTF-8",
+      }
+    });
+    const update_resp = await updateResp.json();
+    return update_resp 
+  },
+
+  async updateTree() {
+    let path = 'updateMasterTreeTableById'
+    let pData = {
+      data: this.updateTreeData
+    }
+
+    const updateResp = await fetch(this.baseURL + path, {
+      method: "POST",
+      body: JSON.stringify(pData),
+      headers : {
+        "Content-type": "application/json;charset=UTF-8",
+      }
+    });
+    const update_resp = await updateResp.json();
+    return update_resp 
   }
 
   },
