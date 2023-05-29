@@ -3,10 +3,11 @@
   <!-- USING A LABELED DATASET AND Images -->
 
   <div class="classifyContainer">
-    <h2 class="dark">Tree classification tool</h2>
+    <h2 class="dark">Tree Classification</h2>
+    <h4 style="text-align:center" class="dark">If you are unsure which tree you are surveyors, use our AI prediction tool.</h4>
 
     <div class="loading" v-if="loadingModel">
-      <h2 class="dark">Loading Model...</h2>
+      <h2 class="dark">Please wait, loading model data.</h2>
       <progress></progress>
     </div>
 
@@ -35,7 +36,13 @@
 
       <img v-show="imagePath" ref="previewImage" class="previewImage" :src="imagePath" />
 
-      <button v-if="imagePath" class="btn" @click="start">Start</button>
+      <button v-if="imagePath" class="btn" @click="start">
+
+         <transition name="spinner" mode="out-in">
+                  <span key="notloading" class="btnText" v-if="!isLoading">Start</span>
+                  <span key="loading" class="btnText" v-else>  <fa size="lg" icon="spinner" pulse> </fa> </span>
+                </transition>
+</button>
     </div>
   </div>
 </template>
@@ -50,7 +57,7 @@ const classifyResults = ref([]);
 // console.log(ml5.version);
 const previewImage = ref(null);
 let classifier = ref(null);
-
+const isLoading = ref(false);
 const imageChange = (e) => {
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -88,7 +95,8 @@ const modelLoaded = () => {
 
 const start = async () => {
      console.log("starting");
-    console.log(classifyResults.value.length)
+ 
+
     if (classifyResults.value.length >= 1) {
     classifyResults.value  = []
     imagePath.value = null
@@ -96,15 +104,18 @@ const start = async () => {
     
     }
  
-  console.log(previewImage);
+
  
 
   try {
+    
+    isLoading.value = true
     const results = await classifier.classify(previewImage.value);
-    console.log(results);
     classifyResults.value = results;
   } catch (error) {
     console.error(error);
+  } finally {
+       isLoading.value = false
   }
 };
 </script>
@@ -115,6 +126,7 @@ margin: 1rem;
 }
 
 .loading {
+    margin: 2rem 0;
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -134,7 +146,7 @@ margin: 1rem;
 img {
   object-fit: cover;
   border-radius: 4px;
-  width: 375px;
+  height: 250px;
   /* height: 320px; */
   /* border:1px solid red; */
 }

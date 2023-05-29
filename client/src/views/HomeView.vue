@@ -6,7 +6,9 @@ import Banner from '@/components/Banner.vue';
 import TheHero from '@/components/TheHero.vue'
 import Game from '@/components/Game.vue'
 import TheNav from '@/components/TheNav.vue'
+import Help from '@/components/TheHelp.vue'
 import Faq from '@/components/TheFaq.vue'
+import About from '@/components/About.vue'
 import TheFoot from '@/components/TheFoot.vue'
 import {useStore} from '@/stores/state.js'
 import ShortQuestion from '@/components/ShortQuestion.vue';
@@ -49,16 +51,12 @@ const store = useStore()
   <Suspense>
     <template #default>
       <Faq />
-
-    </template>
- 
-    <template #fallback>
-      <div>Loading...</div>
-      <!-- <Faq /> -->
-      
     </template>
   </Suspense>
 
+      <Help id="help"></Help>
+
+           <About id="about"></About> 
   <TheFoot/>
   
 

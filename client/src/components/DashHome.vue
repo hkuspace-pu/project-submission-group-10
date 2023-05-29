@@ -55,7 +55,14 @@
             </div>
           </div>
           <div class="rightSide">
-            <p>Next inspection date : {{changeDate(data.nextInspectionDate)}}</p>
+              <div class="surveyOptions">
+                  <p>Next inspection date : {{changeDate(data.nextInspectionDate)}}</p> 
+                  <button  v-if="!isEdit" @click="isEdit = true">Edit</button>
+                  <button  v-if="isEdit" @click="isEdit = true">Save</button>
+                  <button  v-if="isEdit" @click="isEdit = false">Cancel</button>
+
+              </div>
+            
             <table class="dataTable">
               <thead>
                 <tr>
@@ -66,7 +73,12 @@
               <tbody>
                 <tr>
                   <td>Common Name</td>
-                  <td>{{ data.commonName }}</td>
+                  <td v-if="!isEdit">{{ data.commonName }}</td>
+                  <td v-if="isEdit">
+                    <select @change="treeChanged" id="tree-select" v-model="newTree">
+                  <option v-for="tree in store.dropDownTreeList" :value="tree.commonName" :key="tree.id">{{ tree.commonName }}</option>
+                  </select>
+                  </td>
                 </tr>
                 <tr>
                   <td>Scientific Name</td>
@@ -79,7 +91,7 @@
                 </tr>
                 <tr>
                   <td>TCMP ID</td>
-                  <td>
+                  <td :contenteditable="isEdit">
                     
                     <!-- <iframe :src="`https://www.greening.gov.hk/tree_qr_label/?unitid=${data.tcmpId}`" frameborder="0" allowfullscreen sandbox="allow-forms allow-popups allow-same-origin allow-scripts"></iframe> -->
                     
@@ -89,11 +101,11 @@
                 </tr>
                 <tr>
                   <td>Location</td>
-                  <td>{{ data.location }}</td>
+                  <td :contenteditable="isEdit">{{ data.location }}</td>
                 </tr>
                 <tr>
                   <td>District</td>
-                  <td>{{ data.district }}</td>
+                  <td :contenteditable="isEdit">{{ data.district }}</td>
                 </tr>
             
                 <tr>
@@ -102,16 +114,16 @@
                 </tr>
                  <tr>
                   <td>Amenity Value</td>
-                  <td>{{ data.amenityValue }} / 5</td>
+                  <td :contenteditable="isEdit">{{ data.amenityValue }} / 5</td>
                 </tr>
                 <tr>
                   <td>Height(feet)</td>
-                  <td>{{ data.height }}
+                  <td :contenteditable="isEdit">{{ data.height }}
                   </td>
                 </tr>
                 <tr>
                   <td>Health rating</td>
-                  <td>
+                  <td :contenteditable="isEdit">
                     <img class="heart" v-for="index in data.health" src="../assets/images/heartFill.svg" />
                     <span v-if="data.health < 5">
                       <img class="heart" v-for="index in (5 - data.health)" src="../assets/images/heartEmpty.svg" />
@@ -156,9 +168,10 @@ import { ref, computed,onMounted } from 'vue';
 const isDataLoading = ref(false);
 const clickedRow = ref(null)
 const itemsSelected = ref([])
-
+const newTree = ref()
 import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
+const isEdit = ref(false)
 import { useStore } from "@/stores/state.js";
 const store = useStore();
 // let data = ref([])
@@ -223,6 +236,11 @@ const selectedImage = computed(() => {
 })
 
 
+const treeChanged = () => {
+  console.log("Tree select box changed")
+
+
+}
 
 // Dummy Json Data
 const headers = [
@@ -421,6 +439,13 @@ const headers = [
 
 }
 
+.surveyOptions {
+  display:flex;
+  max-width: 520px;
+  flex-direction: row;
+  justify-content: space-between;
+  /* border:1px solid red; */
+}
 .rightSide p {
   margin: 0 20px;
   font-size: 16px;

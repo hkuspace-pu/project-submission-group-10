@@ -132,6 +132,8 @@
       :options="store.dropDownTreeList"
     >
 
+
+
     <template #option="{ option }">
         <div class="formkit-option">
           <img :src="option.imgUrl" width="20px"/>
@@ -141,12 +143,16 @@
         </div>
         
       </template>
+
+      
       
      </FormKit>
      <div v-if="treeID" class="details">
     {{ treeID.longChiDesc }}
      
      </div>
+
+     <p style="margin:10px">Don't know the tree name? Try our<router-link class="link underline" :to="{name:'ml'}"> AI tool</router-link></p>
 
     <FormKit
       type="taglist"
@@ -594,7 +600,9 @@ const nextText = computed(() => {
   }
 });
 
-const handleIconClick = () => {};
+const handleIconClick = () => {
+  window.alert("Enter the tree name")
+};
 
 const newSurvey = () => {
   formStatus.value = false;

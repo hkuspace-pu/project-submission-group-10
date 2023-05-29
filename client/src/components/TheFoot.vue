@@ -10,7 +10,7 @@
         </li>
         <router-link tag="li" :to="{name:'privacy'}">• Privacy Policy</router-link> 
         <li>
-            • Important Notices
+            <a href="mailto:info@hktreewatch.org">• Contact us</a>
         </li>
     </ul>
       

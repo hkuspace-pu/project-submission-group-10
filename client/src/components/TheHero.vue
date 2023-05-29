@@ -25,13 +25,13 @@
       </div>
     </XyzTransition>
     <XyzTransition appear xyz="fade right delay-4">
-      <div class="circle c2">
+      <a href="#help"><div class="circle c2">
     
        <img src="../assets/images/adult1.png" />
          <div class="shownText">Help</div>
        <div class="hiddenText">Help Survey</div>
   
-      </div>
+      </div></a>
     </XyzTransition>
     <XyzTransition appear xyz="fade right delay-6">
           <div class="circle c3">
@@ -41,11 +41,11 @@
        </div>
     </XyzTransition>
     <XyzTransition appear xyz="fade left delay-8">
-         <div class="circle c4">
+        <a target="_blank" href="https://www.1823.gov.hk/en/form/complain/tree"> <div class="circle c4">
          <img src="../assets/images/fallen_tree.png" />
              <div class="shownText">Report</div>
                 <div class="hiddenText">Report fallen tree</div>
-           </div>
+           </div></a>
     </XyzTransition>
   </div>
 </template>
