@@ -179,12 +179,12 @@ const filterNativeExotic = ( _nativeExotic ) => {
 
 const dateFormat = ( _dateTime ) => {
   var _date = new Date(_dateTime)
-  return  _date.getDate()+ 
-           "/"+(_date.getMonth()+1)+
-           "/"+_date.getFullYear()+
-           " "+_date.getHours()+
-           ":"+String(_date.getMinutes()).padStart(2, '0')+
-           ":"+_date.getSeconds()
+    return   String(_date.getDate()).padStart(2, '0')+
+              "/"+String((_date.getMonth()+1)).padStart(2, '0')+
+              "/"+_date.getFullYear()+
+              " "+String(_date.getHours()).padStart(2, '0')+
+              ":"+String(_date.getMinutes()).padStart(2, '0')+
+              ":"+String(_date.getSeconds()).padStart(2, '0')
 }
 
 const deleteTree = async ( _data ) => {

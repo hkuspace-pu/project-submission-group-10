@@ -16,23 +16,32 @@
     </div>
 
     <div>
-      <button class="btn_loggout" @click="loggout()">
-        Loggout
-      </button>
+      <button class="user_btn btn_loggout" @click="loggout()">Loggout</button>
     </div>
 
   </div>
+
+  <div style="padding: 0 2rem;">
+      <button class="user_btn log_btn" @click="getActivityLog()"> Show Activity Log </button>
+      <div v-for="log in activityLogLists" :key="log.id">
+        <label for="name">Date: {{ dateFormat(log.createTime) }}</label>&nbsp;&nbsp;&nbsp;
+        <label for="name">Activity: {{ log.activityLog }}</label>
+      </div>
+    </div>
+
 
 </template>
 
 <script>
 import { ref,computed } from 'vue';
+import { Modal } from 'usemodal-vue3';
 import { useStore } from "@/stores/state.js";
+const store = useStore();
 // localStorage.getItem('key');
 export default {
     data() {
         const store = useStore();
-        console.log( store.getUserInfo )
+        // console.log( store.getUserInfo )
 
         var user_info = JSON.parse(localStorage.getItem('user_info'))
         var _uInfo = user_info.data[0]
@@ -47,15 +56,34 @@ export default {
            "/"+createTime.getFullYear()+
            " "+createTime.getHours()+
            ":"+createTime.getMinutes()+
-           ":"+createTime.getSeconds()
+           ":"+createTime.getSeconds();
+        let isActivityVisible = false
+        let activityLogLists = []
         return {
-            full_name, points, join_date, email, phoneNumber
+            full_name, points, join_date, email, phoneNumber, isActivityVisible, activityLogLists, Modal
         }
     },
     methods: {
       loggout() {
         localStorage.removeItem("user_info");
         window.location.href = '/login'
+      },
+
+      async getActivityLog() {
+        store.activityLogUserId = store.getUserInfo[0].userId
+        const activity_log = await store.getActivityLogByUserId()
+        this.activityLogLists = activity_log.data
+        this.isActivityVisible = true
+      },
+
+      dateFormat(_dateTime) {
+        var _date = new Date(_dateTime)
+        return   String(_date.getDate()).padStart(2, '0')+
+            "/"+String((_date.getMonth()+1)).padStart(2, '0')+
+            "/"+_date.getFullYear()+
+            " "+String(_date.getHours()).padStart(2, '0')+
+            ":"+String(_date.getMinutes()).padStart(2, '0')+
+            ":"+String(_date.getSeconds()).padStart(2, '0')
       }
     }
 };
@@ -67,7 +95,7 @@ export default {
     display:flex;
     flex-direction: row;
     gap:20px;
-    height: 200px;
+    height: 380px;
     width: 100%;
     padding: 2rem;
     /* border:1px solid red; */
@@ -87,13 +115,21 @@ export default {
 }
 
 .btn_loggout {
+    background-color: #2E7D32;
+}
+
+.user_btn {
     padding: 5px 10px;
     border-radius: 5px;
     border: 1px;
     margin: 10px;
-    background-color: #2E7D32;
     color: white;
     font-size: 15px;
+}
+
+.log_btn {
+    background-color: var(--brown);
+    margin: 10px 0;
 }
 
 </style>

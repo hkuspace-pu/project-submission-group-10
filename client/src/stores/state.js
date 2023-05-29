@@ -21,7 +21,8 @@ export const useStore = defineStore({
   exportSurveyTsv: false,
   isCreateNewTree: false,
   createTree: null,
-  updateTreeData: null
+  updateTreeData: null,
+  activityLogUserId: null
   }),  
 
   actions : {
@@ -196,6 +197,20 @@ export const useStore = defineStore({
     return update_resp
   },
 
+  async getActivityLogByUserId() {
+    let path = '/getAllActivityLogList'
+    const formData = new FormData();
+    formData.append("userId", this.activityLogUserId);
+    formData.append("roleId", this.getUserInfo[0].role);
+
+    const resp = await fetch(this.baseURL + path, {
+      method: "POST",
+      body:  formData
+    });
+    const resp_json = await resp.json();
+    return resp_json
+  },
+
   async downloadTsv() {
       let tsvContent = "";
       let tsvKey = ''
@@ -264,6 +279,16 @@ export const useStore = defineStore({
     });
     const update_resp = await updateResp.json();
     return update_resp 
+  },
+
+  async dateFormat( _dateTime ) {
+    var _date = new Date(_dateTime)
+    return   String(_date.getDate()).padStart(2, '0')+
+              "/"+String((_date.getMonth()+1)).padStart(2, '0')+
+              "/"+_date.getFullYear()+
+              " "+String(_date.getHours()).padStart(2, '0')+
+              ":"+String(_date.getMinutes()).padStart(2, '0')+
+              ":"+String(_date.getSeconds()).padStart(2, '0')
   }
 
   },
