@@ -19,7 +19,7 @@
             <fa class="icon" size="2x" icon="notes-medical" :class="$route.name=='feature_new' && 'focused'"/>
         </router-link>
 
-        <router-link v-if="role=='Admin'||role=='Moderator'" tag="div" class="row" :to="{name:'trees'}" >
+        <router-link tag="div" class="row" :to="{name:'trees'}" >
             <fa class="icon" size="2x" icon="tree" :class="$route.name=='trees' && 'focused'"/>
         </router-link>
 
