@@ -36,10 +36,10 @@
 import { ref,computed } from 'vue';
 import { Modal } from 'usemodal-vue3';
 import { useStore } from "@/stores/state.js";
-const store = useStore();
 // localStorage.getItem('key');
 export default {
     data() {
+      const store = useStore();
         var user_info = JSON.parse(localStorage.getItem('user_info'))
         var _uInfo = user_info.data[0]
         var email  = _uInfo.email
@@ -57,7 +57,7 @@ export default {
         let isActivityVisible = false
         let activityLogLists = []
         return {
-            full_name, points, join_date, email, phoneNumber, isActivityVisible, activityLogLists, Modal
+            full_name, points, join_date, email, phoneNumber, isActivityVisible, activityLogLists, Modal, store
         }
     },
     methods: {
