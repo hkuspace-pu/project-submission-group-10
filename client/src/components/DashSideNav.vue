@@ -41,9 +41,9 @@
         <router-link v-if="role=='Admin'||role=='Moderator'" tag="div" class="row" :to="{name:'users'}" >
             <fa class="icon" size="2x" icon="users" :class="$route.name=='users' && 'focused'"/>
         </router-link>
-        <router-link tag="div" class="row" :to="{name:'admin_account'}" >
+        <!-- <router-link tag="div" class="row" :to="{name:'admin_account'}" >
             <fa class="icon" size="2x" icon="circle-user" :class="$route.name=='admin_account' && 'focused'"/>
-        </router-link>
+        </router-link> -->
     
     </footer>
 

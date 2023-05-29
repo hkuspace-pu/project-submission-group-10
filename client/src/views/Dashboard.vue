@@ -11,10 +11,10 @@
         <div class="dashMenu">
        <div class="title"> {{$route.meta.title}}</div>
        <div class="dashIcons">
-       <div @click="refreshData" v-if="$route.path == '/dash' && !store.surveyItemsSelected.length" class="refresh"><fa size="2x" :spin="store.surveyLoading" icon="arrows-rotate"/></div>
-       <fa @click="store.deleteSurvey()" v-if="store.surveyItemsSelected.length && $route.path == '/dash'"  size="2x" icon="trash"/>
-       <fa @click="store.approveSurvey(undefined,9)" style="color:var(--accept)" v-if="store.surveyItemsSelected.length && $route.path == '/dash' && isAdmin"  size="2x" icon="thumbs-up"/>
-        <fa @click="store.approveSurvey(undefined,2)" style="color:var(--warning)" v-if="store.surveyItemsSelected.length && $route.path == '/dash' && isAdmin"  size="2x" icon="thumbs-down"/>
+       <div @click="refreshData" v-if="$route.path == '/dash' && !store.surveyItemsSelected.length" class="refresh"><fa size="lg" :spin="store.surveyLoading" icon="arrows-rotate"/></div>
+       <fa @click="store.deleteSurvey()" v-if="store.surveyItemsSelected.length && $route.path == '/dash'"  size="lg" icon="trash"/>
+       <fa @click="store.approveSurvey(undefined,9)" style="color:var(--accept)" v-if="store.surveyItemsSelected.length && $route.path == '/dash' && isAdmin"  size="lg" icon="thumbs-up"/>
+        <fa @click="store.approveSurvey(undefined,2)" style="color:var(--warning)" v-if="store.surveyItemsSelected.length && $route.path == '/dash' && isAdmin"  size="lg" icon="thumbs-down"/>
         </div>
         </div>
         <div class="dashMiddleBox">
