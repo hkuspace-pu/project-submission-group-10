@@ -234,13 +234,13 @@ export const useStore = defineStore({
     this.createTree = {
       "scientific_name" : '',
       "scientific_chi_name" : '',
-      "family" : '',
+      "family" : 1,
       "common_name" : '',
       "common_chi_name" : '',
       "img_url" : '',
       "short_desc" : '',
       "long_desc" : '',
-      "native_exotic" : '',
+      "native_exotic" : 1,
       "short_chi_desc" : '',
       "long_chi_desc" : '',
     }

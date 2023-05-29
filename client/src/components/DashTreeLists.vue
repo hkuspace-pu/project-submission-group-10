@@ -223,7 +223,7 @@ const updateTree = async ( _json ) => {
 const createTree = async () => {
   await store.submitCreateTree()
   await getTreeList()
-  isVisible.value = false
+  store.isCreateNewTree = false
 }
 
 let confirmBtn = ref({
