@@ -461,7 +461,8 @@ table.dataTable {
 
 .customize-table {
   height: 100%;
-  overflow-y: auto;
+  /* border:1px solid red; */
+  /* overflow-y: auto; */
   /* overflow:hidden; */
   border-radius: 12px;
 }

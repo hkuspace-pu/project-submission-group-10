@@ -315,6 +315,7 @@
 <FormKit
   type="file"
   name="file"
+  @change="onfileInput"
   label="Add  media"
   validation="required"
   accept=".jpg,.png.,webp"
@@ -354,8 +355,8 @@
 
 <div class="rightSide">
   <p>Images</p>
-  <div  class="preview">
-   <img  src="https://dummyimage.com/180x180/cccccc/c6b6b6.png&text=placeholder" id="file-ip-1-preview">
+  <div class="preview">
+   <img  :src="thumbnail_preview" id="file-ip-1-preview">
  </div>
 
 
@@ -489,7 +490,7 @@ const endpoint = 'https://hktreewatch.oss-cn-hongkong.aliyuncs.com'
 // const data = reactive(null);
 // import AddressAutocomplete from 'vue-google-maps-address-autocomplete';
 const step = ref(1);
-
+const thumbnail_preview = ref(null)
 const uploadFile = (async (obj) => {
   console.log(obj)
   console.log('UPLOADING FILE ', obj.file.name)
@@ -664,9 +665,15 @@ fireworks.start()
   // step.value = 1;
 };
 
-const onfileInput = (event) => {
-  // const files = toRaw(event.target.files);
-  // console.log(files)
+const onfileInput = (e) => {
+  console.log('FILE INPUT')
+    const file = e.target.files[0]
+    const reader = new FileReader();
+    reader.onload = () => {
+        thumbnail_preview.value = reader.result
+    
+    }
+   reader.readAsDataURL(file);
   };
 
 const passData = (e) => {
@@ -829,8 +836,17 @@ onMounted(async () => {
   object-fit: cover;
   border: 1px solid grey;
   border-radius: 16px;
+  /* max-width: 150px; */
+  /* max-height: 150px; */
+  /* width: 150px; */
+  /* height: 150px; */
+  
   /* width: 100%; */
   /* height: 100%; */
+}
+
+.preview img {
+  max-width: 300px;
 }
 .class-append {
   border: 1px solid red;

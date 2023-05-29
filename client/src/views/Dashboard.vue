@@ -136,10 +136,6 @@ backdrop-filter: blur(5px);
 border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.dashIcons  :nth-child():hover{
- opacity: 0.5;
-}
-
 .title {
     font-size: 20px;
     /* margin-bottom:1rem; */
@@ -150,11 +146,12 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     /* overflow:hidden; */
 
     background-color: #fefefe;
-    height: calc( 100% - 25px);
+    height: calc( 100% - 65px);
     /* height: 100px; */
     width: 100%;
-    /* overflow:hidden; */
-    overflow:scroll;
+    overflow-x:hidden;
+/* overflow:hidden; */
+    overflow-y:auto;
     box-shadow: 10px 10px 12px -12px rgba(0,0,0,0.25);
 }
 

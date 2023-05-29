@@ -31,6 +31,9 @@
         <router-link  tag="div" class="row" :to="{name:'blog'}" >
             <fa class="icon" size="2x" icon="newspaper" :class="$route.name=='blog' && 'focused'"/>
         </router-link>
+          <router-link  tag="div" class="row" :to="{name:'ml'}" >
+            <fa class="icon" size="2x" icon="lightbulb" :class="$route.name=='blog' && 'focused'"/>
+        </router-link>
     </div>
 
 

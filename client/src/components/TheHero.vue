@@ -18,7 +18,7 @@
     </div>
     <XyzTransition appear xyz="fade left delay-1">
       <div class="circle c1">
-        <img src="../assets/images/child_image.png" />
+        <img src="../assets/images/child_image.jpg" />
         <div class="shownText">Learn</div>
         <div class="hiddenText">Learn to plant</div>
         
