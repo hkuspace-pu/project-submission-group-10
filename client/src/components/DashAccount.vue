@@ -5,14 +5,14 @@
       <img class="account_icon" src="../assets/images/man.png" /> 
     </div>
     <div class="account_detail">
-      <div><label for="name">Name: </label>{{ full_name }}</div>
-      <div><label for="date">Email: </label>{{ email }}</div>
-      <div><label for="date">Contnet: </label>{{ phoneNumber }}</div>
-      <div><label for="points">Points: </label>{{ points }}</div>
-      <div><label for="date">Joined: </label>{{ join_date }}</div>
-      <div><label for="location">
+      <div><label for="name">Name: </label>{{ _uInfo.userName }}</div>
+      <div><label for="date">Email: </label>{{ _uInfo.email }}</div>
+      <div><label for="date">Contnet: </label>{{ _uInfo.phoneNumber }}</div>
+      <div><label for="points">Points: </label>{{ _uInfo.point }}</div>
+      <div><label for="date">Joined: </label>{{ dateFormat(_uInfo.createTime) }}</div>
+      <!-- <div><label for="location">
         <fa class="icon" size="1x" icon="location-dot"/>
-      </label> {{ location }}</div>
+      </label> {{ location }}</div> -->
     </div>
 
     <div>
@@ -32,58 +32,61 @@
 
 </template>
 
-<script>
-import { ref,computed } from 'vue';
+<script setup>
+import { ref,computed, onMounted } from 'vue';
 import { Modal } from 'usemodal-vue3';
 import { useStore } from "@/stores/state.js";
-// localStorage.getItem('key');
-export default {
-    data() {
-      const store = useStore();
-        var user_info = JSON.parse(localStorage.getItem('user_info'))
-        var _uInfo = user_info.data[0]
-        var email  = _uInfo.email
-        var phoneNumber  = _uInfo.phoneNumber
-        var role  = _uInfo.role
-        var full_name = _uInfo.userName
-        var points = _uInfo.point
-        var createTime = new Date(_uInfo.createTime)
-        var join_date = createTime.getDate()+
-           "/"+(createTime.getMonth()+1)+
-           "/"+createTime.getFullYear()+
-           " "+createTime.getHours()+
-           ":"+createTime.getMinutes()+
-           ":"+createTime.getSeconds();
-        let isActivityVisible = false
-        let activityLogLists = []
-        return {
-            full_name, points, join_date, email, phoneNumber, isActivityVisible, activityLogLists, Modal, store
-        }
-    },
-    methods: {
-      loggout() {
-        localStorage.removeItem("user_info");
-        window.location.href = '/login'
-      },
 
-      async getActivityLog() {
-        store.activityLogUserId = store.getUserInfo[0].userId
-        const activity_log = await store.getActivityLogByUserId()
-        this.activityLogLists = activity_log.data
-        this.isActivityVisible = true
-      },
+const store = useStore()
 
-      dateFormat(_dateTime) {
-        var _date = new Date(_dateTime)
-        return   String(_date.getDate()).padStart(2, '0')+
-            "/"+String((_date.getMonth()+1)).padStart(2, '0')+
-            "/"+_date.getFullYear()+
-            " "+String(_date.getHours()).padStart(2, '0')+
-            ":"+String(_date.getMinutes()).padStart(2, '0')+
-            ":"+String(_date.getSeconds()).padStart(2, '0')
-      }
-    }
+let _uInfo = ref({})
+let isActivityVisible = ref(false)
+let activityLogLists = ref([])
+
+onMounted(async () => {
+  if (!store.getUserInfo) {
+    router.push({ name: "login" });
+  }
+
+  try {
+    var user_info = store.getUserInfo[0]
+    _uInfo.value = user_info
+  } catch (e) {
+    console.log("ERROR LOADING DATA ", e);
+  } finally {
+
+  }
+});
+
+// var email = ref(_uInfo.email)
+// var phoneNumber = (_uInfo.phoneNumber)
+// var role  = _uInfo.role
+// var full_name = _uInfo.userName
+// var points = _uInfo.point
+// var createTime = new Date(_uInfo.createTime) 
+
+const loggout = () => {
+  localStorage.removeItem("user_info");
+  window.location.href = '/login'
 };
+
+const getActivityLog = async () => {
+  store.activityLogUserId = store.getUserInfo[0].userId
+  const activity_log = await store.getActivityLogByUserId()
+  activityLogLists.value = activity_log.data
+  isActivityVisible.value = true
+};
+
+const dateFormat = ( _dateTime ) => {
+  var _date = new Date(_dateTime)
+    return   String(_date.getDate()).padStart(2, '0')+
+              "/"+String((_date.getMonth()+1)).padStart(2, '0')+
+              "/"+_date.getFullYear()+
+              " "+String(_date.getHours()).padStart(2, '0')+
+              ":"+String(_date.getMinutes()).padStart(2, '0')+
+              ":"+String(_date.getSeconds()).padStart(2, '0')
+}
+
 
 </script>
 
