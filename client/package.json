@@ -10,9 +10,9 @@
     "@animxyz/core": "^0.6.6",
     "@animxyz/vue3": "^0.6.7",
     "@fireworks-js/vue": "^2.10.4",
-    "@formkit/pro": "^0.112.5",
-    "@formkit/themes": "^0.17.2",
-    "@formkit/vue": "^0.17.2",
+    "@formkit/icons": "latest",
+    "@formkit/pro": "latest",
+    "@formkit/vue": "latest",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^3.0.1",
@@ -26,15 +26,15 @@
     "ml5": "^0.12.2",
     "pinia": "^2.0.27",
     "usemodal-vue3": "^0.3.7",
-    "vue": "^3.2.45",
+    "vue": "^3.2.47",
     "vue-chart-3": "^3.1.8",
     "vue-router": "^4.1.5",
     "vue3-easy-data-table": "^1.5.22",
     "vue3-google-map": "^0.15.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.2.0",
-    "vite": "^3.2.5",
+    "@vitejs/plugin-vue": "^4.1.0",
+    "vite": "^4.3.2",
     "vite-plugin-browser-sync": "^1.0.3",
     "vite-plugin-mkcert": "^1.13.3"
   }

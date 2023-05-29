@@ -12,8 +12,8 @@ import { FontAwesomeIcon as fa } from '@fortawesome/vue-fontawesome'
 import { faBars,faTree,faXmark,faFilePen,faUser,faSpinner,faHouse,faCircleQuestion,faNotesMedical,faCircleUser,faChartSimple
         ,faLocationDot, faFileArrowUp, faLayerGroup, faFileCirclePlus,faChevronRight,faUsers,faNewspaper,faChevronLeft,faArrowsRotate,faTrash,faThumbsUp,faThumbsDown,faLightbulb } from '@fortawesome/free-solid-svg-icons'
 import VueAnimXyz from '@animxyz/vue3'
-
-
+import { plugin, defaultConfig } from '@formkit/vue'
+import formKitConfig from './formkit.config'
 /* add icons to the library */
 
 library.add(faBars,faTree,faXmark,faFilePen,faUser,faSpinner,faHouse,faCircleQuestion,faNotesMedical,faCircleUser,faChartSimple
@@ -36,18 +36,19 @@ import Teaser from "./components/Teaser.vue";
 import Feature from "./components/Feature.vue";
 
 
-import { plugin, defaultConfig } from '@formkit/vue'
-import { createProPlugin,rating,toggle,dropdown } from '@formkit/pro'
-import '@formkit/themes/genesis'
-import '@formkit/pro/genesis'
+// import { plugin, defaultConfig } from '@formkit/vue'
+// import { createProPlugin, rating, toggle, dropdown } from '@formit/pro'
+// import '@formkit/themes/genesis'
+// import '@formkit/pro/genesis'
 // import '@formkit/themes/genesis'
 import './assets/main.css'
 import '@animxyz/core'
 
 
+// const pro = createProPlugin('fk-577218191f7', {rating,toggle,dropdown})
 
 const app = createApp(App)
-
+app.use(plugin, defaultConfig(formKitConfig))
 //STORY BLOCK STUFF
 app.component("Grid", Grid);
 app.component("Page", Page);
@@ -55,10 +56,15 @@ app.component("Teaser", Teaser);
 app.component("Feature", Feature);
 
 
-const pro = createProPlugin('fk-577218191f7', {rating,toggle,dropdown})
-app.use(plugin, defaultConfig)
-app.use(pro, defaultConfig({ plugins: [pro] }))
 
+// app.use(pro, defaultConfig({ plugins: [pro] }))
+// const proPlugin = createProPlugin('fk-577218191f7', {
+//         rating,
+//         toggle,
+//         dropdown
+//         // ... and any other Pro Inputs
+//       })
+//       app.use(proPlugin, defaultConfig)
 app.component('fa', fa)
 app.use(VueAnimXyz)
 app.use(createPinia())
