@@ -37,7 +37,7 @@ import Feature from "./components/Feature.vue";
 
 
 import { plugin, defaultConfig } from '@formkit/vue'
-import { createProPlugin, inputs } from '@formkit/pro'
+import { createProPlugin,rating,toggle,dropdown } from '@formkit/pro'
 import '@formkit/themes/genesis'
 import '@formkit/pro/genesis'
 // import '@formkit/themes/genesis'
@@ -55,8 +55,9 @@ app.component("Teaser", Teaser);
 app.component("Feature", Feature);
 
 
-const pro = createProPlugin('fk-577218191f7', inputs)
-app.use(plugin, defaultConfig({ plugins: [pro] }))
+const pro = createProPlugin('fk-577218191f7', {rating,toggle,dropdown})
+app.use(plugin, defaultConfig)
+app.use(pro, defaultConfig({ plugins: [pro] }))
 
 app.component('fa', fa)
 app.use(VueAnimXyz)
