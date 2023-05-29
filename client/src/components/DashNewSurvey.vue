@@ -163,14 +163,14 @@
 
     <div  class="rightSide"> 
         <XyzTransition appear xyz="fade" mode="out-in">  
-        <div  v-if="treeID" :key="treeID.imgUrl" >
+        <div  v-if="treeID.imgUrl" :key="treeID.imgUrl" >
         <img width="335" height="335"  :src="treeID.imgUrl"/>
       <div class="treeData">
         <p>Common Name : {{ treeID.commonName }} ({{treeID.commonChiName}})</p>
-        <p>Scientific Name : {{ treeID.scientificName}}</p>
+        <p>Scientific Name : <em>{{ treeID.scientificName}}</em></p>
        <p> {{treeID.commonChiName}}</p>
       
-        <p>Family : {{ treeID.family }}</p>
+        <p>Family : {{ treeID.familyName }}</p>
         {{ treeID.longChiDesc }}
         <p><em>{{treeID.shortDesc  }}</em></p>
       <p><em>{{treeID.longChiDesc  }}</em></p>
@@ -378,7 +378,7 @@
       prefixIcon="number"
       name="tcmp_id"
       
-      placeholder="GOVTCP2927S888S"
+      placeholder="36-0001-6084"
       label="Government Tree Identification"
       help="Government registered ID"
     
@@ -613,7 +613,7 @@ const submit = async (fields) => {
       fields.dangerous_tree = 0;
     }
 
-    fields.health = 1
+  
     fields.tree_type_id = treeID.value.id || 1
     fields.user_id = store.getUserInfo[0].userId
     fields.lat = "039333";

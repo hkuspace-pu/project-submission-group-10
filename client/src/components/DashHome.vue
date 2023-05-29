@@ -35,7 +35,7 @@
         <div class="topBar">
           <h4 class="dark">{{ data.commonName }} ~ <em>{{ data.scientificName}}</em></h4>
           <div class="tags">
-            <div v-for="pill in data.treeType" :key="pill" class="pill">
+            <div v-for="pill in JSON.parse(data.treeType)" :key="pill" class="pill">
               {{ pill }}
             </div>
        </div>
@@ -55,11 +55,11 @@
             </div>
           </div>
           <div class="rightSide">
-
+            <p>Next inspection date : {{changeDate(data.nextInspectionDate)}}</p>
             <table class="dataTable">
               <thead>
                 <tr>
-                  <th colspan="2">Tree information</th>
+                  <th colspan="2">Survey Results</th>
                   <!-- <th>Header</th> -->
                 </tr>
               </thead>
@@ -79,7 +79,13 @@
                 </tr>
                 <tr>
                   <td>TCMP ID</td>
-                  <td>{{ data.tcmpId }}</td>
+                  <td>
+                    
+                    <!-- <iframe :src="`https://www.greening.gov.hk/tree_qr_label/?unitid=${data.tcmpId}`" frameborder="0" allowfullscreen sandbox="allow-forms allow-popups allow-same-origin allow-scripts"></iframe> -->
+                    
+                    <a target="_blank" :href="`https://www.greening.gov.hk/tree_qr_label/?unitid=${data.tcmpId}`">{{data.tcmpId}}</a>
+                    
+                    </td>
                 </tr>
                 <tr>
                   <td>Location</td>
@@ -89,16 +95,17 @@
                   <td>District</td>
                   <td>{{ data.district }}</td>
                 </tr>
-                <tr>
-                  <td>Responsible Dept.</td>
-                  <td>{{ data.responsibleDept }}</td>
-                </tr>
+            
                 <tr>
                   <td>Native / Exotic</td>
                   <td>{{ data.nativeExotic }}</td>
                 </tr>
+                 <tr>
+                  <td>Amenity Value</td>
+                  <td>{{ data.amenityValue }} / 5</td>
+                </tr>
                 <tr>
-                  <td>Height</td>
+                  <td>Height(feet)</td>
                   <td>{{ data.height }}
                   </td>
                 </tr>
@@ -112,8 +119,12 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Crown spread</td>
+                  <td>Crown spread (feet)</td>
                   <td>{{ data.crownSpread }}</td>
+                </tr>
+                  <tr>
+                  <td>Stem Circumference (feet)</td>
+                  <td>{{ data.stemCircumference }}</td>
                 </tr>
                 <tr>
                   <td>Latitude</td>
@@ -123,11 +134,10 @@
                   <td>Longitude</td>
                   <td>{{ data.longtitude }}</td>
                 </tr>
+              
                 <tr>
-                  <td>Health tags</td>
-                  <td>
-                    <div class="pill" v-for="tag in data.healthTag">{{ tag }}</div>
-                  </td>
+                  <td>Recommendation</td>
+                  <td>{{ data.recommendation }}</td>
                 </tr>
               </tbody>
             </table>
@@ -411,11 +421,18 @@ const headers = [
 
 }
 
+.rightSide p {
+  margin: 0 20px;
+  font-size: 16px;
+}
+
 .tags {
   display: flex;
   flex-direction: row;
   gap: 10px;
   width: 350px;
+  margin: 20px 0;
+  font-size:14px;
   /* border:1px solid red; */
 }
 
@@ -452,12 +469,22 @@ const headers = [
 
 table.dataTable {
   /* border:1px solid red; */
-  width: 250px;
+  /* width: 250px; */
+  max-width: 500px;
   border-width: 1px;
+  font-size: 14px;
   border-style: outset;
+  margin: 0 20px;
+  /* padding: 5px; */
 
 }
+td {
+  padding: 2px;
+}
 
+th {
+  font-weight: 600;
+}
 .customize-table {
   height: 100%;
   /* border:1px solid red; */
@@ -465,4 +492,10 @@ table.dataTable {
   /* overflow:hidden; */
   border-radius: 12px;
 }
+
+table, th, td {
+  border: 1px dotted grey;
+  /* padding: 5px; */
+}
+
 </style>
