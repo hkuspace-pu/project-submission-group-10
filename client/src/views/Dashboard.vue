@@ -15,7 +15,7 @@
                 <fa @click="store.deleteSurvey()" v-if="store.surveyItemsSelected.length && $route.path == '/dash'"  size="2x" icon="trash"/>
                 <fa @click="store.approveSurvey(undefined,9)" style="color:var(--accept)" v-if="store.surveyItemsSelected.length && $route.path == '/dash' && isAdmin"  size="2x" icon="thumbs-up"/>
                 <fa @click="store.approveSurvey(undefined,2)" style="color:var(--warning)" v-if="store.surveyItemsSelected.length && $route.path == '/dash' && isAdmin"  size="2x" icon="thumbs-down"/>
-                <fa @click="store.downloadTsv()" style="color:var(--dark)" v-if="store.surveyItemsSelected.length && $route.path == '/dash' && isAdmin"  size="2x" icon="download"/>
+                <fa @click="store.downloadTsv()" style="color:var(--dark)" v-if="store.surveyItemsSelected.length && $route.path == '/dash'"  size="2x" icon="download"/>
 
                 <div @click="store.createNewTree()" v-if="$route.path == '/dash/trees' && isAdmin" class="plus"><fa size="2x" icon="plus"/></div>
             </div>
