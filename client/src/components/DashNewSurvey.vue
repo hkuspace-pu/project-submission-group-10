@@ -734,7 +734,7 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   max-width: 1200px;
-  height: 100%;
+  /* height: 100%; */
   /* margin-bottom: 30px; */
   /* height:95%; */
   max-height: calc(100% - 120px);
@@ -743,6 +743,7 @@ onMounted(async () => {
   margin: 30px auto;
   /* overflow:hidden; */
   overflow-x: hidden;
+  /* overflow-y:hidden; */
   background-color : var(--backgroundColor);
   padding:15px;
   border-radius: 12px;
@@ -750,16 +751,17 @@ onMounted(async () => {
 }
 
 .ratingGuide {
-  margin-top: -15px;
+  /* font-size: 16px; */
+  /* margin-top: -15px; */
   margin-bottom: 20px;
 }
 .ratingGuide p,
 .amenity p {
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .formContainer {
-  padding: 10px;
+  padding: 5px;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -943,15 +945,13 @@ height: 120px;
   }
 
   .mapBox {
-    /* width: 100%; */
-    /* margin-left: auto; */
-    /* margin-right: auto; */
-    /* margin-left: 100px; */
-    /* margin-left: auto; */
-    /* margin-right: auto; */
-    /* margin:auto; */
-    width: 100%;
+   
+    max-height: 240px;
     height: auto;
+  }
+
+  .form-body {
+    height: 100%;
   }
 }
 </style>

@@ -133,6 +133,11 @@ foot {
 @media only screen and (max-width:600px) {
 .menuItems {
     flex-direction: row;
+    position:fixed;
+    bottom:0;
+    background: green;
+    width: 100%;
+    justify-content: space-evenly;
 }
 
 foot {

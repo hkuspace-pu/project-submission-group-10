@@ -423,9 +423,12 @@ const headers = [
 
 .dataContent {
   display: flex;
+  flex-direction: row;
+  width:100%;
 }
 
 .leftSide {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -522,5 +525,52 @@ table, th, td {
   border: 1px dotted grey;
   /* padding: 5px; */
 }
+
+
+@media (max-width: 800px) {
+ 
+.heart {
+  width: 9px;
+
+}
+
+.dataContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.rightSide {
+  gap: 5px;
+  display: flex;
+  /* width: 100%; */
+  flex-direction: column;
+
+}
+
+table.dataTable {
+  /* border:1px solid red; */
+  /* width: 250px; */
+  max-width: 360px;
+  border-width: 1px;
+  font-size: 14px;
+  border-style: outset;
+  margin: 0;
+  /* padding: 5px; */
+
+}
+
+.surveyOptions {
+  display:flex;
+  max-width: 350px;
+  flex-direction: row;
+  justify-content: space-between;
+  /* border:1px solid red; */
+}
+
+}
+
+
 
 </style>

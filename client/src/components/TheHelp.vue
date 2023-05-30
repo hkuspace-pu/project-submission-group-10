@@ -9,26 +9,26 @@
 
             <div class="step">
             <img src="../assets/images/step1.png"/>
-<div class=""><h3 class="dark">It's easy to register and create a account.</h3></div>
+<div class="stepText"><p class="dark">It's easy to register and create a account.</p></div>
 
             </div>
 
 
             <div class="step">
     <img src="../assets/images/STEP2.png"/>
-    <div class=""><h3 class="dark">Contribute to survey tree specimen in your neighborhood.</h3></div>
+    <div class="stepText"><p class="dark">Contribute to survey tree specimen in your neighborhood.</p></div>
 
               </div>
 
             <div class="step">
    <img src="../assets/images/STEP3.png"/>
-       <div class=""><h3 class="dark">Earn 25 points per approved survey & redeem free gifts!</h3></div>
+       <div class="stepText"><p class="dark">Earn 25 points per approved survey & redeem free gifts!</p></div>
               </div>
 
 
                <div class="step blob4">
    <img src="../assets/images/STEP4.png"/>
-    <div class=""><h3 class="dark">Be proud of caring for your environment.</h3></div>
+    <div class="stepText"><p class="dark">Be proud of caring for your environment.</p></div>
               </div>
 
           </div>
@@ -46,17 +46,13 @@ import { ref } from "@vue/reactivity";
     
 <style scoped>
 .faqContainer {
-    width: calc(100% - 1rem);
-    max-width: 850px;
+    /* width: calc(100% - 1rem); */
+    /* max-width: 850px; */
     padding: 5rem 0;
-   margin-top:1rem;
-   margin-bottom:5rem;
+   /* margin-top:1rem; */
+   /* margin-bottom:5rem; */
    margin:5rem auto;
-     /* background-image: url('../assets/images/blob1.svg'); */
-     /* background-color:red; */
-      background-position: top center !important;
-      background-repeat: no-repeat;
-      background-size:contain;
+
       display: flex;
       flex-direction: column;
 
@@ -135,7 +131,8 @@ import { ref } from "@vue/reactivity";
 background-color: var(--backgroundColor);
 padding: 1rem 0.5rem;
   display:flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   border-radius:20px;
@@ -148,6 +145,8 @@ display:flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+margin: 0 10px;
+/* height: 760px; */
 
 
 
@@ -156,14 +155,17 @@ justify-content: center;
 }
 
 .stepText {
-padding: 10px;
+overflow-wrap: break-word;
+font-size: 20px;
  
 }
 
 .step img {
   /* max-width: 480px; */
   /* height: 300px; */
-  /* max-width: 300px; */
+  /* max-width: 630px; */
+
+  max-height: 700px;
    filter: drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.2));
 }
 
@@ -186,6 +188,15 @@ padding: 10px;
 
 .innerLeft img {
     max-width:300px
+}
+
+.step img {
+  width: 450px;
+}
+
+.stepText {
+  font-size: 16px;
+  text-align: center;
 }
 
 }

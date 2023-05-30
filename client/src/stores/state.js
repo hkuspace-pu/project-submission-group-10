@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-
+import ml5 from "ml5";
 export const useStore = defineStore({
   id: 'store',
   state: () => ({
@@ -16,6 +16,7 @@ export const useStore = defineStore({
   userLists: [],
   deleteUserId: null,
   updateUserJson: null,
+  previewImage : null,
   }),  
 
   actions : {
@@ -94,6 +95,12 @@ export const useStore = defineStore({
       // console.log('EVERYTHING Fin, refreshing')
       this.getSurvey()
   },
+
+  async AItree() {
+    
+    await classifer.classify(previewImage.value)
+  },
+
 
     async approveSurvey(id = this.surveyItemsSelected,status) {
       console.log('status', status)
