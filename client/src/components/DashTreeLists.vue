@@ -2,7 +2,7 @@
 
   <!-- <h3 class="dark">List Surveys</h3> -->
   <EasyDataTable
-    :headers="headers" :items="items" :loading="isDataLoading"
+    :headers="headers" :items="filteredItems" :loading="isDataLoading"
   >
 
     <template #expand="data">
@@ -153,6 +153,14 @@ onMounted(async () => {
     isDataLoading.value = false;
   }
 });
+
+
+const filteredItems = computed(() => {
+  return items.value.filter(item => {
+    return item.commonName.toLowerCase().includes(store.searchTerm.toLowerCase());
+  })
+})
+
 
 const getTreeList = async () => {
     await store.getMasterTreeList()

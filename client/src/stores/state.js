@@ -25,6 +25,7 @@ export const useStore = defineStore({
   updateTreeData: null,
   activityLogUserId: null,
   previewImage : null,
+  searchTerm : ""
   }),  
 
   actions : {

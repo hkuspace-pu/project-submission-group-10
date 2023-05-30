@@ -18,6 +18,7 @@
                 <fa @click="store.downloadTsv()" style="color:var(--dark)" v-if="store.surveyItemsSelected.length && $route.path == '/dash'"  size="lg" icon="download"/>
 
                 <div @click="store.createNewTree()" v-if="$route.path == '/dash/trees' && isAdmin" class="plus"><fa size="lg" icon="plus"/></div>
+                <input v-if="$route.path == '/dash/trees'" v-model="store.searchTerm" placeholder="Search Common Name" type="text"/>
             </div>
         </div>
         <div class="dashMiddleBox">
@@ -65,6 +66,7 @@ onMounted(() => {
 
 
 });
+
 
 
 const refreshData = async () => {
