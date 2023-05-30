@@ -289,7 +289,7 @@ MODEL VIEW CONTROLLER (MVC APPROACH)
 
 - [:runner:  Final Handover of project]
 
-## :runner : Final Hanover of project
+## Final Hanover of project
 
 - 30 May 2023 is the final deadline, on this date all 3 members of the team will demonstate the project to the client and answer any Q&A
 - Final report will handed over thereafter
