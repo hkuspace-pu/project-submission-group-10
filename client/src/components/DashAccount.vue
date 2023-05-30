@@ -19,7 +19,7 @@
   </div>
 
   <div style="padding: 0 2rem;">
-      <button class="user_btn btn_loggout" @click="loggout()">Loggout</button>
+      <button class="user_btn btn_loggout" @click="loggout()">Log out</button>
     </div>
 
   <div style="padding: 0 2rem;">
