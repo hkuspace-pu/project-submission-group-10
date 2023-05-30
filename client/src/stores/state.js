@@ -210,7 +210,7 @@ export const useStore = defineStore({
     let path = '/getAllActivityLogList'
     const formData = new FormData();
     formData.append("userId", this.activityLogUserId);
-    formData.append("roleId", this.getUserInfo[0].role);
+    formData.append("roleId", 4);
 
     const resp = await fetch(this.baseURL + path, {
       method: "POST",
