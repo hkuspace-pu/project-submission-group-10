@@ -28,8 +28,9 @@
         </div>
 
         <div class="btnClass" >
-            <button class="edit_btn" @click="editUser(data)"> Edit </button>
-            <button class="delete_btn" @click="deleteUser(data.id)"> Delete </button>
+            <button class="user_btn edit_btn" @click="editUser(data)"> Edit </button>
+            <button class="user_btn delete_btn" @click="deleteUser(data.id)"> Delete </button><br/>
+            <button class="user_btn log_btn" @click="getActivityLog(data.id)"> Activity Log </button>
         </div>
       </div>
     </template>
@@ -43,6 +44,13 @@
         <input required v-model="editData.email" type="text" id="edEmail" name="email"/></div>
     <div class="dialog-div"><label for="date">Contnet: </label>
         <input required v-model="editData.phoneNumber" type="text" id="edPhoneNumber" name="phoneNumber"/></div>
+</Modal>
+
+<Modal v-model:visible="isActivityVisible" :okButton="okBtn">
+    <div v-for="log in activityLogLists" :key="log.id">
+      <label for="name">Date: {{ dateFormat(log.createTime) }}</label>&nbsp;&nbsp;&nbsp;
+      <label for="name">Activity: {{ log.activityLog }}</label>
+    </div>
 </Modal>
   <!-- </div> -->
 </template>
@@ -60,7 +68,9 @@ const clickedRow = ref(null);
 const itemsSelected = ref([]);
 let items = ref([]);
 let isVisible = ref(false);
+let isActivityVisible = ref(false);
 let editData = ref({})
+let activityLogLists = ref([])
 
 const url = "https://api.hktreewatch.org";
 
@@ -109,18 +119,17 @@ const selectedImage = computed(() => {
 
 const dateFormat = ( _dateTime ) => {
   var _date = new Date(_dateTime)
-  return  _date.getDate()+
-           "/"+(_date.getMonth()+1)+
-           "/"+_date.getFullYear()+
-           " "+_date.getHours()+
-           ":"+String(_date.getMinutes()).padStart(2, '0')+
-           ":"+_date.getSeconds()
+  return   String(_date.getDate()).padStart(2, '0')+
+            "/"+String((_date.getMonth()+1)).padStart(2, '0')+
+            "/"+_date.getFullYear()+
+            " "+String(_date.getHours()).padStart(2, '0')+
+            ":"+String(_date.getMinutes()).padStart(2, '0')+
+            ":"+String(_date.getSeconds()).padStart(2, '0')
 }
 
 const deleteUser = async ( _id ) => {
   store.deleteUserId = _id
   const delete_user = await store.deleteUser()
-  console.log( 'delete_user', delete_user )
 
   if ( delete_user.errorNo == 200 ) {
     loadUsers()
@@ -135,20 +144,6 @@ const editUser = ( _data ) => {
 }
 
 const updateUser = async () => {
-  console.log( 'updateUser', editData.value )
-
-  // const formData = new URLSearchParams();
-  // formData.append("userId", editData.value['id']);
-  // formData.append("username", editData.value['userName']);
-  // formData.append("phoneNumber", editData.value['phoneNumber']);
-  // formData.append("email", editData.value['email']);
-  // formData.append("role", editData.value['role']);
-
-  // const editResp = await fetch(url + '/editUser', {
-  //   method: "PUT",
-  //   body:  formData
-  // });
-  // const edit_user = await editResp.json();
   var _json = {
     userId: editData.value['id'],
     username: editData.value['userName'],
@@ -159,7 +154,6 @@ const updateUser = async () => {
   store.updateUserJson = _json
 
   const edit_user = await store.updateUser()
-  console.log( 'edit_user', edit_user )
 
   if ( edit_user.errorNo == 200 ) {
     isVisible.value = false
@@ -169,10 +163,24 @@ const updateUser = async () => {
   }
 }
 
+const getActivityLog = async ( _id ) => {
+  store.activityLogUserId = _id
+  const activity_log = await store.getActivityLogByUserId()
+  activityLogLists.value = activity_log.data
+  isActivityVisible.value = true
+}
+
 let confirmBtn = ref({
   text: 'Confirm', 
   onclick: () => {
     updateUser()
+  }
+})
+
+let okBtn = ref({
+  text: 'OK', 
+  onclick: () => {
+    isActivityVisible.value = false
   }
 })
 </script>
@@ -342,21 +350,25 @@ table.dataTable {
   text-align: right;
 }
 
-.edit_btn {
+.user_btn {
     border: 1px;
     padding: 5px 10px;
-    background-color: var(--wrongingBtn);
     border-radius: 4px;
     color: white;
-    margin: 0px 10px;
 }
 
+.edit_btn {
+    background-color: var(--wrongingBtn);
+    margin: 0px 10px;
+} 
+
 .delete_btn {
-    border: 1px;
-    padding: 5px 10px;
     background-color: var(--deletBtn);
-    border-radius: 4px;
-    color: white;
+}
+
+.log_btn {
+    background-color: var(--brown);
+    margin: 10px 0;
 }
 
 .dialog-div {

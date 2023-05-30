@@ -136,7 +136,7 @@ async function register() {
         data.append('password', password.value);
         data.append('email', email.value);
         data.append('phoneNumber', phoneNumber.value);
-        data.append('role', 4);
+        data.append('role', 1);
 
         const resp = await fetch(url+'/createUser', {
             method: 'POST',

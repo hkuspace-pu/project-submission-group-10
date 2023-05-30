@@ -1,6 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import ml5 from "ml5";
+import * as d3 from 'd3'
+import { saveAs } from 'file-saver'
+
 export const useStore = defineStore({
   id: 'store',
   state: () => ({
@@ -16,7 +18,11 @@ export const useStore = defineStore({
   userLists: [],
   deleteUserId: null,
   updateUserJson: null,
-  previewImage : null,
+  exportSurveyTsv: false,
+  isCreateNewTree: false,
+  createTree: null,
+  updateTreeData: null,
+  activityLogUserId: null
   }),  
 
   actions : {
@@ -196,6 +202,100 @@ export const useStore = defineStore({
     });
     const update_resp = await updateResp.json();
     return update_resp
+  },
+
+  async getActivityLogByUserId() {
+    let path = '/getAllActivityLogList'
+    const formData = new FormData();
+    formData.append("userId", this.activityLogUserId);
+    formData.append("roleId", this.getUserInfo[0].role);
+
+    const resp = await fetch(this.baseURL + path, {
+      method: "POST",
+      body:  formData
+    });
+    const resp_json = await resp.json();
+    return resp_json
+  },
+
+  async downloadTsv() {
+      let tsvContent = "";
+      let tsvKey = ''
+
+      tsvKey = Object.keys( this.surveyItemsSelected[0] ).join("\t");
+
+      this.surveyItemsSelected.forEach(it_select => {
+          let row = Object.values(it_select).join("\t");
+          tsvContent += row + "\n";
+      });
+
+      tsvContent = tsvKey + "\n" + tsvContent
+
+      // // Save the CSV string as a TSV file
+      const blob = new Blob([tsvContent], { type: 'text/tab-separated-values' })
+      saveAs(blob, 'output.tsv')
+
+  },
+
+  async createNewTree() {
+    this.createTree = {
+      "scientific_name" : '',
+      "scientific_chi_name" : '',
+      "family" : 1,
+      "common_name" : '',
+      "common_chi_name" : '',
+      "img_url" : '',
+      "short_desc" : '',
+      "long_desc" : '',
+      "native_exotic" : 1,
+      "short_chi_desc" : '',
+      "long_chi_desc" : '',
+    }
+    this.isCreateNewTree = true
+  },
+
+  async submitCreateTree() {
+    let path = 'insertMasterTreeTable'
+    let cData = {
+      data: this.createTree
+    }
+    console.log( 'createTree', cData )
+    const updateResp = await fetch(this.baseURL + path, {
+      method: "POST",
+      body: JSON.stringify(cData),
+      headers : {
+        "Content-type": "application/json;charset=UTF-8",
+      }
+    });
+    const update_resp = await updateResp.json();
+    return update_resp 
+  },
+
+  async updateTree() {
+    let path = 'updateMasterTreeTableById'
+    let pData = {
+      data: this.updateTreeData
+    }
+
+    const updateResp = await fetch(this.baseURL + path, {
+      method: "POST",
+      body: JSON.stringify(pData),
+      headers : {
+        "Content-type": "application/json;charset=UTF-8",
+      }
+    });
+    const update_resp = await updateResp.json();
+    return update_resp 
+  },
+
+  async dateFormat( _dateTime ) {
+    var _date = new Date(_dateTime)
+    return   String(_date.getDate()).padStart(2, '0')+
+              "/"+String((_date.getMonth()+1)).padStart(2, '0')+
+              "/"+_date.getFullYear()+
+              " "+String(_date.getHours()).padStart(2, '0')+
+              ":"+String(_date.getMinutes()).padStart(2, '0')+
+              ":"+String(_date.getSeconds()).padStart(2, '0')
   }
 
   },
