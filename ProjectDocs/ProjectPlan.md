@@ -57,6 +57,7 @@ GROUP PROJECT (GROUP 10)
 - [:traffic_light:  Risk Management Plan](#traffic_light-risk-management-plan )
 - [:cop:  Legal social ethical and professional issues](#cop-legal-social-ethical-and-professional-issues)
 - [:runner:  Sprint Plan](#runner-sprint-plan)
+- [:runner:  Final Handover of project](#runner-sprint-plan)
 
 <!--Roles-->
 ## :busts_in_silhouette: Roles
@@ -285,5 +286,14 @@ MODEL VIEW CONTROLLER (MVC APPROACH)
 ## :runner: Sprint Plan
 
 ![Sprint Action Plan](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/KanBan/sprint_screen.jpeg)
+
+- [:runner:  Final Handover of project]
+
+## :runner : Final Hanover of project
+
+- 30 May 2023 is the final deadline, on this date all 3 members of the team will demonstate the project to the client and answer any Q&A
+- Final report will handed over thereafter
+
+
 
 
