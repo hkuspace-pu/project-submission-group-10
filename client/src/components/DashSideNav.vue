@@ -11,13 +11,13 @@
         <router-link v-if="role=='Admin'" tag="div" class="row" :to="{name:'chart'}" >
             <fa class="icon" size="2x" icon="chart-simple" :class="$route.name=='chart' && 'focused'"/>
         </router-link>
-
+<!-- 
         <router-link v-if="role=='Admin'" tag="div" class="row" :to="{name:'feature'}" >
             <fa class="icon" size="2x" icon="layer-group" :class="$route.name=='feature' && 'focused'"/>
-        </router-link>
-        <router-link v-if="role=='Admin'" tag="div" class="row" :to="{name:'feature_new'}" >
+        </router-link> -->
+        <!-- <router-link v-if="role=='Admin'" tag="div" class="row" :to="{name:'feature_new'}" >
             <fa class="icon" size="2x" icon="notes-medical" :class="$route.name=='feature_new' && 'focused'"/>
-        </router-link>
+        </router-link> -->
 
         <router-link tag="div" class="row" :to="{name:'trees'}" >
             <fa class="icon" size="2x" icon="tree" :class="$route.name=='trees' && 'focused'"/>
@@ -32,7 +32,7 @@
             <fa class="icon" size="2x" icon="newspaper" :class="$route.name=='blog' && 'focused'"/>
         </router-link>
           <router-link  tag="div" class="row" :to="{name:'ml'}" >
-            <fa class="icon" size="2x" icon="lightbulb" :class="$route.name=='blog' && 'focused'"/>
+            <fa class="icon" size="2x" icon="lightbulb" :class="$route.name=='ml' && 'focused'"/>
         </router-link>
     </div>
 
@@ -41,9 +41,9 @@
         <router-link v-if="role=='Admin'||role=='Moderator'" tag="div" class="row" :to="{name:'users'}" >
             <fa class="icon" size="2x" icon="users" :class="$route.name=='users' && 'focused'"/>
         </router-link>
-        <router-link tag="div" class="row" :to="{name:'admin_account'}" >
+        <!-- <router-link tag="div" class="row" :to="{name:'admin_account'}" >
             <fa class="icon" size="2x" icon="circle-user" :class="$route.name=='admin_account' && 'focused'"/>
-        </router-link>
+        </router-link> -->
     
     </footer>
 
@@ -133,6 +133,11 @@ foot {
 @media only screen and (max-width:600px) {
 .menuItems {
     flex-direction: row;
+    position:fixed;
+    bottom:0;
+    background: green;
+    width: 100%;
+    justify-content: space-evenly;
 }
 
 foot {

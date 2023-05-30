@@ -156,6 +156,7 @@ onMounted(async () => {
 
 const getTreeList = async () => {
     await store.getMasterTreeList()
+    await store.getTreeList()
     var jsonData = store.treeLists
     jsonData.forEach(jEle => {
       jEle['createTimeFi'] = dateFormat( jEle['createTime'] )

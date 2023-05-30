@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import * as d3 from 'd3'
 import { saveAs } from 'file-saver'
 
+import ml5 from "ml5";
 export const useStore = defineStore({
   id: 'store',
   state: () => ({
@@ -22,7 +23,8 @@ export const useStore = defineStore({
   isCreateNewTree: false,
   createTree: null,
   updateTreeData: null,
-  activityLogUserId: null
+  activityLogUserId: null,
+  previewImage : null,
   }),  
 
   actions : {
@@ -102,6 +104,12 @@ export const useStore = defineStore({
       this.getSurvey()
   },
 
+  async AItree() {
+    
+    await classifer.classify(previewImage.value)
+  },
+
+
     async approveSurvey(id = this.surveyItemsSelected,status) {
       console.log('status', status)
       let formData = new FormData()
@@ -140,7 +148,8 @@ export const useStore = defineStore({
     this.familyData = jsonData.data
   },
 
-  async getMasterTreeList() {
+  async getTreeList() {
+    console.log('GET MASTER TREE LIST')
     let path 
     path = '/getAllMasterTreeTableList' 
 
@@ -298,6 +307,8 @@ export const useStore = defineStore({
     },
     dropDownTreeList(state) {
       return state.masterTreeList.map(item => ({...item, label : item.value}))
+      // return state.treeLists.map(item => ({...item, label : item.value}))
+      // .filter(item => item.status != 0);
 
     },
     getUserInfo(state){

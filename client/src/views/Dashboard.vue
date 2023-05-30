@@ -11,10 +11,10 @@
         <div class="dashMenu">
             <div class="title"> {{$route.meta.title}}</div>
             <div class="dashIcons">
-                <div @click="refreshData" v-if="$route.path == '/dash' && !store.surveyItemsSelected.length" class="refresh"><fa size="2x" :spin="store.surveyLoading" icon="arrows-rotate"/></div>
-                <fa @click="store.deleteSurvey()" v-if="store.surveyItemsSelected.length && $route.path == '/dash'"  size="2x" icon="trash"/>
-                <fa @click="store.approveSurvey(undefined,9)" style="color:var(--accept)" v-if="store.surveyItemsSelected.length && $route.path == '/dash' && isAdmin"  size="2x" icon="thumbs-up"/>
-                <fa @click="store.approveSurvey(undefined,2)" style="color:var(--warning)" v-if="store.surveyItemsSelected.length && $route.path == '/dash' && isAdmin"  size="2x" icon="thumbs-down"/>
+                <div @click="refreshData" v-if="$route.path == '/dash' && !store.surveyItemsSelected.length" class="refresh"><fa size="lg" :spin="store.surveyLoading" icon="arrows-rotate"/></div>
+                <fa @click="store.deleteSurvey()" v-if="store.surveyItemsSelected.length && $route.path == '/dash'"  size="lg" icon="trash"/>
+                <fa @click="store.approveSurvey(undefined,9)" style="color:var(--accept)" v-if="store.surveyItemsSelected.length && $route.path == '/dash' && isAdmin"  size="lg" icon="thumbs-up"/>
+                <fa @click="store.approveSurvey(undefined,2)" style="color:var(--warning)" v-if="store.surveyItemsSelected.length && $route.path == '/dash' && isAdmin"  size="lg" icon="thumbs-down"/>
                 <fa @click="store.downloadTsv()" style="color:var(--dark)" v-if="store.surveyItemsSelected.length && $route.path == '/dash'"  size="2x" icon="download"/>
 
                 <div @click="store.createNewTree()" v-if="$route.path == '/dash/trees' && isAdmin" class="plus"><fa size="2x" icon="plus"/></div>
@@ -84,7 +84,7 @@ height: 100vh;
 /* height: 100%; */
 width: 100%;
 /* overflow: hidden; */
-
+  overflow-y:hidden;
 }
 
 .middleContainer {
@@ -92,6 +92,7 @@ width: 100%;
     /* height: 100%; */
     display:flex;
     flex-direction: row;
+  
 }
 .dash {
     /* border:1px solid red; */
@@ -166,8 +167,13 @@ border: 1px solid rgba(255, 255, 255, 0.3);
       
     }
 
+.dashboardContainer {
+height: calc(100vh - 110px);
+}
+
     .dashMiddle {
         padding: 5px;
+        /* height: calc(100% - 65px); */
     }
     
 }

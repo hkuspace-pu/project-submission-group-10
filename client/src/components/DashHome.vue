@@ -35,7 +35,7 @@
         <div class="topBar">
           <h4 class="dark">{{ data.commonName }} ~ <em>{{ data.scientificName}}</em></h4>
           <div class="tags">
-            <div v-for="pill in data.treeType" :key="pill" class="pill">
+            <div v-for="pill in JSON.parse(data.treeType)" :key="pill" class="pill">
               {{ pill }}
             </div>
        </div>
@@ -55,18 +55,30 @@
             </div>
           </div>
           <div class="rightSide">
+              <div class="surveyOptions">
+                  <p>Next inspection date : {{changeDate(data.nextInspectionDate)}}</p> 
+                  <button  v-if="!isEdit" @click="isEdit = true">Edit</button>
+                  <button  v-if="isEdit" @click="isEdit = true">Save</button>
+                  <button  v-if="isEdit" @click="isEdit = false">Cancel</button>
 
+              </div>
+            
             <table class="dataTable">
               <thead>
                 <tr>
-                  <th colspan="2">Tree information</th>
+                  <th colspan="2">Survey Results</th>
                   <!-- <th>Header</th> -->
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>Common Name</td>
-                  <td>{{ data.commonName }}</td>
+                  <td v-if="!isEdit">{{ data.commonName }}</td>
+                  <td v-if="isEdit">
+                    <select @change="treeChanged" id="tree-select" v-model="newTree">
+                  <option v-for="tree in store.dropDownTreeList" :value="tree.commonName" :key="tree.id">{{ tree.commonName }}</option>
+                  </select>
+                  </td>
                 </tr>
                 <tr>
                   <td>Scientific Name</td>
@@ -79,32 +91,39 @@
                 </tr>
                 <tr>
                   <td>TCMP ID</td>
-                  <td>{{ data.tcmpId }}</td>
+                  <td :contenteditable="isEdit">
+                    
+                    <!-- <iframe :src="`https://www.greening.gov.hk/tree_qr_label/?unitid=${data.tcmpId}`" frameborder="0" allowfullscreen sandbox="allow-forms allow-popups allow-same-origin allow-scripts"></iframe> -->
+                    
+                    <a target="_blank" :href="`https://www.greening.gov.hk/tree_qr_label/?unitid=${data.tcmpId}`">{{data.tcmpId}}</a>
+                    
+                    </td>
                 </tr>
                 <tr>
                   <td>Location</td>
-                  <td>{{ data.location }}</td>
+                  <td :contenteditable="isEdit">{{ data.location }}</td>
                 </tr>
                 <tr>
                   <td>District</td>
-                  <td>{{ data.district }}</td>
+                  <td :contenteditable="isEdit">{{ data.district }}</td>
                 </tr>
-                <tr>
-                  <td>Responsible Dept.</td>
-                  <td>{{ data.responsibleDept }}</td>
-                </tr>
+            
                 <tr>
                   <td>Native / Exotic</td>
                   <td>{{ data.nativeExotic }}</td>
                 </tr>
+                 <tr>
+                  <td>Amenity Value</td>
+                  <td :contenteditable="isEdit">{{ data.amenityValue }} / 5</td>
+                </tr>
                 <tr>
-                  <td>Height</td>
-                  <td>{{ data.height }}
+                  <td>Height(feet)</td>
+                  <td :contenteditable="isEdit">{{ data.height }}
                   </td>
                 </tr>
                 <tr>
                   <td>Health rating</td>
-                  <td>
+                  <td :contenteditable="isEdit">
                     <img class="heart" v-for="index in data.health" src="../assets/images/heartFill.svg" />
                     <span v-if="data.health < 5">
                       <img class="heart" v-for="index in (5 - data.health)" src="../assets/images/heartEmpty.svg" />
@@ -112,8 +131,12 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Crown spread</td>
+                  <td>Crown spread (feet)</td>
                   <td>{{ data.crownSpread }}</td>
+                </tr>
+                  <tr>
+                  <td>Stem Circumference (feet)</td>
+                  <td>{{ data.stemCircumference }}</td>
                 </tr>
                 <tr>
                   <td>Latitude</td>
@@ -123,11 +146,10 @@
                   <td>Longitude</td>
                   <td>{{ data.longtitude }}</td>
                 </tr>
+              
                 <tr>
-                  <td>Health tags</td>
-                  <td>
-                    <div class="pill" v-for="tag in data.healthTag">{{ tag }}</div>
-                  </td>
+                  <td>Recommendation</td>
+                  <td>{{ data.recommendation }}</td>
                 </tr>
               </tbody>
             </table>
@@ -146,9 +168,10 @@ import { ref, computed,onMounted } from 'vue';
 const isDataLoading = ref(false);
 const clickedRow = ref(null)
 const itemsSelected = ref([])
-
+const newTree = ref()
 import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
+const isEdit = ref(false)
 import { useStore } from "@/stores/state.js";
 const store = useStore();
 // let data = ref([])
@@ -170,7 +193,6 @@ const changeArray = ((array) => {
 
 
 const getFirstImage = ((uploadImg,id,userId) => {
-console.log(uploadImg)
 // console.log("ID ", id)
 const arr = uploadImg.substr(1, uploadImg.length - 2).split(", ");
 // console.log(arr)
@@ -181,7 +203,7 @@ const arr = uploadImg.substr(1, uploadImg.length - 2).split(", ");
 
 onMounted(async () => {
 
-
+store.getMasterTreeList();
 await store.getSurvey()
 
 
@@ -214,6 +236,11 @@ const selectedImage = computed(() => {
 })
 
 
+const treeChanged = () => {
+  console.log("Tree select box changed")
+
+
+}
 
 // Dummy Json Data
 const headers = [
@@ -396,9 +423,12 @@ const headers = [
 
 .dataContent {
   display: flex;
+  flex-direction: row;
+  width:100%;
 }
 
 .leftSide {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -412,11 +442,25 @@ const headers = [
 
 }
 
+.surveyOptions {
+  display:flex;
+  max-width: 520px;
+  flex-direction: row;
+  justify-content: space-between;
+  /* border:1px solid red; */
+}
+.rightSide p {
+  margin: 0 20px;
+  font-size: 16px;
+}
+
 .tags {
   display: flex;
   flex-direction: row;
   gap: 10px;
   width: 350px;
+  margin: 20px 0;
+  font-size:14px;
   /* border:1px solid red; */
 }
 
@@ -453,12 +497,22 @@ const headers = [
 
 table.dataTable {
   /* border:1px solid red; */
-  width: 250px;
+  /* width: 250px; */
+  max-width: 500px;
   border-width: 1px;
+  font-size: 14px;
   border-style: outset;
+  margin: 0 20px;
+  /* padding: 5px; */
 
 }
+td {
+  padding: 2px;
+}
 
+th {
+  font-weight: 600;
+}
 .customize-table {
   height: 100%;
   /* border:1px solid red; */
@@ -466,4 +520,57 @@ table.dataTable {
   /* overflow:hidden; */
   border-radius: 12px;
 }
+
+table, th, td {
+  border: 1px dotted grey;
+  /* padding: 5px; */
+}
+
+
+@media (max-width: 800px) {
+ 
+.heart {
+  width: 9px;
+
+}
+
+.dataContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.rightSide {
+  gap: 5px;
+  display: flex;
+  /* width: 100%; */
+  flex-direction: column;
+
+}
+
+table.dataTable {
+  /* border:1px solid red; */
+  /* width: 250px; */
+  max-width: 360px;
+  border-width: 1px;
+  font-size: 14px;
+  border-style: outset;
+  margin: 0;
+  /* padding: 5px; */
+
+}
+
+.surveyOptions {
+  display:flex;
+  max-width: 350px;
+  flex-direction: row;
+  justify-content: space-between;
+  /* border:1px solid red; */
+}
+
+}
+
+
+
 </style>

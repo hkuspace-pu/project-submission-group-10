@@ -3,7 +3,7 @@
 <div class="formContainer">
   <!-- :submit-label="button_label" -->
   <!-- <FormKit  @submit="submit" type="form" #default="{ value }" >  -->
-    <XyzTransition appear xyz="fade" mode="out-in">
+    <!-- <XyzTransition appear xyz="fade" mode="out-in"> -->
 <div v-if="!formStatus">
   
   <div class="surveySteps">
@@ -132,6 +132,8 @@
       :options="store.dropDownTreeList"
     >
 
+
+
     <template #option="{ option }">
         <div class="formkit-option">
           <img :src="option.imgUrl" width="20px"/>
@@ -141,12 +143,16 @@
         </div>
         
       </template>
+
+      
       
      </FormKit>
      <div v-if="treeID" class="details">
     {{ treeID.longChiDesc }}
      
      </div>
+
+     <p style="margin:10px">Don't know the tree name? Try our<router-link class="link underline" :to="{name:'ml'}"> AI tool</router-link></p>
 
     <FormKit
       type="taglist"
@@ -163,14 +169,14 @@
 
     <div  class="rightSide"> 
         <XyzTransition appear xyz="fade" mode="out-in">  
-        <div  v-if="treeID" :key="treeID.imgUrl" >
+        <div  v-if="treeID.imgUrl" :key="treeID.imgUrl" >
         <img width="335" height="335"  :src="treeID.imgUrl"/>
       <div class="treeData">
         <p>Common Name : {{ treeID.commonName }} ({{treeID.commonChiName}})</p>
-        <p>Scientific Name : {{ treeID.scientificName}}</p>
+        <p>Scientific Name : <em>{{ treeID.scientificName}}</em></p>
        <p> {{treeID.commonChiName}}</p>
       
-        <p>Family : {{ treeID.family }}</p>
+        <p>Family : {{ treeID.familyName }}</p>
         {{ treeID.longChiDesc }}
         <p><em>{{treeID.shortDesc  }}</em></p>
       <p><em>{{treeID.longChiDesc  }}</em></p>
@@ -240,8 +246,16 @@
 <!-- <XyzTransition class="item-group" xyz="fade up-100% out-up" mode="out-in"> -->
 <section key=4 v-show="step == 4">
   <div>
-<!-- <FormKit type="group" name="health"> -->
 <FormKit
+  type="rating"
+  name="health"
+  rating-icon="heart"
+  on-color="#DA012D"
+  id="health"
+  label="Health assessment rating (Vigor):"
+/>
+<!-- <FormKit type="group" name="health"> -->
+<!-- <FormKit
   type="rating"
   name="health"  
   rating-icon="heart"
@@ -252,7 +266,7 @@
   value="3"
   id="health"
   label="Health assessment rating (Vigor):"
-/>
+/> -->
 <div class="ratingGuide">
 <p>1 = Tree is weak with high stress and rot.</p>
 <p>2 = Tree has poor vigor and/or disease infection. </p>
@@ -370,7 +384,7 @@
       prefixIcon="number"
       name="tcmp_id"
       
-      placeholder="GOVTCP2927S888S"
+      placeholder="36-0001-6084"
       label="Government Tree Identification"
       help="Government registered ID"
     
@@ -459,7 +473,7 @@
 
 
 </div>
-</XyzTransition>
+<!-- </XyzTransition> -->
 
 </div>
 
@@ -469,15 +483,12 @@
 <script setup>
 import { GoogleMap, Marker } from "vue3-google-map";
 import OSS from 'ali-oss';
-import { getCurrentInstance, toRaw } from 'vue';
 import { ref, reactive, computed, onMounted,nextTick } from "vue";
 import { getNode } from "@formkit/core";
 import { Fetch } from "@/controller/BaseAPI.js";
 import { useStore } from "@/stores/state.js";
 
 import { Fireworks } from 'fireworks-js'
-
-// const container = document.querySelector('.success')
 
 
 const store = useStore();
@@ -589,7 +600,9 @@ const nextText = computed(() => {
   }
 });
 
-const handleIconClick = () => {};
+const handleIconClick = () => {
+  window.alert("Enter the tree name")
+};
 
 const newSurvey = () => {
   formStatus.value = false;
@@ -608,7 +621,7 @@ const submit = async (fields) => {
       fields.dangerous_tree = 0;
     }
 
-    fields.health = 1
+  
     fields.tree_type_id = treeID.value.id || 1
     fields.user_id = store.getUserInfo[0].userId
     fields.lat = "039333";
@@ -721,7 +734,7 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   max-width: 1200px;
-  height: 100%;
+  /* height: 100%; */
   /* margin-bottom: 30px; */
   /* height:95%; */
   max-height: calc(100% - 120px);
@@ -730,6 +743,7 @@ onMounted(async () => {
   margin: 30px auto;
   /* overflow:hidden; */
   overflow-x: hidden;
+  /* overflow-y:hidden; */
   background-color : var(--backgroundColor);
   padding:15px;
   border-radius: 12px;
@@ -737,16 +751,17 @@ onMounted(async () => {
 }
 
 .ratingGuide {
-  margin-top: -15px;
+  /* font-size: 16px; */
+  /* margin-top: -15px; */
   margin-bottom: 20px;
 }
 .ratingGuide p,
 .amenity p {
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .formContainer {
-  padding: 10px;
+  padding: 5px;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -930,15 +945,13 @@ height: 120px;
   }
 
   .mapBox {
-    /* width: 100%; */
-    /* margin-left: auto; */
-    /* margin-right: auto; */
-    /* margin-left: 100px; */
-    /* margin-left: auto; */
-    /* margin-right: auto; */
-    /* margin:auto; */
-    width: 100%;
+   
+    max-height: 240px;
     height: auto;
+  }
+
+  .form-body {
+    height: 100%;
   }
 }
 </style>

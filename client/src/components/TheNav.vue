@@ -1,11 +1,12 @@
 <template>
    <nav>
 
+<router-link to="/">
 <div class="logo">
   <fa size="2x" icon="tree"/>
   <span class="logo_text"><span class="hk">HK</span> Tree Watch</span>
 </div>
-
+</router-link>
 <NavMenuContents  id="navBarContents" ></NavMenuContents>
 
 

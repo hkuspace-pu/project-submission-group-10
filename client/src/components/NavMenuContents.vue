@@ -14,9 +14,11 @@
         <router-link class="link" tag="li" :to="{name:'dashboard'}">
             <fa v-if="store.isSideBarOpen" size="2x" icon="user"/> <p>About</p>
        </router-link>
-     <router-link class="link" tag="li" :to="{path:'/', hash:'#faq'}">
+       <a class="link" href="#faq">
+     <!-- <router-link class="link" tag="li" :to="{path:'/', hash:'#faq'}"> -->
             <fa v-if="store.isSideBarOpen"  size="2x" icon="user"/> <p>FAQ</p>
-       </router-link>
+       <!-- </router-link> -->
+       </a>
        <a class="link" href="#faq">
         <li>
             <fa v-if="store.isSideBarOpen"  size="2x" icon="user"/> <p>Donate</p>
