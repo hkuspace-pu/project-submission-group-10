@@ -57,6 +57,8 @@ GROUP PROJECT (GROUP 10)
 - [:traffic_light:  Risk Management Plan](#traffic_light-risk-management-plan )
 - [:cop:  Legal social ethical and professional issues](#cop-legal-social-ethical-and-professional-issues)
 - [:runner:  Sprint Plan](#runner-sprint-plan)
+- Closer of issues Final
+- Backlog Update
 - [:runner:  Final Handover of project](#runner-sprint-plan)
 
 <!--Roles-->
@@ -286,6 +288,19 @@ MODEL VIEW CONTROLLER (MVC APPROACH)
 ## :runner: Sprint Plan
 
 ![Sprint Action Plan](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/blob/main/KanBan/sprint_screen.jpeg)
+
+- Closer of issues Final
+
+All open issues have been resolved and now closed
+
+![image](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/assets/5736415/a8ae61b3-774c-4db2-8f59-69884a9c8b7c)
+
+- Backlog Update
+
+All backlogs have been completed, and resolved
+
+![image](https://github.com/hkuspace-pu/project-submission-group-10-HKNatureWatch/assets/5736415/b00266b8-6710-45b4-b2ef-57b766a8d53f)
+
 
 - [:runner:  Final Handover of project]
 
