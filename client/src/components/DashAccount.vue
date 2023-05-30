@@ -15,11 +15,12 @@
       </label> {{ location }}</div> -->
     </div>
 
-    <div>
-      <button class="user_btn btn_loggout" @click="loggout()">Loggout</button>
-    </div>
 
   </div>
+
+  <div style="padding: 0 2rem;">
+      <button class="user_btn btn_loggout" @click="loggout()">Loggout</button>
+    </div>
 
   <div style="padding: 0 2rem;">
       <button class="user_btn log_btn" @click="getActivityLog()"> Show Activity Log </button>
@@ -122,13 +123,13 @@ const dateFormat = ( _dateTime ) => {
     padding: 5px 10px;
     border-radius: 5px;
     border: 1px;
-    margin: 10px;
+    margin: 0 0 20px;
     color: white;
     font-size: 15px;
 }
 
 .log_btn {
-    background-color: var(--brown);
+    background-color: var(--quizBtn);
     margin: 10px 0;
 }
 
