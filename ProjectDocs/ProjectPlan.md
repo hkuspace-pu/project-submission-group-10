@@ -237,7 +237,7 @@ Regular client meetings are necessary to ensure that plans are followed strictly
   - Channels of communication such as Slack, Zoom will be utilized if incase such face-to-face meetings cannot take place, although meeting clients face to face is a preferred choice to obtain valuable feedback.    
     
 ### Security
-  - There may have IP attack, data tampering or sql injection hacking by the hacker that harm the application.
+  - Refer to Secruity Manifesto Document(ProjectDocs/HK TREE WATCH - Security.pdf)
 
 **SOLUTION**
   - Follow OWASAP TOP 10. We can set up the network VPC for the service group, using firewall and WAF, using HTTPS instead of HTTP. Adding verification for the API requests.
