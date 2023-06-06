@@ -52,6 +52,7 @@
   * [Deployment](#triangular_flag_on_post-deployment)
 - [Usage](#eyes-usage)
 - [Roadmap](#compass-roadmap)
+- [Security] = [Refer to Security Manifesto]()
 - [Contributing](#wave-contributing)
 - [License](#warning-license)
 - [Acknowledgements](#Acknowledgements)
